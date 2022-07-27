@@ -2,22 +2,48 @@ import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
 import {Colors} from '../../constants/styles';
 import Button from '../../components/ui/Button';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LoginScreen from './LoginScreen';
+import SignupScreen from './SignupScreen';
 
-const WelcomeScreen = props => {
+// const Stack = createNativeStackNavigator();
+
+// const Navigation = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen name="Login" component={LoginScreen} />
+//         <Stack.Screen name="Signup" component={SignupScreen} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
+const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styels.rootContainer}>
       <View>
         <Image
           style={styels.logo}
-          // source={require('../../Assets/image/smallLogo.png')}
+          source={require('../../Assets/image/smallLogo.png')}
           resizeMode="contain"
         />
         <View style={styels.btnOuterContainer}>
           <View style={styels.btnInnerContainer}>
-            <Button>로그인</Button>
+            <Button
+              onPress={() => {
+                navigation.navigate('Login');
+              }}>
+              로그인
+            </Button>
           </View>
           <View style={styels.btnInnerContainer}>
-            <Button>회원가입</Button>
+            <Button
+              onPress={() => {
+                navigation.navigate('Signup');
+              }}>
+              회원가입
+            </Button>
           </View>
         </View>
       </View>
@@ -31,7 +57,7 @@ const styels = StyleSheet.create({
   rootContainer: {
     flex: 4,
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: Colors.back100,
   },
   logo: {
     flex: 1,
