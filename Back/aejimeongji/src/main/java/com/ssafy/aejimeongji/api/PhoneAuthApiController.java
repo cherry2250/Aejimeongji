@@ -1,8 +1,8 @@
 package com.ssafy.aejimeongji.api;
 
-import com.ssafy.aejimeongji.api.dto.PhoneAuthVerifyRequest;
-import com.ssafy.aejimeongji.api.dto.PhoneAuthSendRequest;
-import com.ssafy.aejimeongji.api.dto.PhoneAuthSendResponse;
+import com.ssafy.aejimeongji.api.dto.phoneauth.PhoneAuthVerifyRequest;
+import com.ssafy.aejimeongji.api.dto.phoneauth.PhoneAuthSendRequest;
+import com.ssafy.aejimeongji.api.dto.phoneauth.PhoneAuthSendResponse;
 import com.ssafy.aejimeongji.api.dto.ResponseDTO;
 import com.ssafy.aejimeongji.domain.service.PhoneAuthService;
 import lombok.RequiredArgsConstructor;

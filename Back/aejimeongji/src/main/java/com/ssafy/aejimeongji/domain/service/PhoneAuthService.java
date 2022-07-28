@@ -33,7 +33,7 @@ public class PhoneAuthService {
 
     @Transactional
     public String sendMessage(String phoneNumber) throws CoolsmsException {
-        String authNumber = makeAuthNum();
+        String authNumber = makeAuthNumber();
         coolSms.send(makeParams(phoneNumber, authNumber));
         return phoneAuthRepository.save(new PhoneAuth(authNumber)).getId().toString();
     }
@@ -45,12 +45,12 @@ public class PhoneAuthService {
         return authNumber.equals(phoneAuth.getAuthNumber()) ? true : false;
     }
 
-    private String makeAuthNum() {
-        String authNum = "";
+    private String makeAuthNumber() {
+        String authNumber = "";
         for(int i=0; i<6; i++) {
-            authNum += Integer.toString(rand.nextInt(10));;
+            authNumber += Integer.toString(rand.nextInt(10));;
         }
-        return authNum;
+        return authNumber;
     }
 
     private HashMap<String, String> makeParams(String phoneNumber, String authNumber) {
@@ -58,7 +58,7 @@ public class PhoneAuthService {
         params.put("to", phoneNumber); // 수신 전화번호
         params.put("from", "01063230351"); // 발신 전화번호
         params.put("type", "sms");
-        params.put("text", " 인증번호는 [" + authNumber + "] 입니다.");
+        params.put("text", "인증번호는 [" + authNumber + "] 입니다.");
         return params;
     }
 }

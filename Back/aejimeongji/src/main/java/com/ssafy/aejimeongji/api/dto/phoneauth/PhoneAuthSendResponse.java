@@ -1,4 +1,4 @@
-package com.ssafy.aejimeongji.api.dto;
+package com.ssafy.aejimeongji.api.dto.phoneauth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

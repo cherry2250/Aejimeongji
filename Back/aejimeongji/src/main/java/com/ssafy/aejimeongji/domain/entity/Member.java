@@ -28,6 +28,11 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    public Member(String email, String nickname) {
+        this.email = email;
+        this.nickname = nickname;
+    }
+
     public Member(String email, String password, String username, String phoneNumber, String nickname) {
         this.email = email;
         this.password = password;
@@ -37,8 +42,9 @@ public class Member extends BaseTimeEntity {
         this.role = Role.ROLE_USER;
     }
 
-    public void updateMember(String password, String nickname) {
+    public void updateMember(String nickname, String password, String phoneNumber) {
         this.password = password;
         this.nickname = nickname;
+        this.phoneNumber = phoneNumber;
     }
 }
