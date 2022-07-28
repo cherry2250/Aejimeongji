@@ -21,17 +21,17 @@ const MainHome = props => {
           <Image
             style={styels.none}
             resizeMode="contain"
-            source={require('../../../Assets/image/calendarLogo.png')}
+            source={require('../../Assets/image/calendarLogo.png')}
           />
           <Image
             style={styels.logo2}
             resizeMode="contain"
-            source={require('../../../Assets/image/logo2.png')}
+            source={require('../../Assets/image/logo2.png')}
           />
           <Image
             style={styels.calendarLogo}
             resizeMode="contain"
-            source={require('../../../Assets/image/calendarLogo.png')}
+            source={require('../../Assets/image/calendarLogo.png')}
           />
         </View>
         <View style={styels.contentbox}>
@@ -45,7 +45,7 @@ const MainHome = props => {
                       height: '80%',
                     }}
                     resizeMode="contain"
-                    source={require('../../../Assets/image/name-icon.png')}
+                    source={require('../../Assets/image/name-icon.png')}
                   />
                 </View>
                 <View style={styels.name2}>
@@ -67,7 +67,7 @@ const MainHome = props => {
                   borderWidth: 2,
                 }}
                 resizeMode="contain"
-                source={require('../../../Assets/image/박베리.png')}
+                source={require('../../Assets/image/박베리.png')}
               />
             </View>
           </View>
@@ -77,7 +77,7 @@ const MainHome = props => {
               <Image
                 style={styels.runicon}
                 resizeMode="contain"
-                source={require('../../../Assets/image/run-icon.png')}
+                source={require('../../Assets/image/run-icon.png')}
               />
             </View>
 
@@ -127,7 +127,7 @@ const MainHome = props => {
               <Image
                 style={styels.plus}
                 resizeMode="contain"
-                source={require('../../../Assets/image/plus.png')}
+                source={require('../../Assets/image/plus.png')}
               />
             </View>
 
@@ -178,7 +178,7 @@ const MainHome = props => {
               <Image
                 style={styels.plus}
                 resizeMode="contain"
-                source={require('../../../Assets/image/plus.png')}
+                source={require('../../Assets/image/plus.png')}
               />
             </View>
 
@@ -190,7 +190,7 @@ const MainHome = props => {
                   borderRadius: 20,
                 }}
                 resizeMode="cover"
-                source={require('../../../Assets/image/강아지숲.png')}
+                source={require('../../Assets/image/강아지숲.png')}
               />
               <View
                 style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -214,7 +214,7 @@ const MainHome = props => {
                     borderRadius: 20,
                   }}
                   resizeMode="cover"
-                  source={require('../../../Assets/image/마이무.png')}
+                  source={require('../../Assets/image/마이무.png')}
                 />
                 <View
                   style={{
@@ -240,7 +240,7 @@ const MainHome = props => {
                     borderRadius: 20,
                   }}
                   resizeMode="cover"
-                  source={require('../../../Assets/image/쿨쿨펫.png')}
+                  source={require('../../Assets/image/쿨쿨펫.png')}
                 />
                 <View
                   style={{
@@ -280,7 +280,7 @@ const MainHome = props => {
                   marginTop: -10,
                 }}
                 resizeMode="contain"
-                source={require('../../../Assets/image/banner1.jpg')}
+                source={require('../../Assets/image/banner1.jpg')}
               />
             </View>
           </View>

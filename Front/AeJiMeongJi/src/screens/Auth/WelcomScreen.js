@@ -23,11 +23,11 @@ const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styels.rootContainer}>
       <View>
-        <Image
+        {/* <Image
           style={styels.logo}
           source={require('../../Assets/image/smallLogo.png')}
           resizeMode="contain"
-        />
+        /> */}
         <View style={styels.btnOuterContainer}>
           <View style={styels.btnInnerContainer}>
             <Button
