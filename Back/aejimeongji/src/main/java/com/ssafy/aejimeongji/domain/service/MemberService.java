@@ -6,6 +6,7 @@ import com.ssafy.aejimeongji.domain.exception.MemberNotFoundException;
 import com.ssafy.aejimeongji.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,14 +18,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public boolean duplicatedCheck(DuplicatedCheckCondition condition) {
-        return memberRepository.duplicatedCheck(condition);
+        return memberRepository.duplicatedCheck(condition) ? false : true;
     }
 
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberNotFoundException());
+                .orElseThrow(() -> new MemberNotFoundException(memberId));
     }
 
     @Transactional
@@ -34,16 +36,14 @@ public class MemberService {
 
     @Transactional
     public Long updateMember(Long memberId, String nickname, String password, String phoneNumber) {
-        Member findMember = memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberNotFoundException());
-        findMember.updateMember(nickname, password, phoneNumber);
+        Member findMember = findMember(memberId);
+        findMember.updateMember(nickname, passwordEncoder.encode(password), phoneNumber);
         return findMember.getId();
     }
 
     @Transactional
     public void deleteMember(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberNotFoundException());
+        Member member = findMember(memberId);
         memberRepository.delete(member);
     }
 }
