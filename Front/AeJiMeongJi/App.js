@@ -25,6 +25,7 @@ const Navigation = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Guide" component={GuideHome} />
+        {/* <Stack.Screen name="Carousel" component={CarouselCards} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
