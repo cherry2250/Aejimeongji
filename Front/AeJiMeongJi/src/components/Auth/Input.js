@@ -4,10 +4,10 @@ import { Colors } from '../../constants/styles';
 
 
 
-const Input = ({textInputConfig}) => {
+const Input = ({textInputConfig, style}) => {
   return (
     <View>
-      <TextInput style={styles.input} {...textInputConfig} />
+      <TextInput style={[styles.input, style]} {...textInputConfig} />
     </View>
   );
 };

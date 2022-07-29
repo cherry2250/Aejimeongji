@@ -1,10 +1,11 @@
-import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import SignupForm from '../../components/Auth/SignupForm';
+import React, {useState} from 'react';
+import {Text, TextInput, View, StyleSheet} from 'react-native';
+import SignupForm from '../../components/Auth/SignupForm2';
+import Button from '../../components/ui/Button';
 import ProgressBar from '../../components/ui/ProgressBar';
 import {Colors} from '../../constants/styles';
 
-const SignupScreen = ({navigation}) => {
+const SignupScreen2 = () => {
   return (
     <View style={styles.rootContainer}>
       <ProgressBar style={styles.progress} />
@@ -12,12 +13,12 @@ const SignupScreen = ({navigation}) => {
         <Text style={styles.title}>회원가입</Text>
       </View>
       <View style={styles.inputContainer}>
-        <SignupForm navigation={navigation} />
+        <SignupForm />
       </View>
     </View>
   );
 };
-export default SignupScreen;
+export default SignupScreen2;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -52,8 +53,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   progress: {
-    position: 'absolute',
-    width: '50%',
-    left: 0,
+    width: '100%',
   },
 });
