@@ -3,6 +3,7 @@ package com.ssafy.aejimeongji.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -25,6 +26,8 @@ public class Member extends BaseTimeEntity {
 
     private String nickname;
 
+    private String refreshToken;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -46,5 +49,17 @@ public class Member extends BaseTimeEntity {
         this.password = password;
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
+    }
+
+    public void createRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public void deleteRefreshToken() {
+        this.refreshToken = null;
+    }
+
+    public boolean matchPassword(PasswordEncoder passwordEncoder, String inputPassword) {
+        return passwordEncoder.matches(inputPassword, password);
     }
 }

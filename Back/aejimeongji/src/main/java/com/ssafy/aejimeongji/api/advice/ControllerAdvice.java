@@ -23,4 +23,10 @@ public class ControllerAdvice {
         log.error("{}번 회원 정보가 존재하지 않습니다. 요청거부", ex.getMemberId());
         return ResponseEntity.badRequest().body(new ErrorDTO(400, ex.getMessage()));
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorDTO> memberNotFoundExHandler(IllegalArgumentException ex) {
+        log.error("메시지 = {}", ex.getMessage());
+        return ResponseEntity.badRequest().body(new ErrorDTO(400, ex.getMessage()));
+    }
 }

@@ -23,15 +23,6 @@ public class MemberApiController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping("/auth/duplicationcheck")
-    public ResponseEntity<DuplicationCheckResponse> checkDuplicated(@RequestBody DuplicatedCheckCondition condition) {
-        boolean resultStatus = memberService.duplicatedCheck(condition);
-        String message = makeDuplicateCheckResponseMessage(condition, resultStatus);
-        if (resultStatus)
-            return ResponseEntity.ok().body(new DuplicationCheckResponse(resultStatus, message));
-        return ResponseEntity.badRequest().body(new DuplicationCheckResponse(resultStatus, message));
-    }
-
     @GetMapping("/member/{memberId}/profile")
     public ResponseEntity<MemberProfileResponse> showMemberProfile(@PathVariable Long memberId) {
         log.info("회원정보조회 요청 = {}", memberId);
@@ -58,15 +49,5 @@ public class MemberApiController {
         log.info("회원탈퇴 요청 = {}", memberId);
         memberService.deleteMember(memberId);
         return ResponseEntity.ok(new ResponseDTO("회원탈퇴가 완료되었습니다."));
-    }
-
-    private String makeDuplicateCheckResponseMessage(DuplicatedCheckCondition condition, boolean resultStatus) {
-        String message = resultStatus ? "사용가능한 " : "이미 존재하는 ";
-        message += addMessage(condition);
-        return message;
-    }
-
-    private String addMessage(DuplicatedCheckCondition condition) {
-        return condition.getEmail() != null ? "이메일입니다." : "닉네임입니다.";
     }
 }
