@@ -22,4 +22,11 @@ public class GuideBook extends BaseTimeEntity {
     private String category;
 
     private int dogAge;
+
+    public GuideBook(String title, String content, String category, int dogAge) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.dogAge = dogAge;
+    }
 }
