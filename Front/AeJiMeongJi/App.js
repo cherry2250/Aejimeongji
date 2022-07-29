@@ -5,6 +5,7 @@ import {StatusBar, Text, View} from 'react-native';
 import MainHome from './src/screens/Home/MainHome';
 import Initial from './src/screens/Initial';
 import Running from './src/screens/Running/Running';
+import GuideHome from './src/screens/Guide/GuideHome';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ const AuthenticatedStack = () => {
       <Stack.Screen name="Initial" component={Initial} />
       <Stack.Screen name="Running" component={Running} />
       <Stack.Screen name="Home" component={MainHome} />
+      <Stack.Screen name="Guide" component={GuideHome} />
     </Stack.Navigator>
   );
 };
