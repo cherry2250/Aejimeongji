@@ -5,9 +5,9 @@ import SignupScreen2 from '../screens/Auth/SignupScreen2';
 import WelcomeScreen from '../screens/Auth/WelcomScreen';
 import SignupScreen from '../screens/Auth/SignupScreen';
 import Initial from '../screens/Initial';
-import Running from '../screens/Running/Running';
 import MainHome from '../screens/Home/MainHome';
 import {CardStyleInterpolators} from '@react-navigation/stack';
+import RunningHome from '../screens/Running/RunningHome';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,7 @@ const AuthStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Initial" component={Initial} />
-      <Stack.Screen name="Running" component={Running} />
+      <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="Home" component={MainHome} />
       <Stack.Screen
         name="Welcome"

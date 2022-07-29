@@ -7,27 +7,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
 
-// const Stack = createNativeStackNavigator();
-
-// const Navigation = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen name="Login" component={LoginScreen} />
-//         <Stack.Screen name="Signup" component={SignupScreen} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
 const WelcomeScreen = ({navigation}) => {
   return (
     <View style={styels.rootContainer}>
       <View>
-        {/* <Image
+        <Image
           style={styels.logo}
           source={require('../../Assets/image/smallLogo.png')}
           resizeMode="contain"
-        /> */}
+        />
         <View style={styels.btnOuterContainer}>
           <View style={styels.btnInnerContainer}>
             <Button
