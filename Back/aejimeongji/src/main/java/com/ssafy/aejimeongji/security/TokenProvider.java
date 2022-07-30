@@ -13,7 +13,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
-public class TokenProvider {
+public class  TokenProvider {
 
     private String secretKey;
 
@@ -51,10 +51,6 @@ public class TokenProvider {
 
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization");
-    }
-
-    public String resolveRefreshToken(HttpServletRequest request) {
-        return request.getHeader("refreshToken");
     }
 
     public boolean validateToken(String jwtToken) {
