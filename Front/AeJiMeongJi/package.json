@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "postinstall": "fix"
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.7",
@@ -20,6 +20,7 @@
     "@rneui/themed": "^4.0.0-rc.5",
     "axios": "^0.27.2",
     "deprecated-react-native-prop-types": "^2.2.0",
+    "patch-package": "^6.4.7",
     "react": "18.0.0",
     "react-native": "0.69.2",
     "react-native-paper": "^4.12.3",

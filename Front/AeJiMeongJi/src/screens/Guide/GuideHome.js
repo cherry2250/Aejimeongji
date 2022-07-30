@@ -4,9 +4,10 @@ import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
 import CarouselCards from './CarouselCards';
 import SubCard from './SubCard';
+import Button from '../../components/ui/Button';
 import GuideButton from '../../components/ui/GuideButton';
 
-const GuideHome = () => {
+const GuideHome = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -30,7 +31,11 @@ const GuideHome = () => {
           <Text style={styles.subGuideTitle}>
             지금 핫한 반려생활 가이드 Top5!
           </Text>
-          <SubCard style={styles.subCards}></SubCard>
+          <SubCard
+            style={styles.subCards}
+            onPress={() => {
+              navigation.navigate('GuideDetail');
+            }}></SubCard>
           <SubCard style={styles.subCards}></SubCard>
           <SubCard style={styles.subCards}></SubCard>
           <SubCard style={styles.subCards}></SubCard>
@@ -44,6 +49,12 @@ const GuideHome = () => {
         <View style={{flex: 4}}>
           <CarouselCards style={styles.carouselCards} />
         </View>
+        <Button
+          onPress={() => {
+            navigation.navigate('GuideDetail');
+          }}>
+          가이드 디테일
+        </Button>
       </View>
     </ScrollView>
   );

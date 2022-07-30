@@ -9,6 +9,7 @@ import LoginScreen from './src/screens/Auth/LoginScreen';
 import SignupScreen from './src/screens/Auth/SignupScreen';
 import RunningHome from './src/screens/Running/RunningHome';
 import GuideHome from './src/screens/Guide/GuideHome';
+import GuideDetail from './src/screens/Guide/GuideDetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ const Navigation = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Guide" component={GuideHome} />
+        <Stack.Screen name="GuideDetail" component={GuideDetail} />
         {/* <Stack.Screen name="Carousel" component={CarouselCards} /> */}
       </Stack.Navigator>
     </NavigationContainer>
