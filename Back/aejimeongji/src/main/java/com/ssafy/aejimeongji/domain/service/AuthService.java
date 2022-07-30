@@ -4,6 +4,7 @@ import com.ssafy.aejimeongji.domain.condition.DuplicatedCheckCondition;
 import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.exception.LoginException;
 import com.ssafy.aejimeongji.domain.exception.MemberNotFoundException;
+import com.ssafy.aejimeongji.domain.exception.RefreshTokenNotFoundException;
 import com.ssafy.aejimeongji.domain.repository.MemberRepository;
 import com.ssafy.aejimeongji.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,13 @@ public class AuthService {
         String refreshToken = tokenProvider.createRefreshToken(member);
         member.createRefreshToken(refreshToken);
         return refreshToken;
+    }
+
+    public String createNewAccessToken(String refreshToken) {
+        Member member = memberRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new RefreshTokenNotFoundException());
+        String newAccessToken = tokenProvider.createAccessToken(member);
+        return newAccessToken;
     }
 
     @Transactional

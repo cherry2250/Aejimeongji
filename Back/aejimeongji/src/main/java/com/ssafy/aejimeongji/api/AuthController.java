@@ -1,6 +1,9 @@
 package com.ssafy.aejimeongji.api;
 
+import com.ssafy.aejimeongji.api.dto.ErrorDTO;
 import com.ssafy.aejimeongji.api.dto.ResponseDTO;
+import com.ssafy.aejimeongji.api.dto.login.IssueRequest;
+import com.ssafy.aejimeongji.api.dto.login.IssueResponse;
 import com.ssafy.aejimeongji.api.dto.login.LoginRequest;
 import com.ssafy.aejimeongji.api.dto.login.LoginResponse;
 import com.ssafy.aejimeongji.api.dto.member.DuplicationCheckResponse;
@@ -11,11 +14,10 @@ import com.ssafy.aejimeongji.domain.service.MemberService;
 import com.ssafy.aejimeongji.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -55,6 +57,20 @@ public class AuthController {
         if (resultStatus)
             return ResponseEntity.ok().body(new DuplicationCheckResponse(resultStatus, message));
         return ResponseEntity.badRequest().body(new DuplicationCheckResponse(resultStatus, message));
+    }
+
+    @PostMapping("/issue")
+    public ResponseEntity<?> issue(@RequestBody IssueRequest request) {
+        String refreshToken = request.getRefreshToken();
+        log.debug("refreshToken = {}", request.getRefreshToken());
+
+        if (StringUtils.hasText(refreshToken) && tokenProvider.validateToken(refreshToken)) {
+            log.info("토큰 유효함");
+            String newAccessToken = authService.createNewAccessToken(refreshToken);
+            return ResponseEntity.ok().body(new IssueResponse("토큰이 재발급 되었습니다.", newAccessToken));
+        }
+        log.info("토큰 유효하지 않음");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorDTO(401, "토큰이 유효하지 않습니다."));
     }
 
     private String makeDuplicateCheckResponseMessage(DuplicatedCheckCondition condition, boolean resultStatus) {
