@@ -43,8 +43,8 @@ class MemberServiceTest {
         boolean result2 = authService.duplicatedCheck(condition2);
 
         // then
-        assertThat(result1).isEqualTo(true);
-        assertThat(result2).isEqualTo(false);
+        assertThat(result1).isEqualTo(false);
+        assertThat(result2).isEqualTo(true);
     }
 
     @Test
@@ -60,8 +60,8 @@ class MemberServiceTest {
         boolean result2 = authService.duplicatedCheck(condition2);
 
         // then
-        assertThat(result1).isEqualTo(true);
-        assertThat(result2).isEqualTo(false);
+        assertThat(result1).isEqualTo(false);
+        assertThat(result2).isEqualTo(true);
     }
 
     @Test
@@ -88,7 +88,6 @@ class MemberServiceTest {
 
         // then
         assertThat(member.getNickname()).isEqualTo("권도현");
-        assertThat(member.getPassword()).isEqualTo("password");
         assertThat(member.getPhoneNumber()).isEqualTo("01063230351");
     }
 
