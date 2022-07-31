@@ -1,15 +1,21 @@
 version: "3"
 services:
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0.28
+    restart: always
     environment:
       MYSQL_DATABASE: aejimeongji
       MYSQL_ROOT_PASSWORD: dowlajdwl1234
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: dowlajdwl1234
     ports:
       - 3306:3306
     volumes:
-      - ./db:/var/lib/mysql
+      - ./database/init/:/docker-entrypoint-initdb.d/
+      - ./database/datadir/:/var/lib/mysql
     command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+    expose:
+      - 3306
 
   redis:
     image: redis
@@ -18,11 +24,15 @@ services:
       - 6379:6379
     volumes:
       - ./redis:/var/lib/mysql
+    expose:
+      - 6379
 
   springbootapp:
-    build: .
+    build: ./
     ports:
       - 8080:8080
     depends_on:
       - mysql
       - redis
+    expose:
+      - 8080
