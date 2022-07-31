@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: aejimeongji
+      MYSQL_ROOT_PASSWORD: dowlajdwl1234
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/var/lib/mysql
+    command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis:/var/lib/mysql
+
+  springbootapp:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+      - redis
