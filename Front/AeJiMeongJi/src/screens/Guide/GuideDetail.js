@@ -3,7 +3,7 @@ import {Image, StyleSheet, View, Text} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
 
-const GuideHome = () => {
+const GuideDetail = () => {
   return (
     <ScrollView>
       <View style={styles.imgBox}>
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
   content: {},
 });
 
-export default GuideHome;
+export default GuideDetail;

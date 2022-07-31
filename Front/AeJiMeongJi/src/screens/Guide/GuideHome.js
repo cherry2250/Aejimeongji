@@ -12,11 +12,46 @@ const GuideHome = ({navigation}) => {
     <ScrollView>
       <View style={styles.container}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <GuideButton style={{marginLeft: 10}}> 건강 </GuideButton>
-          <GuideButton style={{marginLeft: 10}}> 음식 </GuideButton>
-          <GuideButton style={{marginLeft: 10}}> 여행 </GuideButton>
-          <GuideButton style={{marginLeft: 10}}> 훈련 </GuideButton>
-          <GuideButton style={{marginLeft: 10}}> 정보 </GuideButton>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory');
+            }}
+            style={{marginLeft: 10}}>
+            {' '}
+            건강{' '}
+          </GuideButton>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory');
+            }}
+            style={{marginLeft: 10}}>
+            {' '}
+            음식{' '}
+          </GuideButton>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory');
+            }}
+            style={{marginLeft: 10}}>
+            {' '}
+            여행{' '}
+          </GuideButton>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory');
+            }}
+            style={{marginLeft: 10}}>
+            {' '}
+            훈련{' '}
+          </GuideButton>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory');
+            }}
+            style={{marginLeft: 10}}>
+            {' '}
+            정보{' '}
+          </GuideButton>
         </View>
         <View style={styles.guideTitle}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>
@@ -31,11 +66,7 @@ const GuideHome = ({navigation}) => {
           <Text style={styles.subGuideTitle}>
             지금 핫한 반려생활 가이드 Top5!
           </Text>
-          <SubCard
-            style={styles.subCards}
-            onPress={() => {
-              navigation.navigate('GuideDetail');
-            }}></SubCard>
+          <SubCard style={styles.subCards}></SubCard>
           <SubCard style={styles.subCards}></SubCard>
           <SubCard style={styles.subCards}></SubCard>
           <SubCard style={styles.subCards}></SubCard>
