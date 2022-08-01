@@ -1,6 +1,7 @@
 package com.ssafy.aejimeongji.domain.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,6 +42,7 @@ public class Dog extends BaseTimeEntity {
     @JoinColumn(name = "breed_id")
     private Breed breed;
 
+    @Builder
     public Dog(String name, LocalDate birthdate, Gender gender, Boolean neutering, Boolean gone, LocalDate adoptedDay, Member member, DogImage image, Breed breed) {
         this.name = name;
         this.birthdate = birthdate;
@@ -50,6 +52,13 @@ public class Dog extends BaseTimeEntity {
         this.adoptedDay = adoptedDay;
         this.member = member;
         this.image = image;
+        this.breed = breed;
+    }
+
+    public void updateDog(String name, LocalDate birthdate, LocalDate adoptedDay, Breed breed) {
+        this.name = name;
+        this.birthdate = birthdate;
+        this.adoptedDay = adoptedDay;
         this.breed = breed;
     }
 }
