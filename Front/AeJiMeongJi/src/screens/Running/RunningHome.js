@@ -19,6 +19,11 @@ const RunningHome = props => {
           <View style={styels.profileBox}>
             <View style={{flexDirection: 'row'}}>
               <View style={styels.profileImg}>
+                {/* <Image
+                  style={{width: '100%', height: '100%'}}
+                  source={require('../../Assets/image/3d_dog.png')}
+                  resizeMode="cover"
+                /> */}
                 <Text>이미지 들어갈 곳</Text>
               </View>
               <View>
