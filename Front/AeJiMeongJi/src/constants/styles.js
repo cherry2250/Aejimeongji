@@ -6,5 +6,6 @@ export const Colors = {
   btnText: '#FBEDD3',
   notification: '#98CB58',
   inputBorder: '#D6D6D6',
+  contentBox: '#FBEDD3',
+  contentText: '#553609',
 };
-

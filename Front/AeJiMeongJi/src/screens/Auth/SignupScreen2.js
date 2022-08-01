@@ -1,26 +1,24 @@
-import axios from 'axios';
 import React, {useState} from 'react';
 import {Text, TextInput, View, StyleSheet} from 'react-native';
-import LoginForm from '../../components/Auth/LoginForm';
+import SignupForm from '../../components/Auth/SignupForm2';
 import Button from '../../components/ui/Button';
+import ProgressBar from '../../components/ui/ProgressBar';
 import {Colors} from '../../constants/styles';
 
-const LoginScreen = () => {
-
-
+const SignupScreen2 = () => {
   return (
     <View style={styles.rootContainer}>
+      <ProgressBar style={styles.progress} />
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>로그인</Text>
+        <Text style={styles.title}>회원가입</Text>
       </View>
       <View style={styles.inputContainer}>
-        <LoginForm />
+        <SignupForm />
       </View>
     </View>
   );
 };
-
-export default LoginScreen;
+export default SignupScreen2;
 
 const styles = StyleSheet.create({
   rootContainer: {
@@ -53,5 +51,8 @@ const styles = StyleSheet.create({
   btn: {
     flex: 1,
     marginTop: 16,
+  },
+  progress: {
+    width: '100%',
   },
 });

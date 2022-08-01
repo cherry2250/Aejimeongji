@@ -18,7 +18,7 @@ const Initial = ({navigation}) => {
         title="Welcome"></Button>
       <Button
         onPress={() => {
-          navigation.navigate('Running');
+          navigation.navigate('RunningHome');
         }}
         title="Running"></Button>
       <Button
