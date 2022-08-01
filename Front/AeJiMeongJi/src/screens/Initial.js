@@ -23,7 +23,7 @@ const Initial = ({navigation}) => {
         title="Running"></Button>
       <Button
         onPress={() => {
-          navigation.navigate('Guide');
+          navigation.navigate('GuideHome');
         }}
         title="Guide"></Button>
     </View>

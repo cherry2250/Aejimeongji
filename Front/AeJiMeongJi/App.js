@@ -11,7 +11,6 @@ import GuideHome from './src/screens/Guide/GuideHome';
 import GuideCategory from './src/screens/Guide/GuideCategory';
 import GuideDetail from './src/screens/Guide/GuideDetail';
 
-
 const Stack = createNativeStackNavigator();
 
 // 파일을 만들어서, 홈, 산책, 온보딩으로 전달한다.
@@ -19,15 +18,15 @@ const Stack = createNativeStackNavigator();
 const AuthenticatedStack = () => {
   return (
     <Stack.Navigator>
-        <Stack.Screen name="Initial" component={Initial} />
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Running" component={RunningHome} />
-        <Stack.Screen name="Home" component={MainHome} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="Guide" component={GuideHome} />
-        <Stack.Screen name="GuideCategory" component={GuideCategory} />
-        <Stack.Screen name="GuideDetail" component={GuideDetail} />
+      <Stack.Screen name="Initial" component={Initial} />
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
+      <Stack.Screen name="Running" component={RunningHome} />
+      <Stack.Screen name="Home" component={MainHome} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen name="Guide" component={GuideHome} />
+      <Stack.Screen name="GuideCategory" component={GuideCategory} />
+      <Stack.Screen name="GuideDetail" component={GuideDetail} />
     </Stack.Navigator>
   );
 };

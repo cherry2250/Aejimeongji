@@ -8,6 +8,9 @@ import Initial from '../screens/Initial';
 import MainHome from '../screens/Home/MainHome';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import RunningHome from '../screens/Running/RunningHome';
+import GuideHome from '../screens/Guide/GuideHome';
+import GuideDetail from '../screens/Guide/GuideDetail';
+import GuideCategory from '../screens/Guide/GuideCategory';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +37,9 @@ const AuthStack = () => {
         }}
       />
       <Stack.Screen name="Signup2" component={SignupScreen2} />
+      <Stack.Screen name="GuideHome" component={GuideHome} />
+      <Stack.Screen name="GuideDetail" component={GuideDetail} />
+      <Stack.Screen name="GuideCategory" component={GuideCategory} />
     </Stack.Navigator>
   );
 };
