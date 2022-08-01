@@ -28,6 +28,8 @@ const GuideHome = ({navigation}) => {
             {' '}
             음식{' '}
           </GuideButton>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <GuideButton
             onPress={() => {
               navigation.navigate('GuideCategory');
@@ -44,6 +46,16 @@ const GuideHome = ({navigation}) => {
             {' '}
             훈련{' '}
           </GuideButton>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory');
+            }}
+            style={{marginLeft: 10}}>
+            {' '}
+            장소{' '}
+          </GuideButton>
           <GuideButton
             onPress={() => {
               navigation.navigate('GuideCategory');
@@ -54,11 +66,11 @@ const GuideHome = ({navigation}) => {
           </GuideButton>
         </View>
         <View style={styles.guideTitle}>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>
             앵두님께 추천드리는 가이드
           </Text>
         </View>
-        <View style={{flex: 4}}>
+        <View style={{flex: 3.3}}>
           <CarouselCards style={styles.carouselCards} />
         </View>
 
@@ -77,7 +89,7 @@ const GuideHome = ({navigation}) => {
             현재 연령대에 꼭 알아야 하는 정보
           </Text>
         </View>
-        <View style={{flex: 4}}>
+        <View style={{flex: 3.3}}>
           <CarouselCards style={styles.carouselCards} />
         </View>
         <Button
@@ -97,10 +109,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 30,
-    height: 1900,
+    height: 2000,
   },
   guideTitle: {
     flex: 0.4,
+    marginTop: 30,
     marginBottom: 20,
     height: 200,
   },
@@ -115,7 +128,7 @@ const styles = StyleSheet.create({
   },
   carouselCards: {},
   subGuide: {
-    flex: 10.2,
+    flex: 9,
     height: 10,
     width: 350,
     marginTop: 40,

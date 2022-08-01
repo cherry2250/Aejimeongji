@@ -19,16 +19,16 @@ export default GuideButton;
 const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 50,
     backgroundColor: '#E6E6E6',
     elevation: 2,
     shadowColor: 'black',
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    marginLeft: 10,
-    marginBottom: 30,
+    marginHorizontal: 8,
+    marginBottom: 10,
   },
   pressed: {
     opacity: 0.7,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     color: '#6E6E6E',
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
