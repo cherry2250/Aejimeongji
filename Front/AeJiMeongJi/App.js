@@ -10,6 +10,8 @@ import RunningHome from './src/screens/Running/RunningHome';
 import GuideHome from './src/screens/Guide/GuideHome';
 import GuideCategory from './src/screens/Guide/GuideCategory';
 import GuideDetail from './src/screens/Guide/GuideDetail';
+import CalendarHome from './src/screens/Calendar/CalendarHome';
+import TodoUpload from './src/screens/Calendar/TodoUpload';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +29,8 @@ const AuthenticatedStack = () => {
       <Stack.Screen name="Guide" component={GuideHome} />
       <Stack.Screen name="GuideCategory" component={GuideCategory} />
       <Stack.Screen name="GuideDetail" component={GuideDetail} />
+      <Stack.Screen name="Calendar" component={CalendarHome} />
+      <Stack.Screen name="TodoUpload" component={TodoUpload} />
     </Stack.Navigator>
   );
 };
