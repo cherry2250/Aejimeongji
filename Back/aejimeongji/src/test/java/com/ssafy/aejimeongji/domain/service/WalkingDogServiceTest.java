@@ -3,7 +3,6 @@ package com.ssafy.aejimeongji.domain.service;
 import com.ssafy.aejimeongji.domain.entity.*;
 import com.ssafy.aejimeongji.domain.repository.WalkingRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,8 +13,6 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -55,7 +52,7 @@ class WalkingDogServiceTest {
 
         // when
         Long saveWalkingdogId = walkingDogService.saveWalkingDog(dog.getId(), walking.getId(), 12);
-        WalkingDog findWalkingDog = walkingDogService.WalkingDetail(saveWalkingdogId);
+        WalkingDog findWalkingDog = walkingDogService.walkingDogDetail(saveWalkingdogId);
 
         // then
         Assertions.assertThat(findWalkingDog.getDog()).isEqualTo(dog);

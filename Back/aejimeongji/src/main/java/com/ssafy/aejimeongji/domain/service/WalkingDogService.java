@@ -49,10 +49,15 @@ public class WalkingDogService {
         return walkingDogRepository.findByDogId(dogId);
     }
 
-    public WalkingDog WalkingDetail(Long walkingDogId) {
-        return walkingDogRepository.findById(walkingDogId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("요청하신 정보가 존재하지 않습니다.")
-                );
+    public WalkingDog walkingDogDetail(Long walkingDogId) {
+        return walkingDogRepository.findWalkingDogWithWalkingById(walkingDogId)
+                .orElseThrow(() -> new IllegalArgumentException("요청하신 정보가 존재하지 않습니다."));
+    }
+
+    @Transactional
+    public void deleteWalkingDog(Long walkingDogId) {
+        WalkingDog walkingDog = walkingDogRepository.findById(walkingDogId)
+                .orElseThrow(() -> new IllegalArgumentException("요청하신 정보가 존재하지 않습니다."));
+        walkingDogRepository.delete(walkingDog);
     }
 }
