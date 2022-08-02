@@ -11,13 +11,15 @@ import RunningHome from '../screens/Running/RunningHome';
 import GuideHome from '../screens/Guide/GuideHome';
 import GuideDetail from '../screens/Guide/GuideDetail';
 import GuideCategory from '../screens/Guide/GuideCategory';
+import CalendarHome from '../screens/Calendar/CalendarHome';
+import TodoUpload from '../screens/Calendar/TodoUpload';
 
 const Stack = createNativeStackNavigator();
 
 // 로그인 back 연동 후 Initial, running mainhome 삭제
 const AuthStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Initial" component={Initial} />
       <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="Home" component={MainHome} />
@@ -40,6 +42,8 @@ const AuthStack = () => {
       <Stack.Screen name="GuideHome" component={GuideHome} />
       <Stack.Screen name="GuideDetail" component={GuideDetail} />
       <Stack.Screen name="GuideCategory" component={GuideCategory} />
+      <Stack.Screen name="CalendarHome" component={CalendarHome} />
+      <Stack.Screen name="TodoUpload" component={TodoUpload} />
     </Stack.Navigator>
   );
 };
