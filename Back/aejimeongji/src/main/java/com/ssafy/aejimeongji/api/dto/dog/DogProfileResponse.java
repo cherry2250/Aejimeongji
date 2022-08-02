@@ -1,6 +1,5 @@
 package com.ssafy.aejimeongji.api.dto.dog;
 
-import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +21,10 @@ public class DogProfileResponse {
         birthdate = dog.getBirthdate();
         adoptedDay = dog.getAdoptedDay();
         breedName = dog.getBreed().getBreedName();
+    }
+
+    public static DogProfileResponse toDTO(Dog dog) {
+        return new DogProfileResponse(dog);
     }
 
 }

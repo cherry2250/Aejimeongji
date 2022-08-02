@@ -15,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/member/{memberId}/dog")
@@ -22,6 +25,15 @@ import org.springframework.web.bind.annotation.*;
 public class DogApiController {
     private final DogService dogService;
     private final MemberService memberService;
+
+    @GetMapping("")
+    public ResponseEntity<List<DogProfileResponse>> getDogList(@PathVariable("memberId") Long memberId) {
+        log.info("강아지 프로필 목록 조회 요청");
+        List<Dog> dogList = dogService.findDogList(memberId);
+        List<DogProfileResponse> dogProfileResponseList = dogList.stream()
+                .map(DogProfileResponse::toDTO).collect(Collectors.toList());
+        return ResponseEntity.ok().body(dogProfileResponseList);
+    }
 
     @GetMapping("/{dogId}/profile")
     public ResponseEntity<DogProfileResponse> getDog(@PathVariable("memberId") Long memberId, @PathVariable("dogId") Long dogId) {
