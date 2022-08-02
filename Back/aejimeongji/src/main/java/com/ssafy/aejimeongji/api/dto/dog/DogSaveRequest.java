@@ -1,0 +1,28 @@
+package com.ssafy.aejimeongji.api.dto.dog;
+
+import com.ssafy.aejimeongji.domain.entity.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DogSaveRequest {
+
+    private String name;
+    private LocalDate birthdate;
+    private LocalDate adoptedDay;
+    private Gender gender;
+    private Boolean neutering;
+    private Boolean gone;
+    private DogImage image;
+    private Breed breed;
+
+    public Dog convertDog(Member member, Breed breed, DogImage image){
+        return new Dog(getName(), getBirthdate(), getGender(), getNeutering(),
+                getGone(), getAdoptedDay(), member, image, breed);
+    }
+}
