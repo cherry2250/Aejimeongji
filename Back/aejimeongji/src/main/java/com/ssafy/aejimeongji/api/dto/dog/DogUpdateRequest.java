@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class DogUpdateRequest {
     private String name;
+    private double weight;
     private LocalDate birthdate;
     private LocalDate adoptedDay;
     private Breed breed;

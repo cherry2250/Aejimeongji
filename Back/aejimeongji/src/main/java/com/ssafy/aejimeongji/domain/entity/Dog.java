@@ -58,8 +58,9 @@ public class Dog extends BaseTimeEntity {
         this.breed = breed;
     }
 
-    public void updateDog(String name, LocalDate birthdate, LocalDate adoptedDay, Breed breed) {
+    public void updateDog(String name, double weight, LocalDate birthdate, LocalDate adoptedDay, Breed breed) {
         this.name = name;
+        this.weight = weight;
         this.birthdate = birthdate;
         this.adoptedDay = adoptedDay;
         this.breed = breed;

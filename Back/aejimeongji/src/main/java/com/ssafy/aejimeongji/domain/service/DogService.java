@@ -41,9 +41,9 @@ public class DogService {
 
     // 강아지 프로필 수정
     @Transactional
-    public Long updateDog(Long dogId, String newName, LocalDate newBirthdate, LocalDate newAdoptedDay, Breed newBreed) {
+    public Long updateDog(Long dogId, String newName, double newWeight, LocalDate newBirthdate, LocalDate newAdoptedDay, Breed newBreed) {
         Dog findDog = findDog(dogId);
-        findDog.updateDog(newName, newBirthdate, newAdoptedDay, newBreed);
+        findDog.updateDog(newName, newWeight, newBirthdate, newAdoptedDay, newBreed);
         return findDog.getId();
     }
 
