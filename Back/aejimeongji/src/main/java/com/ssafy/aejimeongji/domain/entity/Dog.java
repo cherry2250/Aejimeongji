@@ -19,6 +19,8 @@ public class Dog extends BaseTimeEntity {
 
     private String name;
 
+    private double weight;
+
     private LocalDate birthdate;
 
     @Enumerated(EnumType.STRING)
@@ -43,8 +45,9 @@ public class Dog extends BaseTimeEntity {
     private Breed breed;
 
     @Builder
-    public Dog(String name, LocalDate birthdate, Gender gender, Boolean neutering, Boolean gone, LocalDate adoptedDay, Member member, DogImage image, Breed breed) {
+    public Dog(String name, double weight, LocalDate birthdate, Gender gender, Boolean neutering, Boolean gone, LocalDate adoptedDay, Member member, DogImage image, Breed breed) {
         this.name = name;
+        this.weight = weight;
         this.birthdate = birthdate;
         this.gender = gender;
         this.neutering = neutering;
