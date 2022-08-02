@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class DogSaveRequest {
 
     private String name;
+    private double weight;
     private LocalDate birthdate;
     private LocalDate adoptedDay;
     private Gender gender;
@@ -22,7 +23,7 @@ public class DogSaveRequest {
     private Breed breed;
 
     public Dog convertDog(Member member, Breed breed, DogImage image){
-        return new Dog(getName(), getBirthdate(), getGender(), getNeutering(),
+        return new Dog(getName(), getWeight(), getBirthdate(), getGender(), getNeutering(),
                 getGone(), getAdoptedDay(), member, image, breed);
     }
 }
