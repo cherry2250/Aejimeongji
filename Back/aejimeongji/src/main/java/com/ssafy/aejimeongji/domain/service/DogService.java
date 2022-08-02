@@ -2,6 +2,7 @@ package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
+import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.repository.BreedRepository;
 import com.ssafy.aejimeongji.domain.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -23,6 +25,15 @@ public class DogService {
     // 견종 조회
     public Breed findBreed(String breedName) {
         return breedRepository.findBreedByBreedName(breedName);
+    }
+
+    // 강아지 프로필 목록 조회
+    public List<Dog> findDogList(Long memberId) {
+        List<Dog> dogList = dogRepository.findDogsByMemberId(memberId);
+        dogList.forEach(
+                dog -> dog.getBreed().getBreedName()
+        );
+        return dogList;
     }
 
     // 강아지 프로필 상세 조회

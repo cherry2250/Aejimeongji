@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -27,6 +28,50 @@ class DogServiceTest {
     DogService dogService;
     @PersistenceContext
     EntityManager em;
+
+    @Test
+    void findDogListTest(){
+        // given
+        Member member1 = new Member("test1@ssafy.com", "1234", "테스트1", "01012341234", "test1");
+        em.persist(member1);
+        Member member2 = new Member("test2@ssafy.com", "1234", "테스트2", "01012341234", "test2");
+        em.persist(member2);
+        Breed breed = new Breed("푸들");
+        em.persist(breed);
+
+        for(int i = 1; i <= 2; i++){
+            Dog dog = Dog.builder()
+                    .name("강아지" + i)
+                    .weight(3.1)
+                    .birthdate(LocalDate.of(2020, 2, 2))
+                    .adoptedDay(LocalDate.of(2020, 2, 3))
+                    .gender(Gender.Male)
+                    .neutering(true)
+                    .gone(false)
+                    .member(member1)
+                    .breed(breed)
+                    .build();
+            dogRepository.save(dog);
+        }
+        Dog dog = Dog.builder()
+                .name("강아지3")
+                .weight(3.1)
+                .birthdate(LocalDate.of(2020, 2, 2))
+                .adoptedDay(LocalDate.of(2020, 2, 3))
+                .gender(Gender.Male)
+                .neutering(true)
+                .gone(false)
+                .member(member2)
+                .breed(breed)
+                .build();
+        dogRepository.save(dog);
+
+        // when
+        List<Dog> dogList = dogService.findDogList(member1.getId());
+
+        // then
+        assertThat(dogList.size()).isEqualTo(2);
+    }
 
     @Test
     void findDogTest() {
