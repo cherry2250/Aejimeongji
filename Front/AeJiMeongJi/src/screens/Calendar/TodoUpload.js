@@ -2,35 +2,18 @@ import React from 'react';
 import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 import {Colors} from '../../constants/styles';
+import TodoForm from '../../components/Todo/TodoForm';
 
 const ToddUpload = props => {
   return (
     <View style={styles.rootContainer}>
-      <View style={styles.nav}>
-        <Image
-          style={styles.none}
-          resizeMode="contain"
-          source={require('../../Assets/image/calendarLogo.png')}
-        />
-        <Image
-          style={styles.logo2}
-          resizeMode="contain"
-          source={require('../../Assets/image/logo2.png')}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('TodoUpload');
-          }}
-          style={{paddingLeft: 24}}>
-          <Image
-            style={styles.none}
-            resizeMode="contain"
-            source={require('../../Assets/image/calendarLogo.png')}
-            title="Calendar"
-          />
-        </TouchableOpacity>
+      <View style={styles.titleContainer}>
+        {/* 선택하는 날짜로 띄우기 */}
+        <Text style={styles.title}>8월 2일</Text>
       </View>
-      <View style={styles.contentbox}></View>
+      <View style={styles.inputContainer}>
+        <TodoForm />
+      </View>
     </View>
   );
 };
@@ -64,46 +47,44 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     color: Colors.contentText,
   },
+
   rootContainer: {
-    flex: 1,
-    backgroundColor: Colors.back100,
-  },
-  nav: {
-    height: 50,
-    alignItems: 'center',
+    flex: 4,
     justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  contentbox: {
-    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.back100,
   },
-  none: {
-    marginTop: 5,
-    marginRight: 10,
-    maxWidth: '20%',
-    maxHeight: '80%',
-    opacity: 0,
+  titleContainer: {
+    flex: 1,
+    marginTop: 20,
+    justifyContent: 'center',
   },
-  logo2: {
-    marginTop: 5,
-    maxWidth: '50%',
-    maxHeight: '60%',
+  title: {
+    color: Colors.btnBack100,
+    fontWeight: 'bold',
+    fontSize: 36,
   },
-  runicon: {
-    marginTop: 5,
-    maxWidth: '70%',
-    maxHeight: '60%',
+  inputContainer: {
+    flex: 3,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    width: '100%',
+    backgroundColor: Colors.back200,
+    paddingLeft: 30,
+    paddingRight: 30,
   },
-  calendarLogo: {
-    marginTop: 5,
-    marginRight: 10,
-    maxWidth: '40%',
-    maxHeight: '80%',
+  input: {
+    minWidth: '70%',
+    paddingHorizontal: 10,
+    marginTop: 16,
+    borderWidth: 1,
+    borderRadius: 16,
+    borderColor: Colors.inputBorder,
   },
-  logo: {
-    marginTop: 50,
-    maxWidth: '60%',
-    maxHeight: '30%',
+  btn: {
+    flex: 1,
+    marginTop: 16,
   },
 });
