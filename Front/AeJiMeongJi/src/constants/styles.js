@@ -8,4 +8,5 @@ export const Colors = {
   inputBorder: '#D6D6D6',
   contentBox: '#FBEDD3',
   contentText: '#553609',
+  ProfileInputBorder: '#EEC589'
 };

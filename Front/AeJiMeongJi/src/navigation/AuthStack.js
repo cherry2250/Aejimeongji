@@ -8,11 +8,15 @@ import Initial from '../screens/Initial';
 import MainHome from '../screens/Home/MainHome';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import RunningHome from '../screens/Running/RunningHome';
+import ProfileHomeScreen from '../screens/Profile/ProfileHomeScreen';
+import ProfileHomeScreen2 from '../screens/Profile/ProfileHomeScreen2';
+import ProfileChoiceScreen from '../screens/Profile/ProfileChoiceScreen';
 import GuideHome from '../screens/Guide/GuideHome';
 import GuideDetail from '../screens/Guide/GuideDetail';
 import GuideCategory from '../screens/Guide/GuideCategory';
 import CalendarHome from '../screens/Calendar/CalendarHome';
 import TodoUpload from '../screens/Calendar/TodoUpload';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +43,9 @@ const AuthStack = () => {
         }}
       />
       <Stack.Screen name="Signup2" component={SignupScreen2} />
+      <Stack.Screen name="ProfileHome" component={ProfileHomeScreen} />
+      <Stack.Screen name="ProfileHome2" component={ProfileHomeScreen2} />
+      <Stack.Screen name="프로필 편집" component={ProfileChoiceScreen} />
       <Stack.Screen name="GuideHome" component={GuideHome} />
       <Stack.Screen name="GuideDetail" component={GuideDetail} />
       <Stack.Screen name="GuideCategory" component={GuideCategory} />

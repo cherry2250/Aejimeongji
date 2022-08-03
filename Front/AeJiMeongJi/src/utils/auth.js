@@ -1,13 +1,10 @@
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
-import {authActions} from '../store/auth';
-import {useNavigation} from '@react-navigation/native';
 
-const url = '';
+
+const url = 'http://i7d203.p.ssafy.io:8080';
 
 export const login = async (email, password) => {
   const path = '/api/auth/login';
-  const dispatch = useDispatch();
 
   try {
     const res = await axios({
@@ -18,17 +15,19 @@ export const login = async (email, password) => {
         password,
       },
     });
-    dispatch(authActions.authenticate({token: res.data.token}));
-  } catch (error) {}
+    console.log(res.data.token);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+    return res;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const register = async ({email, password, name, nickname, phone}) => {
   console.log(email, password, name, nickname, phone);
   const path = '/api/signup';
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
   try {
-    const res = await axios({
+    await axios({
       method: 'POST',
       url: url + path,
       data: {
@@ -39,16 +38,13 @@ export const register = async ({email, password, name, nickname, phone}) => {
         phoneNumber: phone,
       },
     });
-    dispatch(authActions.authenticate({token: res.data.token}));
-    AsyncStorage.setItem(token, res.data.accessToken);
-    navigation.navigate('home');
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 };
 
 // 인증번호 요청
-export const fetchCertHandler = async phone => {
+export async function fetchCertHandler(phone) {
   const path = '/api/phoneauth';
   try {
     const res = await axios({
@@ -56,23 +52,29 @@ export const fetchCertHandler = async phone => {
       url: url + path,
       data: {
         phoneNumber: phone,
-      }
+      },
     });
-    dispatch(authActions.authenticate({phoneUUID: res.data.PhoneUUID}))
-  } catch (error) {}
-};
+    console.log(res, '리스폰스');
+
+    return res.data.phoneUUID;
+  } catch (error) {
+    console.log(error, '인증번호 요청에러');
+  }
+}
 
 export const confirmCertHandler = async (authNumber, phoneUUID) => {
-  const path = '/api/phoneauth/verify'
+  const path = '/api/phoneauth/verify';
   try {
     const res = await axios({
       method: 'POST',
       url: url + path,
       data: {
         phoneUUID,
-        authNumber
-      }
-    })
-    return res
-  } catch (error) {}
-}
+        authNumber,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

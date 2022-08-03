@@ -3,14 +3,17 @@ import React, {useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import Button from '../ui/Button';
 import Input from './Input';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../../utils/auth';
 import PhoneAuth from './PhoneAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { authActions } from '../../store/auth';
 
 const SignupForm2 = () => {
   const email = useSelector(state => state.auth.user.email);
   const password = useSelector(state => state.auth.user.password);
   const navigation = useNavigation();
+  const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState({
     email,
     password,
@@ -80,15 +83,15 @@ const SignupForm2 = () => {
     } else if (!phoneIsValid || inputValues.phone.length !== 11) {
       Alert.alert('휴대폰 번호를 확인해주세요.');
       return;
-    } else if (!phoneIsAuthenticated) {
-      Alert.alert('휴대폰 인증이 필요합니다.');
-      return;
+    // } else if (!phoneIsAuthenticated) {
+    //   Alert.alert('휴대폰 인증이 필요합니다.');
+    //   return;
     }
 
     // backend에 쏨
-    await register(inputValues);
+    const res = await register(inputValues);
+    navigation.navigate('Login');
     // 인증받고 홈으로
-    navigation.replace('Home');
   };
 
   return (
@@ -161,7 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   btn: {
-    flex: 1,
+    // flex: 1,
     paddingHorizontal: 30,
   },
   cntr: {
