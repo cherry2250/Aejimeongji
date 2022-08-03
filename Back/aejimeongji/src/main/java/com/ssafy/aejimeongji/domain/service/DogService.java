@@ -2,6 +2,7 @@ package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
+import com.ssafy.aejimeongji.domain.entity.DogImage;
 import com.ssafy.aejimeongji.domain.repository.BreedRepository;
 import com.ssafy.aejimeongji.domain.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,5 +57,22 @@ public class DogService {
     public void deleteDog(Long dogId) {
         Dog findDog = findDog(dogId);
         dogRepository.delete(findDog);
+    }
+
+    public DogImage getDogProfileImage(Long dogId) {
+        return findDog(dogId).getImage();
+    }
+
+    @Transactional
+    public Long changeProfileImage(Long dogId, DogImage image) {
+        Dog dog = findDog(dogId);
+        dog.changeDogProfileImage(image);
+        return image.getId();
+    }
+
+    @Transactional
+    public void deleteProfileImage(Long dogId) {
+        Dog dog = findDog(dogId);
+        dog.changeDogProfileImage(null);
     }
 }

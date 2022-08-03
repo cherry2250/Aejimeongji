@@ -65,4 +65,8 @@ public class Dog extends BaseTimeEntity {
         this.adoptedDay = adoptedDay;
         this.breed = breed;
     }
+
+    public void changeDogProfileImage(DogImage dogImage) {
+        this.image = image;
+    }
 }

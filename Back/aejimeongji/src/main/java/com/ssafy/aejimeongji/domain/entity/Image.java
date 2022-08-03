@@ -10,7 +10,7 @@ import javax.persistence.*;
 @MappedSuperclass
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public abstract class Image {
+public class Image {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
