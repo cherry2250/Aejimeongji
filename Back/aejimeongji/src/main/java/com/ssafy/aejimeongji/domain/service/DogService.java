@@ -2,7 +2,6 @@ package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
-import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.repository.BreedRepository;
 import com.ssafy.aejimeongji.domain.repository.DogRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +19,6 @@ import java.util.List;
 public class DogService {
 
     private final DogRepository dogRepository;
-    private final BreedRepository breedRepository;
-
-    // 견종 조회
-    public Breed findBreed(String breedName) {
-        return breedRepository.findBreedByBreedName(breedName);
-    }
 
     // 강아지 프로필 목록 조회
     public List<Dog> findDogList(Long memberId) {
