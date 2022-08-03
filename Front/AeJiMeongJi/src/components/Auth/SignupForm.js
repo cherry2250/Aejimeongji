@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
   },
   btn: {
-    flex: 1,
+    // flex: 1,
     paddingHorizontal: 30,
   },
 });

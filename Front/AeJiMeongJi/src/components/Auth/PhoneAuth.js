@@ -3,7 +3,8 @@ import {Alert, StyleSheet, Text, View} from 'react-native';
 import Input from './Input';
 import {Button as Btn} from '@rneui/themed';
 import {confirmCertHandler, fetchCertHandler, register} from '../../utils/auth';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { authActions } from '../../store/auth';
 
 const PhoneAuth = ({
   inputValues,
@@ -16,15 +17,15 @@ const PhoneAuth = ({
   const [phoneIsAuthenticated, setPhoneIsAuthenticated] = useState(false);
   const [cert, setCert] = useState(null);
   const certRegex = /^[0-9]{6}$/;
-  const certIsValid = certRegex.test();
-  const phoneUUID = useSelector(state => state.auth.phoneUUID);
-
+  const certIsValid = certRegex.test(cert);
+  const dispatch = useDispatch()
   const [min, setMin] = useState(3);
   const [sec, setSec] = useState(0);
   const time = useRef(180);
   const timerId = useRef(null);
   const [loading, setLoading] = useState(false);
-
+  const [phoneUUID, setPhoneUUID] = useState('')
+  
   const phoneAuthHandler = async () => {
     // Loading 중일 때 버튼을 인증 요청 => 확인
 
@@ -44,7 +45,9 @@ const PhoneAuth = ({
       }
       // 인증번호 요청
       try {
-        await fetchCertHandler(inputValues.phone);
+        const res = await fetchCertHandler(inputValues.phone);
+        setPhoneUUID(res)
+        await dispatch(authActions.fetchPhoneUUID({phoneUUID:res}));
       } catch (error) {
         console.log(error);
       }
@@ -54,10 +57,12 @@ const PhoneAuth = ({
         return;
       }
 
+      console.log(cert, phoneUUID, '출력');
       const res = await confirmCertHandler(cert, phoneUUID);
-
-      switch (res.message) {
-        case '인증이 완료되었습니다.':
+      console.log(res.data.message);
+      switch (res.data.message) {
+        case '인증되었습니다.':
+          console.log('완료');
           setPhoneIsAuthenticated(true);
           break;
         case '인증번호를 다시 확인해주세요.':

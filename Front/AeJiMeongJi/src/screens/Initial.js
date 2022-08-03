@@ -23,6 +23,10 @@ const Initial = ({navigation}) => {
         title="Running"></Button>
       <Button
         onPress={() => {
+          navigation.navigate('ProfileHome');
+        }}
+        title="Profile"></Button>
+<Button onPress={() => {
           navigation.navigate('GuideHome');
         }}
         title="Guide"></Button>
