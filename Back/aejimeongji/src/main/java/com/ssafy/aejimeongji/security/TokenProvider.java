@@ -30,6 +30,7 @@ public class  TokenProvider {
         return Jwts.builder()
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + JwtProperties.accessTokenValidTime))
+                .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
@@ -41,6 +42,7 @@ public class  TokenProvider {
         return Jwts.builder()
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + JwtProperties.refreshTokenValidTime))
+                .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
