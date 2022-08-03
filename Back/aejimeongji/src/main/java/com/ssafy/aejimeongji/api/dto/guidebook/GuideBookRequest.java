@@ -13,8 +13,9 @@ public class GuideBookRequest {
     private String content;
     private String category;
     private int dogAge;
+    private int dogWeight;
 
     public GuideBook convertGuideBook() {
-        return new GuideBook(getTitle(), getContent(), getCategory(), getDogAge());
+        return new GuideBook(getTitle(), getContent(), getCategory(), getDogAge(), getDogWeight());
     }
 }
