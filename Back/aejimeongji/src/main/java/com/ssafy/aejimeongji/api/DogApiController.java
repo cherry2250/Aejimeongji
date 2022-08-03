@@ -8,6 +8,7 @@ import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
 import com.ssafy.aejimeongji.domain.entity.DogImage;
 import com.ssafy.aejimeongji.domain.entity.Member;
+import com.ssafy.aejimeongji.domain.service.BreedService;
 import com.ssafy.aejimeongji.domain.service.DogService;
 import com.ssafy.aejimeongji.domain.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +24,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/member/{memberId}/dog")
 @RequiredArgsConstructor
 public class DogApiController {
+
     private final DogService dogService;
+    private final BreedService breedService;
     private final MemberService memberService;
 
     @GetMapping("")
     public ResponseEntity<List<DogProfileResponse>> getDogList(@PathVariable("memberId") Long memberId) {
-        log.info("강아지 프로필 목록 조회 요청");
+        log.info("사용자 {}의 강아지 프로필 목록 조회 요청", memberId);
         List<Dog> dogList = dogService.findDogList(memberId);
         List<DogProfileResponse> dogProfileResponseList = dogList.stream()
                 .map(DogProfileResponse::toDTO).collect(Collectors.toList());
@@ -46,7 +49,7 @@ public class DogApiController {
     public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @RequestBody DogSaveRequest request) {
         log.info("강아지 프로필 등록 요청");
         Member member = memberService.findMember(memberId);
-        Breed breed = dogService.findBreed(request.getBreed().getBreedName());
+        Breed breed = breedService.findBreed(request.getBreed().getBreedName());
         DogImage image = new DogImage("originTestName", "storeTestName");   // 이미지 아직 없음
         Long savedId = dogService.saveDog(request.convertDog(member, breed, image));
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 " + savedId + " 등록이 완료되었습니다."));
@@ -55,7 +58,7 @@ public class DogApiController {
     @PutMapping("/{dogId}")
     public ResponseEntity<ResponseDTO> updateDog(@PathVariable("memberId") Long memberId, @PathVariable("dogId") Long dogId, @RequestBody DogUpdateRequest request) {
         log.info("강아지 프로필 {} 수정 요청", dogId);
-        Breed breed = dogService.findBreed(request.getBreed().getBreedName());
+        Breed breed = breedService.findBreed(request.getBreed().getBreedName());
         Long updatedId = dogService.updateDog(dogId, request.getName(), request.getWeight(), request.getBirthdate(), request.getAdoptedDay(), breed);
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 "+ updatedId + " 수정이 완료되었습니다."));
     }
