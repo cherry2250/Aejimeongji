@@ -15,6 +15,7 @@ public class DogProfileResponse {
     private LocalDate birthdate;
     private LocalDate adoptedDay;
     private String breedName;
+    private String imageName;
 
     public DogProfileResponse(Dog dog) {
         dogId = dog.getId();
@@ -23,6 +24,7 @@ public class DogProfileResponse {
         birthdate = dog.getBirthdate();
         adoptedDay = dog.getAdoptedDay();
         breedName = dog.getBreed().getBreedName();
+        imageName = dog.getImage().getStoreFilename();
     }
 
     public static DogProfileResponse toDTO(Dog dog) {

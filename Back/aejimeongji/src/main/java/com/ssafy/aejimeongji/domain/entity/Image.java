@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Entity
 public class Image {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

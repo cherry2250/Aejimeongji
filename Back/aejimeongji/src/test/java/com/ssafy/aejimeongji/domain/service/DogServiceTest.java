@@ -1,9 +1,6 @@
 package com.ssafy.aejimeongji.domain.service;
 
-import com.ssafy.aejimeongji.domain.entity.Breed;
-import com.ssafy.aejimeongji.domain.entity.Dog;
-import com.ssafy.aejimeongji.domain.entity.Gender;
-import com.ssafy.aejimeongji.domain.entity.Member;
+import com.ssafy.aejimeongji.domain.entity.*;
 import com.ssafy.aejimeongji.domain.repository.DogRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -63,6 +60,7 @@ class DogServiceTest {
                 .gone(false)
                 .member(member2)
                 .breed(breed)
+                .image(new DogImage("dsafdasf", "dasfdsafdas"))
                 .build();
         dogRepository.save(dog);
 
@@ -91,6 +89,7 @@ class DogServiceTest {
                 .gone(false)
                 .member(member)
                 .breed(breed)
+                .image(new DogImage("dsafdasf", "dasfdsafdas"))
                 .build();
         Long savedDogId = dogRepository.save(dog).getId();
 
@@ -119,6 +118,7 @@ class DogServiceTest {
                 .gone(false)
                 .member(member)
                 .breed(breed)
+                .image(new DogImage("dsafdasf", "dasfdsafdas"))
                 .build();
 
         // when
@@ -154,6 +154,7 @@ class DogServiceTest {
                 .gone(false)
                 .member(member)
                 .breed(breed)
+                .image(new DogImage("dsafdasf", "dasfdsafdas"))
                 .build();
         Long savedId = dogRepository.save(dog).getId();
 
@@ -189,6 +190,7 @@ class DogServiceTest {
                 .gone(false)
                 .member(member)
                 .breed(breed)
+                .image(new DogImage("dsafdasf", "dasfdsafdas"))
                 .build();
         Long savedId = dogRepository.save(dog).getId();
 

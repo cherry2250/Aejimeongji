@@ -34,7 +34,6 @@ public class DogService {
     public Dog findDog(Long dogId) {
         Dog dog = dogRepository.findById(dogId)
                 .orElseThrow(() -> new IllegalArgumentException("조회하신 강아지가 존재하지 않습니다."));
-        dog.getBreed().getBreedName();
         return dog;
     }
 
@@ -64,10 +63,9 @@ public class DogService {
     }
 
     @Transactional
-    public Long changeProfileImage(Long dogId, DogImage image) {
+    public void changeProfileImage(Long dogId, DogImage image) {
         Dog dog = findDog(dogId);
         dog.changeDogProfileImage(image);
-        return image.getId();
     }
 
     @Transactional
