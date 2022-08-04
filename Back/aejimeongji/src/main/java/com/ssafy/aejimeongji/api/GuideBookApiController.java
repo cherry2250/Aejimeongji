@@ -24,8 +24,17 @@ public class GuideBookApiController {
     // 강아지 맞춤형 가이드 목록 조회 - 전체 목록 조회 로직까지 구현됨
     @GetMapping("/dog/{dogId}")
     public ResponseEntity<List<GuideBookResponse>> getGuideBookList(@PathVariable Long dogId) {
-        log.info("강아지{} 맞춤 가이드 목록 요청", dogId);
+        log.info("강아지 {} 맞춤 가이드 목록 요청", dogId);
         List<GuideBook> guideBookList = guideBookService.findGuideBookList();
+        List<GuideBookResponse> guideBookResponseList = guideBookList.stream()
+                .map(GuideBookResponse::toDTO).collect(Collectors.toList());
+        return ResponseEntity.ok().body(guideBookResponseList);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<GuideBookResponse>> getGuideBookList(@RequestParam("category") String categoryName) {
+        log.info("'{}' 카테고리 가이드 목록 요청", categoryName);
+        List<GuideBook> guideBookList = guideBookService.findGuideBookList(categoryName);
         List<GuideBookResponse> guideBookResponseList = guideBookList.stream()
                 .map(GuideBookResponse::toDTO).collect(Collectors.toList());
         return ResponseEntity.ok().body(guideBookResponseList);
@@ -42,7 +51,7 @@ public class GuideBookApiController {
     public ResponseEntity<ResponseDTO> saveGuideBook(@RequestBody GuideBookRequest request) {
         log.info("가이드북 등록 요청");
         Long savedId = guideBookService.saveGuideBook(request.convertGuideBook());
-        return ResponseEntity.ok(new ResponseDTO("가이드북" + savedId + " 등록이 완료되었습니다."));
+        return ResponseEntity.ok(new ResponseDTO("가이드북 " + savedId + " 등록이 완료되었습니다."));
     }
 
     @PutMapping("/{guideId}")
@@ -50,14 +59,14 @@ public class GuideBookApiController {
         log.info("가이드북 {} 수정 요청", guideId);
         Long updatedId = guideBookService.updateGuideBook(guideId, request.getTitle(), request.getContent(),
                 request.getCategory(), request.getDogAge(), request.getDogWeight());
-        return ResponseEntity.ok(new ResponseDTO("가이드북" + updatedId + " 수정이 완료되었습니다."));
+        return ResponseEntity.ok(new ResponseDTO("가이드북 " + updatedId + " 수정이 완료되었습니다."));
     }
 
     @DeleteMapping("/{guideId}")
     public ResponseEntity<ResponseDTO> deleteGuideBook(@PathVariable Long guideId) {
         log.info("가이드북 {} 삭제 요청", guideId);
         guideBookService.deleteGuideBook(guideId);
-        return ResponseEntity.ok().body(new ResponseDTO("가이드북" + guideId + " 삭제가 완료되었습니다."));
+        return ResponseEntity.ok().body(new ResponseDTO("가이드북 " + guideId + " 삭제가 완료되었습니다."));
     }
 }
 
