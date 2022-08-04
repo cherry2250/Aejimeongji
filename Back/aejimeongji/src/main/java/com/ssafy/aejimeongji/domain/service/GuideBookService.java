@@ -23,6 +23,11 @@ public class GuideBookService {
         return guideBookRepository.findAll();
     }
 
+    // 카테고리별 가이드 목록 조회
+    public List<GuideBook> findGuideBookList(String category) {
+        return guideBookRepository.findByCategory(category);
+    }
+
     // 가이드 상세 조회
     public GuideBook findGuideBook(Long guideBookId) {
         return guideBookRepository.findById(guideBookId)
