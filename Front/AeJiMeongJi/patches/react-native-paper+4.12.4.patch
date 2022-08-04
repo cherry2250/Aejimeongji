@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-paper/src/components/Card/Card.tsx b/node_modules/react-native-paper/src/components/Card/Card.tsx
+index d504524..da8f9d6 100644
+--- a/node_modules/react-native-paper/src/components/Card/Card.tsx
++++ b/node_modules/react-native-paper/src/components/Card/Card.tsx
+@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
+   innerContainer: {
+     flexGrow: 1,
+     flexShrink: 1,
++    backgroundColor:'#FBEDD3'
+   },
+   outlined: {
+     elevation: 0,
