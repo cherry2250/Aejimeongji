@@ -46,7 +46,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
 
         //when
-        Dog dog = new Dog("DogTest", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog = new Dog("DogTest", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
 
         //then
@@ -60,7 +60,7 @@ class CalendarServiceTest {
         Member member = new Member("ssafy@naver.com", "닉네임");
         DogImage dogImage = new DogImage("filename1", "storeFilename");
         Breed breed = new Breed("breedTest");
-        Dog dog = new Dog("DogTest", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog = new Dog("DogTest", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
 
         Calendar calendar = new Calendar(dog, "내용1", LocalDate.now(), false, false);
@@ -84,11 +84,11 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
-        Dog dog2 = new Dog("DogTest2", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog2 = new Dog("DogTest2", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog2);
 
@@ -113,7 +113,7 @@ class CalendarServiceTest {
         DogImage dogImage = new DogImage("filename1", "storeFilename");
         Breed breed = new Breed("breedTest");
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
 
         //when
@@ -121,7 +121,7 @@ class CalendarServiceTest {
         Long calendarId = calendarService.createCalendar(calendar1);
 
         //then
-        assertEquals(1, calendarId);
+        assertEquals(calendar1.getId(), calendarId);
 
     }
 
@@ -132,7 +132,7 @@ class CalendarServiceTest {
         DogImage dogImage = new DogImage("filename1", "storeFilename");
         Breed breed = new Breed("breedTest");
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
 
         //when
@@ -141,8 +141,8 @@ class CalendarServiceTest {
         Long updateCalendarId = calendarService.updateCalendar(calendarId, "수정내용", LocalDate.now(), false, false);
 
         //then
-        assertEquals(1, calendarId);
-        assertEquals(1, updateCalendarId);
+        assertEquals(calendar1.getId(), calendarId);
+        assertEquals(calendarId, updateCalendarId);
 
     }
 
@@ -153,7 +153,7 @@ class CalendarServiceTest {
         DogImage dogImage = new DogImage("filename1", "storeFilename");
         Breed breed = new Breed("breedTest");
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
 
         //when
@@ -175,7 +175,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
@@ -207,7 +207,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
@@ -237,7 +237,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
@@ -268,7 +268,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
@@ -299,7 +299,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
@@ -329,7 +329,7 @@ class CalendarServiceTest {
         Breed breed = new Breed("breedTest");
         em.persist(breed);
 
-        Dog dog1 = new Dog("DogTest1", LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
+        Dog dog1 = new Dog("DogTest1", 12.0, LocalDate.now(), Gender.Male, false, false, LocalDate.now(), member,
                 dogImage, breed);
         em.persist(dog1);
 
