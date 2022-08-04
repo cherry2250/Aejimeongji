@@ -67,6 +67,6 @@ public class Dog extends BaseTimeEntity {
     }
 
     public void changeDogProfileImage(DogImage dogImage) {
-        this.image = image;
+        this.image = dogImage;
     }
 }

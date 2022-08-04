@@ -4,6 +4,7 @@ import com.ssafy.aejimeongji.domain.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -19,7 +20,6 @@ public class DogSaveRequest {
     private Gender gender;
     private Boolean neutering;
     private Boolean gone;
-    private DogImage image;
     private Breed breed;
 
     public Dog convertDog(Member member, Breed breed, DogImage image){

@@ -31,6 +31,8 @@ services:
     build: ./
     ports:
       - 8080:8080
+    volumes:
+      - /images:/images
     depends_on:
       - mysql
       - redis

@@ -37,7 +37,7 @@ public class ImageUploader {
 
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFilename = createStoreFilename(originalFilename);
-        multipartFile.transferTo(new File(storeFilename));
+        multipartFile.transferTo(new File(fileDir + storeFilename));
 
         return new Image(originalFilename, storeFilename);
     }
