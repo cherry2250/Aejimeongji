@@ -16,7 +16,7 @@ const SearchBreed = ({setBreed}) => {
   ]);
 
   const onChangeValue = val => {
-    setBreed(+val);
+    setBreed(val);
   };
 
   useEffect(() => {

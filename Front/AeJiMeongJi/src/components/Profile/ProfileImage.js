@@ -2,26 +2,57 @@ import {Avatar} from '@rneui/themed';
 import React, {useRef, useState} from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import UploadModeModal from './UploadModeModal';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+// import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
-const ProfileImage = ({visible}) => {
+const ProfileImage = ({visible, image, setImage}) => {
   const imagePickerOption = {
     mediaType: 'photo',
     maxWidth: 230,
     maxHeight: 172,
     includeBase64: Platform.OS === 'android',
-    saveToPhotos: true
+    saveToPhotos: true,
   };
 
-  const [ProfileImage, setProfileImage] = useState(
-    require('../../Assets/image/Profile.png'),
-  );
-  const onPickImage = res => {
+  // RNF
+
+  const onPickImage = async res => {
     if (res.didCancel || !res) {
       return;
     }
-    console.log(res.assets[0].uri);
-    setProfileImage(res.assets[0].uri)
+
+    console.log(putString(res.assets[0].base64));
+
+    // const RNFS = require('react-native-fs');
+    // const imagePath = `${
+    //   RNFS.DocumentDirectoryPath
+    // }/${new Date().toISOString()}.jpg`.replace(/:/g, '-');
+    // console.log(imagePath);
+
+    // const move = await RNFS.writeFile(imagePath, res.assets[0].base64, 'base64')
+    console.log(move);
+
+
+    // if (Platform.OS === 'ios') {
+    //   RNFS.copyAssetsFileIOS(res.assets[0].uri, imagePath, 0, 0)
+    //     .then(res => {})
+    //     .catch(err => {
+    //       console.log('ERROR: image file write failed!!!');
+    //       console.log(err.message, err.code);
+    //     });
+    // } else if (Platform.OS === 'android') {
+    //   RNFS.copyFile(res.assets[0].uri, imagePath)
+    //     .then(res => {
+    //     })
+    //     .catch(err => {
+    //       console.log('ERROR: image file write failed!!!');
+    //       console.log(err.message, err.code);
+    //     });
+    // }
+
+    // 여기서 axios 요청
+    // console.log(res);
+    setImage(res.assets[0].base64);
   };
   const imageAddBtn = require('../../Assets/image/imgAddBtn.png');
   const fileInput = useRef(null);
@@ -36,15 +67,42 @@ const ProfileImage = ({visible}) => {
   };
 
   const onLaunchImageLibrary = () => {
-    launchImageLibrary(imagePickerOption, onPickImage);
+    // launchImageLibrary(imagePickerOption, onPickImage);
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+    });
+
+
   };
 
   const onLaunchCamera = async () => {
-    await launchCamera(imagePickerOption, onPickImage);
+    // await launchCamera(imagePickerOption, onPickImage);
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+      cropperCircleOverlay: true,
+      includeExif: true
+    }).then(image => {
+      console.log(image);
+      setImage(image)
+    });
   };
 
   return (
     <>
+      {/* {modalVisible && (
+        <UploadModeModal
+          visible={modalVisible}
+          onClose={closeModalHandler}
+          onLaunchImageLibrary={onLaunchImageLibrary}
+          onLaunchCamera={onLaunchCamera}
+        />
+      )} */}
       {modalVisible && (
         <UploadModeModal
           visible={modalVisible}
@@ -55,7 +113,7 @@ const ProfileImage = ({visible}) => {
       )}
       <View style={styles.ImgContainer}>
         <Avatar
-          source={ProfileImage}
+          source={{uri: image, cache: 'reload'}}
           size={'xlarge'}
           activeOpacity={0.2}
           containerStyle={styles.Avatar}
