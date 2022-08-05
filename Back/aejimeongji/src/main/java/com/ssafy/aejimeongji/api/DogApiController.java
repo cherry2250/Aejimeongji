@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -31,6 +33,15 @@ public class DogApiController {
     private final MemberService memberService;
     private final ImageUtil imageUtil;
 
+    @GetMapping
+    public ResponseEntity<List<DogProfileResponse>> getDogList(@PathVariable("memberId") Long memberId) {
+        log.info("사용자 {}의 강아지 프로필 목록 조회 요청", memberId);
+        List<Dog> dogList = dogService.findDogList(memberId);
+        List<DogProfileResponse> dogProfileResponseList = dogList.stream()
+                .map(DogProfileResponse::toDTO).collect(Collectors.toList());
+        return ResponseEntity.ok().body(dogProfileResponseList);
+    }
+
     @GetMapping("/{dogId}/profile")
     public ResponseEntity<DogProfileResponse> getDog(@PathVariable("memberId") Long memberId, @PathVariable("dogId") Long dogId) {
         log.info("강아지 프로필 {} 상세 정보 요청", dogId);
@@ -38,7 +49,7 @@ public class DogApiController {
         return ResponseEntity.ok().body(new DogProfileResponse(dog));
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @RequestPart("request") DogSaveRequest request, @RequestPart("image") MultipartFile image) throws IOException {
         log.info("강아지 프로필 등록 요청");
         DogImage dogImage = new DogImage(imageUtil.storeImage(image));

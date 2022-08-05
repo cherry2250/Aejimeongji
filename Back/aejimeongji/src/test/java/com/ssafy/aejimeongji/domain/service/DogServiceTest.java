@@ -47,6 +47,7 @@ class DogServiceTest {
                     .gone(false)
                     .member(member1)
                     .breed(breed)
+                    .image(new DogImage("dsafdasf", "dasfdsafdas"))
                     .build();
             dogRepository.save(dog);
         }
