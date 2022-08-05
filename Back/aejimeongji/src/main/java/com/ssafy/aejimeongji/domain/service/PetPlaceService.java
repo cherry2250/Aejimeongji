@@ -1,6 +1,10 @@
 package com.ssafy.aejimeongji.domain.service;
 
+import com.ssafy.aejimeongji.domain.entity.Bookmark;
+import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.entity.PetPlace;
+import com.ssafy.aejimeongji.domain.repository.BookmarkRepository;
+import com.ssafy.aejimeongji.domain.repository.MemberRepository;
 import com.ssafy.aejimeongji.domain.repository.PetPlaceRepostiory;
 import com.ssafy.aejimeongji.domain.util.Direction;
 import com.ssafy.aejimeongji.domain.util.GeometryUtil;
@@ -14,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.Math.*;
 
@@ -24,6 +29,10 @@ import static java.lang.Math.*;
 public class PetPlaceService {
 
     private final PetPlaceRepostiory petPlaceRepostiory;
+
+    private final BookmarkRepository bookmarkRepository;
+
+    private final MemberService memberService;
 
     private final EntityManager em;
 
@@ -63,5 +72,32 @@ public class PetPlaceService {
     public PetPlace findPetPlace(Long petplaceId) {
         return petPlaceRepostiory.findById(petplaceId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 " + petplaceId + " 는 존재하지 않습니다."));
+    }
+
+    // 멤버 펫플레이스 북마크 목록
+    public List<Bookmark> findAllBookMark(Long memberId) {
+        return bookmarkRepository.findPetPlaceByMemberId(memberId);
+    }
+
+    // 펫플레이스 북마크
+    @Transactional
+    public Long petPlaceBookMark(Long memberId, Long petplaceId) throws IllegalArgumentException {
+
+        if (bookmarkRepository.findBookmarkByMemberIdAndPetPlaceId(memberId, petplaceId).isPresent()) {
+            throw new IllegalArgumentException("이미 북마크 하였습니다.");
+        }
+
+        Bookmark bookmark = bookmarkRepository.save(new Bookmark(memberService.findMember(memberId), findPetPlace(petplaceId)));
+        return bookmark.getId();
+    }
+
+    // 북마크 취소
+    @Transactional
+    public void cancelPetPlaceBookMark(Long memberId, Long petplaceId) throws IllegalArgumentException {
+        Optional<Bookmark> bookmark = bookmarkRepository.findBookmarkByMemberIdAndPetPlaceId(memberId, petplaceId);
+        if (bookmark.isEmpty()) {
+            throw new IllegalArgumentException("아직 북마크 하지 않았습니다.");
+        }
+        bookmarkRepository.delete(bookmark.get());
     }
 }
