@@ -27,7 +27,10 @@ public class DogService {
     public List<Dog> findDogList(Long memberId) {
         List<Dog> dogList = dogRepository.findDogsByMemberId(memberId);
         dogList.forEach(
-                dog -> dog.getBreed().getBreedName()
+                dog -> {
+                    dog.getBreed().getBreedName();
+                    dog.getImage().getStoreFilename();
+                }
         );
         return dogList;
     }
