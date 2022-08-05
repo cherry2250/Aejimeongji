@@ -1,6 +1,7 @@
 package com.ssafy.aejimeongji.domain.util;
 
 import com.ssafy.aejimeongji.domain.entity.Image;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,8 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Component
-public class ImageUploader {
+public class ImageUtil {
 
     @Value("${file.dir}")
     private String fileDir;
@@ -40,6 +42,17 @@ public class ImageUploader {
         multipartFile.transferTo(new File(fileDir + storeFilename));
 
         return new Image(originalFilename, storeFilename);
+    }
+
+    public void deleteStoreImage(String storeFilename) {
+        File file = new File(fileDir + storeFilename);
+
+        if (file.exists()) {
+            file.delete();
+            log.info("{} 이미지를 삭제하였습니다.", storeFilename);
+        } else {
+            log.info("{} 이미지가 존재하지 않습니다.", storeFilename);
+        }
     }
 
     private String createStoreFilename(String originalFilename) {
