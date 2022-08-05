@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   profile: {
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   image: {
     width: 132,
@@ -37,3 +36,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+

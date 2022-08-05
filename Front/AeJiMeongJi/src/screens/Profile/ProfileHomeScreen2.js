@@ -44,7 +44,7 @@ const ProfileHomeScreen2 = ({route}) => {
     weight: '',
     neutering: check,
     gone: false,
-    image: route.params.image
+    image: route.params.image,
   });
 
   const inputChangeHandler = (inputIdentifier, enterdValue) => {

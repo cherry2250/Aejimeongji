@@ -80,8 +80,6 @@ export const confirmCertHandler = async (authNumber, phoneUUID) => {
   }
 };
 
-
-
 export const getMemberId = async () => {
   const jwt = await AsyncStorage.getItem('token');
   const decodedJwt = jwt_decode(jwt);

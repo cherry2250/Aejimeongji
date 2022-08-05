@@ -18,9 +18,7 @@ const ProfileHomeScreen = () => {
     {label: '암컷', value: 'Female'},
   ]);
 
-
   const [image, setImage] = useState(require('../../Assets/image/Profile.png'));
-
 
   const [visible, setVisible] = useState(null);
 

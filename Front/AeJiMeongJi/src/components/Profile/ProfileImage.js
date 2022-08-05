@@ -32,7 +32,6 @@ const ProfileImage = ({visible, image, setImage}) => {
     // const move = await RNFS.writeFile(imagePath, res.assets[0].base64, 'base64')
     console.log(move);
 
-
     // if (Platform.OS === 'ios') {
     //   RNFS.copyAssetsFileIOS(res.assets[0].uri, imagePath, 0, 0)
     //     .then(res => {})
@@ -71,12 +70,10 @@ const ProfileImage = ({visible, image, setImage}) => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true
+      cropping: true,
     }).then(image => {
       console.log(image);
     });
-
-
   };
 
   const onLaunchCamera = async () => {
@@ -86,10 +83,10 @@ const ProfileImage = ({visible, image, setImage}) => {
       height: 400,
       cropping: true,
       cropperCircleOverlay: true,
-      includeExif: true
+      includeExif: true,
     }).then(image => {
       console.log(image);
-      setImage(image)
+      setImage(image);
     });
   };
 

@@ -13,6 +13,5 @@ const DummyData = [
     id: 3,
     source: require('../../Assets/image/박베리.png'),
   },
-
 ];
 export default DummyData;

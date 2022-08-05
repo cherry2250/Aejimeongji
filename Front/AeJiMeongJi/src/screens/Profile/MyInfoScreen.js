@@ -4,7 +4,7 @@ import Button from '../../components/ui/Button';
 import {Button as Btn} from '@rneui/themed';
 import {Alert, SafeAreaView, StyleSheet} from 'react-native';
 import {changeProfile, getProfile} from '../../utils/profile';
-import { Colors } from '../../constants/styles';
+import {Colors} from '../../constants/styles';
 
 const MyInfoScreen = ({navigation}) => {
   console.log('rendering');
@@ -69,7 +69,7 @@ const MyInfoScreen = ({navigation}) => {
         }}
       />
       <Button onPress={changeInfoHandler}>프로필 변경 </Button>
-      <Btn title='회원탈퇴' />
+      <Btn title="회원탈퇴" />
     </SafeAreaView>
   );
 };
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.back100
-  }
-})
+    backgroundColor: Colors.back100,
+  },
+});
