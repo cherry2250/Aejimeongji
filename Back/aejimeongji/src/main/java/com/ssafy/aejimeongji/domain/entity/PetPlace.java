@@ -1,8 +1,10 @@
 package com.ssafy.aejimeongji.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 
@@ -25,20 +27,21 @@ public class PetPlace {
 
     private String category;
 
-    private String lat;
-
-    private String lng;
+    @JsonBackReference
+    private Point point;
 
     private String openingHours;
 
-    public PetPlace(String name, String description, String address, String tel, String category, String lat, String lng, String openingHours) {
+    private Double distance;
+
+    public PetPlace(String name, String description, String address, String tel, String category, Point point, String openingHours, Double distance) {
         this.name = name;
         this.description = description;
         this.address = address;
         this.tel = tel;
         this.category = category;
-        this.lat = lat;
-        this.lng = lng;
+        this.point = point;
         this.openingHours = openingHours;
+        this.distance = distance;
     }
 }
