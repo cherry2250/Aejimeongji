@@ -49,8 +49,8 @@ public class GuideBookApiController {
         return 9999;
     }
 
-    @GetMapping("/dog/{dogId}")
-    public ResponseEntity<Map<String, List<GuideBookResponse>>> getCustomizedGuideBookList(@PathVariable Long dogId) {
+    @GetMapping(path = "", params = "dog")
+    public ResponseEntity<Map<String, List<GuideBookResponse>>> getCustomizedGuideBookList(@RequestParam(value = "dog") Long dogId) {
         log.info("강아지 {} 맞춤 가이드 목록 요청", dogId);
 
         List<GuideBook> fixedGuideBookList = guideBookService.fixedGuideBookList();
@@ -78,8 +78,8 @@ public class GuideBookApiController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("")
-    public ResponseEntity<List<GuideBookResponse>> getCategorizedGuideBookList(@RequestParam("category") String categoryName) {
+    @GetMapping(path = "", params = "category")
+    public ResponseEntity<List<GuideBookResponse>> getCategorizedGuideBookList(@RequestParam(value = "category") String categoryName) {
         log.info("'{}' 카테고리 가이드 목록 요청", categoryName);
         List<GuideBook> guideBookList = guideBookService.categorizedGuideBookList(categoryName);
         List<GuideBookResponse> guideBookResponseList = guideBookList.stream()

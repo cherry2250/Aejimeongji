@@ -28,25 +28,24 @@ class GuideBookServiceTest {
     EntityManager em;
 
 //    @Test
-//    void findGuideBookListTest() {
+//    void ageCustomizedGuideBookListTest() {
 //        // given
-//        GuideBook guideBook1 = new GuideBook("제목1", "내용1", "의료", 10, 1);
-//        Long id1 = guideBookRepository.save(guideBook1).getId();
-//        GuideBook guideBook2 = new GuideBook("제목2", "내용2", "음식", 5, 2);
-//        Long id2 = guideBookRepository.save(guideBook2).getId();
+//        GuideBook guideBook1 = new GuideBook("제목1", "내용1", "건강", 12, 5);
+//        guideBookRepository.save(guideBook1).getId();
+//        GuideBook guideBook2 = new GuideBook("제목2", "내용2", "음식", 60, 10);
+//        guideBookRepository.save(guideBook2).getId();
 //
 //        // when
-//        List<GuideBook> guideBookList = guideBookService.findGuideBookList();
+//        List<GuideBook> guideBookList = guideBookService.ageCustomizedGuideBookList(12);
 //
 //        // then
-//        assertThat(guideBookList.size()).isEqualTo(2);
+//        assertThat(guideBookList.size()).isEqualTo(1);
 //    }
 
     @Test
     void findGuideBookTest() {
         // given
         GuideBook guideBook = new GuideBook("제목1", "내용1", "의료", 10, 1);
-        em.persist(guideBook);
         Long id = guideBookRepository.save(guideBook).getId();
 
         // when
