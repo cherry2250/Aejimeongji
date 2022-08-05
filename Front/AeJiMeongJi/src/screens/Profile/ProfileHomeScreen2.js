@@ -25,6 +25,7 @@ const ProfileHomeScreen2 = ({route}) => {
 
   const submitHandler = async () => {
     console.log(inputValues);
+    // const res = await fetchDogImage(inputValues.image);
     const res = await fetchDog(inputValues);
     console.log(res);
     // if (res) {

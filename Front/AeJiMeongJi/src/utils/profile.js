@@ -30,10 +30,10 @@ export const fetchDog = async ({
   gone,
   image,
 }) => {
-  // token 받아서, id 불러오기
   const jwt = await AsyncStorage.getItem('token');
   const decodedJwt = jwt_decode(jwt);
   const memberId = decodedJwt.memberId;
+
   const path = `/api/member/${memberId}/dog`;
   const request = {
     adoptedDay,
@@ -47,29 +47,30 @@ export const fetchDog = async ({
   };
 
   const formData = new FormData();
+  formData.append('name', name);
+  formData.append('weight', weight);
+  formData.append('birthdate', birthdate);
+  formData.append('adoptedDay', adoptedDay);
+  formData.append('gender', gender);
+  formData.append('neutering', neutering);
+  formData.append('gone', gone);
+  formData.append('breed', breed);
 
-  formData.append('request', new Blob([JSON.stringify(request)]), {
-    type: 'application/json',
+  formData.append('image', {
+    name: image.uri,
+    type: 'multipart/form-data',
+    uri: image.uri,
   });
-
-  const data = {
-    uri: image.path,
-    name: image.path,
-    type: image.mime, // or photo.type
-  };
-
-  formData.append('image', data);
-  console.log(formData);
-  console.log(data);
 
   try {
     const res = await axios({
-      method: 'post',
+      method: 'POST',
       url: url + path,
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      transformRequest: (data, error) => {
+      transformRequest: formData => {
+        console.log(formData, 'form');
         return formData;
       },
       data: formData,
@@ -81,38 +82,37 @@ export const fetchDog = async ({
   }
 };
 
-export const fetchDogImage = async (id, image) => {
-  const newImage = image.replace('file://', '');
-  const dogId = id;
-  const jwt = await AsyncStorage.getItem('token');
-  const decodedJwt = jwt_decode(jwt);
-  const memberId = decodedJwt.memberId;
-  const path = `/api/member/${memberId}/dog/${dogId}/profileimage`;
+// export const fetchDogImage = async image => {
+//   // const newImage = image.replace('file://', '');
+//   console.log(image);
+//   // const dogId = id;
+//   const jwt = await AsyncStorage.getItem('token');
+//   const decodedJwt = jwt_decode(jwt);
+//   const memberId = decodedJwt.memberId;
+//   const path = `/api/member/${memberId}/dog/${dogId}/profileimage`;
 
-  const formData = new FormData();
-  console.log(image);
-  formData.append('image', {
-    name: image,
-    type: 'image/jpeg',
-    uri: Platform.OS === 'android' ? image : image.replace('file://', ''),
-  });
-  console.log(formData);
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: url + path,
-      formData,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    console.log(res, 'image에러');
-    return res;
-  } catch (error) {
-    console.log(error.message, '에러');
-  }
-};
+//   const formData = new FormData();
+//   console.log(image);
+//   formData.append('image', {
+//     name: image.uri,
+//     type: 'image/jpeg',
+//     uri: image.uri,
+//   });
+//   try {
+//     const res = await axios({
+//       method: 'POST',
+//       url: url + path,
+//       data: formData,
+//       headers: {
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+//     console.log(res, 'image에러');
+//     return res;
+//   } catch (error) {
+//     console.log(error.message, '에러');
+//   }
+// };
 
 export const getDogImage = async () => {
   // 이미지의 pk를 불러와야함.
