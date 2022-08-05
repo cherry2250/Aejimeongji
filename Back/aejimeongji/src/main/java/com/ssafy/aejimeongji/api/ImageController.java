@@ -1,19 +1,15 @@
 package com.ssafy.aejimeongji.api;
 
-import lombok.RequiredArgsConstructor;
-import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @RestController
 @RequestMapping("/api/image")
@@ -23,10 +19,9 @@ public class ImageController {
     private String fileDir;
 
     @GetMapping("/{imageName}")
-    public ResponseEntity<byte[]> getImage(@PathVariable("imageName") String imageName) throws IOException {
-        InputStream imageStream = new FileInputStream(fileDir + imageName);
-        byte[] imageByteArray = IOUtils. toByteArray(imageStream);
-        imageStream.close();
-        return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+    public ResponseEntity<InputStreamResource> getImage(@PathVariable("imageName") String imageName) throws IOException {
+        File file = new File(fileDir + imageName);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/octet-stream")).body(resource);
     }
 }

@@ -64,7 +64,7 @@ public class DogApiController {
     }
 
     @PostMapping("/{dogId}/profileimage")
-    public ResponseEntity<ResponseDTO> saveDogProfileImage(@PathVariable("dogId") Long dogId, MultipartFile image) throws IOException {
+    public ResponseEntity<ResponseDTO> saveDogProfileImage(@PathVariable("dogId") Long dogId, @RequestPart("image") MultipartFile image) throws IOException {
         log.info("강아지 프로필이미지 등록 요청");
         log.info("{}", image.getOriginalFilename());
         DogImage dogImage = new DogImage(imageUtil.storeImage(image));
