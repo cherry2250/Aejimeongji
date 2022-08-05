@@ -48,14 +48,14 @@ export const fetchDog = async ({
 
   const formData = new FormData();
 
-  formData.append('request', new Blob([JSON.stringify(request)]), {
+  formData.append('request', JSON.stringify(request), {
     type: 'application/json',
   });
 
   const data = {
     uri: image.uri,
-    name: image.uri,
-    type: image.type, // or photo.type
+    name: 'abcd.jpg',
+    type: 'multipart/form-data', // or photo.type
   };
   console.log(data, '이것이 data');
 
@@ -65,7 +65,7 @@ export const fetchDog = async ({
       method: 'post',
       url: url + path,
       headers: {
-        "Content-Type": `multipart/form-data`,
+        "Content-Type": 'multipart/form-data',
       },
       transformRequest: (formData) => {
         console.log(formData, 'form');
@@ -80,29 +80,30 @@ export const fetchDog = async ({
   }
 };
 
-export const fetchDogImage = async (id, image) => {
-  const newImage = image.replace('file://', '');
+export const fetchDogImage = async (image) => {
+  // const newImage = image.replace('file://', '');
+  console.log(image);
   const dogId = id;
   const jwt = await AsyncStorage.getItem('token');
   const decodedJwt = jwt_decode(jwt);
   const memberId = decodedJwt.memberId;
-  const path = `/api/member/${memberId}/dog/${dogId}/profileimage`;
+  const path = `/api/member/3/dog/50/profileimage`;
 
   const formData = new FormData();
   console.log(image);
   formData.append('image', {
-    name: image,
+    name: image.uri,
     type: 'image/jpeg',
-    uri: Platform.OS === 'android' ? image : image.replace('file://', ''),
+    uri: image.uri,
   });
-  console.log(formData);
+  console.log(formData, '이거');
   try {
     const res = await axios({
       method: 'POST',
       url: url + path,
-      formData,
+      data: formData,
       headers: {
-        Accept: 'application/json',
+        // Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
       },
     });
