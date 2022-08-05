@@ -54,7 +54,7 @@ const ProfileImage = ({visible, image, setImage}) => {
     // console.log(res);
     setImage(res.assets[0]);
   };
-  const imageAddBtn = require('../../Assets/image/imgAddBtn.png');
+  const imageAddBtn = require('../../Assets/image/plusButton.png');
   const fileInput = useRef(null);
   const [modalVisible, setModalVisible] = useState(visible);
 

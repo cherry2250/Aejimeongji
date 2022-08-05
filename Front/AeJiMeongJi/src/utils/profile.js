@@ -65,9 +65,9 @@ export const fetchDog = async ({
       method: 'post',
       url: url + path,
       headers: {
-        "Content-Type": 'multipart/form-data',
+        'Content-Type': 'multipart/form-data',
       },
-      transformRequest: (formData) => {
+      transformRequest: formData => {
         console.log(formData, 'form');
         return formData;
       },
@@ -80,14 +80,13 @@ export const fetchDog = async ({
   }
 };
 
-export const fetchDogImage = async (image) => {
+export const fetchDogImage = async image => {
   // const newImage = image.replace('file://', '');
   console.log(image);
-  const dogId = id;
   const jwt = await AsyncStorage.getItem('token');
   const decodedJwt = jwt_decode(jwt);
   const memberId = decodedJwt.memberId;
-  const path = `/api/member/3/dog/50/profileimage`;
+  const path = `/api/member/4/dog/52/profileimage`;
 
   const formData = new FormData();
   console.log(image);
@@ -160,5 +159,52 @@ export const changeProfile = async ({nickname}) => {
     return res;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getImage = async () => {
+  const path = '/api/image/0c7bb374-2f58-461f-813b-927b0f5abe8c.JPG';
+
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url + path,
+    });
+    // console.log(res);
+    // console.log(res.data, typeof(res.data), new Blob([res.data]));
+    // const blob = new Blob([res.data])
+    // console.log(blob, '여기');
+    // const img = URL.createObjectUrl(blob)
+
+    console.log(res.data);
+
+    return res;
+  } catch (error) {
+    console.log(error, 'img 못부러옴');
+  }
+};
+
+// 사용자의 강아지
+export const fetchDogs = async () => {
+  const memberId = await getMemberId();
+  console.log(memberId);
+  const path = `/api/member/${memberId}/dog`;
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url + path,
+    });
+
+    const ids = [];
+
+    if (res.data) {
+      res.data.forEach(element => {
+        ids.push(element.id);
+      });
+    }
+
+    return ids;
+  } catch (error) {
+    console.log(error.response, '강아지 목록 불러오지 못함.');
   }
 };

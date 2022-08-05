@@ -4,14 +4,16 @@ import {Alert, StyleSheet, TextInput, View} from 'react-native';
 import Button from '../ui/Button';
 import Input from './Input';
 import axios from 'axios';
-import { login } from '../../utils/auth';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/auth';
+import {login} from '../../utils/auth';
+import {useDispatch} from 'react-redux';
+import {authActions} from '../../store/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {profileActions} from '../../store/profile';
+import {fetchDogs} from '../../utils/profile';
 
 const LoginForm = () => {
-  const dispatch = useDispatch()
-  const navigation = useNavigation()
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [inputValues, setInputValues] = useState({
     email: '',
     password: '',
@@ -25,9 +27,9 @@ const LoginForm = () => {
     });
   };
 
-
   const submitHandler = async () => {
-    const emailRegex = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/
+    const emailRegex =
+      /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
 
     const emailIsValid = emailRegex.test(inputValues.email);
     const passwordIsValid = inputValues.password.length > 8;
@@ -40,11 +42,16 @@ const LoginForm = () => {
       return;
     }
 
-
     const res = await login(inputValues.email, inputValues.password);
     console.log(res.data.accessToken, 'access token');
     await dispatch(authActions.authenticate({token: res.data.accessToken}));
-    navigation.navigate('Home')
+    const ids = await fetchDogs();
+    if (ids) {
+      await dispatch(profileActions.saveDogIds(ids));
+      navigation.navigate('Home');
+    } else {
+      navigation.navigate('ProfileHome')
+    }
   };
 
   return (

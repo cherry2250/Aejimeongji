@@ -13,6 +13,11 @@ const DummyData = [
     id: 3,
     source: require('../../Assets/image/박베리.png'),
   },
+  {
+    id: 5,
+    source: require('../../Assets/image/Profile.png'),
+    purpose: 'yes'
+  },
 
 ];
 export default DummyData;

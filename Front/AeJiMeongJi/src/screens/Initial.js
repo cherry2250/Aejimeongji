@@ -30,6 +30,10 @@ const Initial = ({navigation}) => {
           navigation.navigate('GuideHome');
         }}
         title="Guide"></Button>
+<Button onPress={() => {
+          navigation.navigate('Choice');
+        }}
+        title="프로필선택"></Button>
     </View>
   );
 };
