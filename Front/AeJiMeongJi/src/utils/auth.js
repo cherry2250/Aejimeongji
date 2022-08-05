@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
+import jwt_decode from 'jwt-decode';
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -77,4 +78,13 @@ export const confirmCertHandler = async (authNumber, phoneUUID) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+
+
+export const getMemberId = async () => {
+  const jwt = await AsyncStorage.getItem('token');
+  const decodedJwt = jwt_decode(jwt);
+  const memberId = decodedJwt.memberId;
+  return memberId;
 };
