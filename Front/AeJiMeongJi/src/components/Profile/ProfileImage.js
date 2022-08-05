@@ -2,7 +2,7 @@ import {Avatar} from '@rneui/themed';
 import React, {useRef, useState} from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import UploadModeModal from './UploadModeModal';
-// import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 
 const ProfileImage = ({visible, image, setImage}) => {
@@ -21,7 +21,7 @@ const ProfileImage = ({visible, image, setImage}) => {
       return;
     }
 
-    console.log(putString(res.assets[0].base64));
+    // console.log(res.assets[0].base64);
 
     // const RNFS = require('react-native-fs');
     // const imagePath = `${
@@ -30,7 +30,7 @@ const ProfileImage = ({visible, image, setImage}) => {
     // console.log(imagePath);
 
     // const move = await RNFS.writeFile(imagePath, res.assets[0].base64, 'base64')
-    console.log(move);
+    // console.log(move);
 
 
     // if (Platform.OS === 'ios') {
@@ -52,7 +52,7 @@ const ProfileImage = ({visible, image, setImage}) => {
 
     // 여기서 axios 요청
     // console.log(res);
-    setImage(res.assets[0].base64);
+    setImage(res.assets[0]);
   };
   const imageAddBtn = require('../../Assets/image/imgAddBtn.png');
   const fileInput = useRef(null);
@@ -80,17 +80,17 @@ const ProfileImage = ({visible, image, setImage}) => {
   };
 
   const onLaunchCamera = async () => {
-    // await launchCamera(imagePickerOption, onPickImage);
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
-      cropping: true,
-      cropperCircleOverlay: true,
-      includeExif: true
-    }).then(image => {
-      console.log(image);
-      setImage(image)
-    });
+    await launchCamera(imagePickerOption, onPickImage);
+    // ImagePicker.openCamera({
+    //   width: 300,
+    //   height: 400,
+    //   cropping: true,
+    //   cropperCircleOverlay: true,
+    //   includeExif: true
+    // }).then(image => {
+    //   console.log(image);
+    //   setImage(image)
+    // });
   };
 
   return (

@@ -53,23 +53,22 @@ export const fetchDog = async ({
   });
 
   const data = {
-    uri: image.path,
-    name: image.path,
-    type: image.mime, // or photo.type
+    uri: image.uri,
+    name: image.uri,
+    type: image.type, // or photo.type
   };
+  console.log(data, '이것이 data');
 
   formData.append('image', data);
-  console.log(formData);
-  console.log(data);
-
   try {
     const res = await axios({
       method: 'post',
       url: url + path,
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": `multipart/form-data`,
       },
-      transformRequest: (data, error) => {
+      transformRequest: (formData) => {
+        console.log(formData, 'form');
         return formData;
       },
       data: formData,
