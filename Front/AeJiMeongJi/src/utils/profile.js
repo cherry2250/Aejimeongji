@@ -17,7 +17,7 @@ export const fetchBreed = async () => {
     console.log(error.message);
   }
 };
-.
+
 export const fetchDog = async ({
   adoptedDay,
   birthdate,
