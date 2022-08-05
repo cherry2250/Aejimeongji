@@ -8,6 +8,7 @@ import Initial from '../screens/Initial';
 import MainHome from '../screens/Home/MainHome';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import RunningHome from '../screens/Running/RunningHome';
+import RunningGeolocation from '../screens/Running/RunningGeolocation';
 import ProfileHomeScreen from '../screens/Profile/ProfileHomeScreen';
 import ProfileHomeScreen2 from '../screens/Profile/ProfileHomeScreen2';
 import ProfileChoiceScreen from '../screens/Profile/ProfileChoiceScreen';
@@ -17,7 +18,6 @@ import GuideCategory from '../screens/Guide/GuideCategory';
 import CalendarHome from '../screens/Calendar/CalendarHome';
 import TodoUpload from '../screens/Calendar/TodoUpload';
 
-
 const Stack = createNativeStackNavigator();
 
 // 로그인 back 연동 후 Initial, running mainhome 삭제
@@ -26,6 +26,7 @@ const AuthStack = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Initial" component={Initial} />
       <Stack.Screen name="RunningHome" component={RunningHome} />
+      <Stack.Screen name="RunningGeolocation" component={RunningGeolocation} />
       <Stack.Screen name="Home" component={MainHome} />
       <Stack.Screen
         name="Welcome"

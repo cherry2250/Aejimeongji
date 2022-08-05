@@ -2,21 +2,24 @@ import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
-import CarouselCards from './CarouselCards';
-import SubCard from './SubCard';
+import CarouselCards from '../../components/Guide/CarouselCards';
+import SubCard from '../../components/Guide/SubCard';
 import Button from '../../components/ui/Button';
 import GuideButton from '../../components/ui/GuideButton';
+import {fetchGuideList} from '../../utils/guide';
 
 const GuideHome = ({navigation}) => {
+  const fetchGuide = async children => {
+    const res = await fetchGuideList(children);
+
+    navigation.navigate('GuideCategory', {information: title});
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory');
-            }}
-            style={{marginLeft: 10}}>
+          <GuideButton onPress={fetchGuide} style={{marginLeft: 10}}>
             {' '}
             건강{' '}
           </GuideButton>

@@ -2,8 +2,8 @@ import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
-import GuideShare from './GuideShare';
-import GuideLike from './GuideLike';
+import GuideShare from '../../components/Guide/GuideShare';
+import GuideLike from '../../components/Guide/GuideLike';
 
 const GuideDetail = () => {
   return (

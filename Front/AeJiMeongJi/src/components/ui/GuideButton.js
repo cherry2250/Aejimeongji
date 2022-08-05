@@ -3,10 +3,15 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../constants/styles';
 
 function GuideButton({children, onPress}) {
+  const fetchGuide = () => {
+    console.log('fetchGuide');
+    onPress(children);
+  };
+
   return (
     <Pressable
       style={({pressed}) => [styles.button, pressed && styles.pressed]}
-      onPress={onPress}>
+      onPress={fetchGuide}>
       <View>
         <Text style={styles.buttonText}>{children}</Text>
       </View>

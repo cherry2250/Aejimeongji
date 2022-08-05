@@ -4,7 +4,7 @@ import {Colors} from '../../constants/styles';
 import RunButton from '../../components/ui/RunButton';
 import RunButton2 from '../../components/ui/RunButton2';
 
-const RunningHome = props => {
+const RunningHome = ({navigation}) => {
   return (
     <View style={styels.rootContainer}>
       <View>
@@ -46,7 +46,13 @@ const RunningHome = props => {
           <View style={styels.runButton}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <RunButton styel={styels.runLoginButton}>산책 시작하기</RunButton>
+              <RunButton
+                onPress={() => {
+                  navigation.navigate('RunningGeolocation');
+                }}
+                styel={styels.runLoginButton}>
+                산책 시작하기
+              </RunButton>
               <RunButton2 style={{}}>산책 이력보기</RunButton2>
             </View>
           </View>

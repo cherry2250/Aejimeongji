@@ -3,13 +3,13 @@ import {Pressable, StyleSheet, Text, View, Image} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
 
-const SubCard = () => {
+const SubCard = ({information}) => {
   return (
     <ScrollView>
       <View style={styles.rootContainer}>
         <View style={styles.GuideTitle}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-            가이드 정보가 들어갈 예정
+            가이드 정보가 들어갈 예정{information ? information : '없어'}
           </Text>
         </View>
         <View>
