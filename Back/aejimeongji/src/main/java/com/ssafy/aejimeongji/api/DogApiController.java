@@ -14,6 +14,7 @@ import com.ssafy.aejimeongji.domain.service.MemberService;
 import com.ssafy.aejimeongji.domain.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,12 +50,12 @@ public class DogApiController {
         return ResponseEntity.ok().body(new DogProfileResponse(dog));
     }
 
-    @PostMapping
-    public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @RequestPart("request") DogSaveRequest request, @RequestPart("image") MultipartFile image) throws IOException {
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @ModelAttribute DogSaveRequest request) throws IOException {
         log.info("강아지 프로필 등록 요청");
-        DogImage dogImage = new DogImage(imageUtil.storeImage(image));
+        DogImage dogImage = new DogImage(imageUtil.storeImage(request.getImage()));
         Member member = memberService.findMember(memberId);
-        Breed breed = breedService.findBreed(request.getBreed().getBreedName());
+        Breed breed = breedService.findBreed(request.getBreed());
         Long savedId = dogService.saveDog(request.convertDog(member, breed, dogImage));
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 " + savedId + " 등록이 완료되었습니다."));
     }

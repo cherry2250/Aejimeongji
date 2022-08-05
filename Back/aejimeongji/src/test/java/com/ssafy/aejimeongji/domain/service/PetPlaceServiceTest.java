@@ -5,7 +5,6 @@ import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.entity.PetPlace;
 import com.ssafy.aejimeongji.domain.repository.BookmarkRepository;
 import com.ssafy.aejimeongji.domain.repository.PetPlaceRepostiory;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
