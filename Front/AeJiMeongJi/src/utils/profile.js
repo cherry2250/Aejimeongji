@@ -208,3 +208,17 @@ export const fetchDogs = async () => {
     console.log(error.response, '강아지 목록 불러오지 못함.');
   }
 };
+
+export const deleteProfileHandler = async dogId => {
+  const memberId = getMemberId();
+  const path = `/api/member/${memberId}/dog/${dogId}`;
+
+  try {
+    const res = axios({
+      method: 'delete',
+      url: url + path
+    });
+  } catch (error) {
+    console.log(error.response);
+  }
+};

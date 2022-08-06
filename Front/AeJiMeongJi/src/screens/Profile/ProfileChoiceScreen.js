@@ -5,6 +5,8 @@ import ProfileItems from '../../components/Profile/ProfileItems';
 import {Colors} from '../../constants/styles';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/ui/Button';
+import { fetchDogs } from '../../utils/profile';
+
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
   // item을 flat list로 rendering
@@ -16,16 +18,16 @@ const ProfileChoiceScreen = () => {
   const ids = useSelector(state => state.ids);
   const [isEditing, setIsEditing] = useState(false);
 
-  // const profiles = [
-  //   {
-  //     id,
-  //     title,
-  //     source,
-  //   },
-  // ];
+  const [profiles, setProfiles] = useState([])
 
   useLayoutEffect(() => {
-    const fetchAlldogs = async () => {};
+    const fetchAlldogs = async () => {
+      const res = await fetchDogs()
+      console.log(res);
+    };
+
+    fetchAlldogs()
+
   }, []);
 
   const renderItem = ({item}) => (
@@ -50,7 +52,7 @@ const ProfileChoiceScreen = () => {
         columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
       />
       <View style={styles.buttonContainer}>
-        <Button>
+        <Button style={styles.button}>
           내 계정 관리
         </Button>
       </View>
@@ -87,9 +89,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 80,
   },
   button: {
-
+    backgroundColor: '#EDCCA2',
+    color: '#90560D',
+    fontSize: 13,
+    fontWeight: 'bold',
+    minWidth: '40%',
   }
 });

@@ -23,6 +23,7 @@ const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
 
   const changeProfileHandler = async id => {
     const memberId = await getMemberId();
+    console.log(memberId);
     navigation.navigate('ProfileChange', id);
   };
 
@@ -67,11 +68,11 @@ const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
       <View style={styles.profile}>
         {/* <Text>{title}</Text> */}
         <Image
-          style={[styles.image, !isEditing && !purpose && styles.editing]}
+          style={[styles.image, isEditing && !purpose && styles.editing]}
           resizeMode="contain"
           source={source}
         />
-        {!isEditing && !purpose && (
+        {isEditing && !purpose && (
           <Image
             style={styles.grayscale}
             resizeMode="contain"

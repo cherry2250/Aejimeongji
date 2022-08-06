@@ -25,14 +25,13 @@ const ProfileHomeScreen2 = ({route}) => {
 
   const submitHandler = async () => {
     console.log(inputValues);
-    const res = await fetchDogImage(inputValues.image);
-    console.log(res);
-    // if (res) {
-    //   const res2 = await fetchDogImage(res, route.params.image);
-    //   if (res2) {
-    //     navigation.replace('Choice');
-    //   }
-    // }
+    const res = await fetchDog(inputValues);
+    if (res) {
+      const res2 = await fetchDogImage(res, inputValues.image);
+      if (res2) {
+        navigation.replace('Choice');
+      }
+    }
   };
 
   const [inputValues, setInputValues] = useState({

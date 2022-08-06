@@ -34,6 +34,10 @@ const Initial = ({navigation}) => {
           navigation.navigate('Choice');
         }}
         title="프로필선택"></Button>
+<Button onPress={() => {
+          navigation.navigate('ProfileEdit');
+        }}
+        title="강쥐 프로필 변경"></Button>
     </View>
   );
 };
