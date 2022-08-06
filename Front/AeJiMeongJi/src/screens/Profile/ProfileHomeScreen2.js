@@ -25,6 +25,7 @@ const ProfileHomeScreen2 = ({route}) => {
 
   const submitHandler = async () => {
     console.log(inputValues);
+    // const res = await fetchDogImage(inputValues.image);
     const res = await fetchDog(inputValues);
     if (res) {
       const res2 = await fetchDogImage(res, inputValues.image);
@@ -43,7 +44,7 @@ const ProfileHomeScreen2 = ({route}) => {
     weight: '',
     neutering: check,
     gone: false,
-    image: route.params.image
+    image: route.params.image,
   });
 
   const inputChangeHandler = (inputIdentifier, enterdValue) => {

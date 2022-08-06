@@ -16,8 +16,7 @@ const DummyData = [
   {
     id: 5,
     source: require('../../Assets/image/Profile.png'),
-    purpose: 'yes'
+    purpose: 'yes',
   },
-
 ];
 export default DummyData;

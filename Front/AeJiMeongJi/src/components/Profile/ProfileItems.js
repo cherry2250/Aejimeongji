@@ -8,7 +8,6 @@ import {profileActions} from '../../store/profile';
 import {useNavigation} from '@react-navigation/native';
 import {getMemberId} from '../../utils/auth';
 
-
 const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
   let img = null;
   const dogId = useSelector(state => state.profile.id);
@@ -87,7 +86,6 @@ const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
           </Pressable>
         )}
       </View>
-      
     </Pressable>
   );
 };
@@ -132,6 +130,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#90560D'
+    color: '#90560D',
   },
 });

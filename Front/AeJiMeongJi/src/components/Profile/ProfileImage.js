@@ -71,12 +71,10 @@ const ProfileImage = ({visible, image, setImage}) => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true
+      cropping: true,
     }).then(image => {
       console.log(image);
     });
-
-
   };
 
   const onLaunchCamera = async () => {
@@ -91,6 +89,17 @@ const ProfileImage = ({visible, image, setImage}) => {
   //     console.log(image);
   //     setImage(image)
   //   });
+    //   ImagePicker.openCamera({
+    //     width: 300,
+    //     height: 400,
+    //     cropping: true,
+    //     cropperCircleOverlay: true,
+    //     includeExif: true
+    //   }).then(image => {
+    //     console.log(image);
+    //     setImage(image)
+    //   });
+
   };
 
   return (
