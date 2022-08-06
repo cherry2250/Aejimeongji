@@ -1,7 +1,7 @@
-package com.ssafy.aejimeongji.domain.entity;
+package com.ssafy.aejimeongji.domain.entity.image;
 
+import com.ssafy.aejimeongji.domain.entity.PetPlace;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

@@ -1,7 +1,9 @@
 package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.GuideBook;
+import com.ssafy.aejimeongji.domain.entity.image.GuideThumbnail;
 import com.ssafy.aejimeongji.domain.repository.GuideBookRepository;
+import com.ssafy.aejimeongji.domain.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class GuideBookService {
 
     private final GuideBookRepository guideBookRepository;
     private final Random random = new Random();
+    private final ImageUtil imageUtil;
 
     public List<GuideBook> randomSelect(List<GuideBook> beforeList) {
         int[] randIndexes = new int[5];
@@ -80,9 +83,9 @@ public class GuideBookService {
 
     // 가이드 수정
     @Transactional
-    public Long updateGuideBook(Long guideId, String newTitle, String newContent, String newCategory, int newDogAge, int newDogWeight) {
+    public Long updateGuideBook(Long guideId, String newTitle, String newContent, String newCategory, int newDogAge, int newDogWeight, GuideThumbnail newThumbnail) {
         GuideBook findGuide = findGuideBook(guideId);
-        findGuide.updateGuideBook(newTitle, newContent, newCategory, newDogAge, newDogWeight);
+        findGuide.updateGuideBook(newTitle, newContent, newCategory, newDogAge, newDogWeight, newThumbnail);
         return findGuide.getId();
     }
 
@@ -90,6 +93,7 @@ public class GuideBookService {
     @Transactional
     public void deleteGuideBook(Long guidId) {
         GuideBook findGuide = findGuideBook(guidId);
+        imageUtil.deleteStoreImage(findGuide.getThumbnail().getStoreFilename());
         guideBookRepository.delete(findGuide);
     }
 }

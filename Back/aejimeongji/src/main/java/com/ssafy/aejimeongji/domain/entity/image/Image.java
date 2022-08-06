@@ -1,4 +1,4 @@
-package com.ssafy.aejimeongji.domain.entity;
+package com.ssafy.aejimeongji.domain.entity.image;
 
 import lombok.AccessLevel;
 import lombok.Getter;

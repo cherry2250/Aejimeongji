@@ -1,9 +1,10 @@
 package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.GuideBook;
+import com.ssafy.aejimeongji.domain.entity.image.GuideThumbnail;
+import com.ssafy.aejimeongji.domain.entity.image.Image;
 import com.ssafy.aejimeongji.domain.repository.GuideBookRepository;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -82,7 +81,7 @@ class GuideBookServiceTest {
 
         // when
         guideBookService.updateGuideBook(savedGuideBookId, "new제목", "new내용",
-                "미용", 1, 2);
+                "미용", 1, 2, new GuideThumbnail(new Image("dasfsda", "dsafdas")));
 
         // then
         assertThat(guideBook.getTitle()).isEqualTo("new제목");
@@ -95,7 +94,7 @@ class GuideBookServiceTest {
     @Test
     void deleteGuideBook() {
         // given
-        GuideBook guideBook = new GuideBook("제목", "내용", "의료", 10, 1);
+        GuideBook guideBook = new GuideBook("제목", "내용", "의료", 10, 1, new GuideThumbnail(new Image("dsafdasf", "dsafasd")));
         em.persist(guideBook);
         Long savedGuideBookId = guideBookService.saveGuideBook(guideBook);
 

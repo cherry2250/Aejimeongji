@@ -1,6 +1,7 @@
 package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.*;
+import com.ssafy.aejimeongji.domain.entity.image.DogImage;
 import com.ssafy.aejimeongji.domain.repository.WalkingRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

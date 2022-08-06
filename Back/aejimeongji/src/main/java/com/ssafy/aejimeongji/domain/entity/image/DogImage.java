@@ -1,9 +1,8 @@
-package com.ssafy.aejimeongji.domain.entity;
+package com.ssafy.aejimeongji.domain.entity.image;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
