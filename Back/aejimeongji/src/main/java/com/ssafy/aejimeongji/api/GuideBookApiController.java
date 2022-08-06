@@ -93,27 +93,5 @@ public class GuideBookApiController {
         GuideBook guideBook = guideBookService.findGuideBook(guideId);
         return ResponseEntity.ok().body(new GuideBookResponse(guideBook));
     }
-
-    @PostMapping("")
-    public ResponseEntity<ResponseDTO> saveGuideBook(@RequestBody GuideBookRequest request) {
-        log.info("가이드북 등록 요청");
-        Long savedId = guideBookService.saveGuideBook(request.convertGuideBook());
-        return ResponseEntity.ok(new ResponseDTO("가이드북 " + savedId + " 등록이 완료되었습니다."));
-    }
-
-    @PutMapping("/{guideId}")
-    public ResponseEntity<ResponseDTO> updateGuideBook(@PathVariable Long guideId, @RequestBody GuideBookRequest request) {
-        log.info("가이드북 {} 수정 요청", guideId);
-        Long updatedId = guideBookService.updateGuideBook(guideId, request.getTitle(), request.getContent(),
-                request.getCategory(), request.getDogAge(), request.getDogWeight());
-        return ResponseEntity.ok(new ResponseDTO("가이드북 " + updatedId + " 수정이 완료되었습니다."));
-    }
-
-    @DeleteMapping("/{guideId}")
-    public ResponseEntity<ResponseDTO> deleteGuideBook(@PathVariable Long guideId) {
-        log.info("가이드북 {} 삭제 요청", guideId);
-        guideBookService.deleteGuideBook(guideId);
-        return ResponseEntity.ok().body(new ResponseDTO("가이드북 " + guideId + " 삭제가 완료되었습니다."));
-    }
 }
 

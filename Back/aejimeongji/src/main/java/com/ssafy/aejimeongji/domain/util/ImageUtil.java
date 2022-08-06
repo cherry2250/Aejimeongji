@@ -1,6 +1,6 @@
 package com.ssafy.aejimeongji.domain.util;
 
-import com.ssafy.aejimeongji.domain.entity.Image;
+import com.ssafy.aejimeongji.domain.entity.image.Image;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

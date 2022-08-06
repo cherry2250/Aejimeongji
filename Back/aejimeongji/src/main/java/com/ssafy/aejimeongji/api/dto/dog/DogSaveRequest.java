@@ -1,6 +1,7 @@
 package com.ssafy.aejimeongji.api.dto.dog;
 
 import com.ssafy.aejimeongji.domain.entity.*;
+import com.ssafy.aejimeongji.domain.entity.image.DogImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

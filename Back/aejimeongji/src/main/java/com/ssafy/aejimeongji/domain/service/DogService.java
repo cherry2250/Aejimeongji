@@ -2,8 +2,7 @@ package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
-import com.ssafy.aejimeongji.domain.entity.DogImage;
-import com.ssafy.aejimeongji.domain.repository.BreedRepository;
+import com.ssafy.aejimeongji.domain.entity.image.DogImage;
 import com.ssafy.aejimeongji.domain.repository.DogRepository;
 import com.ssafy.aejimeongji.domain.util.ImageUtil;
 import lombok.RequiredArgsConstructor;

@@ -6,7 +6,7 @@ import com.ssafy.aejimeongji.api.dto.dog.DogSaveRequest;
 import com.ssafy.aejimeongji.api.dto.dog.DogUpdateRequest;
 import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
-import com.ssafy.aejimeongji.domain.entity.DogImage;
+import com.ssafy.aejimeongji.domain.entity.image.DogImage;
 import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.service.BreedService;
 import com.ssafy.aejimeongji.domain.service.DogService;

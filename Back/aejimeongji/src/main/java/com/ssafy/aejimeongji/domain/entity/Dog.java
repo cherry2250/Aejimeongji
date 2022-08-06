@@ -1,5 +1,6 @@
 package com.ssafy.aejimeongji.domain.entity;
 
+import com.ssafy.aejimeongji.domain.entity.image.DogImage;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
