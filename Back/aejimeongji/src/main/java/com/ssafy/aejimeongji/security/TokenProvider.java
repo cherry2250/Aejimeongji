@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class  TokenProvider {
 
     private String secretKey;
@@ -28,9 +30,9 @@ public class  TokenProvider {
         claims.put("role", member.getRole());
         Date now = new Date();
         return Jwts.builder()
+                .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + JwtProperties.accessTokenValidTime))
-                .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
@@ -40,9 +42,9 @@ public class  TokenProvider {
         claims.put("memberId", member.getId());
         Date now = new Date();
         return Jwts.builder()
+                .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + JwtProperties.refreshTokenValidTime))
-                .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }

@@ -30,8 +30,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String accessToken = tokenProvider.resolveToken(request);
 
+        log.debug("엑세스 토큰 = {}", accessToken);
+
         // Bearer 체크
-        if (!accessToken.startsWith("Bearer ")) {
+        if (accessToken == null && !accessToken.startsWith("Bearer ")) {
+            log.debug("엑세스 토큰이 널이거나 Bearer가 없음");
             result.put("message", "Bearer 확인해주세요!");
             makeResponse(response);
             return false;
@@ -45,6 +48,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             log.debug("유효한 토큰");
             return true;
         } else {
+            log.debug("유효하지 않은 토큰");
             makeResponse(response);
             return false;
         }
