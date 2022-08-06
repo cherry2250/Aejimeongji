@@ -8,14 +8,14 @@ import {profileActions} from '../../store/profile';
 import {useNavigation} from '@react-navigation/native';
 import {getMemberId} from '../../utils/auth';
 
-const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
+const ProfileItems = ({source, id, purpose, isEditing, name}) => {
   let img = null;
-  const dogId = useSelector(state => state.profile.id);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const changeDogHandler = async id => {
     // 강아지 정보 조회 후 redux에 현재 강아지 정보 저장
+    Alert.alert(`${name} 강아지로 변경 되었어요.`)
     await dispatch(profileActions.saveDogid({id}));
     console.log('강쥐 변경 완료');
   };
@@ -31,7 +31,11 @@ const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
   const onPress = async () => {
     console.log(`${id}번 강쥐클릭`);
 
-    if (isEditing) {
+    if (purpose) {
+      Alert.alert('프로필 추가 하시겠어요?')
+    }
+
+    if (isEditing && !purpose) {
       Alert.alert('프로필 수정', '프로필 수정 하시겠어요?', [
         {
           text: '아니요',
@@ -40,8 +44,8 @@ const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
         },
         {text: '네', onPress: changeProfileHandler.bind(this, id)},
       ]);
-    } else {
-      Alert.alert('프로필 변경', `${id} 강아지로 변경하시겠어요?`, [
+    } else if (!isEditing && !purpose) {
+      Alert.alert('프로필 변경', `${name} 강아지로 변경하시겠어요?`, [
         {
           text: '아니요',
           onPress: () => console.log('Cancel Pressed'),
@@ -79,7 +83,7 @@ const ProfileItems = ({source, id, purpose, isEditing, ids}) => {
           />
         )}
 
-        <Text style={styles.name}>{id}</Text>
+        <Text style={styles.name}>{name}</Text>
         {purpose && (
           <Pressable onPress={addProfileHandler}>
             <Image source={imageAddBtn} style={styles.imageAddBtn} />

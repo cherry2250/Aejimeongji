@@ -94,38 +94,38 @@ export const fetchDog = async ({
   }
 };
 
-export const fetchDogImage = async image => {
-  // const newImage = image.replace('file://', '');
-  console.log(image);
-  const jwt = await AsyncStorage.getItem('token');
-  const decodedJwt = jwt_decode(jwt);
-  const memberId = decodedJwt.memberId;
-  const path = `/api/member/4/dog/52/profileimage`;
+// export const fetchDogImage = async image => {
+//   // const newImage = image.replace('file://', '');
+//   console.log(image);
+//   const jwt = await AsyncStorage.getItem('token');
+//   const decodedJwt = jwt_decode(jwt);
+//   const memberId = decodedJwt.memberId;
+//   const path = `/api/member/4/dog/52/profileimage`;
 
-  const formData = new FormData();
-  console.log(image);
-  formData.append('image', {
-    name: image.uri,
-    type: 'image/jpeg',
-    uri: image.uri,
-  });
-  console.log(formData, '이거');
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: url + path,
-      data: formData,
-      headers: {
-        // Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    console.log(res, 'image에러');
-    return res;
-  } catch (error) {
-    console.log(error.message, '에러');
-  }
-};
+//   const formData = new FormData();
+//   console.log(image);
+//   formData.append('image', {
+//     name: image.uri,
+//     type: 'image/jpeg',
+//     uri: image.uri,
+//   });
+//   console.log(formData, '이거');
+//   try {
+//     const res = await axios({
+//       method: 'POST',
+//       url: url + path,
+//       data: formData,
+//       headers: {
+//         // Accept: 'application/json',
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+//     console.log(res, 'image에러');
+//     return res;
+//   } catch (error) {
+//     console.log(error.message, '에러');
+//   }
+// };
 // export const fetchDogImage = async image => {
 //   // const newImage = image.replace('file://', '');
 //   console.log(image);
@@ -207,13 +207,15 @@ export const changeProfile = async ({nickname}) => {
   }
 };
 
-export const getImage = async () => {
-  const path = '/api/image/0c7bb374-2f58-461f-813b-927b0f5abe8c.JPG';
-
+export const getImage = async (imageName) => {
+  const path = `/api/image/${imageName}`;
+  // console.log(imageName, '진입');
+  // console.log(url+path);
   try {
     const res = await axios({
       method: 'get',
       url: url + path,
+      // responseType:'blob',
     });
     // console.log(res);
     // console.log(res.data, typeof(res.data), new Blob([res.data]));
@@ -221,9 +223,13 @@ export const getImage = async () => {
     // console.log(blob, '여기');
     // const img = URL.createObjectUrl(blob)
 
-    console.log(res.data);
+    // const reader = new FileReader();
+    // reader.readAsDataURL(res)
 
-    return res;
+
+    console.log(res.data, '이미지요청');
+
+    return res.data;
   } catch (error) {
     console.log(error, 'img 못부러옴');
   }
@@ -232,23 +238,23 @@ export const getImage = async () => {
 // 사용자의 강아지
 export const fetchDogs = async () => {
   const memberId = await getMemberId();
-  console.log(memberId);
   const path = `/api/member/${memberId}/dog`;
   try {
     const res = await axios({
       method: 'get',
       url: url + path,
     });
-
+    console.log(res);
     const ids = [];
 
-    if (res.data) {
-      res.data.forEach(element => {
-        ids.push(element.id);
-      });
-    }
+    // if (res.data) {
+    //   res.data.forEach(element => {
+    //     ids.push(element.dogId);
+    //   });
+    // }
+    console.log(res.data);
 
-    return ids;
+    return res.data;
   } catch (error) {
     console.log(error.response, '강아지 목록 불러오지 못함.');
   }
