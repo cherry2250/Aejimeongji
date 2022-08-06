@@ -27,11 +27,11 @@ const ProfileHomeScreen2 = ({route}) => {
     console.log(inputValues);
     // const res = await fetchDogImage(inputValues.image);
     const res = await fetchDog(inputValues);
+      navigation.replace('Choice');
     if (res) {
-      const res2 = await fetchDogImage(res, inputValues.image);
-      if (res2) {
-        navigation.replace('Choice');
-      }
+      // const res2 = await fetchDogImage(res, inputValues.image);
+      // if (res2) {
+      // }
     }
   };
 

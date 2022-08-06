@@ -56,7 +56,6 @@ export const fetchDog = async ({
   formData.append('gone', gone);
   formData.append('breed', breed);
 
-<<<<<<< HEAD
   formData.append('request', JSON.stringify(request), {
     type: 'application/json',
   });
@@ -69,14 +68,12 @@ export const fetchDog = async ({
   console.log(data, '이것이 data');
 
   formData.append('image', data);
-=======
   formData.append('image', {
     name: image.uri,
     type: 'multipart/form-data',
     uri: image.uri,
   });
 
->>>>>>> ab893fdbd145a87b8bc18feac38785c756b18a7c
   try {
     const res = await axios({
       method: 'POST',
@@ -97,7 +94,6 @@ export const fetchDog = async ({
   }
 };
 
-<<<<<<< HEAD
 export const fetchDogImage = async image => {
   // const newImage = image.replace('file://', '');
   console.log(image);
@@ -130,7 +126,6 @@ export const fetchDogImage = async image => {
     console.log(error.message, '에러');
   }
 };
-=======
 // export const fetchDogImage = async image => {
 //   // const newImage = image.replace('file://', '');
 //   console.log(image);
@@ -162,7 +157,6 @@ export const fetchDogImage = async image => {
 //     console.log(error.message, '에러');
 //   }
 // };
->>>>>>> ab893fdbd145a87b8bc18feac38785c756b18a7c
 
 export const getDogImage = async () => {
   // 이미지의 pk를 불러와야함.
