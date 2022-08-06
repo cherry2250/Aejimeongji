@@ -44,7 +44,7 @@ const LoginForm = () => {
 
     const res = await login(inputValues.email, inputValues.password);
     console.log(res.data.accessToken, 'access token');
-    await dispatch(authActions.authenticate({token: res.data.accessToken}));
+    await dispatch(authActions.authenticate({token: res.data.accessToken, refreshToken: res.data.refreshToken}));
     const ids = await fetchDogs();
     if (ids) {
       await dispatch(profileActions.saveDogIds(ids));

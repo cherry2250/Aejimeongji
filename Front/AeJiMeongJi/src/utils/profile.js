@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { Alert } from 'react-native';
 import {getMemberId} from './auth';
 
 const url = 'http://i7d203.p.ssafy.io:8080';
@@ -20,8 +21,8 @@ export const fetchBreed = async () => {
 };
 
 export const fetchDog = async ({
-  adoptedDay,
-  birthdate,
+  adoptionDay,
+  birthday,
   breed,
   gender,
   name,
@@ -36,8 +37,8 @@ export const fetchDog = async ({
 
   const path = `/api/member/${memberId}/dog`;
   const request = {
-    adoptedDay,
-    birthdate,
+    adoptionDay,
+    birthday,
     breed,
     gender,
     name,
@@ -49,8 +50,8 @@ export const fetchDog = async ({
   const formData = new FormData();
   formData.append('name', name);
   formData.append('weight', weight);
-  formData.append('birthdate', birthdate);
-  formData.append('adoptedDay', adoptedDay);
+  formData.append('birthday', birthday);
+  formData.append('adoptionDay', adoptionDay);
   formData.append('gender', gender);
   formData.append('neutering', neutering);
   formData.append('gone', gone);
@@ -187,7 +188,7 @@ export const getProfile = async () => {
   }
 };
 
-export const changeProfile = async ({nickname}) => {
+export const changeProfile = async ({nickname, password, phoneNumber}) => {
   const jwt = await AsyncStorage.getItem('token');
   const decodedJwt = jwt_decode(jwt);
   const memberId = decodedJwt.memberId;
@@ -199,6 +200,8 @@ export const changeProfile = async ({nickname}) => {
       url: url + path,
       data: {
         nickname,
+        password,
+        phoneNumber
       },
     });
     return res;
@@ -269,6 +272,8 @@ export const deleteProfileHandler = async dogId => {
       method: 'delete',
       url: url + path
     });
+
+
   } catch (error) {
     console.log(error.response);
   }

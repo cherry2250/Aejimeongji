@@ -6,6 +6,7 @@ import {Colors} from '../../constants/styles';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/ui/Button';
 import {fetchDogs, getImage} from '../../utils/profile';
+import { useNavigation } from '@react-navigation/native';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
@@ -17,6 +18,7 @@ const ProfileChoiceScreen = () => {
 
   const ids = useSelector(state => state.ids);
   const [isEditing, setIsEditing] = useState(false);
+  const navigation = useNavigation()
 
   const addProfileData = {
     source: require('../../Assets/image/Profile.png'),
@@ -61,6 +63,10 @@ const ProfileChoiceScreen = () => {
     setIsEditing(cur => !cur)
   }
 
+  const goToMyInfo = () => {
+    navigation.navigate('MyInfo')
+  }
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.header}>
@@ -76,7 +82,7 @@ const ProfileChoiceScreen = () => {
         columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
       />
       <View style={styles.buttonContainer}>
-        <Button style={styles.button}>내 계정 관리</Button>
+        <Button style={styles.button} onPress={goToMyInfo}>내 계정 관리</Button>
       </View>
     </SafeAreaView>
   );

@@ -29,6 +29,7 @@ const AuthenticatedStack = () => {
       <Stack.Screen name="ProfileHome2" component={ProfileHomeScreen2} />
       <Stack.Screen name="Choice" component={ProfileChoiceScreen} />
       <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
+      <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
@@ -86,6 +87,7 @@ import {profileActions} from './src/store/profile';
 import {getMemberId} from './src/utils/auth';
 import {fetchDogs} from './src/utils/profile';
 import ProfileEditScreen from './src/screens/Profile/ProfileEditScreen';
+import MyInfoScreen from './src/screens/Profile/MyInfoScreen';
 export default function App() {
   return (
     <Provider store={store}>

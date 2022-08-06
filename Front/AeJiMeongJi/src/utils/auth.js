@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import {Alert} from 'react-native';
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -16,8 +17,10 @@ export const login = async (email, password) => {
         password,
       },
     });
-    console.log(res.data.token);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+    console.log(res.data.accessToken, '토큰');
+    axios.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${res.data.accessToken}`;
     return res;
   } catch (error) {
     console.log(error.message);
@@ -85,4 +88,39 @@ export const getMemberId = async () => {
   const decodedJwt = jwt_decode(jwt);
   const memberId = decodedJwt.memberId;
   return memberId;
+};
+
+export const removeMember = async () => {
+  const memberId = await getMemberId();
+  const path = `/api/member/${memberId}`;
+  console.log(memberId);
+  try {
+    const res = await axios({
+      method: 'delete',
+      url: url + path,
+    });
+
+    console.log(res.data);
+
+    return res.data.message;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const refresh = async refreshToken => {
+  const path = 'api/auth/issue';
+
+  try {
+    const res = await axios({
+      method: 'post',
+      url: url + path,
+      data: refreshToken,
+    });
+
+    return res.data
+
+  } catch (error) {
+
+  }
 };

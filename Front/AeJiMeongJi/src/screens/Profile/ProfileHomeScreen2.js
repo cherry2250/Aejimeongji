@@ -37,8 +37,8 @@ const ProfileHomeScreen2 = ({route}) => {
 
   const [inputValues, setInputValues] = useState({
     name: route.params.name,
-    adoptedDay: '',
-    birthdate: '',
+    adoptionDay: '',
+    birthday: '',
     breed: route.params.breed,
     gender: route.params.gender,
     weight: '',
@@ -70,14 +70,14 @@ const ProfileHomeScreen2 = ({route}) => {
             inputChangeHandler={inputChangeHandler}
             inputValues={inputValues}
             title="반려견 생일"
-            indentifier="birthdate"
+            indentifier="birthday"
           />
           <View style={styles.inputSubContainer}>
             <DatePick
               inputChangeHandler={inputChangeHandler}
               inputValues={inputValues}
               title="반려견 입양일"
-              indentifier="adoptedDay"
+              indentifier="adoptiondDay"
             />
           </View>
         </View>

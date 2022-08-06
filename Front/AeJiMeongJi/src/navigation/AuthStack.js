@@ -17,6 +17,7 @@ import GuideCategory from '../screens/Guide/GuideCategory';
 import CalendarHome from '../screens/Calendar/CalendarHome';
 import TodoUpload from '../screens/Calendar/TodoUpload';
 import ProfileEditScreen from '../screens/Profile/ProfileEditScreen';
+import MyInfoScreen from '../screens/Profile/MyInfoScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -53,6 +54,7 @@ const AuthStack = () => {
       <Stack.Screen name="CalendarHome" component={CalendarHome} />
       <Stack.Screen name="TodoUpload" component={TodoUpload} />
       <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
+      <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
     </Stack.Navigator>
   );
