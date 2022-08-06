@@ -48,7 +48,7 @@ const RunningHome = ({navigation}) => {
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <RunButton
                 onPress={() => {
-                  navigation.navigate('RunningGeolocation');
+                  navigation.navigate('RunningInfo');
                 }}
                 styel={styels.runLoginButton}>
                 산책 시작하기

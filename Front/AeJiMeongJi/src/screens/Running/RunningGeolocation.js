@@ -23,7 +23,7 @@ const LONGITUDE_DELTA = 0.009;
 const LATITUDE = 37.78825;
 const LONGITUDE = -122.4324;
 
-class AnimatedMarkers extends React.Component {
+class RunningGeolocation extends React.Component {
   constructor(props) {
     super(props);
 
@@ -144,10 +144,19 @@ class AnimatedMarkers extends React.Component {
             coordinate={this.state.coordinate}
           />
         </MapView>
+        <View></View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={[styles.bubble, styles.button]}>
             <Text style={styles.bottomBarContent}>
-              {parseFloat(this.state.distanceTravelled).toFixed(2)} km
+              {parseFloat(this.state.distanceTravelled).toFixed(2) * 1000} m
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.bubble, styles.button]}>
+            <Text style={styles.bottomBarContent}>
+              {(parseFloat(this.state.distanceTravelled).toFixed(2) / 0.1) * 7}{' '}
+              kcal
             </Text>
           </TouchableOpacity>
         </View>
@@ -189,4 +198,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnimatedMarkers;
+export default RunningGeolocation;
