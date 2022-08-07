@@ -1,24 +1,33 @@
-import React from 'react';
-import {Image, StyleSheet, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+} from 'react-native';
 import {Colors} from '../../constants/styles';
 import RunButton from '../../components/ui/RunButton';
 import RunButton2 from '../../components/ui/RunButton2';
 
 const RunningHome = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styels.rootContainer}>
+    <View style={styles.rootContainer}>
       <View>
-        <View style={styels.runimgBox}>
+        <View style={styles.runimgBox}>
           <Image
-            style={styels.runImg}
+            style={styles.runImg}
             source={require('../../Assets/image/3d_dog.png')}
             resizeMode="contain"
           />
         </View>
-        <View style={styels.contentBox}>
-          <View style={styels.profileBox}>
+        <View style={styles.contentBox}>
+          <View style={styles.profileBox}>
             <View style={{flexDirection: 'row'}}>
-              <View style={styels.profileImg}>
+              <View style={styles.profileImg}>
                 {/* <Image
                   style={{width: '100%', height: '100%'}}
                   source={require('../../Assets/image/3d_dog.png')}
@@ -27,36 +36,99 @@ const RunningHome = ({navigation}) => {
                 <Text>이미지 들어갈 곳</Text>
               </View>
               <View>
-                <View style={styels.infoBox}>
-                  <View style={styels.infoName}>
+                <View style={styles.infoBox}>
+                  <View style={styles.infoName}>
                     <Text style={{fontSize: 30, fontWeight: 'bold'}}>앵두</Text>
                   </View>
-                  <View style={styels.infoCate}>
+                  <View style={styles.infoCate}>
                     <Text style={{fontSize: 17}}>10살, 5kg, 푸들</Text>
                   </View>
                 </View>
               </View>
             </View>
-            <View style={styels.RunTime}>
+            <View style={styles.RunTime}>
               <Text style={{fontSize: 15}}>
                 권장 산책시간은 1일 30분입니다.
               </Text>
             </View>
           </View>
-          <View style={styels.runButton}>
+          <View style={styles.runButton}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <RunButton
-                onPress={() => {
-                  navigation.navigate('RunningInfo');
-                }}
-                styel={styels.runLoginButton}>
+                onPress={() => setModalVisible(true)}
+                styel={styles.runLoginButton}>
                 산책 시작하기
               </RunButton>
-              <RunButton2 style={{}}>산책 이력보기</RunButton2>
+              <RunButton2
+                onPress={() => {
+                  navigation.navigate('RunningInfo');
+                }}>
+                산책 이력보기
+              </RunButton2>
             </View>
           </View>
         </View>
+      </View>
+
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('산책이 시작되지 않았습니다.');
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <View style={{flexDirection: 'row', alignContent: 'center'}}>
+                <Text style={styles.modalTitle}>앵두의 </Text>
+                <Text style={styles.modalTitle}>권장 산책시간은</Text>
+              </View>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.modalTitle}>'30분' </Text>
+                <Text style={styles.modalTitle}>입니다.</Text>
+              </View>
+              <Text style={styles.modalSubtitle}>
+                😊 산책을 위한 기본준비 😊
+              </Text>
+              <Text style={styles.modalText}>
+                -목줄, 물통, 배변봉투는 챙기셨나요?
+              </Text>
+              <Text style={styles.modalText}>
+                -보호자와 보폭을 맞춰서 걸어주세요
+              </Text>
+              <Text style={styles.modalText}>
+                -자연을 느낄 수 있도록 배려해주세요
+              </Text>
+              <Text style={styles.modalText}>
+                -잘못된 행동은 교육이 필요해요
+              </Text>
+              <Text style={styles.modalText}>
+                -산책은 억지로 시키지 않아야 합니다
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  marginTop: 20,
+                }}>
+                <RunButton
+                  onPress={() => {
+                    navigation.navigate('RunningProfile');
+                  }}>
+                  <Text style={styles.textStyle}>시작</Text>
+                </RunButton>
+                <RunButton2
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text style={styles.textStyle}>닫기</Text>
+                </RunButton2>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
@@ -64,7 +136,7 @@ const RunningHome = ({navigation}) => {
 
 export default RunningHome;
 
-const styels = StyleSheet.create({
+const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     alignItems: 'center',
@@ -132,5 +204,48 @@ const styels = StyleSheet.create({
     marginLeft: 23,
     marginTop: 30,
     marginBotton: 20,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: Colors.back100,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalTitle: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  modalSubtitle: {
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 17,
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });

@@ -8,6 +8,7 @@ import LoginScreen from './src/screens/Auth/LoginScreen';
 import SignupScreen from './src/screens/Auth/SignupScreen';
 import RunningHome from './src/screens/Running/RunningHome';
 import RunningInfo from './src/screens/Running/RunningInfo';
+import RunningProfile from './src/screens/Running/RunningProfile';
 import RunningGeolocation from './src/screens/Running/RunningGeolocation';
 import GuideHome from './src/screens/Guide/GuideHome';
 import GuideCategory from './src/screens/Guide/GuideCategory';
@@ -26,6 +27,7 @@ const AuthenticatedStack = () => {
       {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
       <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="RunningInfo" component={RunningInfo} />
+      <Stack.Screen name="RunningProfile" component={RunningProfile} />
       <Stack.Screen name="RunningGeolocation" component={RunningGeolocation} />
       <Stack.Screen name="Home" component={MainHome} />
 

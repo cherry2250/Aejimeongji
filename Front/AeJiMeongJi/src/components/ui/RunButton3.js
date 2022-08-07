@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 1, height: 1},
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 70,
+    marginRight: 70,
+    marginTop: 20,
   },
   pressed: {
     opacity: 0.7,
