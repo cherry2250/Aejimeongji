@@ -1,0 +1,26 @@
+diff --git a/node_modules/react-native-calendars/src/agenda/reservation-list/index.js b/node_modules/react-native-calendars/src/agenda/reservation-list/index.js
+index d76b2dd..811b929 100644
+--- a/node_modules/react-native-calendars/src/agenda/reservation-list/index.js
++++ b/node_modules/react-native-calendars/src/agenda/reservation-list/index.js
+@@ -175,7 +175,7 @@ class ReservationList extends Component {
+     };
+     renderRow = ({ item, index }) => {
+         const reservationProps = extractComponentProps(Reservation, this.props);
+-        return (<View onLayout={this.onRowLayoutChange.bind(this, index)}>
++        return (<View style={{backgroundColor:'#FFF8EA'}} onLayout={this.onRowLayoutChange.bind(this, index)}>
+         <Reservation {...reservationProps} item={item.reservation} date={item.date}/>
+       </View>);
+     };
+diff --git a/node_modules/react-native-calendars/src/calendar/header/style.js b/node_modules/react-native-calendars/src/calendar/header/style.js
+index 9d5a139..80e6338 100644
+--- a/node_modules/react-native-calendars/src/calendar/header/style.js
++++ b/node_modules/react-native-calendars/src/calendar/header/style.js
+@@ -23,7 +23,7 @@ export default function (theme = {}) {
+             fontSize: appStyle.textMonthFontSize,
+             fontFamily: appStyle.textMonthFontFamily,
+             fontWeight: appStyle.textMonthFontWeight,
+-            color: appStyle.monthTextColor,
++            color: '#553609',
+             margin: 10
+         },
+         arrow: {
