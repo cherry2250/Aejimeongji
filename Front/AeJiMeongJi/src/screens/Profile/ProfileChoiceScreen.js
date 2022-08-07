@@ -1,12 +1,22 @@
-import React, {useCallback, useLayoutEffect, useState} from 'react';
-import {FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import DummyData from '../../components/Profile/DummyData';
 import ProfileItems from '../../components/Profile/ProfileItems';
 import {Colors} from '../../constants/styles';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/ui/Button';
 import {fetchDogs, getImage} from '../../utils/profile';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { refresh } from '../../utils/auth';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
@@ -18,26 +28,33 @@ const ProfileChoiceScreen = () => {
 
   const ids = useSelector(state => state.ids);
   const [isEditing, setIsEditing] = useState(false);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const addProfileData = {
     source: require('../../Assets/image/Profile.png'),
     purpose: 'yes',
+    name: '프로필 추가',
   };
 
   const [profiles, setProfiles] = useState([]);
   const [dogProfiles, setDogProfiles] = useState([]);
   const [img, setImg] = useState();
   const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
-
   const images = [];
-  useLayoutEffect(() => {
+  useEffect(() => {
     const fetchAlldogs = async () => {
+      const ref = await AsyncStorage.getItem('refresh')
+      console.log(ref, 'rerere');
+      await refresh(ref)
       const res = await fetchDogs();
+
       if (res.length < 4) {
-        res.push(addProfileData)
+        res.push(addProfileData);
       }
-      setProfiles(res)
+      if (!res) {
+        return;
+      }
+      setProfiles(res);
 
       // const image = await getImage(profile.imageName)
       // images.push(image)
@@ -50,9 +67,7 @@ const ProfileChoiceScreen = () => {
   const renderItem = ({item}) => (
     <ProfileItems
       id={item.dogId}
-      source={
-        item.imageName ?     
-        {uri: `${url}${item.imageName}`} : item.source}
+      source={item.imageName ? {uri: `${url}${item.imageName}`} : item.source}
       purpose={item.purpose}
       isEditing={isEditing}
       name={item.name}
@@ -60,17 +75,19 @@ const ProfileChoiceScreen = () => {
   );
 
   const changeEditHandler = () => {
-    setIsEditing(cur => !cur)
-  }
+    setIsEditing(cur => !cur);
+  };
 
   const goToMyInfo = () => {
-    navigation.navigate('MyInfo')
-  }
+    navigation.navigate('MyInfo');
+  };
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.header}>
-        <Button style={styles.button} onPress={changeEditHandler}>편집(수정예정)</Button>
+        <Button style={styles.button} onPress={changeEditHandler}>
+          편집(수정예정)
+        </Button>
       </View>
       <FlatList
         key={'#'}
@@ -82,7 +99,9 @@ const ProfileChoiceScreen = () => {
         columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
       />
       <View style={styles.buttonContainer}>
-        <Button style={styles.button} onPress={goToMyInfo}>내 계정 관리</Button>
+        <Button style={styles.button} onPress={goToMyInfo}>
+          내 계정 관리
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -115,9 +134,9 @@ const styles = StyleSheet.create({
   flatlist: {
     flexGrow: 0,
   },
-  header :{
+  header: {
     position: 'absolute',
-    top: 50
+    top: 50,
   },
   buttonContainer: {
     position: 'absolute',

@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
+import instance from '.';
 import {getMemberId} from './auth';
+import axios from 'axios';
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -69,11 +70,11 @@ export const fetchDog = async ({
   console.log(data, '이것이 data');
 
   formData.append('image', data);
-  formData.append('image', {
-    name: image.uri,
-    type: 'multipart/form-data',
-    uri: image.uri,
-  });
+  // formData.append('image', {
+  //   name: image.uri,
+  //   type: 'multipart/form-data',
+  //   uri: image.uri,
+  // });
 
   try {
     const res = await axios({
@@ -184,7 +185,7 @@ export const getProfile = async () => {
     console.log(res.data);
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 
@@ -201,16 +202,16 @@ export const changeProfile = async ({nickname, password, phoneNumber}) => {
       data: {
         nickname,
         password,
-        phoneNumber
+        phoneNumber,
       },
     });
     return res;
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
 };
 
-export const getImage = async (imageName) => {
+export const getImage = async imageName => {
   const path = `/api/image/${imageName}`;
   // console.log(imageName, '진입');
   // console.log(url+path);
@@ -229,7 +230,6 @@ export const getImage = async (imageName) => {
     // const reader = new FileReader();
     // reader.readAsDataURL(res)
 
-
     console.log(res.data, '이미지요청');
 
     return res.data;
@@ -238,7 +238,7 @@ export const getImage = async (imageName) => {
   }
 };
 
-// 사용자의 강아지
+// 사용자의 강아지 전체 목록
 export const fetchDogs = async () => {
   const memberId = await getMemberId();
   const path = `/api/member/${memberId}/dog`;
@@ -247,7 +247,6 @@ export const fetchDogs = async () => {
       method: 'get',
       url: url + path,
     });
-    console.log(res);
     const ids = [];
 
     // if (res.data) {
@@ -255,7 +254,6 @@ export const fetchDogs = async () => {
     //     ids.push(element.dogId);
     //   });
     // }
-    console.log(res.data);
 
     return res.data;
   } catch (error) {
@@ -263,18 +261,96 @@ export const fetchDogs = async () => {
   }
 };
 
-export const deleteProfileHandler = async dogId => {
-  const memberId = getMemberId();
+export const getDog = async dogId => {
+  const memberId = await getMemberId();
+  console.log(dogId, 'dogid');
+  console.log(memberId, 'memberId');
+  const path = `/api/member/${memberId}/dog/${dogId}/profile`;
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url + path,
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteProfile = async dogId => {
+  const memberId = await getMemberId();
   const path = `/api/member/${memberId}/dog/${dogId}`;
 
   try {
     const res = axios({
       method: 'delete',
-      url: url + path
+      url: url + path,
     });
-
-
   } catch (error) {
     console.log(error.response);
+  }
+};
+
+export const changeDogInfo = async ({
+  dogId,
+  name,
+  weight,
+  birthday,
+  adoptionDay,
+}) => {
+  const memberId = getMemberId();
+  const path = `/api/member/${memberId}/dog/${dogId}`;
+
+  try {
+    const res = axios({
+      method: 'put',
+      url: url + path,
+      data: {
+        name,
+        weight,
+        birthday,
+        adoptionDay,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const changeDogPhoto = async ({dogId, image}) => {
+  const memberId = await getMemberId();
+  console.log(memberId);
+  const path = `/api/member/${memberId}/dog/${dogId}/profileimage`;
+  const formData = new FormData();
+  console.log(image);
+  console.log(dogId);
+
+  const data = {
+    uri: image,
+    name: 'abcd.jpg',
+    type: 'multipart/form-data', // or photo.type
+  };
+  console.log(data, '이것이 data');
+  formData.append('image', data);
+
+  try {
+    const res = await axios({
+      method: 'put',
+      url: url + path,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: formData => {
+        console.log(formData, 'form');
+        return formData;
+      },
+      data: formData,
+    });
+
+    return res;
+  } catch (error) {
+    console.log(error);
   }
 };

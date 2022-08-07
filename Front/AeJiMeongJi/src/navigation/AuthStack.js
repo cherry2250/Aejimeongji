@@ -53,7 +53,7 @@ const AuthStack = () => {
       <Stack.Screen name="GuideCategory" component={GuideCategory} />
       <Stack.Screen name="CalendarHome" component={CalendarHome} />
       <Stack.Screen name="TodoUpload" component={TodoUpload} />
-      <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
+      <Stack.Screen name="ProfileChange" component={ProfileEditScreen} />
       <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
     </Stack.Navigator>

@@ -17,11 +17,8 @@ export const authSlice = createSlice({
   reducers: {
     authenticate(state, action) {
       state.token = action.payload.token;
-      console.log('스토리지 이전');
-      AsyncStorage.setItem('token', action.payload.token);
-      AsyncStorage.setItem('refresh', action.payload.refreshToken);
-      console.log(action.payload.refreshToken);
-      console.log('스토리지 이후');
+      state.refreshToken = action.payload.refreshToken
+      console.log(action.payload.refreshToken, 'refresh');
       state.isAuthenticated = true;
     },
     logout(state) {
@@ -35,11 +32,9 @@ export const authSlice = createSlice({
       state.user.password = action.payload.password;
     },
     fetchPhoneUUID(state, action) {
-      console.log('redux 진입');
       console.log(action);
       state.phoneUUID = action.payload.phoneUUID;
       console.log(state.phoneUUID);
-      console.log('redux out');
     },
     deleteMember(state) {
       state.token = null;

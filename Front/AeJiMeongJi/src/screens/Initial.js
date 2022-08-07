@@ -35,7 +35,7 @@ const Initial = ({navigation}) => {
         }}
         title="프로필선택"></Button>
 <Button onPress={() => {
-          navigation.navigate('ProfileEdit');
+          navigation.navigate('ProfileChange');
         }}
         title="강쥐 프로필 변경"></Button>
     </View>

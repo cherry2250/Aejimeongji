@@ -33,7 +33,6 @@ const LoginForm = () => {
 
     const emailIsValid = emailRegex.test(inputValues.email);
     const passwordIsValid = inputValues.password.length > 8;
-
     if (!emailIsValid) {
       Alert.alert('email 확인해주세요');
       return;
@@ -43,8 +42,11 @@ const LoginForm = () => {
     }
 
     const res = await login(inputValues.email, inputValues.password);
-    console.log(res.data.accessToken, 'access token');
     await dispatch(authActions.authenticate({token: res.data.accessToken, refreshToken: res.data.refreshToken}));
+    await AsyncStorage.multiSet([
+      ['token', res.data.accessToken],
+      ['refresh', res.data.refreshToken],
+    ]);
     const ids = await fetchDogs();
     if (ids) {
       await dispatch(profileActions.saveDogIds(ids));
