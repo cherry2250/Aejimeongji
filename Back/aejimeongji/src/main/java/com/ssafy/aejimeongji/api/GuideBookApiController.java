@@ -49,7 +49,7 @@ public class GuideBookApiController {
         return 9999;
     }
 
-    @GetMapping(path = "", params = "dog")
+    @GetMapping(params = "dog")
     public ResponseEntity<Map<String, List<GuideBookResponse>>> getCustomizedGuideBookList(@RequestParam(value = "dog") Long dogId) {
         log.info("강아지 {} 맞춤 가이드 목록 요청", dogId);
 
@@ -78,10 +78,19 @@ public class GuideBookApiController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(path = "", params = "category")
+    @GetMapping(params = "category")
     public ResponseEntity<List<GuideBookResponse>> getCategorizedGuideBookList(@RequestParam(value = "category") String categoryName) {
         log.info("'{}' 카테고리 가이드 목록 요청", categoryName);
         List<GuideBook> guideBookList = guideBookService.categorizedGuideBookList(categoryName);
+        List<GuideBookResponse> guideBookResponseList = guideBookList.stream()
+                .map(GuideBookResponse::toDTO).collect(Collectors.toList());
+        return ResponseEntity.ok().body(guideBookResponseList);
+    }
+
+    @GetMapping(params = "member")
+    public ResponseEntity<List<GuideBookResponse>> getLikedGuideBookList(@RequestParam(value = "member") Long memberId) {
+        log.info("사용자 {} 좋아요 가이드 목록 요청", memberId);
+        List<GuideBook> guideBookList = guideBookService.likedGuideBookList(memberId);
         List<GuideBookResponse> guideBookResponseList = guideBookList.stream()
                 .map(GuideBookResponse::toDTO).collect(Collectors.toList());
         return ResponseEntity.ok().body(guideBookResponseList);
