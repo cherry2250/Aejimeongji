@@ -21,7 +21,7 @@ public class BreedApiController {
 
     private final BreedService breedService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<BreedResponse>> getBreedList() {
         log.info("견종 목록 조회 요청");
         List<Breed> breedList = breedService.findBreedList();
