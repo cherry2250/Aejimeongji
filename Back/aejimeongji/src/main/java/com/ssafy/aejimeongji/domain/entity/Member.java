@@ -1,6 +1,7 @@
 package com.ssafy.aejimeongji.domain.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,12 +29,26 @@ public class Member extends BaseTimeEntity {
 
     private String refreshToken;
 
+    private String oauthId;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     public Member(String email, String nickname) {
         this.email = email;
         this.nickname = nickname;
+    }
+
+    @Builder
+    public Member(String email, String password, String username, String phoneNumber, String nickname, String refreshToken, String oauthId) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.nickname = nickname;
+        this.refreshToken = refreshToken;
+        this.oauthId = oauthId;
+        role = Role.ROLE_USER;
     }
 
     public Member(String email, String password, String username, String phoneNumber, String nickname) {
