@@ -7,6 +7,8 @@ import {Provider, useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/ui/Button';
 import {fetchDogs, getImage} from '../../utils/profile';
 import { useNavigation } from '@react-navigation/native';
+import { refresh } from '../../utils/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
@@ -15,6 +17,11 @@ const ProfileChoiceScreen = () => {
   // 첫 화면에는 무조건
 
   // 배열에 id를 저장하고, 그 저장한 것 바탕으로 이미지 다시 불러서 DummyData에 push
+
+
+
+
+
 
   const ids = useSelector(state => state.ids);
   const [isEditing, setIsEditing] = useState(false);
@@ -33,6 +40,10 @@ const ProfileChoiceScreen = () => {
   const images = [];
   useLayoutEffect(() => {
     const fetchAlldogs = async () => {
+      // const refreshToken = await AsyncStorage.getItem('refresh')
+      // console.log(refreshToken, 'refresh');
+      // const res2 = await refresh(refreshToken)
+
       const res = await fetchDogs();
       if (res.length < 4) {
         res.push(addProfileData)

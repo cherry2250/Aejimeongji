@@ -43,14 +43,24 @@ const LoginForm = () => {
     }
 
     const res = await login(inputValues.email, inputValues.password);
-    console.log(res.data.accessToken, 'access token');
-    await dispatch(authActions.authenticate({token: res.data.accessToken, refreshToken: res.data.refreshToken}));
+
+    await AsyncStorage.setItem('token', res.accessToken);
+    await AsyncStorage.setItem('refresh', res.refreshToken);
+
+    console.log(res.accessToken, 'access token');
+    await dispatch(
+      authActions.authenticate({
+        token: res.accessToken,
+        refreshToken: res.refreshToken,
+      }),
+    );
     const ids = await fetchDogs();
-    if (ids) {
+    console.log(typeof(ids));
+    if (ids.length !== 0) {
       await dispatch(profileActions.saveDogIds(ids));
       navigation.navigate('Home');
     } else {
-      navigation.navigate('ProfileHome')
+      navigation.navigate('ProfileHome');
     }
   };
 
