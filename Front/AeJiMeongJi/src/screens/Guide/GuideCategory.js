@@ -4,7 +4,6 @@ import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
 
 const SubCard = ({information}) => {
-
   return (
     <ScrollView>
       <View style={styles.rootContainer}>

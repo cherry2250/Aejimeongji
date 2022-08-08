@@ -260,7 +260,7 @@ export const fetchDogs = async () => {
     //     ids.push(element.dogId);
     //   });
     // }
-
+    console.log(res.data, '프로필 호출');
 
     return res.data;
   } catch (error) {

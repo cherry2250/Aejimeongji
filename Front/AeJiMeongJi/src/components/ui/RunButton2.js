@@ -3,7 +3,6 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../constants/styles';
 
 function RunButton2({ children, onPress }) {
-
   return (
     <Pressable
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
@@ -17,7 +16,6 @@ function RunButton2({ children, onPress }) {
 }
 
 export default RunButton2;
-
 
 const styles = StyleSheet.create({
   button: {

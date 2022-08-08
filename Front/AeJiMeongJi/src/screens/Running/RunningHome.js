@@ -70,6 +70,7 @@ const RunningHome = ({navigation}) => {
           </View>
         </View>
       </View>
+
       <View style={styles.centeredView}>
         <Modal
           animationType="slide"

@@ -3,18 +3,18 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../constants/styles';
 
 function RunButton({children, onPress}) {
+  return (
     <Pressable
-      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-      onPress={onPress}
-    >
+      style={({pressed}) => [styles.button, pressed && styles.pressed]}
+      onPress={onPress}>
       <View>
         <Text style={styles.buttonText}>{children}</Text>
       </View>
     </Pressable>
+  );
 }
 
 export default RunButton;
-
 
 const styles = StyleSheet.create({
   button: {
@@ -40,4 +40,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
