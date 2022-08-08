@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useState} from 'react';
 import {
   Alert,
@@ -8,10 +9,15 @@ import {
   View,
   Image,
 } from 'react-native';
+=======
+import React from 'react';
+import {Image, StyleSheet, View, Text} from 'react-native';
+>>>>>>> feature/front/프로필
 import {Colors} from '../../constants/styles';
 import RunButton from '../../components/ui/RunButton';
 import RunButton2 from '../../components/ui/RunButton2';
 
+<<<<<<< HEAD
 const RunningHome = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -20,14 +26,30 @@ const RunningHome = ({navigation}) => {
         <View style={styles.runimgBox}>
           <Image
             style={styles.runImg}
+=======
+const RunningHome = props => {
+  return (
+    <View style={styels.rootContainer}>
+      <View>
+        <View style={styels.runimgBox}>
+          <Image
+            style={styels.runImg}
+>>>>>>> feature/front/프로필
             source={require('../../Assets/image/3d_dog.png')}
             resizeMode="contain"
           />
         </View>
+<<<<<<< HEAD
         <View style={styles.contentBox}>
           <View style={styles.profileBox}>
             <View style={{flexDirection: 'row'}}>
               <View style={styles.profileImg}>
+=======
+        <View style={styels.contentBox}>
+          <View style={styels.profileBox}>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styels.profileImg}>
+>>>>>>> feature/front/프로필
                 {/* <Image
                   style={{width: '100%', height: '100%'}}
                   source={require('../../Assets/image/3d_dog.png')}
@@ -36,22 +58,35 @@ const RunningHome = ({navigation}) => {
                 <Text>이미지 들어갈 곳</Text>
               </View>
               <View>
+<<<<<<< HEAD
                 <View style={styles.infoBox}>
                   <View style={styles.infoName}>
                     <Text style={{fontSize: 30, fontWeight: 'bold'}}>앵두</Text>
                   </View>
                   <View style={styles.infoCate}>
+=======
+                <View style={styels.infoBox}>
+                  <View style={styels.infoName}>
+                    <Text style={{fontSize: 30, fontWeight: 'bold'}}>앵두</Text>
+                  </View>
+                  <View style={styels.infoCate}>
+>>>>>>> feature/front/프로필
                     <Text style={{fontSize: 17}}>10살, 5kg, 푸들</Text>
                   </View>
                 </View>
               </View>
             </View>
+<<<<<<< HEAD
             <View style={styles.RunTime}>
+=======
+            <View style={styels.RunTime}>
+>>>>>>> feature/front/프로필
               <Text style={{fontSize: 15}}>
                 권장 산책시간은 1일 30분입니다.
               </Text>
             </View>
           </View>
+<<<<<<< HEAD
           <View style={styles.runButton}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -66,10 +101,18 @@ const RunningHome = ({navigation}) => {
                 }}>
                 산책 이력보기
               </RunButton2>
+=======
+          <View style={styels.runButton}>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <RunButton styel={styels.runLoginButton}>산책 시작하기</RunButton>
+              <RunButton2 style={{}}>산책 이력보기</RunButton2>
+>>>>>>> feature/front/프로필
             </View>
           </View>
         </View>
       </View>
+<<<<<<< HEAD
 
       <View style={styles.centeredView}>
         <Modal
@@ -130,13 +173,19 @@ const RunningHome = ({navigation}) => {
           </View>
         </Modal>
       </View>
+=======
+>>>>>>> feature/front/프로필
     </View>
   );
 };
 
 export default RunningHome;
 
+<<<<<<< HEAD
 const styles = StyleSheet.create({
+=======
+const styels = StyleSheet.create({
+>>>>>>> feature/front/프로필
   rootContainer: {
     flex: 1,
     alignItems: 'center',
@@ -205,6 +254,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBotton: 20,
   },
+<<<<<<< HEAD
   centeredView: {
     flex: 1,
     justifyContent: 'center',
@@ -248,4 +298,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
+=======
+>>>>>>> feature/front/프로필
 });

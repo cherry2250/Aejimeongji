@@ -1,11 +1,25 @@
+<<<<<<< HEAD
 import React, {useLayoutEffect, useState} from 'react';
 import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+=======
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {
+  Alert,
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+>>>>>>> feature/front/프로필
 import Button from '../../components/ui/Button';
 import {Button as Btn} from '@rneui/themed';
 import ProfileInput from '../../components/Profile/ProfileInput';
 import {Colors} from '../../constants/styles';
 import Weight from '../../components/Profile/Weight';
 import {useNavigation} from '@react-navigation/native';
+<<<<<<< HEAD
 
 const ProfileEditScreen = () => {
   const navigation = useNavigation();
@@ -22,19 +36,107 @@ const ProfileEditScreen = () => {
 
   const deleteProfileHandler = async () => {
     const message = await deleteProfileHandler(dogInfo.id);
+=======
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import UploadModeModal from '../../components/Profile/UploadModeModal';
+import {
+  changeDogInfo,
+  changeDogPhoto,
+  deleteProfile,
+  getDog,
+} from '../../utils/profile';
+import {refresh} from '../../utils/auth';
+
+const ProfileEditScreen = ({route}) => {
+  const navigation = useNavigation();
+  const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
+  const [dogInfo, setDogInfo] = useState({
+    dogId: route.params.dogId,
+    name: '',
+    weight: '',
+    birthday: '',
+    adoptionDay: '',
+    breedName: '',
+    imageName: '',
+    image: '',
+  });
+  const [source, setSource] = useState();
+  const imagePickerOption = {
+    mediaType: 'photo',
+    maxWidth: 230,
+    maxHeight: 172,
+    includeBase64: Platform.OS === 'android',
+    saveToPhotos: true,
+  };
+  const onPickImage = async res => {
+    if (res.didCancel || !res) {
+      return;
+    }
+
+    setSource(res.assets[0].uri);
+  };
+  const deleteProfileHandler = async () => {
+    const message = await deleteProfile(dogInfo.dogId);
+>>>>>>> feature/front/프로필
     Alert.alert(message, [
       {text: '네', onPress: () => navigation.navigate('Choice')},
     ]);
   };
+<<<<<<< HEAD
 
   //   useLayoutEffect(() => {
   //     // 강아지 이미지 및 프로필 조회
   //     const dogInfo = async () => {};
   //   }, []);
+=======
+  const [modalVisible, setModalVisible] = useState(false);
+  const closeModalHandler = () => {
+    setModalVisible(false);
+  };
+  const onLaunchImageLibrary = () => {
+    launchImageLibrary(imagePickerOption, onPickImage);
+  };
+  const onLaunchCamera = async () => {
+    await launchCamera(imagePickerOption, onPickImage);
+  };
+  const changePhotoHandler = async () => {
+    setModalVisible(true);
+  };
+
+  const inputChangeHandler = (inputIdentifier, enterdValue) => {
+    setDogInfo(curValue => {
+      return {
+        ...curValue,
+        [inputIdentifier]: enterdValue,
+      };
+    });
+  };
+
+  const submitHandler = async () => {
+    // const res = await changeDogInfo(dogInfo);
+    // if (res) {
+    // }
+    await changeDogPhoto({dogId: dogInfo.dogId, image: source});
+  };
+
+  useEffect(() => {
+    // 강아지 이미지 및 프로필 조회
+    const setInitialData = async () => {
+      const res = await getDog(dogInfo.dogId);
+      setDogInfo(res);
+      setSource(`${url}${res.imageName}`);
+      // await refresh()
+      return res;
+    };
+    setInitialData();
+  }, []);
+  console.log(dogInfo);
+>>>>>>> feature/front/프로필
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.imageContainer}>
+<<<<<<< HEAD
         <Image style={styles.image} resizeMode="contain" source={source} />
         <View style={styles.profileInputContainer}>
           <ProfileInput
@@ -58,6 +160,69 @@ const ProfileEditScreen = () => {
       <View style={styles.buttonContainer}>
         <Button>적용</Button>
         <Btn title="프로필 삭제 하기" onPress={deleteProfileHandler} />
+=======
+        {modalVisible && (
+          <UploadModeModal
+            visible={modalVisible}
+            onClose={closeModalHandler}
+            onLaunchImageLibrary={onLaunchImageLibrary}
+            onLaunchCamera={onLaunchCamera}
+          />
+        )}
+        <Pressable onPress={changePhotoHandler}>
+          <Image
+            style={styles.image}
+            resizeMode="contain"
+            source={{uri: source, cache: 'reload'}}
+          />
+        </Pressable>
+        <View style={styles.profileInputContainer}>
+          <ProfileInput
+            textInputConfig={{
+              placeholder: dogInfo.name,
+              placeholderTextColor: '#6D6D6D',
+              value: dogInfo.name,
+            }}
+            style={styles.profileInput}
+          />
+        </View>
+      </View>
+      <View style={styles.inputsContainer}>
+        <ProfileInput
+          textInputConfig={{
+            placeholder: dogInfo.birthday,
+            placeholderTextColor: '#6D6D6D',
+            value: dogInfo.birthday,
+          }}
+          style={styles.inputs}
+        />
+        <ProfileInput
+          textInputConfig={{
+            placeholder: dogInfo.breedName,
+            placeholderTextColor: '#6D6D6D',
+            value: dogInfo.breedName,
+          }}
+          style={styles.inputs}
+        />
+      </View>
+      <View style={styles.weightBox}>
+        <Text style={styles.subTitle}>몸무게</Text>
+        <Weight
+          weight={dogInfo.weight}
+          setWeight={inputChangeHandler.bind(this, 'weight')}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} onPress={submitHandler}>
+          적용
+        </Button>
+        <Btn
+          title="프로필 삭제 하기"
+          onPress={deleteProfileHandler}
+          buttonStyle={{backgroundColor: Colors.back100}}
+          titleStyle={styles.btn}
+        />
+>>>>>>> feature/front/프로필
       </View>
     </SafeAreaView>
   );
@@ -72,14 +237,33 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flexDirection: 'row',
+<<<<<<< HEAD
+=======
+    marginTop: 80,
+>>>>>>> feature/front/프로필
   },
   profileInputContainer: {
     justifyContent: 'center',
   },
   profileInput: {
+<<<<<<< HEAD
     width: '50%',
     marginLeft: 20,
   },
+=======
+    width: '15%',
+    marginLeft: 20,
+  },
+  inputsContainer: {
+    flex: 1,
+    alignItems: 'center',
+    flexGrow: 0.5,
+    marginVertical: 16,
+  },
+  inputs: {
+    marginVertical: 8,
+  },
+>>>>>>> feature/front/프로필
   image: {
     width: 132,
     height: 132,
@@ -95,6 +279,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+<<<<<<< HEAD
+=======
+    flexGrow: 0.5,
+>>>>>>> feature/front/프로필
   },
   subTitle: {
     color: '#90560D',
@@ -102,5 +290,18 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+<<<<<<< HEAD
+=======
+    alignItems: 'center',
+  },
+  button: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    width: 200,
+  },
+  btn: {
+    color: '#90560D',
+    marginTop: 16,
+>>>>>>> feature/front/프로필
   },
 });

@@ -3,6 +3,9 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import {Alert} from 'react-native';
 
+
+// import axios from './index'
+
 const url = 'http://i7d203.p.ssafy.io:8080';
 
 export const login = async (email, password) => {
@@ -17,11 +20,11 @@ export const login = async (email, password) => {
         password,
       },
     });
-    console.log(res.data.accessToken, '토큰');
+
     axios.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${res.data.accessToken}`;
-    return res.data;
+    return res;
   } catch (error) {
     console.log(error.message);
   }
@@ -108,9 +111,10 @@ export const removeMember = async () => {
   }
 };
 
-export const refresh = async refreshToken => {
+
+export const refresh = async (refreshToken) => {
   const path = '/api/auth/issue';
-  console.log(typeof refreshToken, 'axios refresh');
+  console.log('refreshtoken axios 요청 진입');
   try {
     const res = await axios({
       method: 'post',
@@ -126,6 +130,6 @@ export const refresh = async refreshToken => {
     console.log(res.data, '토큰 refresh');
     return res.data;
   } catch (error) {
-    console.log(error.response);
+    console.log(error.response, 'issue');
   }
 };

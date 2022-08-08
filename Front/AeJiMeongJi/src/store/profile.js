@@ -20,6 +20,12 @@ export const profileSlice = createSlice({
     saveDogIds(state, action) {
         state.ids = action.payload.ids
     },
+<<<<<<< HEAD
+=======
+    setDogInfo(state, action) {
+      state.dog = action.payload.dog
+    }
+>>>>>>> feature/front/프로필
   },
 });
 

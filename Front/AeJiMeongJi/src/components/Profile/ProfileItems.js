@@ -15,15 +15,17 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
 
   const changeDogHandler = async id => {
     // 강아지 정보 조회 후 redux에 현재 강아지 정보 저장
-    Alert.alert(`${name} 강아지로 변경 되었어요.`)
+
+    Alert.alert(`${name} 강아지로 변경 되었어요.`);
     await dispatch(profileActions.saveDogid({id}));
     console.log('강쥐 변경 완료');
+    navigation.navigate('Home', {dogId:id})
   };
 
   const changeProfileHandler = async id => {
     const memberId = await getMemberId();
     console.log(memberId);
-    navigation.navigate('ProfileChange', id);
+    navigation.navigate('ProfileChange', {dogId:id});
   };
 
   const editingImg = require('../../Assets/image/editing.png');
@@ -32,7 +34,13 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
     console.log(`${id}번 강쥐클릭`);
 
     if (purpose) {
-      Alert.alert('프로필 추가 하시겠어요?')
+      Alert.alert('프로필 추가 하시겠어요?', '',[
+        {
+          text: '아니요',
+          style: 'cancel',
+        },
+        {text: '네', onPress: () => navigation.navigate('ProfileHome')},
+      ]);
     }
 
     if (isEditing && !purpose) {

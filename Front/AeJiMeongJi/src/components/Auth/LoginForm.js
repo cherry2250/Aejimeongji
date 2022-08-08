@@ -54,13 +54,15 @@ const LoginForm = () => {
         refreshToken: res.refreshToken,
       }),
     );
+
+    await dispatch(authActions.authenticate({token: res.data.accessToken, refreshToken: res.data.refreshToken}));
+
     const ids = await fetchDogs();
-    console.log(typeof(ids));
     if (ids.length !== 0) {
       await dispatch(profileActions.saveDogIds(ids));
-      navigation.navigate('Home');
+      navigation.navigate('ProfileChoice');
     } else {
-      navigation.navigate('ProfileHome');
+      navigation.navigate('ProfileHome')
     }
   };
 

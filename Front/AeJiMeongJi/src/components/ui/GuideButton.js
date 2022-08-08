@@ -3,6 +3,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../constants/styles';
 
 function GuideButton({children, onPress}) {
+<<<<<<< HEAD
   const fetchGuide = () => {
     console.log('fetchGuide');
     onPress(children);
@@ -12,6 +13,12 @@ function GuideButton({children, onPress}) {
     <Pressable
       style={({pressed}) => [styles.button, pressed && styles.pressed]}
       onPress={fetchGuide}>
+=======
+  return (
+    <Pressable
+      style={({pressed}) => [styles.button, pressed && styles.pressed]}
+      onPress={onPress}>
+>>>>>>> feature/front/프로필
       <View>
         <Text style={styles.buttonText}>{children}</Text>
       </View>
