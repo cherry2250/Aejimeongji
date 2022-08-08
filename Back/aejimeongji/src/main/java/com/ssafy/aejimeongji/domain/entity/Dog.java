@@ -22,7 +22,7 @@ public class Dog extends BaseTimeEntity {
 
     private double weight;
 
-    private LocalDate birthdate;
+    private LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -31,7 +31,7 @@ public class Dog extends BaseTimeEntity {
 
     private Boolean gone;
 
-    private LocalDate adoptedDay;
+    private LocalDate adoptionDay;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -49,11 +49,11 @@ public class Dog extends BaseTimeEntity {
     public Dog(String name, double weight, LocalDate birthdate, Gender gender, Boolean neutering, Boolean gone, LocalDate adoptedDay, Member member, DogImage image, Breed breed) {
         this.name = name;
         this.weight = weight;
-        this.birthdate = birthdate;
+        this.birthday = birthdate;
         this.gender = gender;
         this.neutering = neutering;
         this.gone = gone;
-        this.adoptedDay = adoptedDay;
+        this.adoptionDay = adoptedDay;
         this.member = member;
         this.image = image;
         this.breed = breed;
@@ -62,8 +62,8 @@ public class Dog extends BaseTimeEntity {
     public void updateDog(String name, double weight, LocalDate birthdate, LocalDate adoptedDay, Breed breed) {
         this.name = name;
         this.weight = weight;
-        this.birthdate = birthdate;
-        this.adoptedDay = adoptedDay;
+        this.birthday = birthdate;
+        this.adoptionDay = adoptedDay;
         this.breed = breed;
     }
 

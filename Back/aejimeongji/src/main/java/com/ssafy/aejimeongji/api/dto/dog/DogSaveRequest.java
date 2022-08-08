@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class DogSaveRequest {
 
     private String name;
-    private double weight;
+    private Double weight;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -27,7 +27,7 @@ public class DogSaveRequest {
     private String breed;
     private MultipartFile image;
 
-    public Dog convertDog(Member member, Breed breed, DogImage image){
+    public Dog toEntity(Member member, Breed breed, DogImage image){
         return new Dog(getName(), getWeight(), getBirthdate(), getGender(), getNeutering(),
                 getGone(), getAdoptedDay(), member, image, breed);
     }

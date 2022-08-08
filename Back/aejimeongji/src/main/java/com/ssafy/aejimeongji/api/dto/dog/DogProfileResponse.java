@@ -21,8 +21,8 @@ public class DogProfileResponse {
         dogId = dog.getId();
         name = dog.getName();
         weight = dog.getWeight();
-        birthdate = dog.getBirthdate();
-        adoptedDay = dog.getAdoptedDay();
+        birthdate = dog.getBirthday();
+        adoptedDay = dog.getAdoptionDay();
         breedName = dog.getBreed().getBreedName();
         imageName = dog.getImage().getStoreFilename();
     }

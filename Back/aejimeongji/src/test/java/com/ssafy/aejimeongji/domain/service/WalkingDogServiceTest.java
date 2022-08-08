@@ -46,7 +46,7 @@ class WalkingDogServiceTest {
         em.persist(dogImage);
         Breed breed = new Breed("testBreed");
         em.persist(breed);
-        Dog dog = new Dog("강아지", 12, LocalDate.now(), Gender.Male, true, true, LocalDate.now(), member, dogImage, breed);
+        Dog dog = new Dog("강아지", 12, LocalDate.now(), Gender.MALE, true, true, LocalDate.now(), member, dogImage, breed);
         em.persist(dog);
         Walking walking = new Walking(1000, "10:20:11.1234", LocalDateTime.now());
         Long saveId = walkingDogService.saveWalking(walking);
@@ -70,7 +70,7 @@ class WalkingDogServiceTest {
         em.persist(dogImage);
         Breed breed = new Breed("testBreed");
         em.persist(breed);
-        Dog dog = new Dog("강아지", 12, LocalDate.now(), Gender.Male, true, true, LocalDate.now(), member, dogImage, breed);
+        Dog dog = new Dog("강아지", 12, LocalDate.now(), Gender.MALE, true, true, LocalDate.now(), member, dogImage, breed);
         em.persist(dog);
         Walking walking = new Walking(1000, "10:20:11.1234", LocalDateTime.now());
         Long saveId = walkingDogService.saveWalking(walking);

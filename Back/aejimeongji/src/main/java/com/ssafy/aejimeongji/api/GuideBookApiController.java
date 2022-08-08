@@ -1,7 +1,5 @@
 package com.ssafy.aejimeongji.api;
 
-import com.ssafy.aejimeongji.api.dto.ResponseDTO;
-import com.ssafy.aejimeongji.api.dto.guidebook.GuideBookRequest;
 import com.ssafy.aejimeongji.api.dto.guidebook.GuideBookResponse;
 import com.ssafy.aejimeongji.domain.entity.Dog;
 import com.ssafy.aejimeongji.domain.entity.GuideBook;
@@ -58,7 +56,7 @@ public class GuideBookApiController {
                 .map(GuideBookResponse::toDTO).collect(Collectors.toList());
 
         Dog dog = dogService.findDog(dogId);
-        int dogMonths = calculateNumberOfMonths(dog.getBirthdate());
+        int dogMonths = calculateNumberOfMonths(dog.getBirthday());
         int targetAge = criterionNumberOfMonths(dogMonths);
         List<GuideBook> ageGuideBookList = guideBookService.ageCustomizedGuideBookList(targetAge);
         List<GuideBookResponse> ageGuideBookResponseList = ageGuideBookList.stream()
