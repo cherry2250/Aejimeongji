@@ -43,7 +43,7 @@ class DogServiceTest {
                     .weight(3.1)
                     .birthdate(LocalDate.of(2020, 2, 2))
                     .adoptedDay(LocalDate.of(2020, 2, 3))
-                    .gender(Gender.Male)
+                    .gender(Gender.MALE)
                     .neutering(true)
                     .gone(false)
                     .member(member1)
@@ -57,7 +57,7 @@ class DogServiceTest {
                 .weight(3.1)
                 .birthdate(LocalDate.of(2020, 2, 2))
                 .adoptedDay(LocalDate.of(2020, 2, 3))
-                .gender(Gender.Male)
+                .gender(Gender.MALE)
                 .neutering(true)
                 .gone(false)
                 .member(member2)
@@ -86,7 +86,7 @@ class DogServiceTest {
                 .weight(3.1)
                 .birthdate(LocalDate.of(2020, 2, 2))
                 .adoptedDay(LocalDate.of(2020, 2, 3))
-                .gender(Gender.Male)
+                .gender(Gender.MALE)
                 .neutering(true)
                 .gone(false)
                 .member(member)
@@ -115,7 +115,7 @@ class DogServiceTest {
                 .weight(3.1)
                 .birthdate(LocalDate.of(2020, 2, 2))
                 .adoptedDay(LocalDate.of(2020, 2, 3))
-                .gender(Gender.Male)
+                .gender(Gender.MALE)
                 .neutering(true)
                 .gone(false)
                 .member(member)
@@ -129,9 +129,9 @@ class DogServiceTest {
         // then
         assertThat(savedDog.getName()).isEqualTo("강아지");
         assertThat(dog.getWeight()).isEqualTo(3.1);
-        assertThat(savedDog.getBirthdate()).isEqualTo(LocalDate.of(2020, 2, 2));
-        assertThat(savedDog.getAdoptedDay()).isEqualTo(LocalDate.of(2020, 2, 3));
-        assertThat(savedDog.getGender()).isEqualTo(Gender.Male);
+        assertThat(savedDog.getBirthday()).isEqualTo(LocalDate.of(2020, 2, 2));
+        assertThat(savedDog.getAdoptionDay()).isEqualTo(LocalDate.of(2020, 2, 3));
+        assertThat(savedDog.getGender()).isEqualTo(Gender.MALE);
         assertThat(savedDog.getNeutering()).isEqualTo(true);
         assertThat(savedDog.getGone()).isEqualTo(false);
         assertThat(savedDog.getMember().getUsername()).isEqualTo("테스트");
@@ -151,7 +151,7 @@ class DogServiceTest {
                 .weight(3.1)
                 .birthdate(LocalDate.of(2020, 2, 2))
                 .adoptedDay(LocalDate.of(2020, 2, 3))
-                .gender(Gender.Male)
+                .gender(Gender.MALE)
                 .neutering(true)
                 .gone(false)
                 .member(member)
@@ -170,7 +170,7 @@ class DogServiceTest {
         // then
         assertThat(dog.getName()).isEqualTo("강아지수정");
         assertThat(dog.getWeight()).isEqualTo(3.3);
-        assertThat(dog.getAdoptedDay()).isEqualTo("2020-05-03");
+        assertThat(dog.getAdoptionDay()).isEqualTo("2020-05-03");
         assertThat(dog.getBreed().getBreedName()).isEqualTo("포메라니안");
     }
 
@@ -187,7 +187,7 @@ class DogServiceTest {
                 .weight(3.1)
                 .birthdate(LocalDate.of(2020, 2, 2))
                 .adoptedDay(LocalDate.of(2020, 2, 3))
-                .gender(Gender.Male)
+                .gender(Gender.MALE)
                 .neutering(true)
                 .gone(false)
                 .member(member)

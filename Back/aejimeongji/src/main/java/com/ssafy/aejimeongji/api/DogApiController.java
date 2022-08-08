@@ -56,7 +56,7 @@ public class DogApiController {
         DogImage dogImage = new DogImage(imageUtil.storeImage(request.getImage()));
         Member member = memberService.findMember(memberId);
         Breed breed = breedService.findBreed(request.getBreed());
-        Long savedId = dogService.saveDog(request.convertDog(member, breed, dogImage));
+        Long savedId = dogService.saveDog(request.toEntity(member, breed, dogImage));
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 " + savedId + " 등록이 완료되었습니다."));
     }
 

@@ -24,21 +24,13 @@ public class DogService {
 
     // 강아지 프로필 목록 조회
     public List<Dog> findDogList(Long memberId) {
-        List<Dog> dogList = dogRepository.findDogsByMemberId(memberId);
-        dogList.forEach(
-                dog -> {
-                    dog.getBreed().getBreedName();
-                    dog.getImage().getStoreFilename();
-                }
-        );
-        return dogList;
+        return dogRepository.findDogsByMemberId(memberId);
     }
 
     // 강아지 프로필 상세 조회
     public Dog findDog(Long dogId) {
-        Dog dog = dogRepository.findById(dogId)
+        return dogRepository.findById(dogId)
                 .orElseThrow(() -> new IllegalArgumentException("조회하신 강아지가 존재하지 않습니다."));
-        return dog;
     }
 
     // 강아지 프로필 등록
