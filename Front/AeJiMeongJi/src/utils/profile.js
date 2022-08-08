@@ -1,10 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import axios from './index'
+
+
 import jwt_decode from 'jwt-decode';
 import {Alert} from 'react-native';
 import instance from '.';
 import {getMemberId} from './auth';
-import axios from 'axios';
+
+// import axios from 'axios';
+
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -247,6 +252,8 @@ export const getImage = async imageName => {
 export const fetchDogs = async () => {
   const memberId = await getMemberId();
   const path = `/api/member/${memberId}/dog`;
+  console.log('fetchdogs 진입');
+  console.log(memberId);
   try {
     const res = await axios({
       method: 'get',
@@ -299,6 +306,7 @@ export const deleteProfile = async dogId => {
     console.log(error.response);
   }
 };
+
 
 
 export const changeDogInfo = async ({

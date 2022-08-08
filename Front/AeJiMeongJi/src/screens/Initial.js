@@ -31,7 +31,7 @@ const Initial = ({navigation}) => {
         }}
         title="Guide"></Button>
 <Button onPress={() => {
-          navigation.navigate('Choice');
+          navigation.navigate('ProfileChoice');
         }}
         title="프로필선택"></Button>
 <Button onPress={() => {

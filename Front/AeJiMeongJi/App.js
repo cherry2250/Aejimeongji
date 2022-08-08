@@ -36,7 +36,7 @@ const AuthenticatedStack = () => {
 
       <Stack.Screen name="ProfileHome" component={ProfileHomeScreen} />
       <Stack.Screen name="ProfileHome2" component={ProfileHomeScreen2} />
-      <Stack.Screen name="Choice" component={ProfileChoiceScreen} />
+      <Stack.Screen name="ProfileChoice" component={ProfileChoiceScreen} />
       <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
       <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
