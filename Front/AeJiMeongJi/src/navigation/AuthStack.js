@@ -21,7 +21,7 @@ import CalendarHome from '../screens/Calendar/CalendarHome';
 import TodoUpload from '../screens/Calendar/TodoUpload';
 import ProfileEditScreen from '../screens/Profile/ProfileEditScreen';
 import MyInfoScreen from '../screens/Profile/MyInfoScreen';
-
+import BottomTabNavigator from '../../BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +29,7 @@ const Stack = createNativeStackNavigator();
 const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Initial" component={Initial} />
+      <Stack.Screen name="Initial" component={BottomTabNavigator} />
       <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="RunningInfo" component={RunningInfo} />
       <Stack.Screen name="RunningProfile" component={RunningProfile} />
@@ -61,7 +61,6 @@ const AuthStack = () => {
       <Stack.Screen name="TodoUpload" component={TodoUpload} />
       <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
       <Stack.Screen name="MyInfo" component={MyInfoScreen} />
-
     </Stack.Navigator>
   );
 };
