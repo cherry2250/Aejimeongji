@@ -55,7 +55,7 @@ const LoginForm = () => {
       }),
     );
 
-    await dispatch(authActions.authenticate({token: res.data.accessToken, refreshToken: res.data.refreshToken}));
+    await dispatch(authActions.authenticate({token: res.accessToken, refreshToken: res.refreshToken}));
 
     const ids = await fetchDogs();
     if (ids.length !== 0) {

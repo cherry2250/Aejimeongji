@@ -3,21 +3,14 @@ import {Pressable, StyleSheet, Text, View, Image} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
 
-<<<<<<< HEAD
 const SubCard = ({information}) => {
-=======
-const SubCard = () => {
->>>>>>> feature/front/프로필
+
   return (
     <ScrollView>
       <View style={styles.rootContainer}>
         <View style={styles.GuideTitle}>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-<<<<<<< HEAD
             가이드 정보가 들어갈 예정{information ? information : '없어'}
-=======
-            가이드 정보가 들어갈 예정
->>>>>>> feature/front/프로필
           </Text>
         </View>
         <View>

@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
-<<<<<<< HEAD
 import CarouselCards from '../../components/Guide/CarouselCards';
 import SubCard from '../../components/Guide/SubCard';
 import Button from '../../components/ui/Button';
@@ -16,27 +15,11 @@ const GuideHome = ({navigation}) => {
     navigation.navigate('GuideCategory', {information: title});
   };
 
-=======
-import CarouselCards from './CarouselCards';
-import SubCard from './SubCard';
-import Button from '../../components/ui/Button';
-import GuideButton from '../../components/ui/GuideButton';
-
-const GuideHome = ({navigation}) => {
->>>>>>> feature/front/프로필
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-<<<<<<< HEAD
           <GuideButton onPress={fetchGuide} style={{marginLeft: 10}}>
-=======
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory');
-            }}
-            style={{marginLeft: 10}}>
->>>>>>> feature/front/프로필
             {' '}
             건강{' '}
           </GuideButton>

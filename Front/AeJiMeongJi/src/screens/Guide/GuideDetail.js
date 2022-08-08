@@ -2,13 +2,8 @@ import React from 'react';
 import {Image, StyleSheet, View, Text} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
-<<<<<<< HEAD
 import GuideShare from '../../components/Guide/GuideShare';
 import GuideLike from '../../components/Guide/GuideLike';
-=======
-import GuideShare from './GuideShare';
-import GuideLike from './GuideLike';
->>>>>>> feature/front/프로필
 
 const GuideDetail = () => {
   return (

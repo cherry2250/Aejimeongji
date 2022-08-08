@@ -8,12 +8,9 @@ import Initial from '../screens/Initial';
 import MainHome from '../screens/Home/MainHome';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import RunningHome from '../screens/Running/RunningHome';
-<<<<<<< HEAD
 import RunningGeolocation from '../screens/Running/RunningGeolocation';
 import RunningInfo from '../screens/Running/RunningInfo';
 import RunningProfile from '../screens/Running/RunningProfile';
-=======
->>>>>>> feature/front/프로필
 import ProfileHomeScreen from '../screens/Profile/ProfileHomeScreen';
 import ProfileHomeScreen2 from '../screens/Profile/ProfileHomeScreen2';
 import ProfileChoiceScreen from '../screens/Profile/ProfileChoiceScreen';
@@ -34,12 +31,9 @@ const AuthStack = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Initial" component={BottomTabNavigator} />
       <Stack.Screen name="RunningHome" component={RunningHome} />
-<<<<<<< HEAD
       <Stack.Screen name="RunningInfo" component={RunningInfo} />
       <Stack.Screen name="RunningProfile" component={RunningProfile} />
       <Stack.Screen name="RunningGeolocation" component={RunningGeolocation} />
-=======
->>>>>>> feature/front/프로필
       <Stack.Screen name="Home" component={MainHome} />
       <Stack.Screen
         name="Welcome"
@@ -65,11 +59,7 @@ const AuthStack = () => {
       <Stack.Screen name="GuideCategory" component={GuideCategory} />
       <Stack.Screen name="CalendarHome" component={CalendarHome} />
       <Stack.Screen name="TodoUpload" component={TodoUpload} />
-<<<<<<< HEAD
-      <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
-=======
       <Stack.Screen name="ProfileChange" component={ProfileEditScreen} />
->>>>>>> feature/front/프로필
       <Stack.Screen name="MyInfo" component={MyInfoScreen} />
     </Stack.Navigator>
   );

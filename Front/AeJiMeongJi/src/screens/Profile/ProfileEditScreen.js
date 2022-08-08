@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-import React, {useLayoutEffect, useState} from 'react';
-import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-=======
+
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   Alert,
@@ -12,31 +9,13 @@ import {
   Text,
   View,
 } from 'react-native';
->>>>>>> feature/front/프로필
 import Button from '../../components/ui/Button';
 import {Button as Btn} from '@rneui/themed';
 import ProfileInput from '../../components/Profile/ProfileInput';
 import {Colors} from '../../constants/styles';
 import Weight from '../../components/Profile/Weight';
 import {useNavigation} from '@react-navigation/native';
-<<<<<<< HEAD
 
-const ProfileEditScreen = () => {
-  const navigation = useNavigation();
-
-  const [source, setSource] = useState(null);
-  const [dogInfo, setDogInfo] = useState({
-    id: '',
-    name: '',
-    weight: '',
-    birthdate: '',
-    adoptedDay: '',
-    breed: '',
-  });
-
-  const deleteProfileHandler = async () => {
-    const message = await deleteProfileHandler(dogInfo.id);
-=======
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import UploadModeModal from '../../components/Profile/UploadModeModal';
 import {
@@ -77,18 +56,11 @@ const ProfileEditScreen = ({route}) => {
   };
   const deleteProfileHandler = async () => {
     const message = await deleteProfile(dogInfo.dogId);
->>>>>>> feature/front/프로필
     Alert.alert(message, [
       {text: '네', onPress: () => navigation.navigate('Choice')},
     ]);
   };
-<<<<<<< HEAD
 
-  //   useLayoutEffect(() => {
-  //     // 강아지 이미지 및 프로필 조회
-  //     const dogInfo = async () => {};
-  //   }, []);
-=======
   const [modalVisible, setModalVisible] = useState(false);
   const closeModalHandler = () => {
     setModalVisible(false);
@@ -131,36 +103,10 @@ const ProfileEditScreen = ({route}) => {
     setInitialData();
   }, []);
   console.log(dogInfo);
->>>>>>> feature/front/프로필
 
   return (
     <SafeAreaView style={styles.rootContainer}>
       <View style={styles.imageContainer}>
-<<<<<<< HEAD
-        <Image style={styles.image} resizeMode="contain" source={source} />
-        <View style={styles.profileInputContainer}>
-          <ProfileInput
-            textInputConfig={{
-              placeholder: '반려견 이름',
-              placeholderTextColor: '#6D6D6D',
-              // onChangeText: inputChangeHandler,
-            }}
-            style={styles.profileInput}
-            //   visible={visible}
-          />
-        </View>
-      </View>
-      <View style={styles.weightBox}>
-        <Text style={styles.subTitle}>몸무게</Text>
-        <Weight
-        // weight={inputValues.weight}
-        // setWeight={inputChangeHandler.bind(this, 'weight')}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button>적용</Button>
-        <Btn title="프로필 삭제 하기" onPress={deleteProfileHandler} />
-=======
         {modalVisible && (
           <UploadModeModal
             visible={modalVisible}
@@ -222,7 +168,6 @@ const ProfileEditScreen = ({route}) => {
           buttonStyle={{backgroundColor: Colors.back100}}
           titleStyle={styles.btn}
         />
->>>>>>> feature/front/프로필
       </View>
     </SafeAreaView>
   );
@@ -237,20 +182,12 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flexDirection: 'row',
-<<<<<<< HEAD
-=======
     marginTop: 80,
->>>>>>> feature/front/프로필
   },
   profileInputContainer: {
     justifyContent: 'center',
   },
   profileInput: {
-<<<<<<< HEAD
-    width: '50%',
-    marginLeft: 20,
-  },
-=======
     width: '15%',
     marginLeft: 20,
   },
@@ -263,7 +200,6 @@ const styles = StyleSheet.create({
   inputs: {
     marginVertical: 8,
   },
->>>>>>> feature/front/프로필
   image: {
     width: 132,
     height: 132,
@@ -279,10 +215,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-<<<<<<< HEAD
-=======
     flexGrow: 0.5,
->>>>>>> feature/front/프로필
   },
   subTitle: {
     color: '#90560D',
@@ -290,8 +223,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-<<<<<<< HEAD
-=======
     alignItems: 'center',
   },
   button: {
@@ -302,6 +233,5 @@ const styles = StyleSheet.create({
   btn: {
     color: '#90560D',
     marginTop: 16,
->>>>>>> feature/front/프로필
   },
 });

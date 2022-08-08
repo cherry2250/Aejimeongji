@@ -20,11 +20,12 @@ export const login = async (email, password) => {
         password,
       },
     });
+    console.log(res);
 
     axios.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${res.data.accessToken}`;
-    return res;
+    return res.data;
   } catch (error) {
     console.log(error.message);
   }
@@ -65,7 +66,7 @@ export async function fetchCertHandler(phone) {
 
     return res.data.phoneUUID;
   } catch (error) {
-    console.log(error, '인증번호 요청에러');
+    console.log(error.response, '인증번호 요청에러');
   }
 }
 
