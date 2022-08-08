@@ -211,6 +211,8 @@ export const changeProfile = async ({nickname, password, phoneNumber}) => {
     });
     return res;
   } catch (error) {
+    console.log(error.response);
+  }}
 
 export const getImage = async imageName => {
   const path = `/api/image/${imageName}`;
@@ -331,15 +333,12 @@ export const changeDogPhoto = async ({dogId, image}) => {
   console.log(memberId);
   const path = `/api/member/${memberId}/dog/${dogId}/profileimage`;
   const formData = new FormData();
-  console.log(image);
-  console.log(dogId);
 
   const data = {
     uri: image,
     name: 'abcd.jpg',
     type: 'multipart/form-data', // or photo.type
   };
-  console.log(data, '이것이 data');
   formData.append('image', data);
 
   try {
@@ -358,7 +357,6 @@ export const changeDogPhoto = async ({dogId, image}) => {
 
     return res;
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   }
-};
-  }
+}
