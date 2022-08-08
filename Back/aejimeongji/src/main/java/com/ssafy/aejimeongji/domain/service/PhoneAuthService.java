@@ -1,6 +1,6 @@
 package com.ssafy.aejimeongji.domain.service;
 
-import com.ssafy.aejimeongji.domain.exception.ExpireAuthNumberException;
+import com.ssafy.aejimeongji.domain.exception.auth.ExpireAuthNumberException;
 import com.ssafy.aejimeongji.domain.entity.redis.PhoneAuth;
 import com.ssafy.aejimeongji.domain.repository.PhoneAuthRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class PhoneAuthService {
 
     public boolean verifyAuthNumber(String phoneUUID, String authNumber) throws ExpireAuthNumberException {
         PhoneAuth phoneAuth = phoneAuthRepository.findById(phoneUUID).orElseThrow(() ->
-            new ExpireAuthNumberException(String.valueOf(Long.valueOf(phoneUUID)))
+            new ExpireAuthNumberException(Long.parseLong(phoneUUID))
         );
         return authNumber.equals(phoneAuth.getAuthNumber()) ? true : false;
     }
