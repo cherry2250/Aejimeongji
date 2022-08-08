@@ -1,6 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useLayoutEffect} from 'react';
 import {StatusBar, Text, View} from 'react-native';
 import MainHome from './src/screens/Home/MainHome';
@@ -13,17 +12,15 @@ import GuideCategory from './src/screens/Guide/GuideCategory';
 import GuideDetail from './src/screens/Guide/GuideDetail';
 import CalendarHome from './src/screens/Calendar/CalendarHome';
 import TodoUpload from './src/screens/Calendar/TodoUpload';
-import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
-const BottomTab = createBottomTabNavigator();
 
 // 파일을 만들어서, 홈, 산책, 온보딩으로 전달한다.
 
 const AuthenticatedStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Initial" component={BottomTabNavigator} />
+      <Stack.Screen name="Initial" component={Initial} />
       {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
       <Stack.Screen name="RunningHome" component={RunningHome} />
 
