@@ -8,7 +8,6 @@ import {
   View,
   Image,
 } from 'react-native';
-
 import {Colors} from '../../constants/styles';
 import RunButton from '../../components/ui/RunButton';
 import RunButton2 from '../../components/ui/RunButton2';
@@ -21,7 +20,6 @@ const RunningHome = ({navigation}) => {
         <View style={styles.runimgBox}>
           <Image
             style={styles.runImg}
-
             source={require('../../Assets/image/3d_dog.png')}
             resizeMode="contain"
           />
@@ -30,7 +28,6 @@ const RunningHome = ({navigation}) => {
           <View style={styles.profileBox}>
             <View style={{flexDirection: 'row'}}>
               <View style={styles.profileImg}>
-
                 {/* <Image
                   style={{width: '100%', height: '100%'}}
                   source={require('../../Assets/image/3d_dog.png')}
@@ -44,14 +41,12 @@ const RunningHome = ({navigation}) => {
                     <Text style={{fontSize: 30, fontWeight: 'bold'}}>앵두</Text>
                   </View>
                   <View style={styles.infoCate}>
-
                     <Text style={{fontSize: 17}}>10살, 5kg, 푸들</Text>
                   </View>
                 </View>
               </View>
             </View>
             <View style={styles.RunTime}>
-
               <Text style={{fontSize: 15}}>
                 권장 산책시간은 1일 30분입니다.
               </Text>
