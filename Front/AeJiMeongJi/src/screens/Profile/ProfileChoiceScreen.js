@@ -43,9 +43,6 @@ const ProfileChoiceScreen = () => {
   const images = [];
   useEffect(() => {
     const fetchAlldogs = async () => {
-      const ref = await AsyncStorage.getItem('refresh')
-      console.log(ref, 'rerere');
-      await refresh(ref)
       const res = await fetchDogs();
 
       if (res.length < 4) {

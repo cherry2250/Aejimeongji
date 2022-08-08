@@ -50,7 +50,7 @@ const LoginForm = () => {
     const ids = await fetchDogs();
     if (ids) {
       await dispatch(profileActions.saveDogIds(ids));
-      navigation.navigate('Home');
+      navigation.navigate('ProfileChoice');
     } else {
       navigation.navigate('ProfileHome')
     }

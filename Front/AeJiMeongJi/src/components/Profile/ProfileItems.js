@@ -18,6 +18,7 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
     Alert.alert(`${name} 강아지로 변경 되었어요.`);
     await dispatch(profileActions.saveDogid({id}));
     console.log('강쥐 변경 완료');
+    navigation.navigate('Home', {dogId:id})
   };
 
   const changeProfileHandler = async id => {
