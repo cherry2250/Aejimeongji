@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
+
+import React, {useEffect, useLayoutEffect} from 'react';
 import {StatusBar, Text, View} from 'react-native';
 import MainHome from './src/screens/Home/MainHome';
 import Initial from './src/screens/Initial';
@@ -22,7 +23,7 @@ const Stack = createNativeStackNavigator();
 
 const AuthenticatedStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Initial" component={Initial} />
       {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
       <Stack.Screen name="RunningHome" component={RunningHome} />
@@ -33,13 +34,16 @@ const AuthenticatedStack = () => {
 
       <Stack.Screen name="ProfileHome" component={ProfileHomeScreen} />
       <Stack.Screen name="ProfileHome2" component={ProfileHomeScreen2} />
+      <Stack.Screen name="Choice" component={ProfileChoiceScreen} />
+      <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
+      <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="Guide" component={GuideHome} />
       <Stack.Screen name="GuideCategory" component={GuideCategory} />
       <Stack.Screen name="GuideDetail" component={GuideDetail} />
-      <Stack.Screen name="Calendar" component={CalendarHome} />
+      <Stack.Screen name="CalendarHome" component={CalendarHome} />
       <Stack.Screen name="TodoUpload" component={TodoUpload} />
     </Stack.Navigator>
   );
@@ -48,12 +52,20 @@ const AuthenticatedStack = () => {
 const Navigation = () => {
   // 자동 로그인 기능
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
+  const dispatch = useDispatch();
+
+  // useLayoutEffect(() => {
   //   const fetchToken = async () => {
   //     const storedToken = await AsyncStorage.getItem('token');
   //     if (storedToken) {
-  //       dispatch(authActions.authenticate({token: storedToken}));
+  //       await dispatch(authActions.authenticate({token: storedToken}));
+  //       // member id불러오고
+  //       const memberId = await getMemberId();
+  //       // 강아지 ids를 불러옴
+  //       const ids = await fetchDogs();
+  //       if (ids) {
+  //         await dispatch(profileActions.saveDogIds(ids));
+  //       }
   //     }
   //   };
   //   fetchToken();
@@ -76,6 +88,14 @@ import {authActions} from './src/store/auth';
 import AuthStack from './src/navigation/AuthStack';
 import ProfileHomeScreen from './src/screens/Profile/ProfileHomeScreen';
 import ProfileHomeScreen2 from './src/screens/Profile/ProfileHomeScreen2';
+
+import ProfileChoiceScreen from './src/screens/Profile/ProfileChoiceScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {profileActions} from './src/store/profile';
+import {getMemberId} from './src/utils/auth';
+import {fetchDogs} from './src/utils/profile';
+import ProfileEditScreen from './src/screens/Profile/ProfileEditScreen';
+import MyInfoScreen from './src/screens/Profile/MyInfoScreen';
 export default function App() {
   return (
     <Provider store={store}>

@@ -25,20 +25,20 @@ const ProfileHomeScreen2 = ({route}) => {
 
   const submitHandler = async () => {
     console.log(inputValues);
+    // const res = await fetchDogImage(inputValues.image);
     const res = await fetchDog(inputValues);
-    console.log(res);
-    // if (res) {
-    //   const res2 = await fetchDogImage(res, route.params.image);
-    //   if (res2) {
-    //     navigation.replace('Choice');
-    //   }
-    // }
+    navigation.replace('Choice');
+    if (res) {
+      // const res2 = await fetchDogImage(res, inputValues.image);
+      // if (res2) {
+      // }
+    }
   };
 
   const [inputValues, setInputValues] = useState({
     name: route.params.name,
-    adoptedDay: '',
-    birthdate: '',
+    adoptionDay: '',
+    birthday: '',
     breed: route.params.breed,
     gender: route.params.gender,
     weight: '',
@@ -70,14 +70,14 @@ const ProfileHomeScreen2 = ({route}) => {
             inputChangeHandler={inputChangeHandler}
             inputValues={inputValues}
             title="반려견 생일"
-            indentifier="birthdate"
+            indentifier="birthday"
           />
           <View style={styles.inputSubContainer}>
             <DatePick
               inputChangeHandler={inputChangeHandler}
               inputValues={inputValues}
               title="반려견 입양일"
-              indentifier="adoptedDay"
+              indentifier="adoptiondDay"
             />
           </View>
         </View>
