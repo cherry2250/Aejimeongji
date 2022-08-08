@@ -21,7 +21,7 @@ export const login = async (email, password) => {
     axios.defaults.headers.common[
       'Authorization'
     ] = `Bearer ${res.data.accessToken}`;
-    return res;
+    return res.data;
   } catch (error) {
     console.log(error.message);
   }
@@ -104,23 +104,28 @@ export const removeMember = async () => {
 
     return res.data.message;
   } catch (error) {
-    console.log(error.message);
+    console.log(error.response);
   }
 };
 
 export const refresh = async refreshToken => {
-  const path = 'api/auth/issue';
-
+  const path = '/api/auth/issue';
+  console.log(typeof refreshToken, 'axios refresh');
   try {
     const res = await axios({
       method: 'post',
       url: url + path,
-      data: refreshToken,
+      data: {
+        refreshToken,
+      },
+      // headers: {
+      //   'Authorization': `Bearer ${refreshToken}`,
+      // },
     });
 
-    return res.data
-
+    console.log(res.data, '토큰 refresh');
+    return res.data;
   } catch (error) {
-
+    console.log(error.response);
   }
 };
