@@ -1,11 +1,8 @@
 package com.ssafy.aejimeongji.domain.service;
 
-import com.ssafy.aejimeongji.domain.condition.DuplicatedCheckCondition;
 import com.ssafy.aejimeongji.domain.entity.Member;
-import com.ssafy.aejimeongji.domain.exception.LoginException;
 import com.ssafy.aejimeongji.domain.exception.MemberNotFoundException;
 import com.ssafy.aejimeongji.domain.repository.MemberRepository;
-import com.ssafy.aejimeongji.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;

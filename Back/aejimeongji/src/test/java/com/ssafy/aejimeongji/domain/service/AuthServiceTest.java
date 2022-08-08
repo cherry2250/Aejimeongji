@@ -1,10 +1,7 @@
 package com.ssafy.aejimeongji.domain.service;
 
 import com.ssafy.aejimeongji.domain.entity.Member;
-import com.ssafy.aejimeongji.domain.exception.LoginException;
-import com.ssafy.aejimeongji.domain.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import com.ssafy.aejimeongji.domain.exception.auth.LoginException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
