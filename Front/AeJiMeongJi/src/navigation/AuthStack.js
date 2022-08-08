@@ -9,6 +9,7 @@ import MainHome from '../screens/Home/MainHome';
 import {CardStyleInterpolators} from '@react-navigation/stack';
 import RunningHome from '../screens/Running/RunningHome';
 import RunningGeolocation from '../screens/Running/RunningGeolocation';
+import RunningFinish from '../screens/Running/RunningFinish';
 import RunningInfo from '../screens/Running/RunningInfo';
 import RunningProfile from '../screens/Running/RunningProfile';
 import ProfileHomeScreen from '../screens/Profile/ProfileHomeScreen';
@@ -31,6 +32,7 @@ const AuthStack = () => {
       <Stack.Screen name="Initial" component={Initial} />
       <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="RunningInfo" component={RunningInfo} />
+      <Stack.Screen name="RunningFinish" component={RunningFinish} />
       <Stack.Screen name="RunningProfile" component={RunningProfile} />
       <Stack.Screen name="RunningGeolocation" component={RunningGeolocation} />
       <Stack.Screen name="Home" component={MainHome} />

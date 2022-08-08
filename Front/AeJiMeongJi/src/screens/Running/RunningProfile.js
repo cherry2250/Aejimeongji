@@ -1,29 +1,46 @@
-import React, {useState} from 'react';
-import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import React, {useState, useLayoutEffect} from 'react';
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  FlatList,
+} from 'react-native';
 import {Colors} from '../../constants/styles';
 import RunButton3 from '../../components/ui/RunButton3';
+import RunningSelect from '../../components/Running/RunningSelect';
+import {fetchDogs} from '../../utils/profile';
 
 const RunningProfile = ({navigation}) => {
+  const [profiles, setProfiles] = useState([]);
+  useLayoutEffect(() => {
+    const fetchAlldogs = async () => {
+      const res = await fetchDogs();
+      setProfiles(res);
+    };
+    fetchAlldogs();
+  }, []);
+
+  console.log(profiles, '프로필');
+  const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
+  const renderItem = ({item}) => (
+    <RunningSelect id={item.dogId} source={{uri: `${url}${item.imageName}`}} />
+  );
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.Title}>함께 산책가는 강아지가 있나요?</Text>
       <View style={styles.ProfileSelect}>
-        <View style={styles.profileImg}>
-          {/* <Image
-                  style={{width: '100%', height: '100%'}}
-                  source={require('../../Assets/image/3d_dog.png')}
-                  resizeMode="cover"
-                /> */}
-          <Text>이미지 들어갈 곳</Text>
-        </View>
-        <View style={styles.profileImg}>
-          {/* <Image
-                  style={{width: '100%', height: '100%'}}
-                  source={require('../../Assets/image/3d_dog.png')}
-                  resizeMode="cover"
-                /> */}
-          <Text>이미지 들어갈 곳</Text>
-        </View>
+        <FlatList
+          key={'#'}
+          data={profiles}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={2}
+          style={styles.flatlist}
+          columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
+        />
         <RunButton3
           onPress={() => {
             navigation.navigate('RunningGeolocation');

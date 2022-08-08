@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,6 +6,9 @@ import {
   TouchableOpacity,
   Platform,
   PermissionsAndroid,
+  AppRegistry,
+  TouchableHighlight,
+  Alert,
 } from 'react-native';
 import MapView, {
   Marker,
@@ -13,8 +16,13 @@ import MapView, {
   Polyline,
   PROVIDER_GOOGLE,
 } from 'react-native-maps';
+import {Colors} from '../../constants/styles';
 import haversine from 'haversine';
 import Geolocation from 'react-native-geolocation-service';
+import RunningTimer from '../../components/Running/RunningTimer';
+import RunningAlert from '../../components/Running/RunningAlert';
+import RunButton from '../../components/ui/RunButton';
+import RunningHome from './RunningHome';
 
 // const LATITUDE = 29.95539;
 // const LONGITUDE = 78.07513;
@@ -41,7 +49,6 @@ class RunningGeolocation extends React.Component {
       }),
     };
   }
-
   // async componentDidMount() {
   //   /*LOCATION : */
   //   //Grant the permission for Location
@@ -77,8 +84,20 @@ class RunningGeolocation extends React.Component {
   //   }
   //   //----LOCATION END----//
   // }
+
   componentDidMount() {
     const {coordinate} = this.state;
+    if (this.props.coordinate) return;
+
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ).then(granted => {
+        if (granted && this.mounted) this.watchLocation();
+      });
+    } else {
+      this.watchLocation();
+    }
 
     this.watchID = Geolocation.watchPosition(
       position => {
@@ -114,6 +133,7 @@ class RunningGeolocation extends React.Component {
     Geolocation.clearWatch(this.watchID);
   }
 
+  //지도 위에 현재 위치
   getMapRegion = () => ({
     latitude: this.state.latitude,
     longitude: this.state.longitude,
@@ -121,6 +141,7 @@ class RunningGeolocation extends React.Component {
     longitudeDelta: LONGITUDE_DELTA,
   });
 
+  //haversine으로 거리 계산
   calcDistance = newLatLng => {
     const {prevLatLng} = this.state;
     return haversine(prevLatLng, newLatLng) || 0;
@@ -136,7 +157,9 @@ class RunningGeolocation extends React.Component {
           followUserLocation
           loadingEnabled
           region={this.getMapRegion()}>
+          {/* 폴리라인 그리는 법 */}
           <Polyline coordinates={this.state.routeCoordinates} strokeWidth={3} />
+          {/* 지도위에 마커 표시 */}
           <Marker.Animated
             ref={marker => {
               this.marker = marker;
@@ -144,21 +167,27 @@ class RunningGeolocation extends React.Component {
             coordinate={this.state.coordinate}
           />
         </MapView>
-        <View></View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
-            <Text style={styles.bottomBarContent}>
-              {parseFloat(this.state.distanceTravelled).toFixed(2) * 1000} m
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.bubble, styles.button]}>
-            <Text style={styles.bottomBarContent}>
-              {(parseFloat(this.state.distanceTravelled).toFixed(2) / 0.1) * 7}{' '}
-              kcal
-            </Text>
-          </TouchableOpacity>
+        <View style={styles.info}>
+          <RunningTimer
+            style={{width: '10%', backgroundColor: 'yellow'}}></RunningTimer>
+          <View style={styles.subContainer}>
+            <View style={styles.distanceContainer}>
+              <Text style={{fontSize: 25}}>
+                {parseFloat(this.state.distanceTravelled).toFixed(2) * 100} m
+              </Text>
+              <Text>거리</Text>
+            </View>
+
+            <View style={styles.calorieContainer}>
+              <Text style={{fontSize: 25}}>
+                {(parseFloat(this.state.distanceTravelled).toFixed(2) / 0.1) *
+                  7}{' '}
+                kcal
+              </Text>
+              <Text>칼로리</Text>
+            </View>
+          </View>
+          <RunningAlert></RunningAlert>
         </View>
       </View>
     );
@@ -174,16 +203,13 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
-  bubble: {
-    flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
   latlng: {
     width: 200,
     alignItems: 'stretch',
+  },
+  subContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   button: {
     width: 80,
@@ -191,10 +217,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 10,
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
+  distanceContainer: {
+    marginVertical: 17,
+    marginHorizontal: 40,
+    alignItems: 'center',
+  },
+  calorieContainer: {
+    marginVertical: 17,
+    marginHorizontal: 40,
+    alignItems: 'center',
+  },
+  info: {
+    backgroundColor: Colors.back100,
+    width: '100%',
+    height: '30%',
   },
 });
 

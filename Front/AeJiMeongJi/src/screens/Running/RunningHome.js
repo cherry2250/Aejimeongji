@@ -14,6 +14,7 @@ import RunButton2 from '../../components/ui/RunButton2';
 
 const RunningHome = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <View style={styles.rootContainer}>
       <View>
@@ -106,7 +107,7 @@ const RunningHome = ({navigation}) => {
                 -잘못된 행동은 교육이 필요해요
               </Text>
               <Text style={styles.modalText}>
-                -산책은 억지로 시키지 않아야 합니다
+                -산책은 억지로 시키지 않아야해요
               </Text>
               <View
                 style={{
