@@ -2,15 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import {Alert} from 'react-native';
-<<<<<<< HEAD
-=======
-import axios from './index'
+import axios from './index';
 
 // import axios from './index'
-
-
-// import axios from './index'
->>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -117,8 +111,7 @@ export const removeMember = async () => {
   }
 };
 
-
-export const refresh = async (refreshToken) => {
+export const refresh = async refreshToken => {
   const path = '/api/auth/issue';
   console.log('refreshtoken axios 요청 진입');
   try {

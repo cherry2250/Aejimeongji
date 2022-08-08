@@ -1,10 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-<<<<<<< HEAD
-
-=======
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
->>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 import React, {useEffect, useLayoutEffect} from 'react';
 import {StatusBar, Text, View} from 'react-native';
 import MainHome from './src/screens/Home/MainHome';
@@ -98,7 +94,6 @@ import {authActions} from './src/store/auth';
 import AuthStack from './src/navigation/AuthStack';
 import ProfileHomeScreen from './src/screens/Profile/ProfileHomeScreen';
 import ProfileHomeScreen2 from './src/screens/Profile/ProfileHomeScreen2';
-
 import ProfileChoiceScreen from './src/screens/Profile/ProfileChoiceScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {profileActions} from './src/store/profile';

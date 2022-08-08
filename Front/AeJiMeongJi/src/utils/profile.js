@@ -1,18 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import axios from './index'
-
-
+import axios from './index';
 import jwt_decode from 'jwt-decode';
 import {Alert} from 'react-native';
-<<<<<<< HEAD
-=======
 import instance from '.';
->>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 import {getMemberId} from './auth';
 
 // import axios from 'axios';
-
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -58,10 +51,6 @@ export const fetchDog = async ({
   };
 
   const formData = new FormData();
-<<<<<<< HEAD
-
-=======
->>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
   formData.append('name', name);
   formData.append('weight', weight);
   formData.append('birthday', birthday);
@@ -110,7 +99,6 @@ export const fetchDog = async ({
   }
 };
 
-<<<<<<< HEAD
 export const fetchDogImage = async (id, image) => {
   const newImage = image.replace('file://', '');
   const dogId = id;
@@ -143,8 +131,6 @@ export const fetchDogImage = async (id, image) => {
     console.log(error.message, '에러');
   }
 };
-=======
->>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 // export const fetchDogImage = async image => {
 //   // const newImage = image.replace('file://', '');
 //   console.log(image);
@@ -234,7 +220,6 @@ export const getProfile = async () => {
     console.log(res.data);
     return res.data;
   } catch (error) {
-
     console.log(error.response);
   }
 };
@@ -257,9 +242,9 @@ export const changeProfile = async ({nickname, password, phoneNumber}) => {
     });
     return res;
   } catch (error) {
-
     console.log(error.response);
-  }}
+  }
+};
 
 export const getImage = async imageName => {
   const path = `/api/image/${imageName}`;
@@ -288,7 +273,6 @@ export const getImage = async imageName => {
   }
 };
 
-
 // 사용자의 강아지 전체 목록
 export const fetchDogs = async () => {
   const memberId = await getMemberId();
@@ -315,7 +299,6 @@ export const fetchDogs = async () => {
     console.log(error.response, '강아지 목록 불러오지 못함.');
   }
 };
-
 
 export const getDog = async dogId => {
   const memberId = await getMemberId();
@@ -347,10 +330,6 @@ export const deleteProfile = async dogId => {
     console.log(error.response);
   }
 };
-<<<<<<< HEAD
-=======
-
-
 
 export const changeDogInfo = async ({
   dogId,
@@ -410,5 +389,4 @@ export const changeDogPhoto = async ({dogId, image}) => {
   } catch (error) {
     console.log(error.response);
   }
-}
->>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
+};
