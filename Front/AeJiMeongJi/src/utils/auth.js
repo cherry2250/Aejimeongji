@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+// import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import {Alert} from 'react-native';
+import axios from './index'
+
+// import axios from './index'
 
 
 // import axios from './index'

@@ -14,8 +14,8 @@ const ProfileHomeScreen = () => {
   const [breed, setBreed] = useState('');
   const [value, setValue] = useState(null);
   const [gender, setGender] = useState([
-    {label: '수컷', value: 'Male'},
-    {label: '암컷', value: 'Female'},
+    {label: '수컷', value: 'MALE'},
+    {label: '암컷', value: 'FEMALE'},
   ]);
 
   const [image, setImage] = useState(require('../../Assets/image/Profile.png'));
