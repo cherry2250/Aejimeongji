@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Colors.back100,
   },
+
   buttonContainer: {
     marginTop: 30,
   },

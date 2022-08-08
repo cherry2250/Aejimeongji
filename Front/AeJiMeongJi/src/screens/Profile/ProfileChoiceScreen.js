@@ -1,4 +1,4 @@
-import React, {useCallback, useLayoutEffect, useState} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -14,9 +14,10 @@ import {Colors} from '../../constants/styles';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/ui/Button';
 import {fetchDogs, getImage} from '../../utils/profile';
+
 import {useNavigation} from '@react-navigation/native';
-import {refresh} from '../../utils/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {refresh} from '../../utils/auth';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
@@ -33,6 +34,7 @@ const ProfileChoiceScreen = () => {
   const addProfileData = {
     source: require('../../Assets/image/Profile.png'),
     purpose: 'yes',
+    name: '프로필 추가',
   };
 
   const [profiles, setProfiles] = useState([]);
@@ -41,16 +43,18 @@ const ProfileChoiceScreen = () => {
   const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
 
   const images = [];
-  useLayoutEffect(() => {
+  useEffect(() => {
     const fetchAlldogs = async () => {
-      // const refreshToken = await AsyncStorage.getItem('refresh')
-      // console.log(refreshToken, 'refresh');
-      // const res2 = await refresh(refreshToken)
-
       const res = await fetchDogs();
+
       if (res.length < 4) {
         res.push(addProfileData);
       }
+
+      if (!res) {
+        return;
+      }
+
       setProfiles(res);
 
       // const image = await getImage(profile.imageName)

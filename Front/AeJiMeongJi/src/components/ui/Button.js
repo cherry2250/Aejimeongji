@@ -7,9 +7,9 @@ function Button({children, onPress, style}) {
     <Pressable
       style={({pressed}) => [styles.button, pressed && styles.pressed, style]}
       onPress={onPress}>
-      <View>
-        <Text style={[styles.buttonText, style]}>{children}</Text>
-      </View>
+      {/* <View> */}
+      <Text style={[styles.buttonText, style]}>{children}</Text>
+      {/* </View> */}
     </Pressable>
   );
 }
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: 'center',
     color: Colors.btnText,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });

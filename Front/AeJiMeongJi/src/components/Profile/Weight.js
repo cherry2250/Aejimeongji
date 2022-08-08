@@ -22,6 +22,7 @@ const Weight = ({weight, setWeight}) => {
         rounded
         textColor="#90560D"
         iconStyle={{color: '#90560D'}}
+        initValue={weight}
       />
     </>
   );

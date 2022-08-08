@@ -1,6 +1,7 @@
 import React, {Component, useState} from 'react';
 import {StyleSheet, View, Text, Alert} from 'react-native';
 import RunButton from '../../components/ui/RunButton';
+import {Colors} from '../../constants/styles';
 
 const RunningFinish = () => {
   return (

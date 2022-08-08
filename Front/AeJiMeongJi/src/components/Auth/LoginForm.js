@@ -55,10 +55,9 @@ const LoginForm = () => {
       }),
     );
     const ids = await fetchDogs();
-    console.log(typeof ids);
     if (ids.length !== 0) {
       await dispatch(profileActions.saveDogIds(ids));
-      navigation.navigate('Home');
+      navigation.navigate('ProfileChoice');
     } else {
       navigation.navigate('ProfileHome');
     }

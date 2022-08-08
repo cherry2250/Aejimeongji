@@ -1,8 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+
+import axios from './index'
+
+
 import jwt_decode from 'jwt-decode';
 import {Alert} from 'react-native';
+<<<<<<< HEAD
+=======
+import instance from '.';
+>>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 import {getMemberId} from './auth';
+
+// import axios from 'axios';
+
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 
@@ -48,7 +58,10 @@ export const fetchDog = async ({
   };
 
   const formData = new FormData();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
   formData.append('name', name);
   formData.append('weight', weight);
   formData.append('birthday', birthday);
@@ -70,6 +83,7 @@ export const fetchDog = async ({
   console.log(data, '이것이 data');
 
   formData.append('image', data);
+
   formData.append('image', {
     name: image.uri,
     type: 'multipart/form-data',
@@ -96,6 +110,7 @@ export const fetchDog = async ({
   }
 };
 
+<<<<<<< HEAD
 export const fetchDogImage = async (id, image) => {
   const newImage = image.replace('file://', '');
   const dogId = id;
@@ -128,6 +143,8 @@ export const fetchDogImage = async (id, image) => {
     console.log(error.message, '에러');
   }
 };
+=======
+>>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 // export const fetchDogImage = async image => {
 //   // const newImage = image.replace('file://', '');
 //   console.log(image);
@@ -217,7 +234,8 @@ export const getProfile = async () => {
     console.log(res.data);
     return res.data;
   } catch (error) {
-    console.log(error);
+
+    console.log(error.response);
   }
 };
 
@@ -239,9 +257,9 @@ export const changeProfile = async ({nickname, password, phoneNumber}) => {
     });
     return res;
   } catch (error) {
-    console.log(error);
-  }
-};
+
+    console.log(error.response);
+  }}
 
 export const getImage = async imageName => {
   const path = `/api/image/${imageName}`;
@@ -270,16 +288,19 @@ export const getImage = async imageName => {
   }
 };
 
-// 사용자의 강아지
+
+// 사용자의 강아지 전체 목록
 export const fetchDogs = async () => {
   const memberId = await getMemberId();
   const path = `/api/member/${memberId}/dog`;
+  console.log('fetchdogs 진입');
+  console.log(memberId);
   try {
     const res = await axios({
       method: 'get',
       url: url + path,
     });
-    console.log(res);
+
     const ids = [];
 
     // if (res.data) {
@@ -287,7 +308,7 @@ export const fetchDogs = async () => {
     //     ids.push(element.dogId);
     //   });
     // }
-    console.log(res.data);
+    console.log(res.data, '프로필 호출');
 
     return res.data;
   } catch (error) {
@@ -295,8 +316,26 @@ export const fetchDogs = async () => {
   }
 };
 
-export const deleteProfileHandler = async dogId => {
-  const memberId = getMemberId();
+
+export const getDog = async dogId => {
+  const memberId = await getMemberId();
+  console.log(dogId, 'dogid');
+  console.log(memberId, 'memberId');
+  const path = `/api/member/${memberId}/dog/${dogId}/profile`;
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url + path,
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteProfile = async dogId => {
+  const memberId = await getMemberId();
   const path = `/api/member/${memberId}/dog/${dogId}`;
 
   try {
@@ -308,3 +347,68 @@ export const deleteProfileHandler = async dogId => {
     console.log(error.response);
   }
 };
+<<<<<<< HEAD
+=======
+
+
+
+export const changeDogInfo = async ({
+  dogId,
+  name,
+  weight,
+  birthday,
+  adoptionDay,
+}) => {
+  const memberId = getMemberId();
+  const path = `/api/member/${memberId}/dog/${dogId}`;
+
+  try {
+    const res = axios({
+      method: 'put',
+      url: url + path,
+      data: {
+        name,
+        weight,
+        birthday,
+        adoptionDay,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const changeDogPhoto = async ({dogId, image}) => {
+  const memberId = await getMemberId();
+  console.log(memberId);
+  const path = `/api/member/${memberId}/dog/${dogId}/profileimage`;
+  const formData = new FormData();
+
+  const data = {
+    uri: image,
+    name: 'abcd.jpg',
+    type: 'multipart/form-data', // or photo.type
+  };
+  formData.append('image', data);
+
+  try {
+    const res = await axios({
+      method: 'put',
+      url: url + path,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: formData => {
+        console.log(formData, 'form');
+        return formData;
+      },
+      data: formData,
+    });
+
+    return res;
+  } catch (error) {
+    console.log(error.response);
+  }
+}
+>>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3

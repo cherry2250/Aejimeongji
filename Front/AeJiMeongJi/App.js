@@ -1,6 +1,10 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+<<<<<<< HEAD
 
+=======
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+>>>>>>> b3563b2090c45d436ad15228b703fef4e596e4d3
 import React, {useEffect, useLayoutEffect} from 'react';
 import {StatusBar, Text, View} from 'react-native';
 import MainHome from './src/screens/Home/MainHome';
@@ -17,15 +21,17 @@ import GuideCategory from './src/screens/Guide/GuideCategory';
 import GuideDetail from './src/screens/Guide/GuideDetail';
 import CalendarHome from './src/screens/Calendar/CalendarHome';
 import TodoUpload from './src/screens/Calendar/TodoUpload';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
 
 // 파일을 만들어서, 홈, 산책, 온보딩으로 전달한다.
 
 const AuthenticatedStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Initial" component={Initial} />
+      <Stack.Screen name="Initial" component={BottomTabNavigator} />
       {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
       <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="RunningInfo" component={RunningInfo} />
@@ -36,7 +42,9 @@ const AuthenticatedStack = () => {
 
       <Stack.Screen name="ProfileHome" component={ProfileHomeScreen} />
       <Stack.Screen name="ProfileHome2" component={ProfileHomeScreen2} />
-      <Stack.Screen name="Choice" component={ProfileChoiceScreen} />
+
+      <Stack.Screen name="ProfileChoice" component={ProfileChoiceScreen} />
+
       <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
       <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
