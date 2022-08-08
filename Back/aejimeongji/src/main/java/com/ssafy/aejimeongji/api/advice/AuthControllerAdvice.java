@@ -15,9 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthControllerAdvice {
 
     @ExceptionHandler(AuthException.class)
-    public ResponseEntity<ErrorDTO> ForbiddenExceptionHandler(ForbiddenException ex) {
+    public ResponseEntity<ErrorDTO> AuthExceptionHandler(AuthException ex) {
         log.error("ExceptionName = {}, message = {}", ex.getClass().getName(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorDTO(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage()));
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorDTO> ForbiddenExceptionHandler(ForbiddenException ex) {
+        log.error("ExceptionName = {}, message = {}", ex.getClass().getName(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorDTO(HttpServletResponse.SC_FORBIDDEN, ex.getMessage()));
     }
 
     @ExceptionHandler(ExpireAuthNumberException.class)
