@@ -34,14 +34,11 @@ axios.interceptors.response.use(
           const refreshToken = await AsyncStorage.getItem('refresh');
           console.log('REFRESH 요청');
 
-          const {data} = await refresh(refreshToken);
-          console.log('refresh 요청 이후, refresh 진입이 안됨.');
-          const {accessToken: newAccessToken, refreshToken: newRefreshToken} =
-            data;
-          await AsyncStorage.multiSet([
-            ['accessToken', newAccessToken],
-            ['refreshToken', newRefreshToken],
-          ]);
+          const res = await refresh(refreshToken);
+          const newAccessToken = res.accessToken;
+          console.log(res);
+          await AsyncStorage.setItem('token', newAccessToken)
+
           axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           console.log('실패 요청 재요청');
