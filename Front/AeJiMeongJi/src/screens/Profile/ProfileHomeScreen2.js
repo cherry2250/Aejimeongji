@@ -28,11 +28,7 @@ const ProfileHomeScreen2 = ({route}) => {
     const res = await fetchDog(inputValues);
 
     navigation.replace('ProfileChoice');
-    if (res) {
-      // const res2 = await fetchDogImage(res, inputValues.image);
-      // if (res2) {
-      // }
-    }
+
   };
 
   const [inputValues, setInputValues] = useState({
