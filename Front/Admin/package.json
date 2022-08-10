@@ -5,6 +5,8 @@
 	"dependencies": {
 		"@ckeditor/ckeditor5-build-classic": "^35.0.1",
 		"@ckeditor/ckeditor5-react": "^5.0.2",
+		"@toast-ui/react-editor": "^3.2.0",
+		"axios": "^0.27.2",
 		"classnames": "^2.2.6",
 		"lodash": "^4.17.15",
 		"react": "^16.13.1",
@@ -38,5 +40,6 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	}
+	},
+	"proxy": "http://i7d203.p.ssafy.io:8080"
 }
