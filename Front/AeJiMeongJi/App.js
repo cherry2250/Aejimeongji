@@ -51,6 +51,7 @@ const AuthenticatedStack = () => {
       <Stack.Screen name="GuideDetail" component={GuideDetail} />
       <Stack.Screen name="CalendarHome" component={CalendarHome} />
       <Stack.Screen name="TodoUpload" component={TodoUpload} />
+      <Stack.Screen name="PlaceHome" component={PlaceHome} />
     </Stack.Navigator>
   );
 };
@@ -101,6 +102,7 @@ import {getMemberId} from './src/utils/auth';
 import {fetchDogs} from './src/utils/profile';
 import ProfileEditScreen from './src/screens/Profile/ProfileEditScreen';
 import MyInfoScreen from './src/screens/Profile/MyInfoScreen';
+import PlaceHome from './src/screens/Place/PlaceHome';
 export default function App() {
   return (
     <Provider store={store}>
