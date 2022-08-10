@@ -35,50 +35,7 @@ async function requestPermission() {
 
 
 const PlaceHome = () => {
-  const DummyData = [
-    {
-      title: 'Beautiful and dramatic Antelope Canyon',
-      subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-      illustration: 'https://i.imgur.com/UYiroysl.jpg',
-    },
-    {
-      title: 'Earlier this morning, NYC',
-      subtitle: 'Lorem ipsum dolor sit amet',
-      illustration: 'https://i.imgur.com/UPrs1EWl.jpg',
-    },
-    {
-      title: 'White Pocket Sunset',
-      subtitle: 'Lorem ipsum dolor sit amet et nuncat ',
-      illustration: 'https://i.imgur.com/MABUbpDl.jpg',
-    },
-    {
-      title: 'Acrocorinth, Greece',
-      subtitle: 'Lorem ipsum dolor sit amet et nuncat mergitur',
-      illustration: 'https://i.imgur.com/KZsmUi2l.jpg',
-    },
-    {
-      title: 'The lone tree, majestic landscape of New Zealand',
-      subtitle: 'Lorem ipsum dolor sit amet',
-      illustration: 'https://i.imgur.com/2nCt3Sbl.jpg',
-    },
-  ];
-
-  const renderItem = ({item, index}, parallaxProps) => {
-    return (
-      <View style={styles.item}>
-        <ParallaxImage
-          source={{uri: item.illustration}}
-          containerStyle={styles.imageContainer}
-          style={styles.image}
-          parallaxFactor={0.4}
-          {...parallaxProps}
-        />
-        <Text style={styles.title} numberOfLines={2}>
-          {item.title}
-        </Text>
-      </View>
-    );
-  };
+  
   const dogId = useSelector(state => state.profile.id);
   const [source, setSource] = useState();
   const [dogInfo, setDogInfo] = useState();
@@ -104,7 +61,8 @@ const PlaceHome = () => {
         );
         if (res === 'granted') {
           Geolocation.getCurrentPosition(pos => {
-            console.log(pos.coords);
+            // api 호출
+            // const res = await 호출()
             setLocation(pos.coords)});
         }
       }

@@ -61,9 +61,8 @@ const renderItem = ({item, index}, parallaxProps) => {
 
 const CarouselItem = ({category}) => {
   const navigation = useNavigation();
-  const goToplaceList = () => {
-    // navigation.navigate('placeList', category)
-    console.log('전체보기 클릭');
+  const goToCategory = () => {
+    navigation.navigate('PlaceCategory', category)
   };
 
   return (
@@ -72,7 +71,7 @@ const CarouselItem = ({category}) => {
         <View style={styles.categoryText}>
           <Text style={styles.CartegoryTitle}>반려견과 함께 방문할 맛집</Text>
         </View>
-        <Pressable style={styles.detail} onPress={goToplaceList}>
+        <Pressable style={styles.detail} onPress={goToCategory}>
           <Text style={styles.detailText}>전체보기</Text>
         </Pressable>
       </View>
@@ -95,14 +94,14 @@ export default CarouselItem;
 const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: Colors.back100,
-    paddingVertical: 16,
-    marginVertical: 8,
+    paddingVertical: responsiveHeight(4),
+    marginVertical: responsiveHeight(1),
   },
   textContainer: {
     flexDirection: 'row',
     alignContent: 'space-around',
     justifyContent: 'space-between',
-    marginHorizontal: 16,
+    marginHorizontal: responsiveWidth(5),
   },
   CartegoryTitle: {
     color: 'black',
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     color: '#90560D',
-    fontSize: 12,
+    fontSize: responsiveFontSize(1.5),
   },
   item: {
     width: responsiveWidth(30),
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: Platform.select({ios: 0, android: 1}), // Prevent a random Android rendering issue
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: responsiveWidth(4),
   },
   image: {
     ...StyleSheet.absoluteFillObject,
