@@ -24,7 +24,6 @@ const ProfileHomeScreen2 = ({route}) => {
   };
 
   const submitHandler = async () => {
-    console.log(inputValues);
     // const res = await fetchDogImage(inputValues.image);
     const res = await fetchDog(inputValues);
 
@@ -78,7 +77,7 @@ const ProfileHomeScreen2 = ({route}) => {
               inputChangeHandler={inputChangeHandler}
               inputValues={inputValues}
               title="반려견 입양일"
-              indentifier="adoptiondDay"
+              indentifier="adoptionDay"
             />
           </View>
         </View>
