@@ -1,13 +1,19 @@
 package com.ssafy.aejimeongji.domain.service;
 
+import com.ssafy.aejimeongji.api.dto.ScrollResponse;
+import com.ssafy.aejimeongji.domain.condition.WalkingDogCondition;
 import com.ssafy.aejimeongji.domain.entity.Dog;
 import com.ssafy.aejimeongji.domain.entity.Walking;
 import com.ssafy.aejimeongji.domain.entity.WalkingDog;
+import com.ssafy.aejimeongji.domain.exception.DogNotFoundException;
+import com.ssafy.aejimeongji.domain.exception.WalkingNotFoundException;
 import com.ssafy.aejimeongji.domain.repository.DogRepository;
 import com.ssafy.aejimeongji.domain.repository.WalkingDogRepository;
 import com.ssafy.aejimeongji.domain.repository.WalkingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,21 +38,21 @@ public class WalkingDogService {
     public Long saveWalkingDog(Long dogId, Long walkingId , double walkingCalories) {
 
         // 강아지 엔티티 조회
-        Dog dog = dogRepository.findById(dogId).orElseThrow(() ->
-                new IllegalArgumentException("요청하신 정보가 존재하지 않습니다.")
-        );
+        Dog dog = dogRepository.findById(dogId).orElseThrow(() -> new DogNotFoundException(dogId.toString()));
 
         // 산책 엔티티 생성 후 영속화
-        Walking walking = walkingRepository.findById(walkingId).orElseThrow(() ->
-                new IllegalArgumentException("요청하신 정보가 존재하지 않습니다.")
-        );
+        Walking walking = walkingRepository.findById(walkingId).orElseThrow(() -> new WalkingNotFoundException(walkingId.toString()));
 
         // 중계 테이블 설정
         return walkingDogRepository.save(new WalkingDog(dog, walking, walkingCalories)).getId();
     }
 
-    public List<WalkingDog> getWalkingDogList(Long dogId) {
-        return walkingDogRepository.findByDogId(dogId);
+    public ScrollResponse<WalkingDog> getWalkingDogList(Long dogId, WalkingDogCondition condition) {
+        long curLastIdx = condition.getCurLastIdx() != null ? condition.getCurLastIdx() : Long.MAX_VALUE;
+        int limit = condition.getLimit() != null ? condition.getLimit() : 10;
+        Slice<WalkingDog> result = walkingDogRepository.findByDogId(dogId, curLastIdx, PageRequest.of(0, limit));
+        List<WalkingDog> data = result.getContent();
+        return new ScrollResponse<WalkingDog>(data, result.hasNext(), data.get(data.size()-1).getId(), (long) limit);
     }
 
     public WalkingDog walkingDogDetail(Long walkingDogId) {
