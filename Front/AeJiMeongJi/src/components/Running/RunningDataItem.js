@@ -1,5 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
+
 import {Colors} from '../../constants/styles';
 
 const RunningDataItem = ({item, index}) => {
@@ -15,7 +21,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.back200,
     borderRadius: 8,
-
     paddingBottom: 12,
     shadowColor: '#000',
     shadowOffset: {

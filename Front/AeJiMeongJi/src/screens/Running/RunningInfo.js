@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
 import {Alert, Modal, StyleSheet, Text, Pressable, View} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 import {Colors} from '../../constants/styles';
 import RunButton3 from '../../components/ui/RunButton3';
 import RunningData from '../../components/Running/RunningData';
@@ -28,14 +33,14 @@ const styles = StyleSheet.create({
   },
   Title: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: responsiveFontSize(3.2),
     fontWeight: 'bold',
     marginBottom: 20,
   },
   InfoList: {
     backgroundColor: Colors.back200,
-    width: 350,
-    height: 550,
+    height: responsiveHeight(80),
+    width: responsiveWidth(85),
     justifyContent: 'center',
     borderRadius: 20,
     shadowColor: '#000',
