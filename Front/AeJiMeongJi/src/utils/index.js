@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { refresh } from './auth';
+import {refresh} from './auth';
 
 // 요청 인터셉터 추가하기
 
@@ -37,7 +37,7 @@ axios.interceptors.response.use(
           const res = await refresh(refreshToken);
           const newAccessToken = res.accessToken;
           console.log(res);
-          await AsyncStorage.setItem('token', newAccessToken)
+          await AsyncStorage.setItem('token', newAccessToken);
 
           axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
