@@ -14,20 +14,26 @@ import GuideButton from '../../components/ui/GuideButton';
 import {fetchGuideList} from '../../utils/guide';
 
 const GuideHome = ({navigation}) => {
-  const fetchGuide = async children => {
-    const res = await fetchGuideList(children);
+  // const fetchGuide = async children => {
+  //   const res = await fetchGuideList(children);
 
-    navigation.navigate('GuideCategory', {information: title});
-  };
+  //   navigation.navigate('GuideCategory', {information});
+  // };
 
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <GuideButton onPress={fetchGuide}> 건강 </GuideButton>
           <GuideButton
             onPress={() => {
-              navigation.navigate('GuideCategory');
+              navigation.navigate('GuideCategory', '건강');
+            }}>
+            {' '}
+            건강{' '}
+          </GuideButton>
+          <GuideButton
+            onPress={() => {
+              navigation.navigate('GuideCategory', '음식');
             }}>
             {' '}
             음식{' '}
@@ -36,14 +42,14 @@ const GuideHome = ({navigation}) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <GuideButton
             onPress={() => {
-              navigation.navigate('GuideCategory');
+              navigation.navigate('GuideCategory', '여행');
             }}>
             {' '}
             여행{' '}
           </GuideButton>
           <GuideButton
             onPress={() => {
-              navigation.navigate('GuideCategory');
+              navigation.navigate('GuideCategory', '훈련');
             }}>
             {' '}
             훈련{' '}
@@ -52,7 +58,7 @@ const GuideHome = ({navigation}) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <GuideButton
             onPress={() => {
-              navigation.navigate('GuideCategory');
+              navigation.navigate('GuideCategory', '장소');
             }}>
             {' '}
             장소{' '}
