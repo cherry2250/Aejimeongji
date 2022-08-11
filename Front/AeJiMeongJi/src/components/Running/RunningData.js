@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 import {Colors} from '../../constants/styles';
 import RunningDataItem from './RunningDataItem';
 import data from './data';
@@ -18,8 +23,8 @@ const RunningData = () => {
 const styles = StyleSheet.create({
   InfoList: {
     backgroundColor: Colors.back200,
-    width: 350,
-    height: 550,
+    height: responsiveHeight(70),
+    width: responsiveWidth(85),
     justifyContent: 'center',
     borderRadius: 20,
     shadowColor: '#000',
