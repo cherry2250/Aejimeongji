@@ -1,12 +1,16 @@
 package com.ssafy.aejimeongji.api;
 
+import com.ssafy.aejimeongji.api.dto.ScrollResponse;
 import com.ssafy.aejimeongji.api.dto.guidebook.GuideBookResponse;
 import com.ssafy.aejimeongji.domain.condition.GuideSearchCondition;
 import com.ssafy.aejimeongji.domain.entity.Category;
 import com.ssafy.aejimeongji.domain.entity.GuideBook;
+import com.ssafy.aejimeongji.domain.entity.Like;
 import com.ssafy.aejimeongji.domain.service.GuideBookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @RestController
@@ -28,14 +33,14 @@ public class GuideBookApiController {
         if (condition.getDog() != null) {
             log.info("강아지 {} 맞춤 가이드 목록 요청", condition);
             return ResponseEntity.ok().body(getCustomizedGuideResult(guideBookService.customizedGuideBookList(condition.getDog())));
-        }
-        else if (condition.getCategory() != null) {
+        } else if (condition.getCategory() != null) {
             log.info("'{}' 카테고리 가이드 목록 요청", condition);
             return ResponseEntity.ok().body(guideBookService.categorizedGuideBookList(condition.getCategory()).stream().map(GuideBookResponse::toDTO).collect(Collectors.toList()));
-        }
-        else {
+        } else {
             log.info("사용자 {} 좋아요 가이드 목록 요청", condition);
-            return ResponseEntity.ok().body(guideBookService.likedGuideBookList(condition.getMember()).stream().map(GuideBookResponse::toDTO).collect(Collectors.toList()));
+            Slice<Like> result = guideBookService.likedGuideBookList(condition.getMember(), condition.getCurLastIdx(), condition.getLimit());
+            List<GuideBookResponse> data = result.getContent().stream().map(GuideBookResponse::toDTO).collect(Collectors.toList());
+            return ResponseEntity.ok().body(new ScrollResponse(data, result.hasNext(), data.get(data.size()-1).getGuideId(), result.getSize()));
         }
     }
 
