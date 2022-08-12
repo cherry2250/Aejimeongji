@@ -1,26 +1,22 @@
 package com.ssafy.aejimeongji.domain.service;
 
+import com.ssafy.aejimeongji.api.dto.ScrollResponse;
+import com.ssafy.aejimeongji.domain.condition.PetPlaceSearchCondition;
 import com.ssafy.aejimeongji.domain.entity.Bookmark;
-import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.entity.PetPlace;
 import com.ssafy.aejimeongji.domain.repository.BookmarkRepository;
-import com.ssafy.aejimeongji.domain.repository.MemberRepository;
 import com.ssafy.aejimeongji.domain.repository.PetPlaceRepostiory;
-import com.ssafy.aejimeongji.domain.util.Direction;
-import com.ssafy.aejimeongji.domain.util.GeometryUtil;
-import com.ssafy.aejimeongji.domain.util.Location;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.lang.Math.*;
 
 @Slf4j
 @Service
@@ -36,33 +32,11 @@ public class PetPlaceService {
 
     private final EntityManager em;
 
-    /***
-     *
-     * @param latitude 위도
-     * @param longitude 경도
-     * @param distance 거리, 1 = 1Km
-     */
-
-    public List<PetPlace> getNearPetPlaceList(Double latitude, Double longitude, Double distance) {
-        Location northEast = GeometryUtil
-                .calculate(latitude, longitude, distance, Direction.NORTHEAST.getBearing());
-        Location southWest = GeometryUtil
-                .calculate(latitude, longitude, distance, Direction.SOUTHWEST.getBearing());
-
-        double x1 = northEast.getLatitude();
-        double y1 = northEast.getLongitude();
-        double x2 = southWest.getLatitude();
-        double y2 = southWest.getLongitude();
-
-        String pointFormat = String.format("'LINESTRING(%f %f, %f %f)')", x1, y1, x2, y2);
-        Query query = em.createNativeQuery("SELECT p.id, p.name, p.description, "
-                        + "p.address, p.tel, p.category, p.point, p.opening_hours, p.detail, p.home_page, p.rating "
-                        + "FROM petplace AS p "
-                        + "WHERE MBRContains(ST_LINESTRINGFROMTEXT(" + pointFormat + ", p.point)", PetPlace.class);
-
-        List<PetPlace> list = query.getResultList();
-
-        return list;
+    public ScrollResponse<PetPlace> searchPetPlaceAll(PetPlaceSearchCondition condition) {
+        Slice<PetPlace> result = petPlaceRepostiory.searchPetPlaceAll(condition, condition.getCurLastIdx(), PageRequest.of(0, condition.getLimit()));
+        List<PetPlace> data = result.getContent();
+        removeData(data);
+        return new ScrollResponse(data, result.hasNext(), !data.isEmpty() ? data.get(data.size()-1).getId() : 0, condition.getLimit());
     }
 
     public List<PetPlace> findPetPlaceList() {
@@ -99,5 +73,11 @@ public class PetPlaceService {
             throw new IllegalArgumentException("아직 북마크 하지 않았습니다.");
         }
         bookmarkRepository.delete(bookmark.get());
+    }
+
+    private void removeData(List<PetPlace> data) {
+        List<PetPlace> list = new ArrayList<>(data);
+        if (list.size() > 1)
+            list.remove(data.size()-1);
     }
 }
