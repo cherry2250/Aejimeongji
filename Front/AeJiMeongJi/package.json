@@ -22,6 +22,7 @@
     "@rneui/base": "^4.0.0-rc.5",
     "@rneui/themed": "^4.0.0-rc.5",
     "axios": "^0.27.2",
+    "date-fns": "^2.29.1",
     "deprecated-react-native-prop-types": "^2.2.0",
     "haversine": "^1.1.1",
     "jwt-decode": "^3.1.2",
@@ -50,6 +51,7 @@
     "react-native-switch-toggle": "^2.2.1",
     "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.2",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "redux": "^4.2.0"
   },
   "devDependencies": {

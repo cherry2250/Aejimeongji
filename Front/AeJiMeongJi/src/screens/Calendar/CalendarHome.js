@@ -1,60 +1,63 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {Avatar, Button, Card, Title, Typography} from 'react-native-paper';
 
 import {Colors} from '../../constants/styles';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
 import Navbar from './../../components/nav/Navbar';
+import {format} from 'date-fns';
 
-const timeToString = time => {
-  const date = new Date(time);
-  return date.toISOString().split('T')[0];
-};
+import TodoList from '../../components/Todo/TodoList';
 
 const CalendarHome = ({navigation}) => {
-  const [items, setItems] = useState({});
+  const [selectedDate, setSelectedDate] = useState(
+    format(new Date(), 'yyyy-MM-dd'),
+  );
 
-  const loadItems = day => {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = timeToString(time);
-
-        if (!items[strTime]) {
-          items[strTime] = [];
-
-          const numItems = Math.floor(Math.random() * 3 + 1);
-          for (let j = 0; j < numItems; j++) {
-            items[strTime].push({
-              name: 'Item for ' + strTime + ' #' + j,
-              height: Math.max(50, Math.floor(Math.random() * 150)),
-              day: strTime,
-            });
-          }
-        }
-      }
-
-      const newItems = {};
-      Object.keys(items).forEach(key => {
-        newItems[key] = items[key];
-      });
-      setItems(newItems);
-    }, 1000);
+  LocaleConfig.locales['calendarData'] = {
+    monthNames: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+    monthNamesShort: [
+      'Jan.',
+      'Feb.',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul.',
+      'Aug',
+      'Sep.',
+      'Oct.',
+      'Nov.',
+      'Dec.',
+    ],
+    dayNames: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
+    dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+    today: "Aujourd'hui",
   };
+  LocaleConfig.defaultLocale = 'calendarData';
 
-  const renderItem = item => {
-    return (
-      <TouchableOpacity style={styles.item}>
-        <Card>
-          <Card.Content>
-            <View>
-              <Text>{item.name}</Text>
-            </View>
-          </Card.Content>
-        </Card>
-      </TouchableOpacity>
-    );
-  };
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.rootContainer}>
@@ -67,33 +70,48 @@ const CalendarHome = ({navigation}) => {
         />
       </View>
       <View style={styles.contentbox}>
-        <Agenda
-          items={items}
-          loadItemsForMonth={loadItems}
-          selected={'2022-08-04'}
-          renderItem={renderItem}
-          theme={{
-            calendarBackground: '#FFFDF8',
-            agendaKnobColor: Colors.btnBack100,
-            agendaDayTextColor: Colors.contentText,
-            agendaDayNumColor: Colors.contentText,
-            agendaTodayColor: 'red',
-            agendaBackground: 'red',
+        <Calendar
+          markingType={'period'}
+          markedDates={{
+            '2022-08-11': {
+              marked: true,
+              dotColor: '#50cebb',
+              startingDay: true,
+              color: '#51cebb',
+              textColor: 'white',
+              startingDay: true,
+            },
+            '2022-08-12': {
+              marked: true,
+              dotColor: '#50cebb',
+              color: '#50cebb',
+              textColor: 'white',
+            },
+            '2022-08-13': {
+              dotColor: '#50cebb',
+
+              color: '#50cebb',
+              textColor: 'white',
+              endingDay: true,
+            },
+          }}
+          onDayPress={day => {
+            setSelectedDate(day.dateString);
+
+            setModalVisible(true);
           }}
         />
+        {/* <TodoList
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          selectedDate={selectedDate}
+        /> */}
       </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('TodoUpload');
-        }}
-        style={{paddingLeft: 24}}>
-        <Image
-          style={styles.plusButton}
-          resizeMode="contain"
-          source={require('../../Assets/image/plusButton.png')}
-          title="plusButton"
-        />
-      </TouchableOpacity>
+      <TodoList
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        selectedDate={selectedDate}
+      />
     </View>
   );
 };
@@ -171,16 +189,5 @@ const styles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
     marginTop: 17,
-  },
-  plusButton: {
-    borderWidth: 1,
-    position: 'absolute',
-    bottom: 60,
-    right: 20,
-    alignSelf: 'flex-end',
-    marginTop: 5,
-
-    maxWidth: '10%',
-    maxHeight: '10%',
   },
 });
