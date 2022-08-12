@@ -14,6 +14,8 @@ import com.ssafy.aejimeongji.domain.repository.LikeRepository;
 import com.ssafy.aejimeongji.domain.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,13 +44,13 @@ public class GuideBookService {
         Dog dog = dogRepository.findById(dogId).orElseThrow(() -> new DogNotFoundException(dogId.toString()));
 
         List<GuideBook> fixedGuideBookList = fixedGuideBookList();
-        List<GuideBook> ageGuideBookList = randomChoice(ageCustomizedGuideBookList(dog), weightCustomizedGuideBookList(dog));
-        List<GuideBook> weightGuideBookList = randomChoice(weightCustomizedGuideBookList(dog), ageCustomizedGuideBookList(dog));
+        List<GuideBook> ageGuideBookList = ageCustomizedGuideBookList(dog);
+        List<GuideBook> weightGuideBookList = weightCustomizedGuideBookList(dog);
 
         Map<String, List<GuideBook>> result = new HashMap<>();
         result.put("fixedGuideList", fixedGuideBookList);
-        result.put("ageGuideList", ageGuideBookList);
-        result.put("weightGuideList", weightGuideBookList);
+        result.put("ageGuideList", fixedGuideBookList);
+        result.put("weightGuideList", fixedGuideBookList);
         return result;
     }
 
@@ -58,9 +60,8 @@ public class GuideBookService {
     }
 
     // 멤버별 좋아요 가이드 목록 조회
-    public List<GuideBook> likedGuideBookList(Long memberId) {
-        List<Like> likeList = likeRepository.findLikesByMemberId(memberId);
-        return likeList.stream().map(Like::getGuideBook).collect(Collectors.toList());
+    public Slice<Like> likedGuideBookList(Long memberId, Long curLastIdx, Integer limit) {
+        return likeRepository.findLikeGuideBook(memberId, curLastIdx, PageRequest.of(0, limit));
     }
 
     // 가이드 상세 조회
@@ -77,31 +78,6 @@ public class GuideBookService {
     private List<GuideBook> ageCustomizedGuideBookList(Dog dog) {
         int targetMonth = calculateNumberOfMonths(dog.getBirthday());
         return guideBookRepository.findCustomizedGuideBookList(targetMonth, null);
-    }
-
-    private List<GuideBook> randomChoice(List<GuideBook> targetList, List<GuideBook> exceptList) {
-        int[] randomIndexes = new int[5];
-        for (int i = 0; i < 5; i++) {
-            int idx = random.nextInt(targetList.size() - 1);
-            Long id = targetList.get(idx).getId();
-            for (int j = 0; j < exceptList.size(); j++) {
-                if (exceptList.get(j).getId() == id) {
-                    i--;
-                    break;
-                }
-            }
-            for (int j = 0; j < i; j++) {
-                if (randomIndexes[i] == randomIndexes[j]) {
-                    i--;
-                    break;
-                }
-            }
-        }
-        List<GuideBook> guideBookList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            guideBookList.add(targetList.get(randomIndexes[i]));
-        }
-        return guideBookList;
     }
 
     // 강아지 홈 무게별 가이드 목록 조회
