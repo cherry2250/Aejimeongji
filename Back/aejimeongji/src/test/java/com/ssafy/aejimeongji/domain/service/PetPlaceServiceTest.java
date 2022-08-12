@@ -1,5 +1,7 @@
 package com.ssafy.aejimeongji.domain.service;
 
+import com.ssafy.aejimeongji.api.dto.ScrollResponse;
+import com.ssafy.aejimeongji.domain.condition.PetPlaceSearchCondition;
 import com.ssafy.aejimeongji.domain.entity.Bookmark;
 import com.ssafy.aejimeongji.domain.entity.Member;
 import com.ssafy.aejimeongji.domain.entity.PetPlace;
@@ -37,13 +39,13 @@ class PetPlaceServiceTest {
     @Test
     void getNearPetPlaceList() {
         //given
-
+        PetPlaceSearchCondition condition = new PetPlaceSearchCondition("숙소", 37.0, 127.0, 1000.0, Long.MAX_VALUE, 10);
 
         //when
-        List<PetPlace> list = petPlaceService.getNearPetPlaceList(37.0, 127.0, 100.0);
+        ScrollResponse<PetPlace> list = petPlaceService.searchPetPlaceAll(condition);
 
         //then
-//        assertEquals(314, list.size());
+//        assertEquals("", list.getData().get(1).getName());
 //        test전용 db 추가 필요
 
     }
