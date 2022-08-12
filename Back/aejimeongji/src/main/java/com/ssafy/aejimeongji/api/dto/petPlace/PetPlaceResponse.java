@@ -58,6 +58,7 @@ public class PetPlaceResponse {
         category = petPlace.getCategory();
         homePage = petPlace.getHomePage();
         detail = petPlace.getDetail();
+        rating = petPlace.getRating();
         openingHours = petPlace.getOpeningHours();
         petplaceImageUrl = getImageList(petPlace.getPetplaceImageSet().getPetplaceImage());
         petplaceInfoUrl = getImageList(petPlace.getPetplaceImageSet().getPetplaceInfo());
