@@ -5,7 +5,6 @@ import com.querydsl.jpa.JPQLQueryFactory;
 import com.ssafy.aejimeongji.domain.entity.GuideBook;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +24,7 @@ public class GuideBookRepositoryCustomImpl implements GuideBookRepositoryCustom 
                 .fetchJoin()
                 .where(getAgeAndWeightEq(targetAge, targetWeight))
                 .fetch();
-        Collections.shuffle(result);
-        return result.stream().limit(5).collect(Collectors.toList());
+        return result.stream().collect(Collectors.toList());
     }
 
     private BooleanExpression getMonthBetween(Integer dogAge) {
@@ -34,7 +32,7 @@ public class GuideBookRepositoryCustomImpl implements GuideBookRepositoryCustom 
     }
 
     private BooleanExpression getWeightBetween(Double dogWeight) {
-        return dogWeight != null ? guideBook.weightMin.loe(dogWeight).and(guideBook.weightMax.goe(dogWeight)) : null;
+        return dogWeight != null ? guideBook.weightMin.lt(dogWeight).and(guideBook.weightMax.goe(dogWeight)) : null;
     }
 
     private BooleanExpression getAgeAndWeightEq(Integer dogMonth, Double dogWeight) {
