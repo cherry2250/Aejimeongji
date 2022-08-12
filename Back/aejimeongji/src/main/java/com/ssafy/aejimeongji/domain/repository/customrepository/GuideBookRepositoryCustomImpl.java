@@ -22,6 +22,7 @@ public class GuideBookRepositoryCustomImpl implements GuideBookRepositoryCustom 
         List<GuideBook> result = queryFactory
                 .selectFrom(guideBook)
                 .leftJoin(guideBook.thumbnail, guideThumbnail)
+                .fetchJoin()
                 .where(getAgeAndWeightEq(targetAge, targetWeight))
                 .fetch();
         Collections.shuffle(result);

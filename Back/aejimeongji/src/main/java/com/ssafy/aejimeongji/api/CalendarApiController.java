@@ -25,7 +25,7 @@ public class CalendarApiController {
     @GetMapping("/dog/{dogId}/calendar")
     public ResponseEntity<List<?>> getTodoList(@ModelAttribute CalendarSearchCondition condition) {
         log.info("{}번 강아지 프로필 캘린더 조회", condition.getDogId());
-        if (condition.getIsActive().equals(true)) {
+        if (condition.getIsActive() != null && condition.getIsActive() == true) {
             List<TodosResponse> result = calendarService.findCalendars(condition).stream().map(c -> new TodosResponse(c)).collect(Collectors.toList());
         }
         List<CalendarResponse> result = calendarService.findCalendars(condition).stream().map(c -> new CalendarResponse(c)).collect(Collectors.toList());

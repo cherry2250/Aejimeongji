@@ -1,6 +1,7 @@
 package com.ssafy.aejimeongji.api;
 
 import com.ssafy.aejimeongji.api.dto.guidebook.GuideBookResponse;
+import com.ssafy.aejimeongji.domain.condition.GuideSearchCondition;
 import com.ssafy.aejimeongji.domain.entity.Category;
 import com.ssafy.aejimeongji.domain.entity.GuideBook;
 import com.ssafy.aejimeongji.domain.service.GuideBookService;
@@ -22,25 +23,20 @@ public class GuideBookApiController {
 
     private final GuideBookService guideBookService;
 
-    @GetMapping(value = "/guide", params = {"dog"})
-    public ResponseEntity<Map<String, List<GuideBookResponse>>> getCustomizedGuideBookList(@RequestParam(value = "dog") Long dogId) {
-        log.info("강아지 {} 맞춤 가이드 목록 요청", dogId);
-        Map<String, List<GuideBook>> guideBookMap = guideBookService.customizedGuideBookList(dogId);
-        return ResponseEntity.ok().body(getCustomizedGuideResult(guideBookMap));
-    }
-
-    @GetMapping(value = "/guide", params = "category")
-    public ResponseEntity<List<GuideBookResponse>> getCategorizedGuideBookList(@RequestParam("category") String categoryName) {
-        log.info("'{}' 카테고리 가이드 목록 요청", categoryName);
-        List<GuideBookResponse> guideBookResponseList = guideBookService.categorizedGuideBookList(categoryName).stream().map(GuideBookResponse::toDTO).collect(Collectors.toList());
-        return ResponseEntity.ok().body(guideBookResponseList);
-    }
-
-    @GetMapping(value = "/guide", params = "member")
-    public ResponseEntity<List<GuideBookResponse>> getLikedGuideBookList(@RequestParam("member") Long memberId) {
-        log.info("사용자 {} 좋아요 가이드 목록 요청", memberId);
-        List<GuideBookResponse> guideBookResponseList = guideBookService.likedGuideBookList(memberId).stream().map(GuideBookResponse::toDTO).collect(Collectors.toList());
-        return ResponseEntity.ok().body(guideBookResponseList);
+    @GetMapping(value = "/guide")
+    public ResponseEntity<?> getCustomizedGuideBookList(@ModelAttribute GuideSearchCondition condition) {
+        if (condition.getDog() != null) {
+            log.info("강아지 {} 맞춤 가이드 목록 요청", condition);
+            return ResponseEntity.ok().body(getCustomizedGuideResult(guideBookService.customizedGuideBookList(condition.getDog())));
+        }
+        else if (condition.getCategory() != null) {
+            log.info("'{}' 카테고리 가이드 목록 요청", condition);
+            return ResponseEntity.ok().body(guideBookService.categorizedGuideBookList(condition.getCategory()).stream().map(GuideBookResponse::toDTO).collect(Collectors.toList()));
+        }
+        else {
+            log.info("사용자 {} 좋아요 가이드 목록 요청", condition);
+            return ResponseEntity.ok().body(guideBookService.likedGuideBookList(condition.getMember()).stream().map(GuideBookResponse::toDTO).collect(Collectors.toList()));
+        }
     }
 
     @GetMapping("/guide/{guideId}")
@@ -64,4 +60,3 @@ public class GuideBookApiController {
         return result;
     }
 }
-
