@@ -26,7 +26,7 @@ class MemberServiceTest {
     @BeforeEach
     void beforeEach() {
         for (int i = 0; i < 10; i++) {
-            memberRepository.save(new Member("ssafy"+i+"@ssafy.com", "1234", "닉네임" + i, "01012341234", "닉네임" + i));
+            memberRepository.save(new Member("ssafy"+i+"@ssafy.com", "1234", "닉네임" + i, "0101235123" + i, "닉네임" + i));
         }
     }
 

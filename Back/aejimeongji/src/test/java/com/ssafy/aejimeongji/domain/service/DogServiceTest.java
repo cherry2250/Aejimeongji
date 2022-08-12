@@ -31,11 +31,11 @@ class DogServiceTest {
     @Test
     void findDogListTest(){
         // given
-        Member member1 = new Member("test1@ssafy.com", "1234", "테스트1", "01012341234", "test1");
+        Member member1 = new Member("test112312312@ssafy.com", "1234", "테스트1234", "010testtest1", "테스트1234456");
         em.persist(member1);
-        Member member2 = new Member("test2@ssafy.com", "1234", "테스트2", "01012341234", "test2");
+        Member member2 = new Member("test12331231242@ssafy.com", "1234", "테스트1234567", "010testtest2", "테스트123345");
         em.persist(member2);
-        Breed breed = new Breed("푸들");
+        Breed breed = new Breed("테스트");
         em.persist(breed);
 
         for(int i = 1; i <= 2; i++){
@@ -77,9 +77,9 @@ class DogServiceTest {
     @Test
     void findDogTest() {
         // given
-        Member member = new Member("test@ssafy.com", "1234", "테스트", "01012341234", "test");
+        Member member = new Member("test@ssafy.com", "1234", "테스트", "010testtest", "test");
         em.persist(member);
-        Breed breed = new Breed("푸들");
+        Breed breed = new Breed("테스트");
         em.persist(breed);
 
         Dog dog = Dog.builder()
@@ -108,7 +108,7 @@ class DogServiceTest {
         // given
         Member member = new Member("test@ssafy.com", "1234", "테스트", "01012341234", "test");
         em.persist(member);
-        Breed breed = new Breed("푸들");
+        Breed breed = new Breed("테스트");
         em.persist(breed);
 
         Dog dog = Dog.builder()
@@ -136,7 +136,7 @@ class DogServiceTest {
         assertThat(savedDog.getNeutering()).isEqualTo(true);
         assertThat(savedDog.getGone()).isEqualTo(false);
         assertThat(savedDog.getMember().getUsername()).isEqualTo("테스트");
-        assertThat(savedDog.getBreed().getBreedName()).isEqualTo("푸들");
+        assertThat(savedDog.getBreed().getBreedName()).isEqualTo("테스트");
     }
 
     @Test
@@ -144,7 +144,7 @@ class DogServiceTest {
         // given
         Member member = new Member("test@ssafy.com", "1234", "테스트", "01012341234", "test");
         em.persist(member);
-        Breed breed = new Breed("푸들");
+        Breed breed = new Breed("테스트");
         em.persist(breed);
 
         Dog dog = Dog.builder()
@@ -162,7 +162,7 @@ class DogServiceTest {
         Long savedId = dogRepository.save(dog).getId();
 
         // when
-        Breed newBreed = new Breed("포메라니안");
+        Breed newBreed = new Breed("테스트2");
         em.persist(newBreed);
 
         dogService.updateDog(savedId, "강아지수정", 3.3, LocalDate.of(2020, 2, 2),
@@ -172,15 +172,15 @@ class DogServiceTest {
         assertThat(dog.getName()).isEqualTo("강아지수정");
         assertThat(dog.getWeight()).isEqualTo(3.3);
         assertThat(dog.getAdoptionDay()).isEqualTo("2020-05-03");
-        assertThat(dog.getBreed().getBreedName()).isEqualTo("포메라니안");
+        assertThat(dog.getBreed().getBreedName()).isEqualTo("테스트2");
     }
 
     @Test
     void deleteDog() {
         // given
-        Member member = new Member("test@ssafy.com", "1234", "테스트", "01012341234", "test");
+        Member member = new Member("test@ssafy.com", "1234", "테스트", "010testtest", "test");
         em.persist(member);
-        Breed breed = new Breed("푸들");
+        Breed breed = new Breed("테스트");
         em.persist(breed);
 
         Dog dog = Dog.builder()
