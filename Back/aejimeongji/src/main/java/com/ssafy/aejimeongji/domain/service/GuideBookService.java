@@ -21,9 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,14 +35,15 @@ public class GuideBookService {
     private final DogRepository dogRepository;
     private final CategoryRepository categoryRepository;
     private final ImageUtil imageUtil;
+    private final Random random = new Random();
 
     // 맞춤 가이드 조회
     public Map<String, List<GuideBook>> customizedGuideBookList(Long dogId) {
         Dog dog = dogRepository.findById(dogId).orElseThrow(() -> new DogNotFoundException(dogId.toString()));
 
         List<GuideBook> fixedGuideBookList = fixedGuideBookList();
-        List<GuideBook> ageGuideBookList = ageCustomizedGuideBookList(dog);
-        List<GuideBook> weightGuideBookList = weightCustomizedGuideBookList(dog);
+        List<GuideBook> ageGuideBookList = randomChoice(ageCustomizedGuideBookList(dog), weightCustomizedGuideBookList(dog));
+        List<GuideBook> weightGuideBookList = randomChoice(weightCustomizedGuideBookList(dog), ageCustomizedGuideBookList(dog));
 
         Map<String, List<GuideBook>> result = new HashMap<>();
         result.put("fixedGuideList", fixedGuideBookList);
@@ -80,11 +79,37 @@ public class GuideBookService {
         return guideBookRepository.findCustomizedGuideBookList(targetMonth, null);
     }
 
+    private List<GuideBook> randomChoice(List<GuideBook> targetList, List<GuideBook> exceptList) {
+        int[] randomIndexes = new int[5];
+        for (int i = 0; i < 5; i++) {
+            int idx = random.nextInt(targetList.size() - 1);
+            Long id = targetList.get(idx).getId();
+            for (int j = 0; j < exceptList.size(); j++) {
+                if (exceptList.get(j).getId() == id) {
+                    i--;
+                    break;
+                }
+            }
+            for (int j = 0; j < i; j++) {
+                if (randomIndexes[i] == randomIndexes[j]) {
+                    i--;
+                    break;
+                }
+            }
+        }
+        List<GuideBook> guideBookList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            guideBookList.add(targetList.get(randomIndexes[i]));
+        }
+        return guideBookList;
+    }
+
     // 강아지 홈 무게별 가이드 목록 조회
     private List<GuideBook> weightCustomizedGuideBookList(Dog dog) {
         return guideBookRepository.findCustomizedGuideBookList(null, dog.getWeight());
     }
 
+    // 카테고리 목록 조회
     public List<Category> getCategories() {
         return categoryRepository.findAll();
     }
@@ -100,9 +125,10 @@ public class GuideBookService {
     @Transactional
     public Long updateGuideBook(Long guideId, GuideBook updateParam, MultipartFile thumbnail) throws IOException {
         GuideBook findGuide = findGuideBook(guideId);
-        if (!thumbnail.isEmpty())
+        if (!thumbnail.isEmpty()) {
             imageUtil.deleteStoreImage(findGuide.getThumbnail().getStoreFilename());
             findGuide.updateGuideBook(updateParam, new GuideThumbnail(imageUtil.storeImage(thumbnail)));
+        }
         return findGuide.getId();
     }
 
