@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -178,5 +179,39 @@ class CalendarServiceTest {
 
         //then
         Assertions.assertThrows(CalendarNotFoundException.class, () -> calendarService.findTodo(calendarId));
+    }
+
+    @Test
+    void findMessagesTest() {
+        //given
+        LocalDate date = LocalDate.now();
+
+        List<Integer> values = new ArrayList<>();
+
+        if (date.getMonthValue() - 7 > 0) {
+            values.add(date.getMonthValue() - 7);
+        } else {
+            values.add(12 - date.getMonthValue() + 7);
+        }
+
+        if (date.getMonthValue() - 4 > 0) {
+            values.add(date.getMonthValue() - 4);
+        } else {
+            values.add(12 - date.getMonthValue() + 4);
+        }
+
+
+        //when
+        LocalDate birthday = LocalDate.of(2018, date.getMonthValue(), date.getDayOfMonth());
+        String birth = calendarService.findMessages(birthday);
+        LocalDate firstday = LocalDate.of(date.getYear(), values.get(0), date.getDayOfMonth());
+        String first = calendarService.findMessages(firstday);
+        LocalDate thirdday = LocalDate.of(date.getYear() - 2, date.getMonthValue() - 4, date.getDayOfMonth());
+        String third = calendarService.findMessages(thirdday);
+
+        //then
+        assertEquals("생일을 축하합니다!", birth);
+        assertEquals("1차 예방접종 기간입니다!", first);
+        assertEquals("3차 예방접종 기간입니다!", third);
     }
 }
