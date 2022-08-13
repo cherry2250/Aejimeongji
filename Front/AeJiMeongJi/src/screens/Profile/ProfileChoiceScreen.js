@@ -1,20 +1,12 @@
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
-import {
-  FlatList,
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 import ProfileItems from '../../components/Profile/ProfileItems';
 import {Colors} from '../../constants/styles';
 import Button from '../../components/ui/Button';
 import {fetchDogs} from '../../utils/profile';
 import {useNavigation} from '@react-navigation/native';
 import CustomNav from '../../components/nav/CustomNav';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
