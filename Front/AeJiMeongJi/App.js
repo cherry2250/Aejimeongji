@@ -63,7 +63,6 @@ const AuthenticatedStack = () => {
         }}>
         <Stack.Screen name="PlaceCategory" component={PlaceCategory} />
         <Stack.Screen name="PlaceDetail" component={PlaceDetail} />
-        <Stack.Screen name="MyInfo" component={MyInfoScreen} />
       </Stack.Group>
       <Stack.Screen name="MyPage" component={MyPage} />
     </Stack.Navigator>
