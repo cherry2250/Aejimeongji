@@ -11,6 +11,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {removeMember} from '../../utils/auth';
 import {authActions} from '../../store/auth';
 import ProfileModal from '../../components/Profile/ProfileModal';
+import CustomNav from '../../components/nav/CustomNav'
 
 const MyInfoScreen = () => {
   const dogId = useSelector(state => state.id);
@@ -42,19 +43,18 @@ const MyInfoScreen = () => {
 
     setVisible(true);
 
-    // const res = await changeProfile(userInfo.nickname);
+    const res = await changeProfile(userInfo.nickname);
 
-    // if (res) {
-    //   Alert.alert('프로필이 변경 되었습니다.');
-    //   navigation.replace('Home');
-    // }
+    if (res) {
+      Alert.alert('프로필이 변경 되었습니다.');
+      navigation.replace('Home');
+    }
   };
 
   const closeModalHandler = () => {
     setVisible(false);
   };
 
-  const confirmPassword = enteredValue => {};
 
   const changeInfoHandler = async (identifier, enteredValue) => {
     setUserInfo(curValue => {
@@ -94,6 +94,7 @@ const MyInfoScreen = () => {
         userInfo={userInfo}
         closeModalHandler={closeModalHandler}
       />
+      <CustomNav>내 계정</CustomNav>
       <ProfileInput
         textInputConfig={{
           placeholder: userInfo.email,
@@ -126,7 +127,7 @@ const MyInfoScreen = () => {
       />
       <View style={styles.buttonContainer}>
         <Button onPress={fetchChangedInfo} style={styles.button}>
-          프로필 변경{' '}
+          프로필 변경
         </Button>
       </View>
       <View style={styles.buttonContainer}>

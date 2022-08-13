@@ -19,12 +19,10 @@ import {useNavigation} from '@react-navigation/native';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import UploadModeModal from '../../components/Profile/UploadModeModal';
 import {
-  changeDogInfo,
   changeDogPhoto,
   deleteProfile,
   getDog,
 } from '../../utils/profile';
-import {refresh} from '../../utils/auth';
 
 const ProfileEditScreen = ({route}) => {
   const navigation = useNavigation();

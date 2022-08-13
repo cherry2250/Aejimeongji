@@ -41,7 +41,8 @@ const AuthenticatedStack = () => {
 
       <Stack.Screen name="ProfileChoice" component={ProfileChoiceScreen} />
 
-      <Stack.Screen name="ProfileEdit" component={ProfileEditScreen} />
+      <Stack.Screen name="ProfileChange" component={ProfileEditScreen} />
+      <Stack.Screen name="MyInfo" component={MyInfoScreen} />
 
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
@@ -62,7 +63,6 @@ const AuthenticatedStack = () => {
         }}>
         <Stack.Screen name="PlaceCategory" component={PlaceCategory} />
         <Stack.Screen name="PlaceDetail" component={PlaceDetail} />
-        <Stack.Screen name="MyInfo" component={MyInfoScreen} />
       </Stack.Group>
       <Stack.Screen name="MyPage" component={MyPage} />
     </Stack.Navigator>

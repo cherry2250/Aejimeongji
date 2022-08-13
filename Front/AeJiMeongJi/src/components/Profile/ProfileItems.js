@@ -1,9 +1,13 @@
 import React from 'react';
 import {Alert, Image, Text, View} from 'react-native';
-import {Pressable, StyleSheet, ImageBackground} from 'react-native';
+import {Pressable, StyleSheet} from 'react-native';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 import {Colors} from '../../constants/styles';
-import {getImage} from '../../utils/profile';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {profileActions} from '../../store/profile';
 import {useNavigation} from '@react-navigation/native';
 import {getMemberId} from '../../utils/auth';
@@ -18,7 +22,6 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
 
     Alert.alert(`${name} 강아지로 변경 되었어요.`);
     await dispatch(profileActions.saveDogid({id}));
-    console.log('강쥐 변경 완료');
     navigation.navigate('Home', {dogId: id});
   };
 
@@ -31,8 +34,6 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
   const editingImg = require('../../Assets/image/editing.png');
 
   const onPress = async () => {
-    console.log(`${id}번 강쥐클릭`);
-
     if (purpose) {
       Alert.alert('프로필 추가 하시겠어요?', '', [
         {
@@ -61,18 +62,10 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
         },
         {text: '네', onPress: changeDogHandler.bind(this, id)},
       ]);
-      // const res = await getImage();
-      // img = res;
-      // console.log(img);
     }
   };
 
-  let addIcon = null;
   const imageAddBtn = require('../../Assets/image/plusButton.png');
-
-  const addProfileHandler = () => {
-    console.log('프로필 추가 합시다.');
-  };
 
   return (
     <Pressable onPress={onPress}>
@@ -93,7 +86,7 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
 
         <Text style={styles.name}>{name}</Text>
         {purpose && (
-          <Pressable onPress={addProfileHandler}>
+          <Pressable onPress={onPress}>
             <Image source={imageAddBtn} style={styles.imageAddBtn} />
           </Pressable>
         )}
@@ -110,20 +103,20 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   image: {
-    width: 132,
-    height: 132,
-    borderRadius: 100,
+    width: responsiveWidth(33),
+    height: responsiveWidth(33),
+    borderRadius: responsiveWidth(33),
     borderColor: Colors.contentText,
     borderWidth: 2,
-    margin: 10,
+    margin: responsiveWidth(3),
     alignItems: 'center',
     justifyContent: 'center',
   },
   imageAddBtn: {
     position: 'absolute',
     borderRadius: 90,
-    width: 40,
-    height: 40,
+    width: responsiveWidth(10),
+    height: responsiveWidth(10),
     left: 20,
     bottom: 30,
   },
@@ -132,15 +125,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
   },
   grayscale: {
-    width: 132,
-    height: 132,
-    borderRadius: 100,
+    width: responsiveWidth(33),
+    height: responsiveWidth(33),
+    borderRadius: responsiveWidth(33),
     position: 'absolute',
     // opacity: 0.3,
     top: 10,
   },
   name: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     fontWeight: 'bold',
     color: '#90560D',
   },

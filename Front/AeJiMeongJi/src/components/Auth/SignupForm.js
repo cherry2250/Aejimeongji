@@ -172,8 +172,4 @@ const styles = StyleSheet.create({
     color: 'red',
     paddingLeft: responsiveWidth(3),
   },
-  btn: {
-    // flex: 1,
-    paddingHorizontal: 30,
-  },
 });

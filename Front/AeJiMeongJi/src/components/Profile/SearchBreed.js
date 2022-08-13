@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../constants/styles';
 import {fetchBreed} from '../../utils/profile';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 const SearchBreed = ({setBreed}) => {
   const [open, setOpen] = useState(false);
@@ -64,14 +65,10 @@ const styles = StyleSheet.create({
     marginLeft: 3,
   },
   input: {
-    // maxWidth: '70%',
-    marginTop: 16,
-    borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: responsiveWidth(10),
     borderColor: Colors.ProfileInputBorder,
     backgroundColor: Colors.ProfileInputBorder,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginVertical: 12,
   },
 });

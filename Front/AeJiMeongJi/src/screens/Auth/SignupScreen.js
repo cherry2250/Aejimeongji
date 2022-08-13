@@ -43,10 +43,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 3,
   },
-  btn: {
-    flex: 1,
-    marginTop: responsiveHeight(4),
-  },
   progress: {
     position: 'absolute',
     width: '50%',
