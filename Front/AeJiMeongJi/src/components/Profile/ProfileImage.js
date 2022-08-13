@@ -1,6 +1,11 @@
 import {Avatar} from '@rneui/themed';
 import React, {useRef, useState} from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 import UploadModeModal from './UploadModeModal';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -59,7 +64,6 @@ const ProfileImage = ({visible, image, setImage}) => {
     // setPreview(pickedImage)
   };
   const imageAddBtn = require('../../Assets/image/plusButton.png');
-  const fileInput = useRef(null);
   const [modalVisible, setModalVisible] = useState(visible);
 
   const addPhotoHandler = () => {
@@ -72,49 +76,14 @@ const ProfileImage = ({visible, image, setImage}) => {
 
   const onLaunchImageLibrary = () => {
     launchImageLibrary(imagePickerOption, onPickImage);
-    // ImagePicker.openPicker({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true,
-    // }).then(image => {
-    //   console.log(image);
-    // });
   };
 
   const onLaunchCamera = async () => {
     await launchCamera(imagePickerOption, onPickImage);
-    //   ImagePicker.openCamera({
-    //     width: 300,
-    //     height: 400,
-    //     cropping: true,
-    //     cropperCircleOverlay: true,
-    //     includeExif: true
-    //   }).then(image => {
-    //     console.log(image);
-    //     setImage(image)
-    //   });
-    //   ImagePicker.openCamera({
-    //     width: 300,
-    //     height: 400,
-    //     cropping: true,
-    //     cropperCircleOverlay: true,
-    //     includeExif: true
-    //   }).then(image => {
-    //     console.log(image);
-    //     setImage(image)
-    //   });
   };
 
   return (
     <>
-      {/* {modalVisible && (
-        <UploadModeModal
-          visible={modalVisible}
-          onClose={closeModalHandler}
-          onLaunchImageLibrary={onLaunchImageLibrary}
-          onLaunchCamera={onLaunchCamera}
-        />
-      )} */}
       {modalVisible && (
         <UploadModeModal
           visible={modalVisible}
@@ -152,18 +121,18 @@ export default ProfileImage;
 const styles = StyleSheet.create({
   Avatar: {
     borderRadius: 90,
-    width: 230,
-    height: 172,
+    width: responsiveWidth(58),
+    height: responsiveHeight(23),
   },
   ImgContainer: {
-    marginTop: 30,
+    marginTop: responsiveHeight(10),
     position: 'relative',
   },
   imageAddBtn: {
     position: 'absolute',
-    borderRadius: 90,
-    width: 40,
-    height: 40,
+    borderRadius: responsiveWidth(10),
+    width: responsiveWidth(10),
+    height: responsiveWidth(10),
     left: 170,
     bottom: 0,
   },

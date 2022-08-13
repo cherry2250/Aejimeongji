@@ -10,6 +10,7 @@ import DatePick from '../../components/Profile/DatePick';
 import {useNavigation} from '@react-navigation/native';
 import Weight from '../../components/Profile/Weight';
 import {fetchDog, fetchDogImage} from '../../utils/profile';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 const ProfileHomeScreen2 = ({route}) => {
   const navigation = useNavigation();
@@ -115,18 +116,18 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    marginTop: 50,
-    paddingLeft: 12,
+    marginTop: responsiveHeight(10),
+    paddingLeft: responsiveWidth(4),
   },
   title: {
     color: '#603500',
     fontWeight: 'bold',
-    fontSize: 26,
-    marginBottom: 8,
+    fontSize: responsiveFontSize(3),
+    marginBottom: responsiveHeight(1),
   },
   subTitle: {
     color: '#90560D',
-    fontSize: 13,
+    fontSize: responsiveFontSize(1.5),
   },
   inputContainer: {
     flex: 6,
@@ -134,11 +135,10 @@ const styles = StyleSheet.create({
   inputSubContainer: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: responsiveHeight(4),
   },
   checkBoxContainer: {
     flex: 1,
-    // marginTop: 8,
   },
   checkBox: {
     backgroundColor: Colors.back100,
@@ -149,9 +149,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: 230,
-    height: 60,
-    borderRadius: 30,
+    width: responsiveWidth(50),
+    height: responsiveHeight(8),
+    borderRadius: responsiveWidth(10),
   },
   weightBox: {
     flex: 1,

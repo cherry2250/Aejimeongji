@@ -1,23 +1,16 @@
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import {
-  FlatList,
-  Image,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import DummyData from '../../components/Profile/DummyData';
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 import ProfileItems from '../../components/Profile/ProfileItems';
 import {Colors} from '../../constants/styles';
-import {Provider, useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/ui/Button';
-import {fetchDogs, getImage} from '../../utils/profile';
-
+import {fetchDogs} from '../../utils/profile';
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {refresh} from '../../utils/auth';
+import CustomNav from '../../components/nav/CustomNav';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
@@ -27,9 +20,10 @@ const ProfileChoiceScreen = () => {
 
   // 배열에 id를 저장하고, 그 저장한 것 바탕으로 이미지 다시 불러서 DummyData에 push
 
-  const ids = useSelector(state => state.ids);
-  const [isEditing, setIsEditing] = useState(false);
   const navigation = useNavigation();
+  const [isEditing, setIsEditing] = useState(false);
+  const [profiles, setProfiles] = useState([]);
+  const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
 
   const addProfileData = {
     source: require('../../Assets/image/Profile.png'),
@@ -37,29 +31,16 @@ const ProfileChoiceScreen = () => {
     name: '프로필 추가',
   };
 
-  const [profiles, setProfiles] = useState([]);
-  const [dogProfiles, setDogProfiles] = useState([]);
-  const [img, setImg] = useState();
-  const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
-
-  const images = [];
   useEffect(() => {
     const fetchAlldogs = async () => {
       const res = await fetchDogs();
-
       if (res.length < 4) {
         res.push(addProfileData);
       }
-
       if (!res) {
         return;
       }
-
       setProfiles(res);
-
-      // const image = await getImage(profile.imageName)
-      // images.push(image)
-      // setImg(image)
     };
     fetchAlldogs();
   }, []);
@@ -75,21 +56,16 @@ const ProfileChoiceScreen = () => {
     />
   );
 
-  const changeEditHandler = () => {
-    setIsEditing(cur => !cur);
-  };
-
   const goToMyInfo = () => {
+    // 여기서 비밀번호 컨펌
     navigation.navigate('MyInfo');
   };
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <View style={styles.header}>
-        <Button style={styles.button} onPress={changeEditHandler}>
-          편집(수정예정)
-        </Button>
-      </View>
+      <CustomNav isEditing={isEditing} setIsEditing={setIsEditing} screen='Choice'>
+        {isEditing ? '프로필 편집' : '프로필 선택'}
+      </CustomNav>
       <FlatList
         key={'#'}
         data={profiles}
@@ -117,37 +93,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  subContainer: {
-    // flex: 3 ,
-    // justifyContent: 'center',
-  },
-  profile: {
-    // flex: 1,
-  },
-  image: {
-    width: 132,
-    height: 132,
-    borderRadius: 100,
-    borderColor: Colors.contentText,
-    borderWidth: 2,
-    margin: 10,
-  },
   flatlist: {
     flexGrow: 0,
   },
-  header: {
-    position: 'absolute',
-    top: 50,
-  },
   buttonContainer: {
     position: 'absolute',
-    bottom: 80,
+    bottom: responsiveHeight(15),
   },
   button: {
     backgroundColor: '#EDCCA2',
     color: '#90560D',
-    fontSize: 13,
+    fontSize: responsiveFontSize(1.5),
     fontWeight: 'bold',
-    minWidth: '40%',
+    width: responsiveWidth(40),
   },
 });

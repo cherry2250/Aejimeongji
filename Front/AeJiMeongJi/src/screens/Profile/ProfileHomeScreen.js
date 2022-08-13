@@ -1,6 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 import DropDownPicker from 'react-native-dropdown-picker';
 import ProfileImage from '../../components/Profile/ProfileImage';
 import ProfileInput from '../../components/Profile/ProfileInput';
@@ -36,7 +41,7 @@ const ProfileHomeScreen = () => {
   };
 
   const inputChangeHandler = entredValue => {
-    setName(curValue => {
+    setName(() => {
       return entredValue;
     });
   };
@@ -96,15 +101,15 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 2,
-    width: 300,
+    width: responsiveWidth(70),
   },
   profileInput: {
-    marginTop: 80,
+    marginTop: responsiveHeight(10),
   },
   button: {
-    width: 230,
-    height: 60,
-    borderRadius: 30,
+    width: responsiveWidth(50),
+    height: responsiveHeight(8),
+    borderRadius: responsiveWidth(10),
   },
   buttonContainer: {
     flex: 1,
@@ -118,18 +123,14 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     flex: 1,
-    marginRight: 3,
+    marginRight: responsiveWidth(1),
   },
   input: {
-    // maxWidth: '70%',
-    marginTop: 16,
-    borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: responsiveWidth(10),
     borderColor: Colors.ProfileInputBorder,
     backgroundColor: Colors.ProfileInputBorder,
     textAlign: 'center',
     fontWeight: 'bold',
-    marginVertical: 12,
   },
   searchBox: {
     flex: 1,

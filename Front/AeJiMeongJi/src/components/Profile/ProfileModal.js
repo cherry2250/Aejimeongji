@@ -17,7 +17,6 @@ const ProfileModal = ({
       visible={visible}
       transparent={true}
       onRequestClose={() => {
-        Alert.alert('Modal has been closed.');
         setVisible(false);
       }}>
       <View style={styles.centeredView}>
@@ -32,7 +31,7 @@ const ProfileModal = ({
           />
           <View style={styles.modalBtnContainer}>
             <Button
-              title={'변경하기'}
+              title={'확인'}
               type="clear"
               onPress={fetchChangedInfo}></Button>
             <Button
