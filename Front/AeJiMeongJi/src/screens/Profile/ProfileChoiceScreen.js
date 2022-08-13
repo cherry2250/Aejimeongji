@@ -1,10 +1,14 @@
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import {
-  responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
-} from 'react-native-responsive-dimensions';
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import ProfileItems from '../../components/Profile/ProfileItems';
 import {Colors} from '../../constants/styles';
 import Button from '../../components/ui/Button';
