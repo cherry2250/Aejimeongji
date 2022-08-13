@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -65,47 +66,49 @@ public class CalendarService {
     // messages
     public String findMessages(LocalDate birthday) {
 
-        Date b = java.sql.Date.valueOf(birthday);
-        java.util.Calendar birth = java.util.Calendar.getInstance();
-        birth.setTime(b);
-
-        java.util.Calendar now = java.util.Calendar.getInstance();
-
-        int diffMonth = (now.get(java.util.Calendar.YEAR) * 12 + now.get(java.util.Calendar.MONTH)) - (birth.get(java.util.Calendar.YEAR) * 12 + birth.get(java.util.Calendar.MONTH));
-        int day = birth.get(java.util.Calendar.DATE);
-        int nowDay = now.get(java.util.Calendar.DATE);
-
+        LocalDate nowDate = LocalDate.now();
+        Period diff = Period.between(birthday, nowDate);
 
         // 7 3 3 3 12
-        if (birth.get(java.util.Calendar.MONTH) == now.get(java.util.Calendar.MONTH) && day == nowDay) {
+        if (diff.getMonths() == 0 && diff.getDays() == 0) {
             return "생일을 축하합니다!";
         }
 
-        if (diffMonth < 28 && (day <= nowDay) && (nowDay <= day + 3)) {
+        if (diff.getMonths() + diff.getYears() * 12 < 28 && (diff.getDays() == 1 || diff.getDays() == 0 || diff.getDays() == 30)) {
 
-            if (diffMonth == 7) {
+            if (checkDay(diff, 7)) {
                 return "1차 예방접종 기간입니다!";
-            } else if (diffMonth == 10) {
+            } else if (checkDay(diff, 10)) {
                 return "2차 첫 번째 예방접종 기간입니다!";
-            } else if (diffMonth == 13) {
+            } else if (checkDay(diff, 13)) {
                 return "2차 두 번째 예방접종 기간입니다!";
-            } else if (diffMonth == 16) {
+            } else if (checkDay(diff, 16)) {
                 return "2차 세 번째 예방접종 기간입니다!";
+            } else if (checkYear(diff)) {
+                return "3차 예방접종 기간입니다!";
             } else {
                 List<Messages> messages = messagesRepository.findAll();
                 Collections.shuffle(messages);
-                String result = messages.get(0).getMessage();
-                return result;
+                return messages.get(0).getMessage();
             }
 
-        } else if ((diffMonth - 28) % 12 == 0 && (day <= nowDay) && (nowDay <= day + 3)) {
+        } else if (checkYear(diff)) {
             return "3차 예방접종 기간입니다!";
 
         } else {
             List<Messages> messages = messagesRepository.findAll();
             Collections.shuffle(messages);
-            String result = messages.get(0).getMessage();
-            return result;
+            return messages.get(0).getMessage();
         }
+    }
+
+    private boolean checkYear(Period diff) {
+        return (diff.getMonths() + (diff.getYears() + 1) * 12 - 28) % 12 == 0 && (diff.getDays() == 1 || diff.getDays() == 0) ||
+                ((diff.getMonths() + (diff.getYears() + 1) * 12 - 27) % 12 == 0 && diff.getDays() == 30);
+    }
+
+    private boolean checkDay(Period diff, int diffMonth) {
+        return (diff.getMonths() + diff.getYears() * 12 == diffMonth && (diff.getDays() == 1 || diff.getDays() == 0)) ||
+                (diff.getMonths() + diff.getYears() * 12 == diffMonth - 1 && diff.getDays() == 30);
     }
 }
