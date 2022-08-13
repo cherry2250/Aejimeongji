@@ -5,7 +5,7 @@ import {
   View,
   Text,
   ScrollView,
-  TouchableOpacity  ,
+  TouchableOpacity,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -18,6 +18,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RunningHome from './src/screens/Running/RunningHome';
 import MainHome from './src/screens/Home/MainHome';
 import GuideHome from './src/screens/Guide/GuideHome';
+import PlaceHome from './src/screens/Place/PlaceHome';
+import MyPage from './src/screens/Profile/MyPage';
 
 import Initial from './src/screens/Initial';
 import {Colors} from './src/constants/styles';
@@ -111,8 +113,43 @@ function BottomTabNavigator() {
           },
         }}
       />
-      {/* <BottomTab.Screen name="GuideHome" component={GuideHome} />
-      <BottomTab.Screen name="GuideHome" component={GuideHome} /> */}
+
+      <BottomTab.Screen
+        name="PlaceHome"
+        component={PlaceHome}
+        options={{
+          tabBarIcon: () => {
+            return (
+              <Image
+                style={{
+                  width: responsiveWidth(7),
+                  height: responsiveWidth(7),
+                }}
+                resizeMode="contain"
+                source={require('./src/Assets/image/navbar/place.png')}
+              />
+            );
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="MyPage"
+        component={MyPage}
+        options={{
+          tabBarIcon: () => {
+            return (
+              <Image
+                style={{
+                  width: responsiveWidth(7),
+                  height: responsiveWidth(7),
+                }}
+                resizeMode="contain"
+                source={require('./src/Assets/image/navbar/profile.png')}
+              />
+            );
+          },
+        }}
+      />
     </BottomTab.Navigator>
   );
 }
