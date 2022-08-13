@@ -41,15 +41,37 @@ public class GuideBookService {
     public Map<String, List<GuideBook>> customizedGuideBookList(Long dogId) {
         Dog dog = dogRepository.findById(dogId).orElseThrow(() -> new DogNotFoundException(dogId.toString()));
 
-        List<GuideBook> fixedGuideBookList = fixedGuideBookList();
-        List<GuideBook> ageGuideBookList = ageCustomizedGuideBookList(dog);
-        List<GuideBook> weightGuideBookList = weightCustomizedGuideBookList(dog);
+        List<GuideBook> fixedGuideBookList = randomFixedGuide(fixedGuideBookList());
+        List<GuideBook> ageGuideBookList = randomAgeGuide(ageCustomizedGuideBookList(dog));
+        List<GuideBook> weightGuideBookList = randomWeightGuide(weightCustomizedGuideBookList(dog), ageGuideBookList);
 
         Map<String, List<GuideBook>> result = new HashMap<>();
         result.put("fixedGuideList", fixedGuideBookList);
-        result.put("ageGuideList", fixedGuideBookList);
-        result.put("weightGuideList", fixedGuideBookList);
+        result.put("ageGuideList", ageGuideBookList);
+        result.put("weightGuideList", weightGuideBookList);
         return result;
+    }
+
+    private List<GuideBook> randomFixedGuide(List<GuideBook> fixedTemp) {
+        Collections.shuffle(fixedTemp);
+        return fixedTemp.subList(0, 5);
+    }
+
+    private List<GuideBook> randomAgeGuide(List<GuideBook> ageTemp) {
+        Collections.shuffle(ageTemp);
+        return ageTemp.subList(0, 5);
+    }
+
+    private List<GuideBook> randomWeightGuide(List<GuideBook> weightTemp, List<GuideBook> ageGuideBookList) {
+        Collections.shuffle(weightTemp);
+        List<GuideBook> weightGuideBookList = new ArrayList<>();
+        for (GuideBook guide : weightTemp) {
+            if (!ageGuideBookList.contains(guide))
+                weightGuideBookList.add(guide);
+            if (weightGuideBookList.size() == 5)
+                break;
+        }
+        return weightGuideBookList;
     }
 
     // 카테고리별 가이드 목록 조회
