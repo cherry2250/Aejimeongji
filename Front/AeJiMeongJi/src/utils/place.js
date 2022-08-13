@@ -18,8 +18,6 @@ export const searchPlace = async address => {
       url: path,
     });
 
-    console.log(res.data);
-
     return res.data.addresses[0];
   } catch (error) {
     console.log(error.response);
@@ -69,7 +67,6 @@ export const fetchPlace = async (category, lat2, lng2) => {
       method: 'get',
       url: url + path,
     });
-    console.log(res.data.data, 'fetchPlace');
     return res.data;
   } catch (error) {
     console.log(error);
@@ -101,7 +98,6 @@ export const fetchPlaceDetail = async petplaceId => {
       method: 'get',
       url: url + path,
     });
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error.response);
@@ -116,7 +112,6 @@ export const fetchReviews = async petplaceId => {
       method: 'get',
       url: url + path,
     });
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error.response);
@@ -139,3 +134,23 @@ export const fetchMoreData = async (category, lat2, lng2, curLastIdx) => {
     console.log(error.response);
   }
 };
+
+export const fetchLiked = async (liked, petplaceId) => {
+  const memberId = await getMemberId()
+  const method = !liked ? 'delete' : 'post'
+  const path = `/api/petplace/${petplaceId}/member/${memberId}/bookmark`
+  try {
+    const res = await axios({
+      method,
+      url: url + path,
+      data: {
+        memberId,
+        petplaceId
+      }
+    });
+    console.log(res.data);
+
+  } catch (error) {
+    console.log(error.response);
+  }
+}
