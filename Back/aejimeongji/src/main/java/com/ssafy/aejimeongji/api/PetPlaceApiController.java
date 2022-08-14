@@ -73,4 +73,10 @@ public class PetPlaceApiController {
         petPlaceService.cancelPetPlaceBookMark(memberId, petplaceId);
         return ResponseEntity.ok(new ResponseDTO("북마크를 취소 하였습니다."));
     }
+
+    @GetMapping("/{petplaceId}/member/{memberId}")
+    public ResponseEntity<Boolean> isBookMarked(@PathVariable Long petplaceId, @PathVariable Long memberId) {
+        log.info("{}번 회원의 북마크 리스트에 {}번 펫플레이스 존재 여부 조회", memberId, petplaceId);
+        return ResponseEntity.ok(petPlaceService.checkBookMark(petplaceId, memberId));
+    }
 }
