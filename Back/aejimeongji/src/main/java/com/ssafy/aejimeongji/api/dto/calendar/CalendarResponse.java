@@ -15,6 +15,7 @@ public class CalendarResponse {
     private LocalDate date;
     private Boolean isActive;
     private Boolean isAlert;
+    private Boolean isInjection;
 
     public CalendarResponse(Calendar calendar) {
         id = calendar.getId();
@@ -22,5 +23,6 @@ public class CalendarResponse {
         date = calendar.getDate();
         isActive = calendar.getIsActive();
         isAlert = calendar.getIsAlert();
+        isInjection = calendar.getIsInjection();
     }
 }
