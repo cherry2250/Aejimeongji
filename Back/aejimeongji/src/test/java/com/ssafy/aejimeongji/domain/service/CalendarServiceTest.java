@@ -96,7 +96,7 @@ class CalendarServiceTest {
         Calendar calendar3 = new Calendar(dog1,  "내용3" , LocalDate.of(2022,8, 7), true, false);
         em.persist(calendar3);
 
-        assertEquals(3, calendarRepository.findAll().size());
+        assertEquals(12, calendarRepository.findAll().size());
 
 
         CalendarSearchCondition condition1 = new CalendarSearchCondition();
