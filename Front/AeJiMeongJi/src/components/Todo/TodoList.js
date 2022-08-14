@@ -91,9 +91,11 @@ const TodoList = props => {
     return (
       <View style={styles.todoDetail} key={index}>
         <View style={styles.todoCategory}>
-          <Text style={{fontWeight: 'bold'}}>할일</Text>
+          <Text style={{fontFamily: '강원교육튼튼', paddingTop: 3}}>할일</Text>
         </View>
-        <Text>{todo.content}</Text>
+        <Text style={{fontFamily: 'IBMPlexSansKR-Regular'}}>
+          {todo.content}
+        </Text>
       </View>
     );
   });
@@ -120,6 +122,7 @@ const TodoList = props => {
               color: '#553609',
               marginTop: 10,
               marginBottom: 20,
+              fontFamily: '강원교육튼튼',
             }}>
             {props.selectedDate.substr(0, 4)}년{' '}
             {props.selectedDate.substr(5, 2)}월{' '}
