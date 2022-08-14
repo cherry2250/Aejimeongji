@@ -15,7 +15,6 @@ import com.ssafy.aejimeongji.domain.service.MemberService;
 import com.ssafy.aejimeongji.domain.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +56,7 @@ public class DogApiController {
     @PostMapping
     public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @Valid @ModelAttribute DogSaveRequest request, BindingResult bindingResult) throws IOException {
         log.info("강아지 프로필 등록 요청");
-        valideteRequest(bindingResult);
+        valideteRequest(request.getBirthday(), request.getAdoptionDay(),bindingResult);
         DogImage dogImage = new DogImage(imageUtil.storeImage(request.getImage()));
         Member member = memberService.findMember(memberId);
         Breed breed = breedService.findBreed(request.getBreed());
@@ -67,9 +67,7 @@ public class DogApiController {
     @PutMapping("/{dogId}")
     public ResponseEntity<ResponseDTO> updateDog(@PathVariable("memberId") Long memberId, @PathVariable("dogId") Long dogId, @Valid @RequestBody DogUpdateRequest request, BindingResult bindingResult) {
         log.info("강아지 프로필 {} 수정 요청", dogId);
-
-        valideteRequest(bindingResult);
-
+        valideteRequest(request.getBirthday(), request.getAdoptionDay(),bindingResult);
         Breed breed = breedService.findBreed(request.getBreed().getBreedName());
         Long updatedId = dogService.updateDog(dogId, request.getName(), request.getWeight(), request.getBirthday(), request.getAdoptionDay(), breed);
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 "+ updatedId + " 수정이 완료되었습니다."));
@@ -106,8 +104,11 @@ public class DogApiController {
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 이미지 삭제가 완료되었습니다."));
     }
 
-    private void valideteRequest(BindingResult bindingResult) {
+    private void valideteRequest(LocalDate birthday, LocalDate adoptionDay, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             throw new MethodArgumentNotValidException(bindingResult);
+        if (adoptionDay.isBefore(birthday))
+            bindingResult.reject("adoptionDay", String.format("입양일 %s일이 생일 %s일보다 빠르면 안돼요!", adoptionDay, birthday));
+        throw new MethodArgumentNotValidException(bindingResult);
     }
 }
