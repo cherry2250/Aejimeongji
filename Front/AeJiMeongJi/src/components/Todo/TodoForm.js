@@ -60,6 +60,7 @@ const TodoForm = props => {
       <Input
         textInputConfig={{
           placeholder: '할 일을 입력하세요',
+          fontFamily: 'IBMPlexSansKR-Regular',
           autoCapitalize: 'none',
           autoFocus: true,
           onChangeText: inputChangeHandler.bind(this),
@@ -109,11 +110,7 @@ export default TodoForm;
 
 const styles = StyleSheet.create({
   font: {
-    fontFamily: 'ONE Mobile POP',
-  },
-  contentFont: {
-    fontFamily: 'ONE Mobile Regular',
-    fontWeight: 'bold',
+    fontFamily: '강원교육튼튼',
   },
 
   mainText: {
@@ -151,7 +148,7 @@ const styles = StyleSheet.create({
   btnContainer3: {
     flex: 1,
     width: '70%',
-    marginTop: 40,
+    marginTop: -100,
     alignSelf: 'center',
   },
 });

@@ -72,14 +72,11 @@ export default Profile;
 const styles = StyleSheet.create({
   //글꼴
   font: {
-    fontFamily: 'ONE Mobile POP',
+    fontFamily: 'Cafe24Ssurround',
     letterSpacing: 4,
     color: Colors.contentText,
   },
-  contentFont: {
-    fontFamily: 'ONE Mobile Regular',
-    fontWeight: 'bold',
-  },
+
   //글자 크기
   font10: {fontSize: 10},
   font12: {fontSize: 12},
@@ -130,7 +127,7 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   dday: {
-    fontSize: 31,
+    fontSize: 25,
     lineHeight: 40,
     letterSpacing: 4,
     color: Colors.btnBack100,

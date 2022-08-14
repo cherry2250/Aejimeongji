@@ -10,7 +10,9 @@ const ToddUpload = props => {
       <View style={styles.titleContainer}>
         {/* 선택하는 날짜로 띄우기 */}
         <Text style={styles.title}>
-          {props.route.params.date ? props.route.params.date : ' '}
+          {props.route.params.date.substr(0, 4)}년{' '}
+          {props.route.params.date.substr(5, 2)}월{' '}
+          {props.route.params.date.substr(8, 2)}일
         </Text>
       </View>
       <View style={styles.inputContainer}>
@@ -23,11 +25,7 @@ export default ToddUpload;
 
 const styles = StyleSheet.create({
   font: {
-    fontFamily: 'ONE Mobile POP',
-  },
-  contentFont: {
-    fontFamily: 'ONE Mobile Regular',
-    fontWeight: 'bold',
+    fontFamily: '강원교육튼튼',
   },
 
   mainText: {
@@ -62,9 +60,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    color: Colors.btnBack100,
-    fontWeight: 'bold',
-    fontSize: 36,
+    fontSize: 30,
+    color: '#553609',
+    marginTop: 10,
+    marginBottom: 20,
+    fontFamily: '강원교육튼튼',
   },
   inputContainer: {
     flex: 3,

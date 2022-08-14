@@ -81,10 +81,7 @@ const styles = StyleSheet.create({
     letterSpacing: 4,
     color: Colors.contentText,
   },
-  contentFont: {
-    fontFamily: 'ONE Mobile Regular',
-    fontWeight: 'bold',
-  },
+
   //글자 크기
   font10: {fontSize: 10},
   font12: {fontSize: 12},
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   runTitle: {
-    width: '80%',
+    width: '90%',
     height: 40,
     marginTop: 10,
     marginBottom: 10,
