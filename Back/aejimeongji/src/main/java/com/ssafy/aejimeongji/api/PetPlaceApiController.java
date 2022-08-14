@@ -61,16 +61,14 @@ public class PetPlaceApiController {
     }
 
     @PostMapping("/{petplaceId}/member/{memberId}/bookmark")
-    public ResponseEntity<?> bookMark(@PathVariable Long petplaceId,
-                                      @PathVariable Long memberId) {
+    public ResponseEntity<?> bookMark(@PathVariable Long petplaceId, @PathVariable Long memberId) {
         log.info("{}번 회원이 {}번 펫플레이스 북마크", memberId, petplaceId);
         petPlaceService.petPlaceBookMark(memberId, petplaceId);
         return ResponseEntity.ok(new ResponseDTO("펫플레이스를 북마크 하였습니다."));
     }
 
     @DeleteMapping("/{petplaceId}/member/{memberId}/bookmark")
-    public ResponseEntity<?> cancelBookMark(@PathVariable Long petplaceId,
-                                            @PathVariable Long memberId) {
+    public ResponseEntity<?> cancelBookMark(@PathVariable Long petplaceId, @PathVariable Long memberId) {
         log.info("{}번 회원이 {}번 펫플레이스 북마크 해제", memberId, petplaceId);
         petPlaceService.cancelPetPlaceBookMark(memberId, petplaceId);
         return ResponseEntity.ok(new ResponseDTO("북마크를 취소 하였습니다."));

@@ -8,6 +8,7 @@ import com.ssafy.aejimeongji.domain.entity.Breed;
 import com.ssafy.aejimeongji.domain.entity.Dog;
 import com.ssafy.aejimeongji.domain.entity.image.DogImage;
 import com.ssafy.aejimeongji.domain.entity.Member;
+import com.ssafy.aejimeongji.domain.exception.MethodArgumentNotValidException;
 import com.ssafy.aejimeongji.domain.service.BreedService;
 import com.ssafy.aejimeongji.domain.service.DogService;
 import com.ssafy.aejimeongji.domain.service.MemberService;
@@ -16,9 +17,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,9 +53,10 @@ public class DogApiController {
         return ResponseEntity.ok().body(new DogProfileResponse(dog));
     }
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @ModelAttribute DogSaveRequest request) throws IOException {
+    @PostMapping
+    public ResponseEntity<ResponseDTO> saveDog(@PathVariable("memberId") Long memberId, @Valid @ModelAttribute DogSaveRequest request, BindingResult bindingResult) throws IOException {
         log.info("강아지 프로필 등록 요청");
+        valideteRequest(bindingResult);
         DogImage dogImage = new DogImage(imageUtil.storeImage(request.getImage()));
         Member member = memberService.findMember(memberId);
         Breed breed = breedService.findBreed(request.getBreed());
@@ -61,8 +65,11 @@ public class DogApiController {
     }
 
     @PutMapping("/{dogId}")
-    public ResponseEntity<ResponseDTO> updateDog(@PathVariable("memberId") Long memberId, @PathVariable("dogId") Long dogId, @RequestBody DogUpdateRequest request) {
+    public ResponseEntity<ResponseDTO> updateDog(@PathVariable("memberId") Long memberId, @PathVariable("dogId") Long dogId, @Valid @RequestBody DogUpdateRequest request, BindingResult bindingResult) {
         log.info("강아지 프로필 {} 수정 요청", dogId);
+
+        valideteRequest(bindingResult);
+
         Breed breed = breedService.findBreed(request.getBreed().getBreedName());
         Long updatedId = dogService.updateDog(dogId, request.getName(), request.getWeight(), request.getBirthday(), request.getAdoptionDay(), breed);
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 "+ updatedId + " 수정이 완료되었습니다."));
@@ -97,5 +104,10 @@ public class DogApiController {
         String storeFilename = dogService.deleteProfileImage(dogId);
         imageUtil.deleteStoreImage(storeFilename);
         return ResponseEntity.ok(new ResponseDTO("강아지 프로필 이미지 삭제가 완료되었습니다."));
+    }
+
+    private void valideteRequest(BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            throw new MethodArgumentNotValidException(bindingResult);
     }
 }
