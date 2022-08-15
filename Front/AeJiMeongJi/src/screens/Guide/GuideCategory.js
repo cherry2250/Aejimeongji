@@ -62,7 +62,7 @@ const GuideCategory = props => {
       <View style={styles.GuideImg}>
         <Image
           style={{width: '100%', height: '100%', borderRadius: 10}}
-          source={{uri: `${imageurl}${thumbnail}`}}
+          source={thumbnail}
           resizeMode="cover"
         />
       </View>
@@ -73,7 +73,7 @@ const GuideCategory = props => {
     <Item
       title={item.title}
       guideId={item.guideId}
-      source={
+      thumbnail={
         item.thumbnail ? {uri: `${imageurl}${item.thumbnail}`} : item.sources
       }
     />

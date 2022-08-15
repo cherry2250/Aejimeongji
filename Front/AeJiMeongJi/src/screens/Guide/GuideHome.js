@@ -10,6 +10,7 @@ import {SafeAreaView, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import {getMemberId} from '../../utils/auth';
 import CarouselCards from '../../components/Guide/CarouselCards';
+import GuideNavbar from '../../components/nav/GuideNavbar';
 import SubCard from '../../components/Guide/SubCard';
 import Button from '../../components/ui/Button';
 import GuideButton from '../../components/ui/GuideButton';
@@ -21,6 +22,7 @@ const url = 'http://i7d203.p.ssafy.io:8080';
 
 const GuideHome = ({navigation}) => {
   const [dogInfo, setDogInfo] = useState();
+  const [source, setSource] = useState();
   const [id, setId] = useState();
   const [guideList, setguideList] = useState([]);
 
@@ -31,6 +33,7 @@ const GuideHome = ({navigation}) => {
       const res = await getDog(dogId);
       if (res) {
         setDogInfo(res.name);
+        setSource(`http://i7d203.p.ssafy.io:8080/api/image/${res.imageName}`);
         // console.log(res.name);
       }
     };
@@ -50,6 +53,7 @@ const GuideHome = ({navigation}) => {
 
   return (
     <ScrollView>
+      <GuideNavbar source={source} />
       <View style={styles.container}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <GuideButton
