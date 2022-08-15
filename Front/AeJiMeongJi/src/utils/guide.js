@@ -44,3 +44,16 @@ export const isGuideLiked = async (memberId, guideId) => {
     console.log(error.response);
   }
 };
+
+export const fetchMoreGuide = async (category, curLastIdx, limit) => {
+  const path = `/api/guide?category=${category}&curLastIdx=${curLastIdx}&limit=${limit}`;
+
+  try {
+    const res = await axios({
+      method: 'get',
+      url: url + path,
+    });
+
+    return res;
+  } catch (error) {}
+};
