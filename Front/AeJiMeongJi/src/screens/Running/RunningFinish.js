@@ -44,7 +44,7 @@ const RunningFinish = ({navigation}) => {
         <View style={styles.image}>
           <Image
             style={{width: '100%', height: '100%'}}
-            source={require('../../Assets/image/dog_running.png')}
+            source={require('../../Assets/image/runfinish.gif')}
             resizeMode="cover"
           />
         </View>
@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    marginBottom: responsiveHeight(5),
-    height: responsiveHeight(18),
-    width: responsiveWidth(34),
+    marginBottom: responsiveHeight(2),
+    height: responsiveHeight(24),
+    width: responsiveWidth(36),
     justifyContent: 'center',
     alignItems: 'center',
   },

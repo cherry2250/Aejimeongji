@@ -32,7 +32,7 @@ const SubCard = props => {
           <View style={styels.GuideImg}>
             <Image
               style={{width: '100%', height: '100%', borderRadius: 15}}
-              source={{uri: `${imageurl}${thumbnail}`}}
+              source={thumbnail}
               resizeMode="center"
             />
           </View>
@@ -67,7 +67,7 @@ const SubCard = props => {
     <Item
       title={item.title}
       guideId={item.guideId}
-      source={
+      thumbnail={
         item.thumbnail ? {uri: `${imageurl}${item.thumbnail}`} : item.sources
       }
     />
