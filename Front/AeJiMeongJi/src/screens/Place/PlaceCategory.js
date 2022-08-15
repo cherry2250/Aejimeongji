@@ -12,6 +12,7 @@ import {Colors} from '../../constants/styles';
 import {fetchCategoryPlace, fetchMoreData} from '../../utils/place';
 
 const PlaceCategory = ({route}) => {
+  console.log(route.params.lat);
   const [data, setData] = useState();
   const [hasNext, setHasNext] = useState(route.params.loadMoreData.hasNext);
   const [curLastIdx, setCurLastIdx] = useState(
@@ -21,37 +22,45 @@ const PlaceCategory = ({route}) => {
   const loadMore = async () => {
     console.log('loadmore');
     if (loading) {
-      return
+      return;
     }
 
     if (hasNext) {
-      setLoading(true)
-      const res = await fetchMoreData(route.params.category, route.params.lat, route.params.lng, curLastIdx);
+      setLoading(true);
+      const res = await fetchMoreData(
+        route.params.category,
+        route.params.lat,
+        route.params.lng,
+        curLastIdx,
+      );
       const newData = res.data;
       setData([...data, ...newData]);
-      setHasNext(res.hasNext)
-      setCurLastIdx(res.curLastIdx)
-      setLoading(false)
+      setHasNext(res.hasNext);
+      setCurLastIdx(res.curLastIdx);
+      setLoading(false);
     }
   };
 
   const renderLoader = () => {
     return (
       <View style={styles.loaderStyle}>
-        <ActivityIndicator size='large' color='#aaa' />
+        <ActivityIndicator size="large" color="#aaa" />
       </View>
-    )
-  }
-
+    );
+  };
 
   useLayoutEffect(() => {
     const initialData = async () => {
-      const res = await fetchCategoryPlace(route.params.category);
-      setData(res.data)
-      setHasNext(res.hasNext)
-      setCurLastIdx(res.curLastIdx)
+      const res = await fetchCategoryPlace(
+        route.params.category,
+        route.params.lat,
+        route.params.lng,
+      );
+      setData(res.data);
+      setHasNext(res.hasNext);
+      setCurLastIdx(res.curLastIdx);
     };
-    initialData()
+    initialData();
   }, []);
 
   const renderItem = ({item}) => (
@@ -96,6 +105,6 @@ const styles = StyleSheet.create({
   },
   loaderStyle: {
     marginVertical: responsiveHeight(4),
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
