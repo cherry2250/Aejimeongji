@@ -16,7 +16,7 @@ const ProfileImage = ({visible, image, setImage}) => {
     maxWidth: 230,
     maxHeight: 172,
     includeBase64: Platform.OS === 'android',
-    saveToPhotos: true,
+    // saveToPhotos: true,
   };
 
   const [preview, setPreview] = useState(null);
