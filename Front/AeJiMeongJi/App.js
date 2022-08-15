@@ -28,7 +28,7 @@ const AuthenticatedStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Initial" component={BottomTabNavigator} />
-      {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
+      <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="RunningHome" component={RunningHome} />
       <Stack.Screen name="RunningInfo" component={RunningInfo} />
       <Stack.Screen name="RunningProfile" component={RunningProfile} />
@@ -120,6 +120,7 @@ import PlaceHome from './src/screens/Place/PlaceHome';
 import PlaceCategory from './src/screens/Place/PlaceCategory';
 import PlaceDetail from './src/screens/Place/PlaceDetail';
 import MyPage from './src/screens/Profile/MyPage';
+import WelcomeScreen from './src/screens/Auth/WelcomScreen';
 export default function App() {
   return (
     <Provider store={store}>
