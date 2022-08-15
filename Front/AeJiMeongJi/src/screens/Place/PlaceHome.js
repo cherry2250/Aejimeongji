@@ -59,7 +59,7 @@ const PlaceHome = () => {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <PlaceNavbar source={source}>플레이스</PlaceNavbar>
+      <PlaceNavbar source={source} logo={require('../../Assets/image/placelogo.png')}></PlaceNavbar>
       <ScrollView>
         <View>
           <DogInfo source={source} dogInfo={dogInfo} />

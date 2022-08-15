@@ -16,7 +16,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {Colors} from '../../constants/styles';
 
-const PlaceNavbar = ({source, children}) => {
+const PlaceNavbar = ({source, children, logo}) => {
   const navigation = useNavigation();
 
   return (
@@ -32,7 +32,10 @@ const PlaceNavbar = ({source, children}) => {
         />
       </Pressable>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{children}</Text>
+        {logo && (
+          <Image source={logo} resizeMode="contain" style={styles.logo} />
+        )}
+        {children && <Text style={styles.text}>{children}</Text>}
       </View>
       <Pressable
         onPress={() => {
@@ -54,15 +57,6 @@ export default PlaceNavbar;
 
 const styles = StyleSheet.create({
   //글꼴
-  font: {
-    fontFamily: 'ONE Mobile POP',
-    letterSpacing: 4,
-    color: Colors.contentText,
-  },
-  contentFont: {
-    fontFamily: 'ONE Mobile Regular',
-    fontWeight: 'bold',
-  },
   nav: {
     height: responsiveHeight(7),
     alignItems: 'center',
@@ -84,7 +78,7 @@ const styles = StyleSheet.create({
     marginLeft: responsiveWidth(4),
   },
   logo: {
-    marginTop: 5,
+    height: responsiveHeight(3),
   },
   calendarLogo: {
     width: responsiveWidth(8),
