@@ -224,7 +224,7 @@ class CalendarServiceTest {
         //given
         Member member = new Member("ssafy@naver.com", "닉네임");
         DogImage dogImage = new DogImage("filename1", "storeFilename");
-        Breed breed = new Breed("푸들");
+        Breed breed = new Breed("test12465");
         em.persist(member);
         em.persist(dogImage);
         em.persist(breed);
