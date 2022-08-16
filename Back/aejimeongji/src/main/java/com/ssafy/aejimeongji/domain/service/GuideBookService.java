@@ -54,16 +54,18 @@ public class GuideBookService {
 
     private List<GuideBook> randomFixedGuide(List<GuideBook> fixedTemp) {
         Collections.shuffle(fixedTemp);
-        return fixedTemp.subList(0, 5);
+        return fixedTemp.size() >= 5 ? fixedTemp.subList(0, 5) : fixedTemp;
     }
 
     private List<GuideBook> randomAgeGuide(List<GuideBook> ageTemp) {
         Collections.shuffle(ageTemp);
-        return ageTemp.subList(0, 5);
+        return ageTemp.size() >= 5 ? ageTemp.subList(0, 5) : ageTemp;
     }
 
     private List<GuideBook> randomWeightGuide(List<GuideBook> weightTemp, List<GuideBook> ageGuideBookList) {
         Collections.shuffle(weightTemp);
+        if (weightTemp.size() < 5)
+            return weightTemp;
         List<GuideBook> weightGuideBookList = new ArrayList<>();
         for (GuideBook guide : weightTemp) {
             if (!ageGuideBookList.contains(guide))
