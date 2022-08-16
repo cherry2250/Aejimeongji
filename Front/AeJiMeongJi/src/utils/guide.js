@@ -57,3 +57,51 @@ export const fetchMoreGuide = async (category, curLastIdx, limit) => {
     return res;
   } catch (error) {}
 };
+
+export const fetchRunningData = async (walkingDistance, walkingTime) => {
+  console.log(walkingDistance, walkingTime, '값');
+  const path = '/api/walking';
+  const walkingDate = new Date();
+  try {
+    const res = await axios({
+      method: 'post',
+      url: url + path,
+      data: {
+        walkingDate,
+        walkingDistance,
+        walkingTime,
+      },
+    });
+    console.log(res.data, '이거?');
+    return res.data;
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const fetchCalData = async (calories, dogId, walkingId) => {
+  const path = '/api/walkingdog';
+  console.log(dogId);
+  console.log(calories, dogId, walkingId);
+  try {
+    const res = await axios({
+      method: 'post',
+      url: url + path,
+      data: {
+        calories,
+        dogId,
+        walkingId,
+      },
+    });
+    console.log(res);
+    return res.data
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+// {
+//   "calories": 0,
+//   "dogId": 0,
+//   "walkingId": 0
+// }

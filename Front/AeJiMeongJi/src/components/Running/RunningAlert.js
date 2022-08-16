@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useRef, useState} from 'react';
 import {Stopwatch, Timer} from 'react-native-stopwatch-timer';
 
 import {
@@ -16,26 +16,48 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import RunButton from '../../components/ui/RunButton';
+import StopWatch from 'react-native-stopwatch-timer/lib/stopwatch';
+import {useDispatch} from 'react-redux';
+import {runningActions} from '../../store/running';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RunningAlert = props => {
   console.log(`running alert에서 찍는`, props);
-
+  const timeRef = useRef(0);
   const [start, setStart] = useState(true);
   const [reset, setReset] = useState(false);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
-
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const options = {
+    container: {
+      padding: responsiveWidth(2),
+      borderRadius: 5,
+      width: responsiveWidth(50),
+      alignItems: 'center',
+    },
+    text: {
+      fontSize: responsiveFontSize(3.4),
+      fontFamily: '강원교육튼튼',
+      color: '#000000',
+      marginLeft: responsiveWidth(2),
+    },
+  };
 
-  const timeKeeper = time => {
+  const timeKeeper = async time => {
     if (loading) {
-      console.log(time);
+      const myTime = time;
+      await AsyncStorage.setItem('time', myTime);
+      return myTime;
     }
   };
 
-  const createThreeButtonAlert = () => {
+  const createThreeButtonAlert = async () => {
     setLoading(true);
-    timeKeeper();
+    await timeKeeper();
+    const savedTime = await AsyncStorage.getItem('time');
+    setLoading(false);
 
     Alert.alert(
       '산책을 종료하시겠어요?',
@@ -50,18 +72,27 @@ const RunningAlert = props => {
           text: '완료',
           onPress: async () => {
             // 포스트요청 거리랑, 시간을 보냄
-            navigation.replace('RunningFinish', {distance: props.data, data});
+            navigation.replace('RunningFinish', {
+              distance: props.data,
+              time: savedTime,
+            });
           },
         },
       ],
     );
   };
+
   return (
     <View>
-      <View>
-        <Stopwatch laps secs start={start} reset={reset} getTime={timeKeeper} />
+      <View style={styles.container}>
+        <StopWatch
+          laps
+          secs
+          start={start}
+          getTime={timeKeeper}
+          options={options}
+        />
       </View>
-
       <RunButton title={'3-Button Alert'} onPress={createThreeButtonAlert}>
         산책종료
       </RunButton>
@@ -69,4 +100,9 @@ const RunningAlert = props => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+});
 export default RunningAlert;

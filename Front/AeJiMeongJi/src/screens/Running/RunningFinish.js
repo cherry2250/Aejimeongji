@@ -8,9 +8,36 @@ import {
 import RunButton from '../../components/ui/RunButton';
 import RunButton2 from '../../components/ui/RunButton2';
 import {Colors} from '../../constants/styles';
-
+import {fetchRunningData, fetchCalData} from '../../utils/guide.js';
+import {useSelector} from 'react-redux';
 const RunningFinish = ({navigation, route}) => {
-  console.log(route, '제발');
+  // const dogIds = useSelector(state => state.profile.ids);
+  const dogIds = [1, 7, 8, 9];
+
+  const fetchData = async identifier => {
+    const walkingDistance = parseFloat(route.params.distance).toFixed(2);
+    const walkingTime =
+      +route.params.time.slice(0, 2) / 60 +
+      +route.params.time.slice(3, 5) +
+      Math.round(+route.params.time.slice(6, 8) / 60);
+    const calorie = parseFloat((route.params.distance / 0.1) * 7).toFixed(2);
+    console.log(dogIds, 'dogIds');
+
+    const res = await fetchRunningData(walkingDistance, walkingTime);
+    if (res.walkingId) {
+      const parallel = await Promise.all(
+        dogIds.map(dogId => fetchCalData(calorie, dogId, res.walkingId)),
+      );
+      if (parallel) {
+        if (identifier === 'home') {
+          navigation.replace('Home');
+        } else {
+          navigation.replace('RunningInfo');
+        }
+      }
+    }
+  };
+
   return (
     <View style={styles.Container}>
       <Text
@@ -33,13 +60,18 @@ const RunningFinish = ({navigation, route}) => {
         </Text>
         <View style={styles.RunningContent}>
           <View style={styles.ContentItem}>
-            <Text style={styles.itemFont}>581m</Text>
+            <Text style={styles.itemFont}>
+              {parseFloat(route.params.distance * 1000).toFixed(2)} m
+            </Text>
           </View>
           <View style={styles.ContentItem}>
-            <Text style={styles.itemFont}>00:23:36</Text>
+            <Text style={styles.itemFont}>{route.params.time}</Text>
           </View>
           <View style={styles.ContentItem}>
-            <Text style={styles.itemFont}>281kcal</Text>
+            <Text style={styles.itemFont}>
+              {' '}
+              {parseFloat((route.params.distance / 0.1) * 7).toFixed(2)}kcal
+            </Text>
           </View>
         </View>
         <View style={styles.image}>
@@ -53,9 +85,10 @@ const RunningFinish = ({navigation, route}) => {
       <View style={styles.runButton}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <RunButton
-            onPress={() => {
-              navigation.navigate('Home');
-            }}
+            onPress={fetchData.bind(this, 'home')}
+            //   () => {
+            //   navigation.navigate('Home');
+            // }}
             styel={styles.runLoginButton}>
             산책 완료
           </RunButton>

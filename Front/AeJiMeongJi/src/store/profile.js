@@ -13,16 +13,18 @@ export const profileSlice = createSlice({
   reducers: {
     // 현재 선택된 강아지 id 저장
     saveDogid(state, action) {
-        state.id = action.payload.id
-        console.log(action.payload.id);
+      state.id = action.payload.id;
+      console.log(action.payload.id);
     },
     // 강아지 모든 목록
     saveDogIds(state, action) {
-        state.ids = action.payload.ids
+      console.log('진입');
+      state.ids = action.payload.ids;
+      console.log(action.payload.ids);
     },
     setDogInfo(state, action) {
-      state.dog = action.payload.dog
-    }
+      state.dog = action.payload.dog;
+    },
   },
 });
 
