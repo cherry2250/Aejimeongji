@@ -12,14 +12,14 @@ const RunningDataItem = ({item, index}) => {
   return (
     <View style={styles.container} key={index}>
       <Image source={{uri: item.imgUrl}} style={styles.image} />
-      <Text style={styles.header}>{item.title}</Text>
+      <Text style={styles.header}>{item.title}시간</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.back200,
+    backgroundColor: Colors.back100,
     borderRadius: 8,
     paddingBottom: 12,
     shadowColor: '#000',

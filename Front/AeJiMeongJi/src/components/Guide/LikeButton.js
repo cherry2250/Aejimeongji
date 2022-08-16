@@ -25,7 +25,7 @@ import axios from '../../utils/index';
 import {isGuideLiked} from '../../utils/guide';
 
 const url = 'http://i7d203.p.ssafy.io:8080';
-console.log(new Date());
+
 export default function GuideLike(props) {
   const LikeButton = () => {
     const [memberId, setmemberId] = useState([]);
@@ -46,7 +46,7 @@ export default function GuideLike(props) {
       member();
     }, []);
     const guideId = props.data;
-    console.log(guideId, memberId);
+
     const liked = useSharedValue(0);
 
     const submitLike = async () => {
@@ -63,11 +63,9 @@ export default function GuideLike(props) {
           method: method,
           url: url + `/api/member/${memberId}/guide/${guideId}/like`,
         });
-        console.log(res);
+
         return res.data;
-      } catch (error) {
-        console.log(error.response, 'issue');
-      }
+      } catch (error) {}
     };
 
     const deleteLike = async () => {
@@ -76,11 +74,9 @@ export default function GuideLike(props) {
           method: 'delete',
           url: url + `/api/member/${memberId}/guide/${guideId}/like`,
         });
-        console.log(res);
+
         return res.data;
-      } catch (error) {
-        console.log(error.response, 'issue');
-      }
+      } catch (error) {}
     };
     const outlineStyle = useAnimatedStyle(() => {
       return {

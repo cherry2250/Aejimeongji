@@ -23,7 +23,7 @@ const GuideNavbar = ({source, children}) => {
     <View style={styles.nav}>
       <Pressable
         onPress={() => {
-          navigation.navigate('Home');
+          navigation.navigate('ProfileChoice');
         }}>
         <Image
           style={styles.profilelogo}
@@ -33,7 +33,7 @@ const GuideNavbar = ({source, children}) => {
       </Pressable>
       <Pressable
         onPress={() => {
-          navigation.navigate('Home');
+          navigation.navigate('GuideHome');
         }}>
         <Image
           style={styles.logo}
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    backgroundColor: Colors.back100,
   },
   // imageContainer: {
   //   height: responsiveHeight(20),
