@@ -132,3 +132,22 @@ export const refresh = async refreshToken => {
     console.log(error.response, 'issue');
   }
 };
+
+export const logout = async () => {
+  const path = '/api/auth/logout';
+  const refreshToken = await AsyncStorage.getItem('refresh');
+  console.log(refreshToken);
+  try {
+    const res = await axios({
+      method: 'post',
+      url: url + path,
+      data: {
+        refreshToken,
+      },
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error.response);
+  }
+};

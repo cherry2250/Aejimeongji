@@ -8,15 +8,16 @@ import {Colors} from '../../constants/styles';
 import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
-import {removeMember} from '../../utils/auth';
+import {logout, removeMember} from '../../utils/auth';
 import {authActions} from '../../store/auth';
 import ProfileModal from '../../components/Profile/ProfileModal';
 import CustomNav from '../../components/nav/CustomNav';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import {responsiveHeight} from 'react-native-responsive-dimensions';
 
 const MyInfoScreen = () => {
   const dogId = useSelector(state => state.id);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     email: '',
@@ -25,7 +26,6 @@ const MyInfoScreen = () => {
     password: '',
   });
   const [visible, setVisible] = useState(false);
-  const navigation = useNavigation();
   useLayoutEffect(() => {
     const initialValue = async () => {
       const res = await getProfile();
@@ -84,6 +84,14 @@ const MyInfoScreen = () => {
     ]);
   };
 
+  const logoutHandler = async () => {
+    const res = await logout();
+    if (res) {
+      dispatch(authActions.logout());
+      navigation.navigate('Welcome');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ProfileModal
@@ -132,6 +140,12 @@ const MyInfoScreen = () => {
       </View>
       <View style={styles.btnContainer}>
         <Btn
+          title="로그아웃"
+          buttonStyle={{backgroundColor: Colors.back100}}
+          titleStyle={styles.btnLogout}
+          onPress={logoutHandler}
+        />
+        <Btn
           title="회원탈퇴"
           buttonStyle={{backgroundColor: Colors.back100}}
           titleStyle={styles.btn}
@@ -156,13 +170,18 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(5),
   },
   btnContainer: {
-    marginTop: responsiveHeight(2)
+    marginTop: responsiveHeight(2),
+    flexDirection: 'row',
   },
   btn: {
-    color: '#90560D',
+    color: '#f36507',
     fontFamily: 'IBMPlexSansKR-Regular',
   },
   button: {
     paddingHorizontal: 20,
+  },
+  btnLogout: {
+    color: '#90560D',
+    fontFamily: 'IBMPlexSansKR-Regular',
   },
 });
