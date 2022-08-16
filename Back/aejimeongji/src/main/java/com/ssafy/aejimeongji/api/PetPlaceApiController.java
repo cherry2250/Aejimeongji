@@ -81,8 +81,12 @@ public class PetPlaceApiController {
     }
 
     @GetMapping("/pop")
-    public ResponseEntity<List<PetPlace>> getPopPlace() {
+    public ResponseEntity<List<PetPlaceResponse>> getPopPlace() {
         log.info("북마크가 5개 이상인 펫플레이스 목록 중 3개");
-        return ResponseEntity.ok(petPlaceService.findPopPetPlaceList());
+        List<PetPlace> list = petPlaceService.findPopPetPlaceList();
+        List<PetPlaceResponse> result = list.stream()
+                .map(p -> new PetPlaceResponse(p))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(result);
     }
 }
