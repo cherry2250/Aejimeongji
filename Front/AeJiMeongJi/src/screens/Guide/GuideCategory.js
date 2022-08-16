@@ -32,9 +32,8 @@ const GuideCategory = props => {
   const [hasNext, setHasNext] = useState(true);
   const [curLastIdx, setCurLastIdx] = useState();
   const [loading, setLoading] = useState(false);
-  const limit = 5;
+  const limit = 55;
   const loadMore = async () => {
-    console.log('loadmore');
     if (loading) {
       return;
     }
@@ -62,13 +61,11 @@ const GuideCategory = props => {
   const card = props.route.params;
 
   useLayoutEffect(() => {
-    console.log('진입');
     const fetchCategory = async () => {
       const res = await axios(
         url + `/api/guide?category=${props.route.params}&limit=25`,
       );
       if (res) {
-        console.log(res.data, '데이터');
         setCategoryList(res.data.data);
         setHasNext(res.data.hasNext);
         setCurLastIdx(res.data.curLastIdx);
@@ -86,6 +83,7 @@ const GuideCategory = props => {
       <View style={styles.infoBox}>
         <Text
           style={{
+            width: responsiveWidth(60),
             fontFamily: '강원교육튼튼',
             fontSize: responsiveFontSize(2.6),
           }}>
@@ -112,7 +110,7 @@ const GuideCategory = props => {
     />
   );
   return (
-    <View>
+    <ScrollView>
       <View style={styles.rootContainer}>
         <View style={styles.GuideTitle}>
           <Text
@@ -136,7 +134,7 @@ const GuideCategory = props => {
             keyExtractor={item => item.id}></FlatList>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

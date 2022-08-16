@@ -18,7 +18,6 @@ const url = 'http://i7d203.p.ssafy.io:8080/api/guide/';
 const imageurl = 'http://i7d203.p.ssafy.io:8080/api/image/';
 
 const GuideDetail = props => {
-  console.log(props.route.params.guideId);
   const [GuideDetail, setGuideDetail] = useState([]);
   const guidenum = props.route.params.guideId;
   useLayoutEffect(() => {
@@ -30,7 +29,7 @@ const GuideDetail = props => {
     };
     fetchGuideDetail();
   }, []);
-  console.log(GuideDetail);
+
   return (
     <View style={{flex: 1}}>
       <ScrollView>
@@ -77,7 +76,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.back100,
     padding: responsiveWidth(6),
-    height: 2200,
   },
   footer: {
     backgroundColor: Colors.back200,
