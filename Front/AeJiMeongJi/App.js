@@ -39,7 +39,7 @@ const AuthenticatedStack = () => {
       />
       <Stack.Screen
         name="RunningGeolocation"
-        component={RunningGeolocation2}
+        component={RunningGeolocation}
         options={{unmountOnBlur: true}}
       />
       <Stack.Screen name="Home" component={MainHome} />

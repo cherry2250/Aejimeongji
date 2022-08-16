@@ -9,6 +9,7 @@ import {
   AppRegistry,
   TouchableHighlight,
   Alert,
+  Pressable,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -64,6 +65,7 @@ class RunningGeolocation extends React.Component {
     };
   }
   componentDidMount() {
+
     const {coordinate} = this.state;
     if (this.props.coordinate) return;
 
@@ -79,7 +81,7 @@ class RunningGeolocation extends React.Component {
 
     this.watchID = Geolocation.watchPosition(
       position => {
-        const {routeCoordinates, distanceTravelled} = this.state;
+        const {routeCoordinates, distanceTravelled, currentTime} = this.state;
         const {latitude, longitude} = position.coords;
 
         const newCoordinate = {
@@ -96,6 +98,7 @@ class RunningGeolocation extends React.Component {
           distanceTravelled:
             distanceTravelled + this.calcDistance(newCoordinate),
           prevLatLng: newCoordinate,
+          currentTime: currentTime + 1,
         });
       },
       error => console.log(error),
@@ -104,6 +107,7 @@ class RunningGeolocation extends React.Component {
         timeout: 20000,
         maximumAge: 1000,
         distanceFilter: 10,
+        interval: 10,
       },
     );
   }
@@ -113,9 +117,7 @@ class RunningGeolocation extends React.Component {
     console.log(this.state.currentTime);
     console.log('산책 끝!dd');
   };
-  getFormattedTime(time) {
-    this.currentTime = time;
-  }
+
   //지도 위에 현재 위치
   getMapRegion = () => ({
     latitude: this.state.latitude,
@@ -129,7 +131,11 @@ class RunningGeolocation extends React.Component {
     const {prevLatLng} = this.state;
     return haversine(prevLatLng, newLatLng) || 0;
   };
-
+  getFormattedTime(time) {
+    if (!this.state.start) {
+      console.log(time);
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -153,12 +159,6 @@ class RunningGeolocation extends React.Component {
         <View style={styles.info}>
           <View style={styles.timeContainer}>
             <View style={styles.timeSectionStyle}>
-              <Stopwatch
-                laps
-                secs
-                start={this.state.start}
-                options={options}
-                reset={resetStopwatch}></Stopwatch>
             </View>
           </View>
           <View style={styles.subContainer}>
@@ -200,7 +200,9 @@ class RunningGeolocation extends React.Component {
             </View>
           </View>
           {/* tiem /// 마지막 time 잡아서 */}
-          <RunningAlert data={this.state.distanceTravelled}></RunningAlert>
+          <Pressable onPress={() => this.setState({start: !this.state.start})}>
+            <RunningAlert data={this.state.distanceTravelled}></RunningAlert>
+          </Pressable>
           {/* <TouchableHighlight
             onPress={() => this.setState({start: !this.state.start})}>
             <Text style={styles.buttonText}>
@@ -214,7 +216,10 @@ class RunningGeolocation extends React.Component {
               data={this.state.distanceTravelled}
               onPress={() => {
                 this.setState({start: !this.state.start});
-                this.props.navigation.navigate(RunningAlert);
+                this.props.navigation.replace(
+                  RunningFinish,
+                  this.state.distanceTravelled,
+                );
               }}>
               산책종료
             </RunButton>
