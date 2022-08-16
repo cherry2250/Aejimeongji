@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 import Button from '../ui/Button';
 import Input from './Input';
 import {Colors} from '../../constants/styles';
@@ -25,14 +30,6 @@ const TodoForm = props => {
   };
 
   const submitHandler = () => {
-    // if (content == '') {
-    //   Alert.alert('내용을 입력해주세요');
-    //   return;
-    // }
-
-    console.log('content');
-    console.log(content);
-
     let data = {
       content: content,
       date: props.date,
@@ -73,7 +70,12 @@ const TodoForm = props => {
 
       <View style={styles.btnContainer}>
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 2, marginTop: 13, marginLeft: 10}}>
+          <View
+            style={{
+              flex: 2,
+              marginTop: responsiveHeight(2),
+              marginLeft: responsiveWidth(3),
+            }}>
             <Text style={[styles.font, styles.mainText]}>홈 화면에서 보기</Text>
           </View>
           <View style={{flex: 1}}>
@@ -84,7 +86,12 @@ const TodoForm = props => {
           </View>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <View style={{flex: 2, marginTop: 13, marginLeft: 10}}>
+          <View
+            style={{
+              flex: 2,
+              marginTop: responsiveHeight(2),
+              marginLeft: responsiveWidth(3),
+            }}>
             <Text style={[styles.font, styles.mainText]}>푸시알람 받기</Text>
           </View>
           <View style={{flex: 1}}>
@@ -112,43 +119,36 @@ const styles = StyleSheet.create({
   font: {
     fontFamily: '강원교육튼튼',
   },
-
+  font10: {fontSize: responsiveFontSize(1)},
+  font12: {fontSize: responsiveFontSize(1.3)},
+  font14: {fontSize: responsiveFontSize(1.6)},
+  font18: {fontSize: responsiveFontSize(1.99)},
+  font20: {fontSize: responsiveFontSize(1.9999)},
+  line20: {lineHeight: 20},
+  line40: {lineHeight: 40},
   mainText: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(1.9999),
     lineHeight: 40,
     letterSpacing: 4,
-    color: Colors.contentText,
-  },
-  subText: {
-    fontSize: 18,
-    lineHeight: 40,
-    letterSpacing: 4,
-    color: Colors.contentText,
-  },
-
-  contentText: {
-    fontSize: 12,
-    lineHeight: 20,
-    letterSpacing: 2,
     color: Colors.contentText,
   },
 
   btnContainer: {
     flex: 1,
-    width: '100%',
-    marginTop: 24,
+    width: responsiveWidth(80),
+    marginTop: responsiveHeight(5),
     alignSelf: 'center',
   },
   btnContainer2: {
     flex: 1,
-    width: '70%',
-    marginTop: 40,
+    width: responsiveWidth(60),
+    marginTop: responsiveHeight(5),
     alignSelf: 'center',
   },
   btnContainer3: {
     flex: 1,
-    width: '70%',
-    marginTop: -70,
+    width: responsiveWidth(60),
+    marginTop: responsiveHeight(-4),
     alignSelf: 'center',
   },
 });

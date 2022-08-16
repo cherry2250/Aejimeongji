@@ -196,12 +196,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     position: 'absolute',
     bottom: responsiveHeight(10),
-    right: responsiveWidth(5),
+    right: responsiveWidth(7),
     alignSelf: 'flex-end',
     marginTop: responsiveHeight(10),
-
     maxWidth: responsiveWidth(12),
-    maxHeight: responsiveHeight(6),
+    maxHeight: responsiveWidth(12),
   },
   todoContent: {
     width: responsiveWidth(80),
