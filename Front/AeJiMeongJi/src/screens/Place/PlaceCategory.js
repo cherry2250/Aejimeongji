@@ -6,6 +6,7 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
+import PlaceNavbar from '../../components/nav/PlaceNavbar';
 import CategoryDummy from '../../components/Place/CategoryDummy';
 import CategoryItem from '../../components/Place/CategoryItem';
 import {Colors} from '../../constants/styles';
@@ -76,8 +77,11 @@ const PlaceCategory = ({route}) => {
 
   return (
     <>
-      <View style={styles.headerLine}></View>
       <View style={styles.rootContainer}>
+      <PlaceNavbar
+        source={route.params.source}
+        logo={require('../../Assets/image/placelogo.png')}></PlaceNavbar>
+      <View style={styles.headerLine}></View>
         <FlatList
           key={'#'}
           data={data}

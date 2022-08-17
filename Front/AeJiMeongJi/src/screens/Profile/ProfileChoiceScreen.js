@@ -6,7 +6,11 @@ import Button from '../../components/ui/Button';
 import {fetchDogs} from '../../utils/profile';
 import {useNavigation} from '@react-navigation/native';
 import CustomNav from '../../components/nav/CustomNav';
-import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 // 아이템을 parameter로 받아서 profileItems의 parameter로 넘겨줘야함.
 const ProfileChoiceScreen = () => {
@@ -59,18 +63,23 @@ const ProfileChoiceScreen = () => {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
-      <CustomNav isEditing={isEditing} setIsEditing={setIsEditing} screen='Choice'>
+      <CustomNav
+        isEditing={isEditing}
+        setIsEditing={setIsEditing}
+        screen="Choice">
         {isEditing ? '프로필 편집' : '프로필 선택'}
       </CustomNav>
-      <FlatList
-        key={'#'}
-        data={profiles}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        numColumns={2}
-        style={styles.flatlist}
-        columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
-      />
+      <View style={styles.flatlistContainer}>
+        <FlatList
+          key={'#'}
+          data={profiles}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={2}
+          style={styles.flatlist}
+          columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
+        />
+      </View>
       <View style={styles.buttonContainer}>
         <Button style={styles.button} onPress={goToMyInfo}>
           내 계정 관리
@@ -89,12 +98,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  flatlistContainer: {
+    marginTop: responsiveHeight(5)
+  },
   flatlist: {
     flexGrow: 0,
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: responsiveHeight(15),
+    // position: 'absolute',
+    // bottom: responsiveHeight(15),
+    marginVertical: responsiveHeight(5),
   },
   button: {
     backgroundColor: '#EDCCA2',

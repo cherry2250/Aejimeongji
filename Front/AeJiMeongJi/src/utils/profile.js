@@ -314,13 +314,14 @@ export const getDog = async dogId => {
 export const deleteProfile = async dogId => {
   const memberId = await getMemberId();
   const path = `/api/member/${memberId}/dog/${dogId}`;
+  console.log(path);
 
   try {
     const res = await axios({
       method: 'delete',
       url: url + path,
     });
-    console.log(res);
+    console.log(res.data);
     return res.data.message
   } catch (error) {
     console.log(error.response);

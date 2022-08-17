@@ -67,7 +67,7 @@ const PlaceHome = () => {
         </View>
         <View>
           {location && (
-            <CarouselList lat={location?.latitude} lng={location?.longitude} />
+            <CarouselList lat={location?.latitude} lng={location?.longitude} source={source} />
           )}
         </View>
       </ScrollView>

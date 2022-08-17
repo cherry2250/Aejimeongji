@@ -61,7 +61,7 @@ const ProfileHomeScreen2 = ({route}) => {
       <View style={styles.textContainer}>
         <Text style={styles.title}>추가 정보 입력</Text>
         <Text style={styles.subTitle}>
-          생일과 입양일은 꼭 정확하지 않아도 되요!
+          생일과 입양일은 꼭 정확하지 않아도 돼요!
         </Text>
       </View>
       <View style={styles.inputContainer}>
