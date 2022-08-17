@@ -62,6 +62,12 @@ const PlaceCategory = ({route}) => {
       setCurLastIdx(res.curLastIdx);
     };
     initialData();
+
+    return () => {
+      setData();
+      setHasNext(route?.params?.loadMoreData?.hasNext);
+      setCurLastIdx(route?.params?.loadMoreData?.curLastIdx);
+    };
   }, []);
 
   const renderItem = ({item}) => (
@@ -78,10 +84,10 @@ const PlaceCategory = ({route}) => {
   return (
     <>
       <View style={styles.rootContainer}>
-      <PlaceNavbar
-        source={route.params.source}
-        logo={require('../../Assets/image/placelogo.png')}></PlaceNavbar>
-      <View style={styles.headerLine}></View>
+        <PlaceNavbar
+          source={route.params.source}
+          logo={require('../../Assets/image/placelogo.png')}></PlaceNavbar>
+        <View style={styles.headerLine}></View>
         <FlatList
           key={'#'}
           data={data}
