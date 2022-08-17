@@ -28,6 +28,7 @@ const TodoList = props => {
 
   const dogId = useSelector(state => state.profile.id);
   const [todolist, setTodolist] = useState([]);
+  const [runningllist, setRunningllist] = useState([]);
 
   const {modalVisible, setModalVisible} = props;
   const screenHeight = Dimensions.get('screen').height;
@@ -71,17 +72,29 @@ const TodoList = props => {
       resetBottomSheet.start();
     }
 
+    console.log('데이터선택');
+    console.log(props.selectedDate);
+    axios
+      .get(url + `/api/dog/${dogId}/walkingdog?date=${props.selectedDate}`)
+      .then(response => {
+        if (response.status == 200) {
+          console.log('산책데이터받기');
+          console.log(response.data.data);
+          setRunningllist(response.data.data);
+        } else {
+          console.log(response.status + '산책데이터받기에러');
+        }
+      });
+
     axios
       .get(url + `/api/dog/${dogId}/calendar?date=${props.selectedDate}`)
       .then(response => {
-        console.log('reponse찍기');
+        console.log('todo list 받기');
         console.log(response);
         if (response.status == 200) {
-          console.log('오늘의 to-do');
-          console.log(response.data);
           setTodolist(response.data);
         } else {
-          console.log(error.response + 'todo받기에러');
+          console.log(response.status + 'todo받기에러');
         }
       });
   }, [props.modalVisible]);
@@ -95,11 +108,43 @@ const TodoList = props => {
   const toDo = todolist.map((todo, index) => {
     return (
       <View style={styles.todoDetail} key={index}>
-        <View style={styles.todoCategory}>
-          <Text style={{fontFamily: '강원교육튼튼', paddingTop: 3}}>할일</Text>
-        </View>
+        {todo.isInjection ? (
+          <View style={styles.todoCategory1}>
+            <Text style={{fontFamily: '강원교육튼튼', paddingTop: 3}}>
+              접종
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.todoCategory2}>
+            <Text style={{fontFamily: '강원교육튼튼', paddingTop: 3}}>
+              할일
+            </Text>
+          </View>
+        )}
+
         <Text style={{fontFamily: 'IBMPlexSansKR-Regular'}}>
           {todo.content}
+        </Text>
+      </View>
+    );
+  });
+
+  const running = runningllist.map((running, index) => {
+    return (
+      <View style={styles.todoDetail} key={index}>
+        <View style={styles.todoCategory3}>
+          <Text style={{fontFamily: '강원교육튼튼', paddingTop: 3}}>산책</Text>
+        </View>
+        <Text
+          style={{
+            fontFamily: '강원교육튼튼',
+          }}>
+          {running.walkingDate}
+          {'   '}
+        </Text>
+        <Text style={{fontFamily: 'IBMPlexSansKR-Regular'}}>
+          {running.walkingTime}분 {(running.walkingDistance / 1000).toFixed(2)}
+          km
         </Text>
       </View>
     );
@@ -141,7 +186,12 @@ const TodoList = props => {
                 marginBottom: 100,
               }}>
               {todolist.length != 0 ? (
-                <View style={styles.todoContent}>{toDo}</View>
+                <>
+                  <View style={styles.todoContent}>
+                    {running}
+                    {toDo}
+                  </View>
+                </>
               ) : (
                 <View>
                   {/* <NothingTodo /> */}
@@ -208,8 +258,28 @@ const styles = StyleSheet.create({
     marginLeft: responsiveWidth(9),
     marginRight: responsiveWidth(5),
   },
-  todoCategory: {
+  todoCategory1: {
+    backgroundColor: '#AFD485',
+    marginLeft: 10,
+    marginRight: 10,
+    width: responsiveWidth(10),
+    height: responsiveHeight(3),
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  todoCategory2: {
     backgroundColor: '#DD9944',
+    marginLeft: 10,
+    marginRight: 10,
+    width: responsiveWidth(10),
+    height: responsiveHeight(3),
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  todoCategory3: {
+    backgroundColor: '#B8E9FF',
     marginLeft: 10,
     marginRight: 10,
     width: responsiveWidth(10),
