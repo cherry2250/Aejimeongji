@@ -11,8 +11,7 @@ import {Colors} from '../../constants/styles';
 import {fetchRunningData, fetchCalData} from '../../utils/guide.js';
 import {useSelector} from 'react-redux';
 const RunningFinish = ({navigation, route}) => {
-  // const dogIds = useSelector(state => state.profile.ids);
-  const dogIds = [1, 7, 8, 9];
+  const dogIds = useSelector(state => state.profile.ids);
 
   const fetchData = async identifier => {
     const walkingDistance = parseFloat(route.params.distance).toFixed(2);
@@ -92,12 +91,7 @@ const RunningFinish = ({navigation, route}) => {
             styel={styles.runLoginButton}>
             산책 완료
           </RunButton>
-          <RunButton2
-            onPress={() => {
-              navigation.navigate('RunningInfo');
-            }}>
-            산책 이력
-          </RunButton2>
+          <RunButton2 onPress={fetchData}>산책 이력</RunButton2>
         </View>
       </View>
     </View>
