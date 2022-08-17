@@ -30,6 +30,7 @@ const RunningHome = ({navigation}) => {
   useLayoutEffect(() => {
     const fetchInitialData = async () => {
       const res = await getDog(dogId);
+
       if (res) {
         setDogName(res.name);
         setDogWeight(res.weight);

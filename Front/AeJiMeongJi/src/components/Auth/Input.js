@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     borderWidth: responsiveHeight(0.3),
     borderRadius: responsiveWidth(5),
     borderColor: Colors.inputBorder,
-    color: Colors.inputBorder,
+    color: '#212121',
   },
 });
