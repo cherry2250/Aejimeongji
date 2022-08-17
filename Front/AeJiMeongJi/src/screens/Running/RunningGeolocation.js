@@ -65,7 +65,6 @@ class RunningGeolocation extends React.Component {
     };
   }
   componentDidMount() {
-
     const {coordinate} = this.state;
     if (this.props.coordinate) return;
 
@@ -158,8 +157,7 @@ class RunningGeolocation extends React.Component {
         </MapView>
         <View style={styles.info}>
           <View style={styles.timeContainer}>
-            <View style={styles.timeSectionStyle}>
-            </View>
+            <View style={styles.timeSectionStyle}></View>
           </View>
           <View style={styles.subContainer}>
             <View style={styles.distanceContainer}>
@@ -251,19 +249,19 @@ const styles = StyleSheet.create({
     marginHorizontal: responsiveWidth(2),
   },
   distanceContainer: {
-    marginVertical: responsiveHeight(1.3),
+    marginVertical: responsiveHeight(0.3),
     marginHorizontal: responsiveWidth(10),
     alignItems: 'center',
   },
   calorieContainer: {
-    marginVertical: responsiveHeight(1.3),
+    marginVertical: responsiveHeight(0.3),
     marginHorizontal: responsiveWidth(10),
     alignItems: 'center',
   },
   info: {
     backgroundColor: Colors.back100,
     width: responsiveWidth(100),
-    height: responsiveHeight(70),
+    height: responsiveHeight(28),
   },
   timeContainer: {
     padding: responsiveHeight(1.5),

@@ -85,13 +85,15 @@ const RunningAlert = props => {
   return (
     <View>
       <View style={styles.container}>
-        <StopWatch
-          laps
-          secs
-          start={start}
-          getTime={timeKeeper}
-          options={options}
-        />
+        <View style={{marginBottom: responsiveHeight(2.5)}}>
+          <StopWatch
+            laps
+            secs
+            start={start}
+            getTime={timeKeeper}
+            options={options}
+          />
+        </View>
       </View>
       <RunButton title={'3-Button Alert'} onPress={createThreeButtonAlert}>
         산책종료

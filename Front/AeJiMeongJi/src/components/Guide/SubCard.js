@@ -28,7 +28,7 @@ const SubCard = props => {
         navigation.navigate('GuideDetail', {guideId});
       }}>
       <View style={styels.GuideBox}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={styels.GuideImg}>
             <Image
               style={{width: '100%', height: '100%', borderRadius: 15}}
@@ -41,6 +41,7 @@ const SubCard = props => {
               <View style={styels.infoTitle}>
                 <Text
                   style={{
+                    width: responsiveWidth(50),
                     fontSize: responsiveFontSize(2.4),
                     fontFamily: '강원교육튼튼',
                   }}>
@@ -92,10 +93,10 @@ const styels = StyleSheet.create({
     backgroundColor: 'orange',
     borderRadius: 30,
     height: responsiveHeight(15),
-    width: responsiveWidth(30),
-    marginLeft: responsiveWidth(6),
+    width: responsiveWidth(28),
+    marginLeft: responsiveWidth(3),
     justifyContent: 'center',
-    alignItems: 'center',
+    alignContent: 'center',
   },
 
   GuideBox: {
