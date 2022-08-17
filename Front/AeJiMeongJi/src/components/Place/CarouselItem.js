@@ -10,7 +10,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {fetchPlace} from '../../utils/place';
 
-const CarouselItem = ({category, lat, lng}) => {
+const CarouselItem = ({category, lat, lng, source}) => {
   const navigation = useNavigation();
 
   const renderItem = ({item, index}, parallaxProps) => {
@@ -49,6 +49,7 @@ const CarouselItem = ({category, lat, lng}) => {
       loadMoreData,
       lat,
       lng,
+      source,
     });
   };
 

@@ -17,16 +17,14 @@ export const authSlice = createSlice({
   reducers: {
     authenticate(state, action) {
       state.token = action.payload.token;
-
       state.refreshToken = action.payload.refreshToken;
-
       state.isAuthenticated = true;
     },
     logout(state) {
       state.token = null;
       AsyncStorage.removeItem('token');
       AsyncStorage.removeItem('refresh');
-      isAuthenticated = false;
+      state.isAuthenticated = false;
     },
     fetchInfo(state, action) {
       state.user.email = action.payload.email;

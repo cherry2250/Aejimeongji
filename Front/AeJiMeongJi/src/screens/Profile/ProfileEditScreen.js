@@ -17,11 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import UploadModeModal from '../../components/Profile/UploadModeModal';
-import {
-  changeDogPhoto,
-  deleteProfile,
-  getDog,
-} from '../../utils/profile';
+import {changeDogPhoto, deleteProfile, getDog} from '../../utils/profile';
 
 const ProfileEditScreen = ({route}) => {
   const navigation = useNavigation();
@@ -53,7 +49,7 @@ const ProfileEditScreen = ({route}) => {
   };
   const deleteProfileHandler = async () => {
     const message = await deleteProfile(dogInfo.dogId);
-    Alert.alert(message, [
+    Alert.alert('삭제가 완료 되었습니다.', '', [
       {text: '네', onPress: () => navigation.navigate('Choice')},
     ]);
   };

@@ -19,8 +19,8 @@ export const profileSlice = createSlice({
     // 강아지 모든 목록
     saveDogIds(state, action) {
       console.log('진입');
-      state.ids = action.payload.ids;
-      console.log(action.payload.ids);
+      state.ids = action.payload;
+      console.log(action.payload);
     },
     setDogInfo(state, action) {
       state.dog = action.payload.dog;

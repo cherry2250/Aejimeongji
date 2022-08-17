@@ -1,5 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -21,18 +28,19 @@ const MyPage = () => {
   const [source, setSource] = useState();
   const dogId = useSelector(state => state.profile.id);
   const [dogName, setDogName] = useState();
+  const [loading, setLoading] = useState(false);
 
   useLayoutEffect(() => {
     const fetchInitialData = async () => {
+      setLoading(true);
       const likedGuide = await fetchLikedGuide();
       const likedPlace = await fetchLikedPlace();
       const res = await getDog(dogId);
-      console.log(likedPlace);
-      console.log(likedGuide);
       setDogName(res.name);
       setGuide(likedGuide.data);
       setPlace(likedPlace.data);
       setSource(`http://i7d203.p.ssafy.io:8080/api/image/${res.imageName}`);
+      setLoading(false);
     };
     fetchInitialData();
   }, []);
@@ -40,6 +48,7 @@ const MyPage = () => {
   return (
     <ScrollView style={styles.rootContainer}>
       <PlaceNavbar source={source}>MyPage</PlaceNavbar>
+      {loading && <ActivityIndicator style={styles.spinner} size="large" />}
       <View style={styles.ConnectMyInfo}>
         <ConnectMyInfo dogName={dogName} />
       </View>
@@ -63,24 +72,6 @@ const MyPage = () => {
           {!guide && <NoGuide navigate="Guide">가이드</NoGuide>}
         </View>
       )}
-      {/* <View>
-        <Text style={styles.likedTitle}> 즐겨찾기 한 장소 목록 </Text>
-        <FlatList
-          contentContainerStyle={styles.guideContainer}
-          key={'#'}
-          data={place}
-          renderItem={LikeGuide}
-        />
-      </View>
-      <View>
-        <Text style={styles.likedTitle}> 즐겨찾기 한 가이드 목록 </Text>
-        <FlatList
-          contentContainerStyle={styles.guideContainer}
-          key={'#'}
-          data={guide}
-          renderItem={LikeGuide}
-        />
-      </View> */}
     </ScrollView>
   );
 };
@@ -116,4 +107,9 @@ const styles = StyleSheet.create({
   likedContainer: {
     marginVertical: responsiveHeight(2),
   },
+  spinner: {
+    position: 'absolute',
+    top: responsiveHeight(50),
+    left: responsiveWidth(50),
+  }
 });

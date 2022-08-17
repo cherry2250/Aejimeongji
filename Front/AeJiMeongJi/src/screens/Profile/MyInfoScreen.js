@@ -16,6 +16,7 @@ import {responsiveHeight} from 'react-native-responsive-dimensions';
 
 const MyInfoScreen = () => {
   const dogId = useSelector(state => state.id);
+  const isAuthenticated = useSelector(state => state.isAuthenticated);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [userInfo, setUserInfo] = useState({
@@ -88,7 +89,11 @@ const MyInfoScreen = () => {
     const res = await logout();
     if (res) {
       dispatch(authActions.logout());
-      navigation.navigate('Welcome');
+      console.log(isAuthenticated);
+
+      if (!isAuthenticated) {
+        navigation.navigate('Welcome');
+      }
     }
   };
 
