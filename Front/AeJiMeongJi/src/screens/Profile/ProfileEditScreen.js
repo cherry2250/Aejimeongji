@@ -50,7 +50,7 @@ const ProfileEditScreen = ({route}) => {
   const deleteProfileHandler = async () => {
     const message = await deleteProfile(dogInfo.dogId);
     Alert.alert('삭제가 완료 되었습니다.', '', [
-      {text: '네', onPress: () => navigation.navigate('Choice')},
+      {text: '네', onPress: () => navigation.replace('ProfileChoice')},
     ]);
   };
 

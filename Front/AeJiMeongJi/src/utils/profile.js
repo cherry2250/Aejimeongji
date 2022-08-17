@@ -321,7 +321,7 @@ export const deleteProfile = async dogId => {
       method: 'delete',
       url: url + path,
     });
-    console.log(res.data);
+    console.log(res.data, '프로필 삭제');
     return res.data.message
   } catch (error) {
     console.log(error.response);
