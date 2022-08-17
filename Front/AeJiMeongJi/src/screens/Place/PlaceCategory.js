@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {
@@ -50,7 +50,7 @@ const PlaceCategory = ({route}) => {
     );
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const initialData = async () => {
       const res = await fetchCategoryPlace(
         route.params.category,
@@ -62,13 +62,14 @@ const PlaceCategory = ({route}) => {
       setCurLastIdx(res.curLastIdx);
     };
     initialData();
-
     return () => {
       setData();
-      setHasNext(route?.params?.loadMoreData?.hasNext);
-      setCurLastIdx(route?.params?.loadMoreData?.curLastIdx);
+      setHasNext();
+      setCurLastIdx();
     };
-  }, []);
+  }, [route]);
+
+  useEffect(() => {}, []);
 
   const renderItem = ({item}) => (
     <CategoryItem
