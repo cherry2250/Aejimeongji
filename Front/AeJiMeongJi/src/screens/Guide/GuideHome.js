@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useLayoutEffect} from 'react';
-import {Image, StyleSheet, View, Text} from 'react-native';
+import {Image, StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -25,31 +25,26 @@ const GuideHome = ({navigation}) => {
   const [source, setSource] = useState();
   const [id, setId] = useState();
   const [guideList, setguideList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const dogId = useSelector(state => state.profile.id);
 
   useLayoutEffect(() => {
+    setLoading(true);
     const fetchInitialData = async () => {
       const res = await getDog(dogId);
+      const response = await axios(url + '/api/guide?dog=' + dogId);
       if (res) {
         setDogInfo(res.name);
         setSource(`http://i7d203.p.ssafy.io:8080/api/image/${res.imageName}`);
-        // console.log(res.name);
       }
-    };
-    fetchInitialData();
-  });
-  useLayoutEffect(() => {
-    const fetchGuide = async () => {
-      const response = await axios(url + '/api/guide?dog=' + dogId);
-      // console.log(response.data);
       if (response) {
         setguideList(response.data);
       }
+      setLoading(false);
     };
-    fetchGuide();
+    fetchInitialData();
   }, []);
-  // console.log(guideList);
 
   return (
     <ScrollView>
@@ -96,6 +91,9 @@ const GuideHome = ({navigation}) => {
             훈련{' '}
           </GuideButton>
         </View>
+        {loading && (
+          <ActivityIndicator size="large" color="#aaa" style={styles.spinner} />
+        )}
         <View style={styles.guideTitle}>
           <Text
             style={{
