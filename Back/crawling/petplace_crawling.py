@@ -255,32 +255,5 @@ for p in petPlaceList:
     val = (id, name, description, address, lat, lng, tel, category, detail[0], homePage, openingTime, rating)
     cursor.execute(sql, val)
 
-    if p['image']:
-        image = p['image']
-        sql_carousel = """insert into image
-        (dtype, store_filename, petplace_id)
-        values (%s, %s, %s)
-        """
-        val_carousel = ('PetPlace', image, id)
-        cursor.execute(sql_carousel, val_carousel)
-
-    if p['info']:
-        info = p['info']
-        sql_info = """insert into image
-        (dtype, store_filename, petplace_id)
-        values (%s, %s, %s)
-        """
-        val_info = ('PetPlace', info, id)
-        cursor.execute(sql_info, val_info)
-
-    if p['menu']:
-        menu = p['menu']
-        sql_menu = """insert into image
-        (dtype, store_filename, petplace_id)
-        values (%s, %s, %s)
-        """
-        val_menu = ('PetPlace', menu, id)
-        cursor.execute(sql_menu, val_menu)
-    connect.commit()
 
 connect.close()
