@@ -139,8 +139,10 @@ const styles = StyleSheet.create({
   distance: {
     fontSize: responsiveFontSize(1.5),
     fontFamily: 'IBMPlexSansKR-Regular',
+    color: '#212121',
   },
   title: {
     fontFamily: 'IBMPlexSansKR-Regular',
+    color: '#212121',
   },
 });
