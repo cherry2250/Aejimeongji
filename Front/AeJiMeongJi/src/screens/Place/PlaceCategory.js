@@ -13,11 +13,11 @@ import {Colors} from '../../constants/styles';
 import {fetchCategoryPlace, fetchMoreData} from '../../utils/place';
 
 const PlaceCategory = ({route}) => {
-  console.log(route.params.lat);
+  console.log(route?.params?.lat);
   const [data, setData] = useState();
-  const [hasNext, setHasNext] = useState(route.params.loadMoreData.hasNext);
+  const [hasNext, setHasNext] = useState(route?.params?.loadMoreData?.hasNext);
   const [curLastIdx, setCurLastIdx] = useState(
-    route.params.loadMoreData.curLastIdx,
+    route?.params?.loadMoreData?.curLastIdx,
   );
   const [loading, setLoading] = useState(false);
   const loadMore = async () => {
