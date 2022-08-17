@@ -34,6 +34,7 @@ const Stack = createNativeStackNavigator();
 
 const HomeStack = ({navigation}) => {
   const dogId = useSelector(state => state.profile.id);
+  console.log(dogId !== '');
 
   return (
     <Stack.Navigator

@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {
@@ -13,11 +13,11 @@ import {Colors} from '../../constants/styles';
 import {fetchCategoryPlace, fetchMoreData} from '../../utils/place';
 
 const PlaceCategory = ({route}) => {
-  console.log(route.params.lat);
+  console.log(route?.params?.lat);
   const [data, setData] = useState();
-  const [hasNext, setHasNext] = useState(route.params.loadMoreData.hasNext);
+  const [hasNext, setHasNext] = useState(route?.params?.loadMoreData?.hasNext);
   const [curLastIdx, setCurLastIdx] = useState(
-    route.params.loadMoreData.curLastIdx,
+    route?.params?.loadMoreData?.curLastIdx,
   );
   const [loading, setLoading] = useState(false);
   const loadMore = async () => {
@@ -50,7 +50,7 @@ const PlaceCategory = ({route}) => {
     );
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const initialData = async () => {
       const res = await fetchCategoryPlace(
         route.params.category,
@@ -62,7 +62,14 @@ const PlaceCategory = ({route}) => {
       setCurLastIdx(res.curLastIdx);
     };
     initialData();
-  }, []);
+    return () => {
+      setData();
+      setHasNext();
+      setCurLastIdx();
+    };
+  }, [route]);
+
+  useEffect(() => {}, []);
 
   const renderItem = ({item}) => (
     <CategoryItem
@@ -78,10 +85,10 @@ const PlaceCategory = ({route}) => {
   return (
     <>
       <View style={styles.rootContainer}>
-      <PlaceNavbar
-        source={route.params.source}
-        logo={require('../../Assets/image/placelogo.png')}></PlaceNavbar>
-      <View style={styles.headerLine}></View>
+        <PlaceNavbar
+          source={route.params.source}
+          logo={require('../../Assets/image/placelogo.png')}></PlaceNavbar>
+        <View style={styles.headerLine}></View>
         <FlatList
           key={'#'}
           data={data}
