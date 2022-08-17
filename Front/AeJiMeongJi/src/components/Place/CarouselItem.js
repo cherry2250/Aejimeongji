@@ -9,8 +9,9 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {fetchPlace} from '../../utils/place';
+import {useSelector} from 'react-redux';
 
-const CarouselItem = ({category, lat, lng, source}) => {
+const CarouselItem = ({category, lat, lng, source, data}) => {
   const navigation = useNavigation();
 
   const renderItem = ({item, index}, parallaxProps) => {
@@ -55,9 +56,9 @@ const CarouselItem = ({category, lat, lng, source}) => {
 
   useLayoutEffect(() => {
     const initialData = async () => {
-      const res = await fetchPlace(category, lat, lng);
-      const loadMore = {curLastIdx: res.curLastIdx, hasNext: res.hasNext};
-      setPlaceData(res.data);
+      // const res = await fetchPlace(category, lat, lng);
+      const loadMore = {curLastIdx: data.curLastIdx, hasNext: data.hasNext};
+      setPlaceData(data.data);
       setLoadMoreData(loadMore);
     };
     initialData();
@@ -65,7 +66,7 @@ const CarouselItem = ({category, lat, lng, source}) => {
 
   return (
     <>
-      {placeData?.length !== 0 && (
+      {data?.length !== 0 && (
         <View style={styles.rootContainer}>
           <View style={styles.textContainer}>
             <View style={styles.categoryText}>
@@ -81,7 +82,7 @@ const CarouselItem = ({category, lat, lng, source}) => {
             sliderWidth={responsiveWidth(100)}
             sliderHeight={responsiveHeight(50)}
             itemWidth={responsiveWidth(33)}
-            data={placeData}
+            data={data?.data}
             renderItem={renderItem}
             hasParallaxImages={true}
             showSpinner={true}

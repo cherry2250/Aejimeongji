@@ -46,6 +46,7 @@ const MyPage = () => {
   return (
     <ScrollView style={styles.rootContainer}>
       <PlaceNavbar source={source}>MyPage</PlaceNavbar>
+
       <View style={styles.ConnectMyInfo}>
         <ConnectMyInfo dogName={dogName} />
       </View>
@@ -69,24 +70,6 @@ const MyPage = () => {
           {!guide && <NoGuide navigate="Guide">가이드</NoGuide>}
         </View>
       )}
-      {/* <View>
-        <Text style={styles.likedTitle}> 즐겨찾기 한 장소 목록 </Text>
-        <FlatList
-          contentContainerStyle={styles.guideContainer}
-          key={'#'}
-          data={place}
-          renderItem={LikeGuide}
-        />
-      </View>
-      <View>
-        <Text style={styles.likedTitle}> 즐겨찾기 한 가이드 목록 </Text>
-        <FlatList
-          contentContainerStyle={styles.guideContainer}
-          key={'#'}
-          data={guide}
-          renderItem={LikeGuide}
-        />
-      </View> */}
     </ScrollView>
   );
 };
