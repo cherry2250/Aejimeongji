@@ -12,6 +12,7 @@ import {getMemberId} from '../../utils/auth';
 import CarouselCards from '../../components/Guide/CarouselCards';
 import GuideNavbar from '../../components/nav/GuideNavbar';
 import SubCard from '../../components/Guide/SubCard';
+import GuideCategoryCarousel from '../../components/Guide/GuideCategoryCarousel';
 import Button from '../../components/ui/Button';
 import GuideButton from '../../components/ui/GuideButton';
 import {fetchGuideList} from '../../utils/guide';
@@ -52,91 +53,54 @@ const GuideHome = ({navigation}) => {
   // console.log(guideList);
 
   return (
-    <ScrollView>
+    <SafeAreaView>
       <GuideNavbar source={source} />
-      <View style={styles.container}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory', '건강');
-            }}>
-            {' '}
-            건강{' '}
-          </GuideButton>
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory', '음식');
-            }}>
-            {' '}
-            음식{' '}
-          </GuideButton>
-        </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory', '제품');
-            }}>
-            {' '}
-            제품{' '}
-          </GuideButton>
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory', '행동');
-            }}>
-            {' '}
-            행동{' '}
-          </GuideButton>
-        </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <GuideButton
-            onPress={() => {
-              navigation.navigate('GuideCategory', '훈련');
-            }}>
-            {' '}
-            훈련{' '}
-          </GuideButton>
-        </View>
-        <View style={styles.guideTitle}>
-          <Text
-            style={{
-              fontSize: responsiveFontSize(2.7),
-              fontFamily: '강원교육튼튼',
-            }}>
-            {dogInfo}를 위한 맞춤형 추천 가이드
-          </Text>
-        </View>
-        <View style={{flex: 3.3}}>
-          <CarouselCards
-            style={styles.carouselCards}
-            age={guideList.ageGuideList}
-          />
-        </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <GuideCategoryCarousel style={{}}></GuideCategoryCarousel>
 
-        <View style={styles.subGuide}>
-          <Text style={styles.subGuideTitle}>
-            지금 핫한 반려생활 가이드 Top5!
-          </Text>
-          <SubCard
-            style={styles.subCards}
-            category={guideList.fixedGuideList}></SubCard>
+          <View style={styles.guideTitle}>
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2.7),
+                fontFamily: '강원교육튼튼',
+              }}>
+              {dogInfo}를 위한 맞춤형 추천 가이드
+            </Text>
+          </View>
+          <View style={{flex: 2.2}}>
+            <CarouselCards
+              style={styles.carouselCards}
+              age={guideList.ageGuideList}
+            />
+          </View>
+
+          <View style={styles.subGuide}>
+            <Text style={styles.subGuideTitle}>
+              지금 핫한 반려생활 가이드 Top5!
+            </Text>
+            <SubCard
+              style={styles.subCards}
+              category={guideList.fixedGuideList}></SubCard>
+          </View>
+          <View style={styles.subguideTitle2}>
+            <Text
+              style={{
+                fontSize: responsiveFontSize(2.5),
+                fontFamily: '강원교육튼튼',
+              }}>
+              현재 연령대에 꼭 알아야 하는 정보
+            </Text>
+          </View>
+          <View style={{flex: 2.2}}>
+            <CarouselCards
+              style={styles.carouselCards}
+              age={guideList.weightGuideList}
+            />
+          </View>
         </View>
-        <View style={styles.subguideTitle2}>
-          <Text
-            style={{
-              fontSize: responsiveFontSize(2.5),
-              fontFamily: '강원교육튼튼',
-            }}>
-            현재 연령대에 꼭 알아야 하는 정보
-          </Text>
-        </View>
-        <View style={{flex: 3.3}}>
-          <CarouselCards
-            style={styles.carouselCards}
-            age={guideList.weightGuideList}
-          />
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -146,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 30,
-    height: 2000,
+    height: 2300,
   },
   guideTitle: {
     flex: 0.4,
@@ -165,8 +129,8 @@ const styles = StyleSheet.create({
   },
   carouselCards: {},
   subGuide: {
-    flex: 9,
-    height: 10,
+    flex: 6.4,
+    height: responsiveHeight(3),
     width: responsiveWidth(90),
     marginTop: responsiveHeight(2),
   },

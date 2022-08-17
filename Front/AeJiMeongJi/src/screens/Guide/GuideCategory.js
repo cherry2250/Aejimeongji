@@ -139,9 +139,7 @@ const GuideCategory = props => {
 };
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    height: 1400,
-  },
+  rootContainer: {},
   GuideTitle: {
     marginVertical: responsiveHeight(2.8),
     alignItems: 'center',
