@@ -17,7 +17,7 @@ const CarouselItem = ({category, lat, lng, source, data}) => {
   const renderItem = ({item, index}, parallaxProps) => {
     const goToDetail = () => {
       const {id, address} = item;
-      navigation.navigate('PlaceDetail', {id, address});
+      navigation.navigate('상세정보', {id, address});
     };
     return (
       <Pressable onPress={goToDetail} style={styles.item}>

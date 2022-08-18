@@ -6,8 +6,6 @@ import TodoUpload from '../screens/Calendar/TodoUpload';
 
 import ProfileChoiceScreen from '../screens/Profile/ProfileChoiceScreen';
 import ProfileHomeScreen from '../screens/Profile/ProfileHomeScreen';
-import SplashScreen from './SplashScreen';
-import WelcomeScreen from '../screens/Auth/WelcomScreen';
 import ProfileEditScreen from '../screens/Profile/ProfileEditScreen';
 import ProfileHomeScreen2 from '../screens/Profile/ProfileHomeScreen2';
 import GuideCategory from '../screens/Guide/GuideCategory';
@@ -68,7 +66,7 @@ const GuideStack = ({navigation}) => {
           headerShadowVisible: false,
         }}>
         <Stack.Screen
-          name="PlaceDetail"
+          name="상세정보"
           component={PlaceDetail}
           options={{unmountOnBlur: true}}
         />

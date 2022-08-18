@@ -54,8 +54,10 @@ export const searchPlace = async address => {
 //   console.log(res.data);
 // };
 
-export const fetchPlace = async (category, lat, lng) => {
+export const fetchPlace = async (category) => {
   console.log(category, 'category');
+  const lat = 36.123
+  const lng = 128.123
 
   const dist = 1000;
   const limit = 10;
@@ -72,7 +74,10 @@ export const fetchPlace = async (category, lat, lng) => {
   }
 };
 
-export const fetchCategoryPlace = async (category, lat, lng) => {
+export const fetchCategoryPlace = async (category) => {
+
+  const lat = 36.123
+  const lng = 128.123
   const dist = 1000;
   const limit = 3;
   const path = `/api/petplace?category=${category}&dist=${dist}&lat=${lat}&limit=${limit}&lng=${lng}`;

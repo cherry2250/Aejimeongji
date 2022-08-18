@@ -18,7 +18,7 @@ const MyPageLiked = ({data, screen}) => {
       const {id, address} = item;
 
       if (screen === 'PlaceDetail') {
-        navigation.navigate(screen, {id, address});
+        navigation.navigate('상세정보', {id, address});
       } else {
         navigation.navigate(screen, {guideId: item.guideId});
       }
