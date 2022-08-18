@@ -9,7 +9,7 @@ import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
 import GuideShare from '../../components/Guide/GuideShare';
 import LikeButton from '../../components/Guide/LikeButton';
-import Markdown from 'react-native-simple-markdown';
+import Markdown from 'react-native-markdown-display';
 import axios from '../../utils/index';
 import {getMemberId} from '../../utils/auth';
 
