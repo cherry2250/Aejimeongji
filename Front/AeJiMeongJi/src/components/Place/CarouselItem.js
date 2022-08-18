@@ -20,7 +20,7 @@ const CarouselItem = ({category, lat, lng, source, data}) => {
       navigation.navigate('PlaceDetail', {id, address});
     };
     return (
-      <View style={styles.item}>
+      <Pressable onPress={goToDetail} style={styles.item}>
         <ParallaxImage
           source={{uri: item.petplaceThumbnail}}
           containerStyle={styles.imageContainer}
@@ -36,7 +36,7 @@ const CarouselItem = ({category, lat, lng, source, data}) => {
             {Math.floor(item.distance / 1000)} km
           </Text>
         </Pressable>
-      </View>
+      </Pressable>
     );
   };
 

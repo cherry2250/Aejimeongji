@@ -26,7 +26,7 @@ const DogInfo = ({source, dogInfo}) => {
           </View>
           <View style={styles.recommendTextContainer}>
             <Text style={styles.recommendText}>
-              함께 가요!
+              총 8000개의 애견동반 여행정보!
             </Text>
           </View>
         </View>

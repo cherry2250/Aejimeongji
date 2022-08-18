@@ -32,6 +32,7 @@ const RunningData = props => {
       const res = await axios(url + `/api/dog/${dogId}/walkingdog`);
       if (res) {
         setRunningInfo(res.data.data);
+        console.log(res.data.data);
       }
     };
     fetchRunningInfo();
