@@ -92,6 +92,7 @@ export const fetchDog = async ({
     return res.data.dogId;
   } catch (error) {
     console.log(error.response);
+    Alert.alert('잘못 입력된 것이 있는지 확인해주세요.')
   }
 };
 

@@ -9,14 +9,13 @@ import {
   View,
 } from 'react-native';
 import {
-  responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import UploadModeModal from './UploadModeModal';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 
-const ProfileImage = ({visible, image, setImage}) => {
+const ProfileImage = ({visible, setImage}) => {
   const imagePickerOption = {
     mediaType: 'photo',
     maxWidth: 230,
@@ -59,7 +58,6 @@ const ProfileImage = ({visible, image, setImage}) => {
 
     setImage(res.assets[0]);
     setPreview(res.assets[0].uri);
-    // setPreview(pickedImage)
   };
   const imageAddBtn = require('../../Assets/image/plusButton.png');
   const [modalVisible, setModalVisible] = useState(visible);
