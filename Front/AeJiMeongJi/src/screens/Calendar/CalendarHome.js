@@ -87,7 +87,7 @@ const CalendarHome = ({navigation}) => {
       </View>
       <View style={styles.contentbox}>
         <Calendar
-          style={{backgroundColor: '#FFF8EA', height:responsiveHeight(90)}}
+          style={{backgroundColor: '#FFF8EA', height:responsiveHeight(100)}}
           markingType={'period'}
           markedDates={{
             [date]: {
