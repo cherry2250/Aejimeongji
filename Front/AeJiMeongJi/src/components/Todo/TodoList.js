@@ -12,6 +12,7 @@ import {
   Image,
   ScrollView,
   Pressable,
+  Alert,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -105,6 +106,11 @@ const TodoList = props => {
       setModalVisible(false);
     });
   };
+
+  const goToUpload = () => {
+      Alert.alert('클릭클릭')
+      // navigation.replace('TodoUpload', {date: props.selectedDate});
+  }
 
   const toDo = todolist.map((todo, index) => {
     return (
@@ -209,11 +215,8 @@ const TodoList = props => {
             </View>
           </ScrollView>
         </Animated.View>
-        <Pressable
-          onPress={() => {
-            console.log('클릭클릭클릭');
-            navigation.replace('TodoUpload', {date: props.selectedDate});
-          }}
+        <TouchableOpacity
+          onPress={goToUpload}
           style={{paddingLeft: 24}}>
           <Image
             style={styles.plusButton}
@@ -221,7 +224,7 @@ const TodoList = props => {
             source={require('../../Assets/image/plusButton.png')}
             title="plusButton"
           />
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -254,7 +257,7 @@ const styles = StyleSheet.create({
     maxWidth: responsiveWidth(12),
     maxHeight: responsiveWidth(12),
     flex: 1,
-    zIndex : 1
+    zIndex: 1,
   },
   todoContent: {
     width: responsiveWidth(80),

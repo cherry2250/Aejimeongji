@@ -1,5 +1,12 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -21,12 +28,11 @@ const MyPage = () => {
   const [source, setSource] = useState();
   const dogId = useSelector(state => state.profile.id);
   const [dogName, setDogName] = useState();
+  const [loading, setLoading] = useState(false);
 
   useLayoutEffect(() => {
     const fetchInitialData = async () => {
-      // const likedGuide = await fetchLikedGuide();
-      // const likedPlace = await fetchLikedPlace();
-      // const res = await getDog(dogId);
+      setLoading(true);
 
       const promises = await Promise.all([
         fetchLikedGuide(),
@@ -39,6 +45,7 @@ const MyPage = () => {
       setSource(
         `http://i7d203.p.ssafy.io:8080/api/image/${promises[2].imageName}`,
       );
+      setLoading(false);
     };
     fetchInitialData();
   }, []);
@@ -46,11 +53,14 @@ const MyPage = () => {
   return (
     <ScrollView style={styles.rootContainer}>
       <PlaceNavbar source={source}>MyPage</PlaceNavbar>
+      {loading && <ActivityIndicator style={styles.spinner} color='#ccc' size="large" />}
 
-      <View style={styles.ConnectMyInfo}>
-        <ConnectMyInfo dogName={dogName} />
-      </View>
-      {place ? (
+      {!loading && (
+        <View style={styles.ConnectMyInfo}>
+          <ConnectMyInfo dogName={dogName} />
+        </View>
+      )}
+      {place && !loading ? (
         <View style={styles.likedContainer}>
           <Text style={styles.likedTitle}> 즐겨찾기 한 장소 목록 </Text>
           <MyPageLiked data={place} screen="PlaceDetail" />
@@ -60,7 +70,7 @@ const MyPage = () => {
           {!place && <NoGuide navigate="PlaceHome">장소</NoGuide>}
         </View>
       )}
-      {guide ? (
+      {guide && !loading ? (
         <View style={styles.likedContainer}>
           <Text style={styles.likedTitle}> 즐겨찾기 한 가이드 목록 </Text>
           <MyPageLiked data={guide} screen="GuideDetail" />
@@ -104,5 +114,8 @@ const styles = StyleSheet.create({
   },
   likedContainer: {
     marginVertical: responsiveHeight(2),
+  },
+  spinner: {
+    marginTop: responsiveHeight(40),
   },
 });

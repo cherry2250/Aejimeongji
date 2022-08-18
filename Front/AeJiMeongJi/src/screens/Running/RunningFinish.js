@@ -12,6 +12,9 @@ import {fetchRunningData, fetchCalData} from '../../utils/guide.js';
 import {useSelector} from 'react-redux';
 const RunningFinish = ({navigation, route}) => {
   const dogIds = useSelector(state => state.profile.ids);
+  const cur = new Date();
+  const month = cur.getMonth();
+  const date = cur.getDate();
 
   const fetchData = async identifier => {
     const walkingDistance = parseFloat(route.params.distance).toFixed(2);
@@ -55,7 +58,7 @@ const RunningFinish = ({navigation, route}) => {
             marginTop: responsiveHeight(4),
             marginBottom: responsiveHeight(2),
           }}>
-          8월 15일의 산책
+          {month}월 {date}일의 산책
         </Text>
         <View style={styles.RunningContent}>
           <View style={styles.ContentItem}>
