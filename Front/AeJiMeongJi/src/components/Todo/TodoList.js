@@ -107,6 +107,11 @@ const TodoList = props => {
     });
   };
 
+  const goToUpload = () => {
+      Alert.alert('클릭클릭')
+      // navigation.replace('TodoUpload', {date: props.selectedDate});
+  }
+
   const toDo = todolist.map((todo, index) => {
     return (
       <View style={styles.todoDetail} key={index}>
@@ -211,10 +216,7 @@ const TodoList = props => {
           </ScrollView>
         </Animated.View>
         <TouchableOpacity
-          onPress={() => {
-            Alert.alert('클릭클릭')
-            navigation.replace('TodoUpload', {date: props.selectedDate});
-          }}
+          onPress={goToUpload}
           style={{paddingLeft: 24}}>
           <Image
             style={styles.plusButton}
