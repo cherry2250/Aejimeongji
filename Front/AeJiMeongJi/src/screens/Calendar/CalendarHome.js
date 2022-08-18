@@ -84,7 +84,6 @@ const CalendarHome = ({navigation}) => {
   return (
     <View style={styles.rootContainer}>
       <View style={styles.nav}>
-        <CalendarNav imageName />
       </View>
       <View style={styles.contentbox}>
         <Calendar
