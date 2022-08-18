@@ -24,8 +24,9 @@ const Running = () => {
   const dogId = useSelector(state => state.profile.id);
   const [lastKm, setLastKm] = useState('');
   const [runningDate, setRunningDate] = useState({});
+  const [current, setCurrent] = useState(0)
 
-  let current = 0;
+  // let current = 0;
 
   const emoji = [
     {
@@ -46,24 +47,27 @@ const Running = () => {
     axios.get(url + `/api/walking?dog=${dogId}`).then(response => {
       if (response.status == 200) {
         setRunningDate(response.data);
+        console.log(response.data.totalCount, '몇개?');
 
         switch (response.data.totalCount) {
           case 0:
-            current = 0;
+            setCurrent(0)
             break;
           case 1:
           case 2:
           case 3:
-            current = 1;
+            setCurrent(1)
             break;
           case 4:
           case 5:
           case 6:
-            current = 2;
+            setCurrent(2)
             break;
           case 7:
-            current = 3;
+            setCurrent(3)
             break;
+          default:
+            setCurrent(3)
         }
       } else {
         console.log(response.status + '이번주 산책 정보 가져오기 에러');

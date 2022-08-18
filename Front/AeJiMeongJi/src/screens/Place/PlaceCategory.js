@@ -7,7 +7,6 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import PlaceNavbar from '../../components/nav/PlaceNavbar';
-import CategoryDummy from '../../components/Place/CategoryDummy';
 import CategoryItem from '../../components/Place/CategoryItem';
 import {Colors} from '../../constants/styles';
 import {fetchCategoryPlace, fetchMoreData} from '../../utils/place';

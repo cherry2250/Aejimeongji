@@ -55,10 +55,8 @@ export const searchPlace = async address => {
 // };
 
 export const fetchPlace = async (category, lat, lng) => {
-  console.log(category, 'category');
-
   const dist = 1000;
-  const limit = 10;
+  const limit = 8;
   const path = `/api/petplace?category=${category}&dist=${dist}&lat=${lat}&limit=${limit}&lng=${lng}`;
 
   try {
@@ -108,7 +106,6 @@ export const fetchReviews = async petplaceId => {
       method: 'get',
       url: url + path,
     });
-    console.log(res.data, 'review');
     return res.data;
   } catch (error) {
     console.log(error.response);
@@ -143,7 +140,6 @@ export const fetchLiked = async (liked, petplaceId) => {
         petplaceId,
       },
     });
-    console.log(res.data);
   } catch (error) {
     console.log(error.response);
   }

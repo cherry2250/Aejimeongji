@@ -24,7 +24,6 @@ const url = 'http://i7d203.p.ssafy.io:8080';
 const GuideHome = ({navigation}) => {
   const [dogInfo, setDogInfo] = useState();
   const [source, setSource] = useState();
-  const [id, setId] = useState();
   const [guideList, setguideList] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -69,7 +68,7 @@ const GuideHome = ({navigation}) => {
                 fontSize: responsiveFontSize(2.7),
                 fontFamily: '강원교육튼튼',
               }}>
-              {dogInfo}를 위한 맞춤형 추천 가이드
+              맞춤형 추천 가이드
             </Text>
           </View>
           <CarouselCards age={guideList?.ageGuideList} />
@@ -121,8 +120,8 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(2),
   },
   trandingContainer: {
-    height: responsiveHeight(120),
-    marginVertical: responsiveHeight(5),
+    height: responsiveHeight(130),
+    marginVertical: responsiveHeight(2),
     justifyContent: 'center',
     alignItems: 'center',
   },

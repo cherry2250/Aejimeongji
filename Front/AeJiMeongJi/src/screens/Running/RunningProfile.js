@@ -24,6 +24,7 @@ import {profileActions} from '../../store/profile';
 const RunningProfile = ({route, navigation}) => {
   const [profiles, setProfiles] = useState([]);
   const [dogIds, setDogIds] = useState([route.params.dogId]);
+  const [hasOthers, setHasOthers] = useState();
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -31,17 +32,19 @@ const RunningProfile = ({route, navigation}) => {
       const res = await fetchDogs();
       const newArray = res.filter(item => item.dogId !== route.params.dogId);
       setProfiles(newArray);
+      setHasOthers(res);
     };
     fetchAlldogs();
   }, []);
-  console.log(profiles, '프로필');
-
-  console.log(dogIds, '업데이트 되는 값');
 
   const fetchDogIds = async () => {
     dispatch(profileActions.saveDogIds(dogIds));
     navigation.navigate('RunningGeolocation');
   };
+
+  const goToProfile = () => {
+    navigation.replace('ProfileHome')
+  }
 
   const url = 'http://i7d203.p.ssafy.io:8080/api/image/';
   const renderItem = ({item}) => (
@@ -55,20 +58,32 @@ const RunningProfile = ({route, navigation}) => {
   );
   return (
     <View style={styles.rootContainer}>
-      <Text style={styles.Title}>함께 산책가는 강아지가 있나요?</Text>
+      <Text style={styles.Title}>
+        {hasOthers?.length === 1
+          ? '함께 산책갈 강아지가 없으시군요'
+          : '함께 산책가는 강아지가 있나요?'}
+      </Text>
       <View style={styles.ProfileSelect}>
-        <FlatList
-          key={'#'}
-          data={profiles}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          style={styles.flatlist}
-          columnWrapperStyle={{justifyContent: 'center', alignItems: 'center'}}
-        />
+        {hasOthers?.length > 1 && (
+          <FlatList
+            key={'#'}
+            data={profiles}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            numColumns={2}
+            style={styles.flatlist}
+            columnWrapperStyle={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          />
+        )}
         <RunButton3 onPress={fetchDogIds} style={{width: responsiveWidth(10)}}>
-          선택완료
+          {hasOthers?.length === 1 ? '산책가기' : '선택하기'}
         </RunButton3>
+        {hasOthers?.length === 1 && (
+          <RunButton3 onPress={goToProfile}>다른 강아지 등록하기</RunButton3>
+        )}
       </View>
     </View>
   );

@@ -59,7 +59,6 @@ export const fetchMoreGuide = async (category, curLastIdx, limit) => {
 };
 
 export const fetchRunningData = async (walkingDistance, walkingTime) => {
-  console.log(walkingDistance, walkingTime, '값');
   const path = '/api/walking';
   const curr = new Date();
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;

@@ -7,11 +7,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import {Colors} from '../../constants/styles';
 import {SafeAreaView, ScrollView} from 'react-native';
-import GuideShare from '../../components/Guide/GuideShare';
 import LikeButton from '../../components/Guide/LikeButton';
 import Markdown from 'react-native-markdown-display';
 import axios from '../../utils/index';
-import {getMemberId} from '../../utils/auth';
 
 axios.defaults.withCredentials = true;
 const url = 'http://i7d203.p.ssafy.io:8080/api/guide/';
@@ -65,7 +63,6 @@ const GuideDetail = props => {
       <View style={styles.footer}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <LikeButton data={GuideDetail.guideId}></LikeButton>
-          <GuideShare></GuideShare>
         </View>
       </View>
     </View>

@@ -24,8 +24,6 @@ const onTokenRefreshed = accessToken => {
   refreshSubscribers = [];
 };
 
-console.log(refreshSubscribers, '리프레쉬 서브 스크라이버스');
-
 const addRefreshSubscriber = callback => {
   refreshSubscribers.push(callback);
 };
@@ -45,7 +43,7 @@ axios.interceptors.response.use(
 
     try {
       const originalRequest = config;
-      console.log(config, 'config?');
+      console.log(config);
       console.log(status);
 
       if (status === 0) {
@@ -69,16 +67,13 @@ axios.interceptors.response.use(
         if (!isTokenRefreshing) {
         console.log(status);
         isTokenRefreshing = true;
-        console.log('출력됨');
         const refreshToken = await AsyncStorage.getItem('refresh');
-        console.log(refreshToken, '출력이 안됨');
         const res = await refresh(refreshToken);
         const newAccessToken = res.accessToken;
         await AsyncStorage.setItem('token', newAccessToken)
 
         isTokenRefreshing = false;
         axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        console.log('갱신 성공');
         onTokenRefreshed(newAccessToken);
         // }
         const retryOriginalRequest = new Promise(resolve => {
@@ -91,7 +86,7 @@ axios.interceptors.response.use(
         return retryOriginalRequest;
       }}
     } catch (error) {
-      console.log(error.response, '여기서 throw');
+      console.log(error.response);
     }
     return Promise.reject(error);
   },
