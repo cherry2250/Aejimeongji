@@ -109,6 +109,7 @@ const TodoList = props => {
 
   const goToUpload = () => {
       Alert.alert('클릭클릭')
+      setModalVisible(false)
       // navigation.replace('TodoUpload', {date: props.selectedDate});
   }
 
