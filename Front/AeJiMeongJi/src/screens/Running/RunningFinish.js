@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 const RunningFinish = ({navigation, route}) => {
   const dogIds = useSelector(state => state.profile.ids);
   const cur = new Date();
-  const month = cur.getMonth();
+  const month = cur.getMonth() + 1;
   const date = cur.getDate();
 
   const fetchData = async identifier => {
