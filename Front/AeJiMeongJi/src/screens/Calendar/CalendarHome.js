@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -82,7 +82,7 @@ const CalendarHome = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.rootContainer}>
+    <ScrollView style={styles.rootContainer}>
       <View style={styles.nav}>
       </View>
       <View style={styles.contentbox}>
@@ -108,7 +108,7 @@ const CalendarHome = ({navigation}) => {
         setModalVisible={setModalVisible}
         selectedDate={selectedDate}
       />
-    </View>
+    </ScrollView>
   );
 };
 export default CalendarHome;
