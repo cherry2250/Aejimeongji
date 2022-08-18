@@ -68,7 +68,7 @@ const GuideHome = ({navigation}) => {
           <View style={{flex: 2.2}}>
             <CarouselCards
               style={styles.carouselCards}
-              age={guideList.ageGuideList}
+              age={guideList?.ageGuideList}
             />
           </View>
 
@@ -78,7 +78,7 @@ const GuideHome = ({navigation}) => {
             </Text>
             <SubCard
               style={styles.subCards}
-              category={guideList.fixedGuideList}></SubCard>
+              category={guideList?.fixedGuideList}></SubCard>
           </View>
           <View style={styles.subguideTitle2}>
             <Text
@@ -92,7 +92,7 @@ const GuideHome = ({navigation}) => {
           <View style={{flex: 2.2}}>
             <CarouselCards
               style={styles.carouselCards}
-              age={guideList.weightGuideList}
+              age={guideList?.weightGuideList}
             />
           </View>
         </View>

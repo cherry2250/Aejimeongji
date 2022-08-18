@@ -251,6 +251,8 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(10),
     maxWidth: responsiveWidth(12),
     maxHeight: responsiveWidth(12),
+    flex: 1,
+    zIndex : 1
   },
   todoContent: {
     width: responsiveWidth(80),
