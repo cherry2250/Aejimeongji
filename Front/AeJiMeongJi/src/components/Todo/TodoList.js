@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Pressable,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -208,9 +209,10 @@ const TodoList = props => {
             </View>
           </ScrollView>
         </Animated.View>
-        <TouchableOpacity
+        <Pressable
           onPress={() => {
-            navigation.navigate('TodoUpload', {date: props.selectedDate});
+            console.log('클릭클릭클릭');
+            navigation.replace('TodoUpload', {date: props.selectedDate});
           }}
           style={{paddingLeft: 24}}>
           <Image
@@ -219,7 +221,7 @@ const TodoList = props => {
             source={require('../../Assets/image/plusButton.png')}
             title="plusButton"
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </Modal>
   );

@@ -43,7 +43,11 @@ const HomeStack = ({navigation}) => {
       <Stack.Screen name="ProfileChoice" component={ProfileChoiceScreen} />
       <Stack.Screen name="Home" component={MainHome} />
       <Stack.Screen name="CalendarHome" component={CalendarHome} />
-      <Stack.Screen name="TodoUpload" component={TodoUpload} />
+      <Stack.Screen
+        name="TodoUpload"
+        component={TodoUpload}
+        options={{unmountOnBlur: true}}
+      />
       <Stack.Screen name="MyPage" component={MyPage} />
       <Stack.Screen name="ProfileChange" component={ProfileEditScreen} />
       <Stack.Screen name="MyInfo" component={MyInfoScreen} />

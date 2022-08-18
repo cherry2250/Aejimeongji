@@ -3,12 +3,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity,
   Platform,
   PermissionsAndroid,
-  AppRegistry,
-  TouchableHighlight,
-  Alert,
   Pressable,
 } from 'react-native';
 import {
@@ -37,8 +33,8 @@ import RunningFinish from './RunningFinish';
 // const LONGITUDE = 78.07513;
 const LATITUDE_DELTA = 0.009;
 const LONGITUDE_DELTA = 0.009;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
+const LATITUDE = 36.134578;
+const LONGITUDE = 128.33244;
 const isStopwatchStart = true;
 const resetStopwatch = false;
 
