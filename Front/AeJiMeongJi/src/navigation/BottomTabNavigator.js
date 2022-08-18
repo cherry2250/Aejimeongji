@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Image,
-} from 'react-native';
+import {Image} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -15,6 +13,8 @@ import {Colors} from '../constants/styles';
 import {useSelector} from 'react-redux';
 import HomeStack from './HomeStack';
 import GuideHome from '../screens/Guide/GuideHome';
+import PlaceStack from './PlaceStack';
+import GuideStack from './GuideStack';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -55,9 +55,9 @@ function BottomTabNavigator() {
         />
         <BottomTab.Screen
           name="가이드"
-          component={GuideHome}
+          component={GuideStack}
           options={{
-            unmountOnBlur: true,
+            // unmountOnBlur: true,
             tabBarIcon: () => {
               return (
                 <Image
@@ -77,6 +77,7 @@ function BottomTabNavigator() {
           name="Home"
           component={HomeStack}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: () => {
               return (
                 <Image
@@ -94,7 +95,7 @@ function BottomTabNavigator() {
 
         <BottomTab.Screen
           name="플레이스"
-          component={PlaceHome}
+          component={PlaceStack}
           options={{
             unmountOnBlur: true,
             tabBarIcon: () => {
