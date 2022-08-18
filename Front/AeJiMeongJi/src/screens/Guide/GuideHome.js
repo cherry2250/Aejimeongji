@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: responsiveHeight(2),
   },
   trandingContainer: {
-    height: responsiveHeight(127),
+    height: responsiveHeight(130),
     marginVertical: responsiveHeight(2),
     justifyContent: 'center',
     alignItems: 'center',
