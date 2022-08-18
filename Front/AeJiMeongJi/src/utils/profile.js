@@ -122,10 +122,9 @@ export const fetchDogImage = async (id, image) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(res, 'image에러');
     return res;
   } catch (error) {
-    console.log(error.message, '에러');
+    console.log(error.response);
   }
 };
 // export const fetchDogImage = async image => {

@@ -55,12 +55,8 @@ export const searchPlace = async address => {
 // };
 
 export const fetchPlace = async (category) => {
-  console.log(category, 'category');
-  const lat = 36.123
-  const lng = 128.123
-
   const dist = 1000;
-  const limit = 10;
+  const limit = 8;
   const path = `/api/petplace?category=${category}&dist=${dist}&lat=${lat}&limit=${limit}&lng=${lng}`;
 
   try {
@@ -74,10 +70,7 @@ export const fetchPlace = async (category) => {
   }
 };
 
-export const fetchCategoryPlace = async (category) => {
-
-  const lat = 36.123
-  const lng = 128.123
+export const fetchCategoryPlace = async (category, lat, lng) => {
   const dist = 1000;
   const limit = 3;
   const path = `/api/petplace?category=${category}&dist=${dist}&lat=${lat}&limit=${limit}&lng=${lng}`;
@@ -113,7 +106,6 @@ export const fetchReviews = async petplaceId => {
       method: 'get',
       url: url + path,
     });
-    console.log(res.data, 'review');
     return res.data;
   } catch (error) {
     console.log(error.response);
@@ -148,7 +140,6 @@ export const fetchLiked = async (liked, petplaceId) => {
         petplaceId,
       },
     });
-    console.log(res.data);
   } catch (error) {
     console.log(error.response);
   }
