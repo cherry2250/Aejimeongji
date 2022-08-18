@@ -15,7 +15,6 @@ import {
 } from 'react-native-responsive-dimensions';
 import UploadModeModal from './UploadModeModal';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import ImagePicker from 'react-native-image-crop-picker';
 
 const ProfileImage = ({visible, image, setImage}) => {
   const imagePickerOption = {
