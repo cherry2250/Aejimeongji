@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+<<<<<<< HEAD
 import java.sql.Timestamp;
 import java.time.LocalDate;
+=======
+>>>>>>> develop
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,6 +21,7 @@ public class Walking {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+<<<<<<< HEAD
     private String distance;
 
     private String walkingTime;
@@ -33,5 +37,17 @@ public class Walking {
         this.walkingTime = walkingTime;
         this.walkingDate = walkingDate;
         this.member = member;
+=======
+    private double distance;
+
+    private double walkingTime;
+
+    private LocalDateTime walkingDate;
+
+    public Walking(double distance, double walkingTime, LocalDateTime walkingDate) {
+        this.distance = distance;
+        this.walkingTime = walkingTime;
+        this.walkingDate = walkingDate;
+>>>>>>> develop
     }
 }
