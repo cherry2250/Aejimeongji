@@ -15,7 +15,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const url = 'http://i7d203.p.ssafy.io:8080';
 const TodoForm = props => {
-  console.log('todo form 진입');
 
 
   const navigation = useNavigation();

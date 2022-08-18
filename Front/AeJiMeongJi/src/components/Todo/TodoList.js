@@ -13,6 +13,7 @@ import {
   ScrollView,
   Pressable,
   Alert,
+  BackHandler,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -109,9 +110,8 @@ const TodoList = props => {
   };
 
   const goToUpload = () => {
-    Alert.alert('클릭클릭');
     setModalVisible(false);
-    // navigation.replace('TodoUpload', {date: props.selectedDate});
+    navigation.replace('TodoUpload', {date: props.selectedDate});
   };
 
   const toDo = todolist.map((todo, index) => {
@@ -217,11 +217,7 @@ const TodoList = props => {
             </View>
           </ScrollView>
           <View style={styles.buttonContainer}>
-            <Button
-              onPress={() => {
-                navigation.replace('TodoUpload', {date: props.selectedDate});
-              }}
-              style={styles.button}>
+            <Button onPress={goToUpload} style={styles.button}>
               생성하기
             </Button>
           </View>

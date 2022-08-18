@@ -45,6 +45,7 @@ const LoginForm = () => {
 
     const res = await login(inputValues.email, inputValues.password);
 
+
     await AsyncStorage.setItem('token', res.accessToken);
     await AsyncStorage.setItem('refresh', res.refreshToken);
 
