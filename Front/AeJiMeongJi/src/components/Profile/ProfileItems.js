@@ -21,13 +21,13 @@ const ProfileItems = ({source, id, purpose, isEditing, name}) => {
 
     Alert.alert(`${name} 강아지로 변경 되었어요.`);
     await dispatch(profileActions.saveDogid({id}));
-    navigation.navigate('Home', {dogId: id});
+    navigation.replace('Home', {dogId: id});
   };
 
   const changeProfileHandler = async id => {
     const memberId = await getMemberId();
     console.log(memberId);
-    navigation.navigate('ProfileChange', {dogId: id});
+    navigation.replace('ProfileChange', {dogId: id});
   };
 
   const editingImg = require('../../Assets/image/editing.png');
