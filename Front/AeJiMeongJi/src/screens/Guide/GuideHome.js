@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   carouselCards: {},
   subGuide: {
-    flex: 6.4,
+    flex: 7,
     height: responsiveHeight(3),
     width: responsiveWidth(90),
     marginTop: responsiveHeight(2),
