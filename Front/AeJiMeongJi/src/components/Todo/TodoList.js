@@ -23,6 +23,7 @@ import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
 import axios from 'axios';
+import Button from '../ui/Button';
 const url = 'http://i7d203.p.ssafy.io:8080';
 
 const TodoList = props => {
@@ -108,10 +109,10 @@ const TodoList = props => {
   };
 
   const goToUpload = () => {
-      Alert.alert('클릭클릭')
-      setModalVisible(false)
-      // navigation.replace('TodoUpload', {date: props.selectedDate});
-  }
+    Alert.alert('클릭클릭');
+    setModalVisible(false);
+    // navigation.replace('TodoUpload', {date: props.selectedDate});
+  };
 
   const toDo = todolist.map((todo, index) => {
     return (
@@ -215,17 +216,16 @@ const TodoList = props => {
               )}
             </View>
           </ScrollView>
+          <View style={styles.buttonContainer}>
+            <Button
+              onPress={() => {
+                navigation.replace('TodoUpload', {date: props.selectedDate});
+              }}
+              style={styles.button}>
+              생성하기
+            </Button>
+          </View>
         </Animated.View>
-        <TouchableOpacity
-          onPress={goToUpload}
-          style={{paddingLeft: 24}}>
-          <Image
-            style={styles.plusButton}
-            resizeMode="contain"
-            source={require('../../Assets/image/plusButton.png')}
-            title="plusButton"
-          />
-        </TouchableOpacity>
       </View>
     </Modal>
   );
@@ -304,6 +304,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  buttonContainer: {
+    marginBottom: responsiveHeight(5),
+  },
+  button: {
+    width: responsiveWidth(40),
   },
 });
 
