@@ -24,7 +24,7 @@ const MyPageLiked = ({data, screen}) => {
       }
     };
     return (
-      <View style={styles.item}>
+      <Pressable style={styles.item} onPress={goToScreen}>
         <ParallaxImage
           source={{
             uri:
@@ -42,7 +42,7 @@ const MyPageLiked = ({data, screen}) => {
             {screen === 'PlaceDetail' ? item.name : item.title}
           </Text>
         </Pressable>
-      </View>
+      </Pressable>
     );
   };
 
