@@ -65,7 +65,6 @@ const GuideDetail = props => {
       <View style={styles.footer}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <LikeButton data={GuideDetail.guideId}></LikeButton>
-          <GuideShare></GuideShare>
         </View>
       </View>
     </View>
