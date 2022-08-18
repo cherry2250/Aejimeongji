@@ -113,6 +113,8 @@ const TodoList = props => {
     setModalVisible(false);
     navigation.replace('TodoUpload', {date: props.selectedDate});
   };
+      // navigation.replace('TodoUpload', {date: props.selectedDate});
+
 
   const toDo = todolist.map((todo, index) => {
     return (

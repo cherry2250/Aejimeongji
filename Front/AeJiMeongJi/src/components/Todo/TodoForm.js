@@ -16,7 +16,6 @@ import {useNavigation} from '@react-navigation/native';
 const url = 'http://i7d203.p.ssafy.io:8080';
 const TodoForm = props => {
 
-
   const navigation = useNavigation();
   const dogId = useSelector(state => state.profile.id);
   const [isHome, setIsHome] = useState(false);
