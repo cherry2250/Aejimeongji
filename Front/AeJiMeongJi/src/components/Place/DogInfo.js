@@ -48,9 +48,10 @@ const styles = StyleSheet.create({
     borderRadius: responsiveWidth(5)
   },
   imageContainer: {
-    paddingRight: 16,
+    // paddingRight: 16,
     paddingBottom: 16,
-    marginRight: 8,
+    marginHorizontal: responsiveWidth(6),
+    paddingLeft: responsiveWidth(15)
   },
   image: {
     width: responsiveWidth(27),
