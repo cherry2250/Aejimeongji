@@ -15,6 +15,8 @@ import HomeStack from './HomeStack';
 import GuideHome from '../screens/Guide/GuideHome';
 import PlaceStack from './PlaceStack';
 import GuideStack from './GuideStack';
+import RunningStack from './RunningStack';
+import MyPageStack from './MyPageStack';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -36,7 +38,7 @@ function BottomTabNavigator() {
         initialRouteName="Home">
         <BottomTab.Screen
           name="산책"
-          component={RunningHome}
+          component={RunningStack}
           options={{
             unmountOnBlur: true,
             tabBarIcon: () => {
@@ -114,7 +116,7 @@ function BottomTabNavigator() {
         />
         <BottomTab.Screen
           name="마이페이지"
-          component={MyPage}
+          component={MyPageStack}
           options={{
             unmountOnBlur: true,
             tabBarIcon: () => {
