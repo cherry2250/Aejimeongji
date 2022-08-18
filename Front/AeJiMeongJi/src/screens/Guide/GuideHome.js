@@ -51,12 +51,19 @@ const GuideHome = ({navigation}) => {
   return (
     <SafeAreaView>
       <GuideNavbar source={source} />
-      <ScrollView>
-        <View style={styles.container}>
-          <GuideCategoryCarousel style={{}}></GuideCategoryCarousel>
-
-          <View style={styles.guideTitle}>
-            {loading && <ActivityIndicator size="large" color="#aaa" />}
+      <ScrollView style={styles.rootContainer}>
+        <View style={styles.categoryContainer}>
+          <GuideCategoryCarousel></GuideCategoryCarousel>
+          {loading && (
+            <ActivityIndicator
+              style={styles.spinner}
+              size="large"
+              color="#aaa"
+            />
+          )}
+        </View>
+        <View style={styles.recommendContainer}>
+          <View style={styles.recommendTitle}>
             <Text
               style={{
                 fontSize: responsiveFontSize(2.7),
@@ -65,36 +72,29 @@ const GuideHome = ({navigation}) => {
               {dogInfo}를 위한 맞춤형 추천 가이드
             </Text>
           </View>
-          <View style={{flex: 2.2}}>
-            <CarouselCards
-              style={styles.carouselCards}
-              age={guideList?.ageGuideList}
-            />
-          </View>
-
-          <View style={styles.subGuide}>
-            <Text style={styles.subGuideTitle}>
-              지금 핫한 반려생활 가이드 Top5!
-            </Text>
-            <SubCard
-              style={styles.subCards}
-              category={guideList?.fixedGuideList}></SubCard>
-          </View>
-          <View style={styles.subguideTitle2}>
-            <Text
-              style={{
-                fontSize: responsiveFontSize(2.5),
-                fontFamily: '강원교육튼튼',
-              }}>
-              현재 연령대에 꼭 알아야 하는 정보
-            </Text>
-          </View>
-          <View style={{flex: 2.2}}>
-            <CarouselCards
-              style={styles.carouselCards}
-              age={guideList?.weightGuideList}
-            />
-          </View>
+          <CarouselCards age={guideList?.ageGuideList} />
+        </View>
+        <View style={styles.trandingContainer}>
+          <Text style={styles.trandingTitle}>
+            지금 핫한 반려생활 가이드 Top5!
+          </Text>
+          <SubCard
+            style={styles.subCards}
+            category={guideList?.fixedGuideList}></SubCard>
+        </View>
+        <View style={styles.essentialContainer}>
+          <Text
+            style={{
+              fontSize: responsiveFontSize(2.5),
+              fontFamily: '강원교육튼튼',
+              marginVertical: responsiveHeight(2)
+            }}>
+            현재 연령대에 꼭 알아야 하는 정보
+          </Text>
+          <CarouselCards
+            style={styles.carouselCards}
+            age={guideList?.weightGuideList}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -102,42 +102,41 @@ const GuideHome = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     backgroundColor: Colors.back100,
-    alignItems: 'center',
+  },
+  spinner: {
+    position: 'absolute',
+    left: responsiveWidth(45),
+    top: responsiveHeight(25),
+  },
+  recommendContainer: {
+    height: responsiveHeight(40),
+    marginVertical: responsiveHeight(3),
     justifyContent: 'center',
-    padding: 30,
-    height: 2300,
+    alignItems: 'center',
   },
-  guideTitle: {
-    flex: 0.4,
-    marginTop: responsiveHeight(4),
-    marginBottom: responsiveHeight(2),
-    height: 200,
-  },
-  subguideTitle2: {
-    flex: 0.38,
+  recommendTitle: {
+    marginTop: responsiveHeight(2),
     marginBottom: responsiveHeight(2),
   },
-  subGuideTitle: {
+  trandingContainer: {
+    height: responsiveHeight(120),
+    marginVertical: responsiveHeight(5),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  trandingTitle: {
     fontSize: responsiveFontSize(2.7),
     fontFamily: '강원교육튼튼',
     marginBottom: responsiveHeight(3),
   },
-  carouselCards: {},
-  subGuide: {
-    flex: 7,
-    height: responsiveHeight(3),
-    width: responsiveWidth(90),
-    marginTop: responsiveHeight(2),
+  essentialContainer: {
+    height: responsiveHeight(50),
+    marginVertical: responsiveHeight(3),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  subGuide2: {
-    flex: 7,
-    height: 10,
-    width: responsiveWidth(90),
-    marginTop: responsiveHeight(2),
-  },
-  ButtonBox: {},
   subCards: {
     marginBottom: responsiveHeight(2),
   },

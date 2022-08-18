@@ -120,7 +120,7 @@ const PhoneAuth = ({
         )}
         {loading && phoneIsAuthenticated && (
           <View style={styles.afterPhoneAuth}>
-            <Text>확인완료 되었습니다.</Text>
+            <Text style={styles.afterPhoneAuthText}>확인완료 되었습니다.</Text>
           </View>
         )}
         {!loading && (
@@ -200,6 +200,10 @@ const styles = StyleSheet.create({
     paddingTop: responsiveHeight(5),
   },
   time: {
-    paddingLeft: responsiveWidth(2)
-  }
+    paddingLeft: responsiveWidth(2),
+  },
+  afterPhoneAuthText: {
+    fontFamily: 'IBMPlexSansKR-Regular',
+    color: 'black'
+  },
 });

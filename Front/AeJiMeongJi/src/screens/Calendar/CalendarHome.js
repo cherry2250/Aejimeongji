@@ -99,7 +99,6 @@ const CalendarHome = ({navigation}) => {
           }}
           onDayPress={day => {
             setSelectedDate(day.dateString);
-
             setModalVisible(true);
           }}
         />
