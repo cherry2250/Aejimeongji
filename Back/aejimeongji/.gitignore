@@ -39,4 +39,6 @@ out/
 ### CYC ###
 application.yml
 application.properties
+application-aws.yml
+application-oauth.yml
 messages.properties

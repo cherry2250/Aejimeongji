@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active:
+      on-profile: aws
+#    include: oauth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/aejimeongji?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: dowlajdwl1234
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 1000
+  #    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.spatial.dialect.mysql.MySQL56InnoDBSpatialDialect
+  messages:
+    basename: messages
+  redis:
+    host: redis
+    port: 6379
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+logging:
+  level:
+    #    root: debug
+    org.hibernate.SQL: debug
+    #    org.hibernate.type: trace
+    org.springframework.web: debug
+    com.ssafy.aejimeongji: debug
+    p6spy: info
+
+server:
+  tomcat:
+    max-http-form-post-size: 20MB
+
+coolsms:
+  apiKey: NCSHUZ8V9NAHIDQ7
+  apiSecret: BRQ6IFOTVUMLDTMOWON8WQZGWZGP4VNF
+
+jwt:
+  secretKey: ssafygumi2class3teamfightingkdhpgypje
+
+file:
+  dir: /images/
+

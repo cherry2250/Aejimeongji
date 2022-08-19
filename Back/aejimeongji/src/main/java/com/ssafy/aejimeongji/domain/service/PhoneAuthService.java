@@ -1,6 +1,10 @@
 package com.ssafy.aejimeongji.domain.service;
 
+<<<<<<< HEAD
 import com.ssafy.aejimeongji.domain.exception.ExpireAuthNumberException;
+=======
+import com.ssafy.aejimeongji.domain.exception.auth.ExpireAuthNumberException;
+>>>>>>> develop
 import com.ssafy.aejimeongji.domain.entity.redis.PhoneAuth;
 import com.ssafy.aejimeongji.domain.repository.PhoneAuthRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -33,24 +37,41 @@ public class PhoneAuthService {
 
     @Transactional
     public String sendMessage(String phoneNumber) throws CoolsmsException {
+<<<<<<< HEAD
         String authNumber = makeAuthNum();
+=======
+        String authNumber = makeAuthNumber();
+>>>>>>> develop
         coolSms.send(makeParams(phoneNumber, authNumber));
         return phoneAuthRepository.save(new PhoneAuth(authNumber)).getId().toString();
     }
 
     public boolean verifyAuthNumber(String phoneUUID, String authNumber) throws ExpireAuthNumberException {
         PhoneAuth phoneAuth = phoneAuthRepository.findById(phoneUUID).orElseThrow(() ->
+<<<<<<< HEAD
             new ExpireAuthNumberException(String.valueOf(Long.valueOf(phoneUUID)))
+=======
+            new ExpireAuthNumberException(Long.parseLong(phoneUUID))
+>>>>>>> develop
         );
         return authNumber.equals(phoneAuth.getAuthNumber()) ? true : false;
     }
 
+<<<<<<< HEAD
     private String makeAuthNum() {
         String authNum = "";
         for(int i=0; i<6; i++) {
             authNum += Integer.toString(rand.nextInt(10));;
         }
         return authNum;
+=======
+    private String makeAuthNumber() {
+        String authNumber = "";
+        for(int i=0; i<6; i++) {
+            authNumber += Integer.toString(rand.nextInt(10));;
+        }
+        return authNumber;
+>>>>>>> develop
     }
 
     private HashMap<String, String> makeParams(String phoneNumber, String authNumber) {
@@ -58,7 +79,11 @@ public class PhoneAuthService {
         params.put("to", phoneNumber); // 수신 전화번호
         params.put("from", "01063230351"); // 발신 전화번호
         params.put("type", "sms");
+<<<<<<< HEAD
         params.put("text", " 인증번호는 [" + authNumber + "] 입니다.");
+=======
+        params.put("text", "인증번호는 [" + authNumber + "] 입니다.");
+>>>>>>> develop
         return params;
     }
 }
