@@ -1,9 +1,5 @@
 ## 🐶 반려동물 길잡이 어플리케이션 애지멍지
 
-[<img src="file:///C:/Users/multicampus/Downloads/smallLogo.png" title="" alt="타이틀이미지" width="311">](https://user-images.githubusercontent.com/55949647/154088644-8ae7ec32-04bb-4fc3-810a-c2111ec2afb8.png)
-
------
-
 
 
 ## 1. 애지멍지 소개 영상
