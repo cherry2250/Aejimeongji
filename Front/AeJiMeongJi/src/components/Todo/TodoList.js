@@ -13,10 +13,7 @@ import {
   ScrollView,
   Pressable,
   Alert,
-<<<<<<< HEAD
-=======
   BackHandler,
->>>>>>> develop
 } from 'react-native';
 import {
   responsiveHeight,
@@ -113,17 +110,12 @@ const TodoList = props => {
   };
 
   const goToUpload = () => {
-<<<<<<< HEAD
-      Alert.alert('클릭클릭')
       // navigation.replace('TodoUpload', {date: props.selectedDate});
+      setModalVisible(false);
+      navigation.replace('TodoUpload', {date: props.selectedDate});
   }
-=======
-    setModalVisible(false);
-    navigation.replace('TodoUpload', {date: props.selectedDate});
-  };
       // navigation.replace('TodoUpload', {date: props.selectedDate});
 
->>>>>>> develop
 
   const toDo = todolist.map((todo, index) => {
     return (
@@ -233,19 +225,6 @@ const TodoList = props => {
             </Button>
           </View>
         </Animated.View>
-<<<<<<< HEAD
-        <TouchableOpacity
-          onPress={goToUpload}
-          style={{paddingLeft: 24}}>
-          <Image
-            style={styles.plusButton}
-            resizeMode="contain"
-            source={require('../../Assets/image/plusButton.png')}
-            title="plusButton"
-          />
-        </TouchableOpacity>
-=======
->>>>>>> develop
       </View>
     </Modal>
   );
