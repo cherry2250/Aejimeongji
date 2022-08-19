@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Alert, Pressable, StyleSheet, View} from 'react-native';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -32,6 +32,17 @@ const ProfileHomeScreen = () => {
   };
 
   const goNextPage = () => {
+    if (name.length > 6 || name.length === 0) {
+      Alert.alert('이름을 6자 이하로 작성해주세요.');
+      return;
+    } else if (image === require('../../Assets/image/Profile.png')) {
+      Alert.alert('사진을 추가해주세요.');
+      return;
+    } else if (gender.length > 5 || breed === null) {
+      Alert.alert('빈칸이 없으신가요?');
+      return
+    }
+
     navigation.navigate('ProfileHome2', {
       name,
       gender: value,

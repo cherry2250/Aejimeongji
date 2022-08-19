@@ -14,10 +14,11 @@ import {
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
 import {Colors} from '../../constants/styles';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import RunButton from '../../components/ui/RunButton';
 import RunButton2 from '../../components/ui/RunButton2';
-import {getDog} from '../../utils/profile';
+import {fetchDogs, getDog} from '../../utils/profile';
+import {profileActions} from '../../store/profile';
 
 const RunningHome = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -39,7 +40,11 @@ const RunningHome = ({navigation}) => {
       }
     };
     fetchInitialData();
-  });
+  }, []);
+
+  const goToRunning = () => {
+    navigation.navigate('RunningProfile', {dogId});
+  };
 
   return (
     <View style={styles.rootContainer}>
@@ -97,11 +102,7 @@ const RunningHome = ({navigation}) => {
           <View style={styles.runButton}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <RunButton
-                onPress={() => {
-                  navigation.navigate('RunningProfile', {dogId});
-                }}
-                styel={styles.runLoginButton}>
+              <RunButton onPress={goToRunning} styel={styles.runLoginButton}>
                 산책 시작하기
               </RunButton>
               <RunButton2

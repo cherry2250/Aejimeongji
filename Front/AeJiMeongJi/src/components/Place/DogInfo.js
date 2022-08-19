@@ -26,7 +26,7 @@ const DogInfo = ({source, dogInfo}) => {
           </View>
           <View style={styles.recommendTextContainer}>
             <Text style={styles.recommendText}>
-              함께 가요!
+              총 7448개의 애견동반 여행정보!
             </Text>
           </View>
         </View>
@@ -48,9 +48,10 @@ const styles = StyleSheet.create({
     borderRadius: responsiveWidth(5)
   },
   imageContainer: {
-    paddingRight: 16,
+    // paddingRight: 16,
     paddingBottom: 16,
-    marginRight: 8,
+    marginHorizontal: responsiveWidth(6),
+    paddingLeft: responsiveWidth(15)
   },
   image: {
     width: responsiveWidth(27),

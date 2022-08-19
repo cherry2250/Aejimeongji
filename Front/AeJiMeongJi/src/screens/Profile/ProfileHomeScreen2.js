@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Alert} from 'react-native';
 import ProfileInput from '../../components/Profile/ProfileInput';
 import Button from '../../components/ui/Button';
 import {Colors} from '../../constants/styles';
@@ -19,8 +19,6 @@ import {
 const ProfileHomeScreen2 = ({route}) => {
   const navigation = useNavigation();
 
-  console.log(route.params);
-
   const [check, setCheck] = useState(false);
   const checkHandler = () => {
     setCheck(curValue => {
@@ -29,7 +27,18 @@ const ProfileHomeScreen2 = ({route}) => {
   };
 
   const submitHandler = async () => {
-    // const res = await fetchDogImage(inputValues.image);
+    const {adoptionDay, birthday, weight} = inputValues;
+    console.log(weight);
+
+    if (adoptionDay < birthday) {
+      Alert.alert('입양일은 태어난 날보다 빠를 수 없어요')
+      return
+    } else if (!weight || weight < 0) {
+      Alert.alert('체중을 다시 확인해주세요.')
+      return
+    }
+
+
     const res = await fetchDog(inputValues);
 
     navigation.replace('ProfileChoice');

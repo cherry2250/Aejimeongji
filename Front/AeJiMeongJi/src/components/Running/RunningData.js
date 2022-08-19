@@ -32,6 +32,7 @@ const RunningData = props => {
       const res = await axios(url + `/api/dog/${dogId}/walkingdog`);
       if (res) {
         setRunningInfo(res.data.data);
+        console.log(res.data.data);
       }
     };
     fetchRunningInfo();
@@ -46,7 +47,7 @@ const RunningData = props => {
   }) => {
     return (
       <View style={{padding: 10}} key={dogId}>
-        <Text
+        {/* <Text
           style={{
             fontFamily: '강원교육튼튼',
             fontSize: responsiveFontSize(2),
@@ -55,7 +56,7 @@ const RunningData = props => {
             marginLeft: responsiveWidth(2),
           }}>
           {walkingDate}
-        </Text>
+        </Text> */}
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <View style={styles.ContentItem}>
             <Text style={styles.itemFont}>{walkingCalories}</Text>

@@ -78,17 +78,15 @@ const CarouselItem = ({category, lat, lng, source}) => {
           카테고리 별 가이드 보기!
         </Text>
       </View>
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
         <Carousel
           layout={'default'}
           data={data}
           sliderWidth={responsiveWidth(100)}
-          sliderHeight={responsiveHeight(50)}
+          sliderHeight={responsiveHeight(20)}
           itemWidth={responsiveWidth(44)}
           renderItem={renderItem}
           firstItem={2}
         />
-      </View>
     </SafeAreaView>
   );
 };

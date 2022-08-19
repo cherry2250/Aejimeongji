@@ -16,7 +16,7 @@ const CategoryItem = ({source, title, rating, info, id, address, logo}) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     // console.log('placeDetail');
-    navigation.navigate('PlaceDetail', {id, address});
+    navigation.navigate('상세정보', {id, address});
   };
 
   return (

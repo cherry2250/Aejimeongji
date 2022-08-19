@@ -27,6 +27,7 @@ export const login = async (email, password) => {
     return res.data;
   } catch (error) {
     console.log(error.message);
+    Alert.alert('아이디 비밀번호를 다시 확인해주세요.')
   }
 };
 

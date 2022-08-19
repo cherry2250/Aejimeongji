@@ -18,13 +18,13 @@ const MyPageLiked = ({data, screen}) => {
       const {id, address} = item;
 
       if (screen === 'PlaceDetail') {
-        navigation.navigate(screen, {id, address});
+        navigation.navigate('상세정보', {id, address});
       } else {
         navigation.navigate(screen, {guideId: item.guideId});
       }
     };
     return (
-      <View style={styles.item}>
+      <Pressable style={styles.item} onPress={goToScreen}>
         <ParallaxImage
           source={{
             uri:
@@ -42,7 +42,7 @@ const MyPageLiked = ({data, screen}) => {
             {screen === 'PlaceDetail' ? item.name : item.title}
           </Text>
         </Pressable>
-      </View>
+      </Pressable>
     );
   };
 

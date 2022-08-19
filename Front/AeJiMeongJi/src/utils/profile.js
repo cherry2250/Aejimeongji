@@ -92,6 +92,7 @@ export const fetchDog = async ({
     return res.data.dogId;
   } catch (error) {
     console.log(error.response);
+    Alert.alert('잘못 입력된 것이 있는지 확인해주세요.')
   }
 };
 
@@ -121,10 +122,9 @@ export const fetchDogImage = async (id, image) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(res, 'image에러');
     return res;
   } catch (error) {
-    console.log(error.message, '에러');
+    console.log(error.response);
   }
 };
 // export const fetchDogImage = async image => {

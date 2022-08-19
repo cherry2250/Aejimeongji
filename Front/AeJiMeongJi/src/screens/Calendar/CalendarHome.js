@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -82,12 +82,12 @@ const CalendarHome = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.rootContainer}>
+    <ScrollView style={styles.rootContainer}>
       <View style={styles.nav}>
       </View>
       <View style={styles.contentbox}>
         <Calendar
-          style={{backgroundColor: '#FFF8EA'}}
+          style={{backgroundColor: '#FFF8EA', height:responsiveHeight(100)}}
           markingType={'period'}
           markedDates={{
             [date]: {
@@ -99,7 +99,6 @@ const CalendarHome = ({navigation}) => {
           }}
           onDayPress={day => {
             setSelectedDate(day.dateString);
-
             setModalVisible(true);
           }}
         />
@@ -109,7 +108,7 @@ const CalendarHome = ({navigation}) => {
         setModalVisible={setModalVisible}
         selectedDate={selectedDate}
       />
-    </View>
+    </ScrollView>
   );
 };
 export default CalendarHome;
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.back100,
   },
   nav: {
-    height: responsiveHeight(8),
+    height: responsiveHeight(5),
     alignSelf: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
